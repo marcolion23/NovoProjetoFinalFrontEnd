@@ -6,6 +6,7 @@ import { ProductCreateComponent } from './components/product/product-create/prod
 import { ProductUpdateComponent } from './components/product/product-update/product-update.component';
 import { ProductDeleteComponent } from './components/product/product-delete/product-delete.component';
 import { FormaPagamentoCrudComponent } from './views/forma-pagamento-crud/forma-pagamento-crud.component';
+import { FormaPagamentoCreateComponent } from './components/formaPagamento/forma-pagamento-create/forma-pagamento-create.component';
 
 //configuração para rotear entre as paginas na home
 const routes: Routes = [
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: "fpagamentos",
     component: FormaPagamentoCrudComponent
+  },
+  {
+    path: "fpagamentos/create",
+    component: FormaPagamentoCreateComponent
   }
 ];
 
