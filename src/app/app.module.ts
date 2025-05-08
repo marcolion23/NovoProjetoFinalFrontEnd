@@ -39,6 +39,7 @@ import { ProductDeleteComponent } from './components/product/product-delete/prod
 import { FormaPagamentoReadComponent } from './components/formaPagamento/forma-pagamento-read/forma-pagamento-read.component';
 import { FormaPagamentoCrudComponent } from './views/forma-pagamento-crud/forma-pagamento-crud.component';
 import { FormaPagamentoCreateComponent } from './components/formaPagamento/forma-pagamento-create/forma-pagamento-create.component';
+import { FormaPagamentoUpdateComponent } from './components/formaPagamento/forma-pagamento-update/forma-pagamento-update.component';
 
 registerLocaleData(localePt)
 
@@ -57,7 +58,8 @@ registerLocaleData(localePt)
     ProductDeleteComponent,
     FormaPagamentoReadComponent,
     FormaPagamentoCrudComponent,
-    FormaPagamentoCreateComponent
+    FormaPagamentoCreateComponent,
+    FormaPagamentoUpdateComponent
   ],
   imports: [
     BrowserModule,
