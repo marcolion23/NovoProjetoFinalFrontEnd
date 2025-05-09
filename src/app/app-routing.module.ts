@@ -8,6 +8,7 @@ import { ProductDeleteComponent } from './components/product/product-delete/prod
 import { FormaPagamentoCrudComponent } from './views/forma-pagamento-crud/forma-pagamento-crud.component';
 import { FormaPagamentoCreateComponent } from './components/formaPagamento/forma-pagamento-create/forma-pagamento-create.component';
 import { FormaPagamentoUpdateComponent } from './components/formaPagamento/forma-pagamento-update/forma-pagamento-update.component';
+import { FormaPagamentoDeleteComponent } from './components/formaPagamento/forma-pagamento-delete/forma-pagamento-delete.component';
 
 //configuração para rotear entre as paginas na home
 const routes: Routes = [
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     path: "fpagamentos/update/:fpgId",
     component: FormaPagamentoUpdateComponent
+  },
+  {
+    path: "fpagamentos/delete/:fpgId",
+    component: FormaPagamentoDeleteComponent
   }
 ];
 
