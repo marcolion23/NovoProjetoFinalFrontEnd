@@ -41,6 +41,12 @@ import { FormaPagamentoCrudComponent } from './views/forma-pagamento-crud/forma-
 import { FormaPagamentoCreateComponent } from './components/formaPagamento/forma-pagamento-create/forma-pagamento-create.component';
 import { FormaPagamentoUpdateComponent } from './components/formaPagamento/forma-pagamento-update/forma-pagamento-update.component';
 import { FormaPagamentoDeleteComponent } from './components/formaPagamento/forma-pagamento-delete/forma-pagamento-delete.component';
+import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
+//import { ClienteComponent } from './components/cliente/cliente.component';
+import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.component';
+import { ClienteReadComponent } from './components/cliente/cliente-read/cliente-read.component';
+import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
+import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
 
 registerLocaleData(localePt)
 
@@ -61,7 +67,13 @@ registerLocaleData(localePt)
     FormaPagamentoCrudComponent,
     FormaPagamentoCreateComponent,
     FormaPagamentoUpdateComponent,
-    FormaPagamentoDeleteComponent
+    FormaPagamentoDeleteComponent,
+    ClienteCreateComponent,
+    //ClienteComponent,
+    ClienteCrudComponent,
+    ClienteReadComponent,
+    ClienteUpdateComponent,
+    ClienteDeleteComponent
   ],
   imports: [
     BrowserModule,
