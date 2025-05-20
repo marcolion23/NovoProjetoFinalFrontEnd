@@ -1,9 +1,56 @@
-.home .title{
-    font-size: 3rem;
-    font-weight: 300;
-    line-height: 1.2;
-}
-
-.home .subtitle{
-    font-size: 1.1rem;
-}
+/* Estilização geral do card da home */
+.home {
+    background: linear-gradient(135deg, #1e293b, #0f172a); /* Gradiente escuro estilo gamer */
+    color: #e0f2f1;                                        /* Cor de texto suave */
+    padding: 40px;                                         /* Espaçamento interno */
+    border-radius: 16px;                                   /* Bordas arredondadas */
+    max-width: 800px;                                      /* Largura máxima */
+    margin: 40px auto;                                     /* Centraliza na tela */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);            /* Sombra profunda */
+    transition: transform 0.3s ease;                       /* Animação suave no hover */
+  }
+  
+  /* Animação sutil ao passar o mouse */
+  .home:hover {
+    transform: scale(1.1); /* Cresce levemente ao passar o mouse */
+  }
+  
+  /* Layout flexível para o conteúdo interno do card */
+  .home-content {
+    display: flex;            /* Alinha ícone e texto lado a lado */
+    align-items: center;      /* Alinha verticalmente */
+    gap: 24px;                /* Espaço entre ícone e texto */
+  }
+  
+  /* Ícone principal estilizado com efeito visual */
+  .home-icon {
+    font-size: 25px;                                      /* Tamanho do ícone */
+    color: #ffffff;                                       /* Cor azul clara */
+    background-color: #2C3E50;                            /* Fundo azul escuro */
+    border-radius:90%;                                   /* Forma circular */
+    padding: 25px;                                        /* Espaçamento interno */
+    box-shadow: 0 0 12px rgba(66, 165, 245, 0.6);          /* Brilho ao redor */
+  }
+  
+  /* Título principal do card */
+  .title {
+    font-size: 2.2rem;            /* Tamanho grande */
+    font-weight: 700;             /* Negrito */
+    margin-bottom: 15px;           /* Espaço abaixo */
+    color: #ffffff;               /* Branco puro */
+  }
+  
+  /* Parte do título com efeito de gradiente */
+  .title .highlight {
+    background: linear-gradient(to right, #2196f3, #21cbf3); /* Gradiente azul neon */
+    -webkit-background-clip: text;       /* Aplica gradiente no texto */
+    -webkit-text-fill-color: transparent;/* Torna o texto transparente para o gradiente aparecer */
+  }
+  
+  /* Subtítulo do card */
+  .subtitle {
+    font-size: 1.2rem;            /* Tamanho confortável */
+    font-weight: 500;             /* Peso padrão */
+    color: #cfd8dc;               /* Cinza azulado leve */
+  }
+  

@@ -1,15 +1,45 @@
-.sidenav{
-    background-color: #3F51B5;
-    width: 200px;
-}
-.sidenav a{
-    color: #fff;
-}
-.sidenav i{
-    padding-right: 10px;
+/* Menu lateral com design mais refinado */
+.sidenav {
+    background-color: #2C3E50; /* Azul escuro mais elegante */
+    width: 240px;              /* Largura mais confortável */
+    color: #ecf0f1;            /* Tom de branco suave para melhor contraste */
+    padding-top: 24px;         /* Espaço superior extra */
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15); /* Sombra suave mais profunda */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;                  /* Espaço entre os itens do menu */
 }
 
-.content{
-    padding: 16px;
-    background-color: #fff;
+/* Links de navegação do menu */
+.sidenav a {
+    display: flex;             /* Ícone e texto lado a lado */
+    align-items: center;       /* Alinhamento vertical */
+    padding: 14px 20px;        /* Espaçamento interno aprimorado */
+    text-decoration: none;     /* Remove o sublinhado */
+    color: inherit;            /* Usa a cor definida no .sidenav */
+    font-weight: 500;          /* Texto um pouco mais forte */
+    border-radius: 8px;        /* Borda arredondada moderna */
+    transition: background 0.3s ease, transform 0.2s ease; /* Animação suave */
+}
+
+/* Efeito ao passar o mouse no link */
+.sidenav a:hover {
+    background-color: rgba(255, 255, 255, 0.08); /* Destaque leve */
+    transform: translateX(4px); /* Animação de leve movimento para direita */
+}
+
+/* Estilo dos ícones (material icons) */
+.sidenav i {
+    margin-right: 12px;        /* Espaço entre ícone e texto */
+    font-size: 22px;           /* Ícone um pouco maior */
+    color: #BBDEFB;            /* Azul claro para contraste visual */
+}
+
+/* Área de conteúdo principal */
+.content {
+    padding: 32px;             /* Espaço interno generoso */
+    background-color: #f4f6f9; /* Fundo cinza-claro moderno */
+    min-height: 100vh;         /* Ocupa 100% da altura da tela */
+    font-family: 'Roboto', sans-serif; /* Fonte moderna e padrão do Material */
+    color: #2c3e50;            /* Texto escuro para boa leitura */
 }

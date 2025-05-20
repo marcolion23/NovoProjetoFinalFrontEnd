@@ -47,6 +47,12 @@ import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.componen
 import { ClienteReadComponent } from './components/cliente/cliente-read/cliente-read.component';
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
+import { EstoqueComponent } from './components/estoque/estoque.component';
+import { AjustesComponent } from './components/ajustes/ajustes.component';
+import { RelatoriosComponent } from './components/relatorios/relatorios.component';
+import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
+import { AgendamentosComponent } from './components/agendamentos/agendamentos.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 registerLocaleData(localePt)
 
@@ -73,7 +79,13 @@ registerLocaleData(localePt)
     ClienteCrudComponent,
     ClienteReadComponent,
     ClienteUpdateComponent,
-    ClienteDeleteComponent
+    ClienteDeleteComponent,
+    EstoqueComponent,
+    AjustesComponent,
+    RelatoriosComponent,
+    FornecedoresComponent,
+    AgendamentosComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
