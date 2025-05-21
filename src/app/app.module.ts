@@ -54,6 +54,7 @@ import { FornecedoresComponent } from './components/fornecedores/fornecedores.co
 import { AgendamentosComponent } from './components/agendamentos/agendamentos.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 
 registerLocaleData(localePt)
 
@@ -107,7 +108,8 @@ registerLocaleData(localePt)
   MatPaginatorModule,
   MatSortModule,
   MatSelectModule, 
-  FormsModule        // Também necessário para <mat-select>
+  FormsModule, 
+  MatIconModule   
 ],
 
   providers: [{

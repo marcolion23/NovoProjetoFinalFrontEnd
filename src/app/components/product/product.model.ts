@@ -10,3 +10,4 @@ export interface Product {
   proEstoque: number;           // Quantidade em estoque
   proAtivo: boolean;            // Produto está ativo ou inativo
 }
+

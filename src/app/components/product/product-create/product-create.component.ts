@@ -9,6 +9,9 @@ import { Product } from '../product.model';
   styleUrls: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
+formValid() {
+throw new Error('Method not implemented.');
+}
 
  product: Product = {
   proNome: '',
@@ -19,7 +22,21 @@ export class ProductCreateComponent implements OnInit {
   proCodigoBarras: '',
   proEstoque: 0,
   proAtivo: true
+
 }
+limpar(): void {
+  this.product = {
+    proNome: '',
+    proPrecoCusto: 0,
+    proPrecoVenda: 0,
+    proCategoria: '',
+    proMarca: '',
+    proCodigoBarras: '',
+    proEstoque: 0,
+    proAtivo: true
+  };
+}
+
   //importando productService
   constructor(private productService: ProductService,
     private router: Router) { }

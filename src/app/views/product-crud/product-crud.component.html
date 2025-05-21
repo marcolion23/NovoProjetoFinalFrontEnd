@@ -1,5 +1,8 @@
-<button mat-raised-button (click)="navigateToProductCreate()" color="primary">
-    Novo Produto
-</button>
-
+<!-- Container do botão "Novo Produto", centralizado -->
+<div class="novo-produto-container">
+    <button class="novo-produto-btn" [routerLink]="'/products/create'">
+      Novo Produto
+    </button>
+  </div>
+  
 <app-product-read></app-product-read>

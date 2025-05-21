@@ -19,7 +19,7 @@
     color: inherit;            /* Usa a cor definida no .sidenav */
     font-weight: 500;          /* Texto um pouco mais forte */
     border-radius: 8px;        /* Borda arredondada moderna */
-    transition: background 0.3s ease, transform 0.2s ease; /* Animação suave */
+ 
 }
 
 /* Efeito ao passar o mouse no link */

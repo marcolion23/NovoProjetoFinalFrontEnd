@@ -1,11 +1,60 @@
-table{
-    width: 100%;
+/* Container com rolagem horizontal e padding, ideal para telas menores */
+.table-container {
+    overflow-x: auto;             /* Adiciona scroll horizontal se necessário */
+    margin-top: 30px;             /* Espaço superior */
+    background-color: #2C3E50;    /* Fundo escuro estilo gamer */
+    padding: 16px;                /* Espaçamento interno */
 }
 
-.edit > i{
-    color: #d9cd26;
+/* Tabela principal com visual limpo e espaçado */
+table.gamer-table {
+    width: 100%;                  /* Ocupa toda a largura do container */
+    border-collapse: collapse;    /* Remove espaçamento entre as células */
+    font-family: 'Segoe UI', sans-serif;  /* Fonte moderna e legível */
+    color: #e0e0e0;               /* Texto claro para contraste com fundo escuro */
 }
 
-.delete > i{
-    color: #e35e6b;
+/* Cabeçalho das colunas */
+table.gamer-table th {
+    background-color: #ffffff;          /* Cor de fundo do cabeçalho */
+    color: #2C3E50;                     /* Cor do texto */
+    font-weight: 600;                   /* Negrito */
+    padding: 14px;                      /* Espaçamento interno */
+    text-align: left;                   /* Alinhamento à esquerda */
+    border-bottom: 2px solid #0af8c1;   /* Linha inferior neon */
+    border: 1px solid #0af8c1;          /* Adiciona borda ao redor da célula do cabeçalho */
+}
+
+/* Células comuns (linhas) */
+table.gamer-table td {
+    padding: 14px;                      /* Espaçamento interno */
+    border-bottom: 1px solid #444;      /* Linha divisória discreta */
+}
+
+/* Efeito ao passar o mouse sobre uma linha */
+table.gamer-table tr:hover {
+    background-color: #2c2f36;          /* Realce com tom mais claro ao hover */
+    transition: background-color 0.2s ease-in-out; /* Transição suave */
+}
+
+/* Estilo comum para botões de ação */
+.action-btn {
+    margin-right: 8px;                 /* Espaço entre os botões */
+    border-radius: 50%;                /* Botões redondos */
+    transition: transform 0.2s ease;   /* Efeito de clique suave */
+}
+
+/* Efeito de "zoom leve" ao passar o mouse */
+.action-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Botão de edição com cor personalizada */
+.edit mat-icon {
+    color: #f4d03f;                    /* Amarelo gamer para edição */
+}
+
+/* Botão de exclusão com cor personalizada */
+.delete mat-icon {
+    color: #e35e6b;                    /* Vermelho forte para ações perigosas */
 }

@@ -1,3 +1,26 @@
-button{
-    margin-bottom: 30px;
+/* Container do botão com alinhamento central */
+.novo-produto-container {
+  display: flex;
+  justify-content: center;       /* Centraliza horizontalmente */
+  margin-bottom: 16px;           /* Espaço entre o botão e a tabela */
+}
+
+/* Estilo do botão "Novo Produto" */
+.novo-produto-btn {
+  background-color: #0af8c1;     /* Neon verde-água */
+  color: #2C3E50;                /* Texto escuro */
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 12px rgba(10, 248, 193, 0.3);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover com leve zoom */
+.novo-produto-btn:hover {
+  background-color: #0edbb1;
+  transform: scale(1.05);
 }
