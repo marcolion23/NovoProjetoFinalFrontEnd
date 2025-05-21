@@ -1,8 +1,89 @@
-form{
-    display: flex;
-    flex-direction: column;
+/* Formulário: layout em coluna com espaçamento entre elementos */
+.product-form {
+  display: flex;               /* Usa Flexbox para um layout flexível */
+  flex-direction: column;      /* Coloca os campos em uma coluna vertical */
+  gap: 20px;                   /* Espaçamento entre os campos */
+  margin-top: 16px;            /* Espaçamento superior */
+  padding: 0 5px;              /* Espaçamento horizontal pequeno */
 }
 
-button{
-    margin: 20px 15px 0px 0px;
+/* Garante que os campos ocupem toda a largura disponível */
+.full-width {
+  width: 100%;                 /* Preenche 100% da largura do container pai */
+  box-sizing: border-box;      /* Inclui padding e borda no cálculo de largura */
+}
+
+/* Cartão que envolve o formulário com estilo moderno e limpo */
+.product-card {
+  max-width: 600px;                               /* Limita a largura máxima do card */
+  margin: 40px auto;                              /* Centraliza horizontalmente e adiciona espaçamento vertical */
+  padding: 32px 24px;                             /* Espaçamento interno para conforto visual */
+  border-radius: 16px;                            /* Bordas arredondadas */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);       /* Sombra para profundidade */
+  background-color: #2C3E50;                      /* Cor de fundo escura e elegante */
+  color: #ffffff;                                 /* Cor do texto branca pura para contraste */
+  transition: box-shadow 0.3s ease;               /* Animação suave em interações */
+}
+
+/* Container dos botões alinhado à direita com espaçamento entre eles */
+.button-container {
+  display: flex;               /* Layout flexível para alinhar botões */
+  justify-content: flex-end;   /* Alinha os botões à direita */
+  gap: 16px;                   /* Espaço entre os botões */
+  margin-top: 24px;            /* Espaço acima dos botões */
+}
+
+/* Estilo base de todos os botões */
+button {
+  font-weight: 700;                                /* Texto em negrito */
+  padding: 12px 28px;                              /* Área clicável maior */
+  border-radius: 12px;                             /* Bordas arredondadas */
+  border: none;                                    /* Remove bordas padrão */
+  cursor: pointer;                                 /* Muda o cursor para indicar que é clicável */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Animações suaves */
+  color: #ffffff;                                  /* Texto branco */
+}
+
+/* Botão principal (ex: Salvar) com verde suave */
+button[color="primary"] {
+  background-color: #388e3c;                       /* Verde mais sóbrio e moderno */
+  box-shadow: 0 4px 12px rgba(56, 142, 60, 0.4);    /* Sombra verde suave */
+}
+
+/* Efeito hover do botão principal */
+button[color="primary"]:hover {
+  background-color: #2e7d32;                       /* Verde mais escuro ao passar o mouse */
+  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.6);    /* Sombra mais forte */
+}
+
+/* Botão de cancelamento (ou ações perigosas) com vermelho sóbrio */
+button[color="warn"] {
+  background-color: #c62828;                       /* Vermelho forte e limpo */
+  color: #ffffff;                                  /* Texto branco */
+  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.4);    /* Sombra vermelha suave */
+}
+
+/* Efeito hover do botão de aviso */
+button[color="warn"]:hover {
+  background-color: #b71c1c;                       /* Vermelho mais escuro */
+  box-shadow: 0 6px 16px rgba(183, 28, 28, 0.6);    /* Sombra mais intensa */
+}
+
+/* Ajustes de responsividade para telas pequenas */
+@media (max-width: 640px) {
+  .product-card {
+    margin: 20px 12px;             /* Margem mais compacta */
+    padding: 24px 16px;            /* Padding reduzido para mobile */
+  }
+
+  button {
+    width: 100%;                   /* Botões ocupam a largura total no mobile */
+    padding: 14px 0;               /* Padding vertical aumentado */
+  }
+
+  .button-container {
+    flex-direction: column;        /* Botões empilhados verticalmente */
+    gap: 12px;                     /* Espaçamento entre botões */
+    justify-content: center;       /* Centraliza os botões no container */
+  }
 }

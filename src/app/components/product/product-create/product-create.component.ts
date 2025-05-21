@@ -10,12 +10,16 @@ import { Product } from '../product.model';
 })
 export class ProductCreateComponent implements OnInit {
 
-  product: Product = {
-    proNome: '',
-    proPrecoCusto: 0,
-    proPrecoVenda: 0
-  }
-
+ product: Product = {
+  proNome: '',
+  proPrecoCusto: 0,
+  proPrecoVenda: 0,
+  proCategoria: '',
+  proMarca: '',
+  proCodigoBarras: '',
+  proEstoque: 0,
+  proAtivo: true
+}
   //importando productService
   constructor(private productService: ProductService,
     private router: Router) { }

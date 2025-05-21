@@ -53,6 +53,7 @@ import { RelatoriosComponent } from './components/relatorios/relatorios.componen
 import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
 import { AgendamentosComponent } from './components/agendamentos/agendamentos.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { MatSelectModule } from '@angular/material/select';
 
 registerLocaleData(localePt)
 
@@ -86,26 +87,29 @@ registerLocaleData(localePt)
     FornecedoresComponent,
     AgendamentosComponent,
     PerfilComponent
+
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    //precisamos declara os modulos de material importados
-    MatToolbarModule, 
-    MatSidenavModule,
-    MatListModule,
-    MatCardModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    HttpClientModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule
-  ],
+ imports: [
+  BrowserModule,
+  AppRoutingModule,
+  BrowserAnimationsModule,
+  MatToolbarModule, 
+  MatSidenavModule,
+  MatListModule,
+  MatCardModule,
+  MatButtonModule,
+  MatSnackBarModule,
+  HttpClientModule,
+  FormsModule,            // OK aqui
+  MatFormFieldModule,
+  MatInputModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatSelectModule, 
+  FormsModule        // Também necessário para <mat-select>
+],
+
   providers: [{
     provide: LOCALE_ID,
     useValue: 'pt-BR'
