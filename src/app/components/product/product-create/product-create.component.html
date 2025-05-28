@@ -22,26 +22,87 @@
       <mat-label>Código de Barras</mat-label>
       <input matInput placeholder="Ex: 7891234567890" [(ngModel)]="product.proCodigoBarras" name="proCodigoBarras" required>
     </mat-form-field>
-
-    <!-- Campo: Categoria -->
-    <mat-form-field appearance="outline" class="full-width custom-select">
-      <mat-label>Categoria</mat-label>
-      <mat-select [(ngModel)]="product.proCategoria" name="proCategoria" required>
-        <mat-option value="teclado">Teclado</mat-option>
-        <mat-option value="mouse">Mouse</mat-option>
-        <mat-option value="monitor">Monitor</mat-option>
-        <mat-option value="headset">Headset</mat-option>
-        <mat-option value="mousepad">MousePad</mat-option>
-        <mat-option value="acessorios">Acessórios</mat-option>
-      </mat-select>
-    </mat-form-field>
     
+<!-- Categoria -->
+<mat-form-field appearance="outline" class="full-width custom-select">
+  <mat-label>Categoria</mat-label>
+  <mat-select [(ngModel)]="product.proCategoria" name="proCategoria" required>
 
-    <!-- Campo: Marca -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Marca</mat-label>
-      <input matInput placeholder="Ex: HyperX" [(ngModel)]="product.proMarca" name="proMarca" required>
-    </mat-form-field> 
+    <mat-option value="teclado">
+      <mat-icon class="option-icon">keyboard</mat-icon>
+      Teclado
+    </mat-option>
+
+    <mat-option value="mouse">
+      <mat-icon class="option-icon">mouse</mat-icon>
+      Mouse
+    </mat-option>
+
+    <mat-option value="monitor">
+      <mat-icon class="option-icon">tv</mat-icon> <!-- "monitor" não existe no material icons, use tv ou outro -->
+      Monitor
+    </mat-option>
+
+    <mat-option value="headset">
+      <mat-icon class="option-icon">headset</mat-icon>
+      Headset
+    </mat-option>
+
+    <mat-option value="mousepad">
+      <img src="assets/icons/mousepad.png" class="option-img" />
+      MousePad
+    </mat-option>
+
+    <mat-option value="cadeira">
+      <img src="assets/icons/cadeira.png"  class="option-img" />
+      Cadeira Gamer
+    </mat-option>
+
+    <mat-option value="acessorios">
+      <mat-icon class="option-icon">build</mat-icon>
+      Acessórios
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- Marca -->
+<mat-form-field appearance="outline" class="full-width custom-select">
+  <mat-label>Marca</mat-label>
+  <mat-select [(ngModel)]="product.proMarca" name="proMarca" required>
+
+    <mat-option value="razer">
+      <img src="assets/logos/razer.png" class="option-img" />
+      Razer
+    </mat-option>
+
+    <mat-option value="hyperx">
+      <img src="assets/logos/hyperx.png"  class="option-img" />
+      HyperX
+    </mat-option>
+
+    <mat-option value="corsair">
+      <img src="assets/logos/corsair.png" class="option-img" />
+      Corsair
+    </mat-option>
+
+    <mat-option value="steelseries">
+      <img src="assets/logos/steelseries.png" class="option-img" />
+      SteelSeries
+    </mat-option>
+
+    <mat-option value="reddragon">
+      <img src="assets/logos/reddragon.png" class="option-img" />
+      RedDragon
+    </mat-option>
+
+    <mat-option value="outra">
+      <mat-icon class="option-icon">help_outline</mat-icon>
+      Outra Marca
+    </mat-option>
+
+  </mat-select>
+</mat-form-field>
+
 
     <!-- Campo: Estoque -->
     <mat-form-field appearance="outline" class="full-width">

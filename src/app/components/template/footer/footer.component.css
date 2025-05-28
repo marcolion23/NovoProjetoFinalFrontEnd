@@ -18,3 +18,21 @@
     font-size: 1rem;               /* Tamanho adequado */
     font-weight: 500;              /* Peso leve para aparência suave */
 }
+/* Container dos ícones sociais, no canto direito */
+.social-icons {
+    display: flex;                         /* Exibe ícones lado a lado */
+    gap: 16px;                             /* Espaço entre cada ícone */
+    align-items: center;                   /* Alinha verticalmente */
+}
+
+/* Estilo base dos ícones */
+.social-icons a {
+    color: #ecf0f1;                        /* Cor branca suave */
+    font-size: 1.4rem;                     /* Tamanho confortável */
+    transition: color 0.3s ease;           /* Transição suave de cor */
+}
+
+/* Estilo ao passar o mouse nos ícones */
+.social-icons a:hover {
+    color: #21CBF3;                        /* Azul claro ao passar o mouse */
+}
