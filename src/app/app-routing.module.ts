@@ -13,6 +13,7 @@ import { ClienteCreateComponent } from './components/cliente/cliente-create/clie
 import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.component';
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
+import { ProductReadComponent } from './components/product/product-read/product-read.component';
 
 //configuração para rotear entre as paginas na home
 const routes: Routes = [
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: "products/create",
     component: ProductCreateComponent
+  },
+  {
+    path:"products/read",
+    component: ProductReadComponent
   },
   {
     path: "products/update/:proId",

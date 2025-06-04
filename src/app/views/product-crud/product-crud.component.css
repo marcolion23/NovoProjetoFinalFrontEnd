@@ -1,26 +1,64 @@
-/* Container do botão com alinhamento central */
+/* Container com alinhamento central e quebra de linha se necessário */
 .novo-produto-container {
   display: flex;
-  justify-content: center;       /* Centraliza horizontalmente */
-  margin-bottom: 16px;           /* Espaço entre o botão e a tabela */
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-bottom: 24px;
 }
 
-/* Estilo do botão "Novo Produto" */
-.novo-produto-btn {
-  background-color: #0af8c1;     /* Neon verde-água */
-  color: #2C3E50;                /* Texto escuro */
+/* Botões agora têm mesma largura (50% do container de 80% da tela) */
+.expanded-btn {
+  width: 40%; /* 40% cada botão, 80% somado */
+  min-width: 280px; /* Evita quebra total em telas muito pequenas */
+  background-color: #0af8c1;
+  color: #2C3E50;
   font-weight: bold;
-  padding: 12px 24px;
+  padding: 32px 0; /* Aumenta altura do botão */
+  font-size: 2rem;
   border: none;
-  border-radius: 12px;
+  border-radius: 28px;
   cursor: pointer;
   font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 4px 12px rgba(10, 248, 193, 0.3);
-  transition: all 0.2s ease-in-out;
+  box-shadow: 0 8px 24px rgba(10, 248, 193, 0.4);
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+}
+.dashboard-panels {
+  width: 100vw;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  padding: 30px 50px;
+  box-sizing: border-box;
 }
 
-/* Hover com leve zoom */
-.novo-produto-btn:hover {
-  background-color: #0edbb1;
-  transform: scale(1.05);
+.panel-info {
+  background: white;
+  border-radius: 24px;
+  padding: 40px 30px;
+  box-shadow: 0 10px 30px rgba(0, 255, 200, 0.25);
+  text-align: center;
+  height: 300px; /* Altura fixa para teste, pode ajustar depois */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+  transition: transform 0.3s ease;
+}
+
+.panel-info:hover {
+  transform: translateY(-5px);
+}
+
+.panel-info h2 {
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+.panel-info p {
+  font-size: 22px;
+  color: #444;
 }

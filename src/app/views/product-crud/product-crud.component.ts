@@ -8,8 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-crud.component.css']
 })
 
+
 export class ProductCrudComponent implements OnInit {
   mostrarTabela = false;
+  totalProdutos: number = 145;
+  estoqueCritico: number = 8;
+  maisVendido: string = 'Mouse Gamer XYZ';
 
   colunasExibidas: string[] = ['id', 'nome', 'custo', 'venda', 'acoes'];
 

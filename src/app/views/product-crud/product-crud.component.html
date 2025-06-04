@@ -1,48 +1,35 @@
-<!-- Container do botão "Novo Produto", centralizado -->
+<!-- Container com flexbox para centralizar e expandir os botões -->
 <div class="novo-produto-container">
-    <button mat-raised-button class="novo-produto-btn" [routerLink]="'/products/create'">
-      Novo Produto
-    </button>
-    <button mat-raised-button color="accent" class="big-button"[routerLink]="'/products/create'">
-      Gerenciamento de Produtos
-    </button>
-  </div>
-  
-<!-- Tabela só aparece se mostrarTabela for true -->
-<div *ngIf="mostrarTabela">
-  <table mat-table [dataSource]="produtos" class="mat-elevation-z8 full-width-table">
 
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>#ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-    </ng-container>
+  <!-- Botão "Novo Produto" -->
+  <button 
+    mat-raised-button
+    class="novo-produto-btn expanded-btn"
+    [routerLink]="'/products/create'">
+    Novo Produto
+  </button>
 
-    <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef>Produto</th>
-      <td mat-cell *matCellDef="let element">{{ element.nome }}</td>
-    </ng-container>
+  <!-- Botão "Gerenciamento de Produtos" -->
+  <button 
+    mat-raised-button
+    class="big-button expanded-btn"
+    [routerLink]="'/products/read'">
+    Gerenciamento de Produtos
+  </button>
+<!-- Painéis de Resumo -->
+<div class="dashboard-panels">
+  <mat-card class="panel-info">
+    <h2>Total de Produtos</h2>
+    <p>{{ totalProdutos }}</p>
+  </mat-card>
 
-    <ng-container matColumnDef="custo">
-      <th mat-header-cell *matHeaderCellDef>Custo</th>
-      <td mat-cell *matCellDef="let element">{{ element.custo }}</td>
-    </ng-container>
+  <mat-card class="panel-info">
+    <h2>Estoque Crítico</h2>
+    <p>{{ estoqueCritico }} produtos</p>
+  </mat-card>
 
-    <ng-container matColumnDef="venda">
-      <th mat-header-cell *matHeaderCellDef>Venda</th>
-      <td mat-cell *matCellDef="let element">{{ element.venda }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="acoes">
-      <th mat-header-cell *matHeaderCellDef>Ações</th>
-      <td mat-cell *matCellDef="let element">
-        <!-- Exemplo de ações -->
-        <button mat-button color="warn">Excluir</button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="colunasExibidas"></tr>
-    <tr mat-row *matRowDef="let row; columns: colunasExibidas;"></tr>
-  </table>
+  <mat-card class="panel-info">
+    <h2>Mais Vendido</h2>
+    <p>{{ maisVendido }}</p>
+  </mat-card>
 </div>
-  
-<app-product-read></app-product-read>
