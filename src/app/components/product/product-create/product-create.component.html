@@ -39,7 +39,7 @@
     </mat-option>
 
     <mat-option value="monitor">
-      <mat-icon class="option-icon">tv</mat-icon> <!-- "monitor" não existe no material icons, use tv ou outro -->
+      <mat-icon class="option-icon">tv</mat-icon> 
       Monitor
     </mat-option>
 
@@ -47,19 +47,29 @@
       <mat-icon class="option-icon">headset</mat-icon>
       Headset
     </mat-option>
-
+ 
     <mat-option value="mousepad">
-      <img src="assets/icons/mousepad.png" class="option-img" />
+      <img src="assets/img/mousepad.png" width="20" style="margin-right: 8px;" class="option-img" />
       MousePad
     </mat-option>
 
     <mat-option value="cadeira">
-      <img src="assets/icons/cadeira.png"  class="option-img" />
+      <img src="assets/img/cadeira-gamer.png"  width="20" style="margin-right: 8px;" class="option-img" />
       Cadeira Gamer
     </mat-option>
 
+    <mat-option value="Console">
+      <img src="assets/img/console-de-videogame.png" width="20" style="margin-right: 8px;" class="option-img" />
+      Console
+    </mat-option>
+
+    <mat-option value="Controle">
+      <img src="assets/img/controle-de-video-game.png" width="20" style="margin-right: 8px;" class="option-img" />
+      Controle
+    </mat-option>
+
     <mat-option value="acessorios">
-      <mat-icon class="option-icon">build</mat-icon>
+      <img src="assets/img/outra.png" width="20" style="margin-right: 8px;" class="option-img" />
       Acessórios
     </mat-option>
   </mat-select>
@@ -71,32 +81,47 @@
   <mat-select [(ngModel)]="product.proMarca" name="proMarca" required>
 
     <mat-option value="razer">
-      <img src="assets/logos/razer.png" class="option-img" />
+      <img src="assets/img/razer.png" width="20" style="margin-right: 8px;"class="option-img" />
       Razer
     </mat-option>
 
     <mat-option value="hyperx">
-      <img src="assets/logos/hyperx.png"  class="option-img" />
+      <img src="assets/img/hyperx.png" width="20" style="margin-right: 8px;" class="option-img" />
       HyperX
     </mat-option>
+   
+    <mat-option value="nzxt">
+      <img src="assets/img/NZXT.png" width="20" style="margin-right: 8px;" class="option-img" />
+      NZXT
+    </mat-option>
+    
+    <mat-option value="Dell">
+      <img src="assets/img/Dell.png" width="20" style="margin-right: 8px;" class="option-img" />
+      Dell
+    </mat-option>
 
-    <mat-option value="corsair">
-      <img src="assets/logos/corsair.png" class="option-img" />
-      Corsair
+    <mat-option value="Lian Li">
+      <img src="assets/img/LianLi.png" width="20" style="margin-right: 8px;" class="option-img" />
+      Lian Li
+    </mat-option>
+
+    <mat-option value="logitech">
+      <img src="assets/img/LogiTech.png"width="20" style="margin-right: 8px;"  class="option-img" />
+      Logitech
     </mat-option>
 
     <mat-option value="steelseries">
-      <img src="assets/logos/steelseries.png" class="option-img" />
+      <img src="assets/img/steelseries.png"width="20" style="margin-right: 8px;" class="option-img" />
       SteelSeries
     </mat-option>
 
     <mat-option value="reddragon">
-      <img src="assets/logos/reddragon.png" class="option-img" />
+      <img src="assets/img/redragons.png"width="20" style="margin-right: 8px;" class="option-img" />
       RedDragon
     </mat-option>
 
     <mat-option value="outra">
-      <mat-icon class="option-icon">help_outline</mat-icon>
+      <img src="assets/img/outra.png"width="20" style="margin-right: 8px;" class="option-img" />
       Outra Marca
     </mat-option>
 
