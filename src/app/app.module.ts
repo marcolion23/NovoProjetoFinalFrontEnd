@@ -1,6 +1,7 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,7 +48,6 @@ import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.componen
 import { ClienteReadComponent } from './components/cliente/cliente-read/cliente-read.component';
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
-import { EstoqueComponent } from './components/estoque/estoque.component';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { RelatoriosComponent } from './components/relatorios/relatorios.component';
 import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
@@ -55,6 +55,10 @@ import { AgendamentosComponent } from './components/agendamentos/agendamentos.co
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { EstoqueDeleteComponent } from './components/estoque/estoque-delete/estoque-delete.component';
+import { EstoqueReadComponent } from './components/estoque/estoque-read/estoque-read.component';
+import { EstoqueUpdateComponent } from './components/estoque/estoque-update/estoque-update.component';
+import { EstoqueCreateComponent } from './components/estoque/estoque-create/estoque-create.component';
 
 registerLocaleData(localePt)
 
@@ -82,12 +86,16 @@ registerLocaleData(localePt)
     ClienteReadComponent,
     ClienteUpdateComponent,
     ClienteDeleteComponent,
-    EstoqueComponent,
+    
     AjustesComponent,
     RelatoriosComponent,
     FornecedoresComponent,
     AgendamentosComponent,
-    PerfilComponent
+    PerfilComponent,
+    EstoqueDeleteComponent,
+    EstoqueReadComponent,
+    EstoqueUpdateComponent,
+    EstoqueCreateComponent,
 
   ],
  imports: [
@@ -109,7 +117,8 @@ registerLocaleData(localePt)
   MatSortModule,
   MatSelectModule, 
   FormsModule, 
-  MatIconModule   
+  MatIconModule,
+
 ],
 
   providers: [{
