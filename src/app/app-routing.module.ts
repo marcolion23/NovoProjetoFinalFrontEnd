@@ -14,12 +14,37 @@ import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.componen
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
 import { ProductReadComponent } from './components/product/product-read/product-read.component';
+import { EstoqueCreateComponent } from './components/estoque/estoque-create/estoque-create.component';
+import { EstoqueCrudComponent } from './views/estoque-crud/estoque-crud.component';
+import { EstoqueDeleteComponent } from './components/estoque/estoque-delete/estoque-delete.component';
+import { EstoqueReadComponent } from './components/estoque/estoque-read/estoque-read.component';
+import { EstoqueUpdateComponent } from './components/estoque/estoque-update/estoque-update.component';
 
 //configuração para rotear entre as paginas na home
 const routes: Routes = [
   {
     path: "",
     component: HomeComponent
+  },
+  {
+    path: "estoque",
+    component: EstoqueCrudComponent
+  },
+  {
+    path: "estoque/create",
+    component: EstoqueCreateComponent
+  },
+  {
+    path: "estoque/delete",
+    component: EstoqueDeleteComponent
+  },
+  {
+    path: "estoque/read",
+    component: EstoqueReadComponent
+  },
+  {
+    path: "estoque/update",
+    component: EstoqueUpdateComponent
   },
   {
     path: "products",

@@ -59,6 +59,7 @@ import { EstoqueDeleteComponent } from './components/estoque/estoque-delete/esto
 import { EstoqueReadComponent } from './components/estoque/estoque-read/estoque-read.component';
 import { EstoqueUpdateComponent } from './components/estoque/estoque-update/estoque-update.component';
 import { EstoqueCreateComponent } from './components/estoque/estoque-create/estoque-create.component';
+import { EstoqueCrudComponent } from './views/estoque-crud/estoque-crud.component';
 
 registerLocaleData(localePt)
 
@@ -96,6 +97,7 @@ registerLocaleData(localePt)
     EstoqueReadComponent,
     EstoqueUpdateComponent,
     EstoqueCreateComponent,
+    EstoqueCrudComponent,
 
   ],
  imports: [
