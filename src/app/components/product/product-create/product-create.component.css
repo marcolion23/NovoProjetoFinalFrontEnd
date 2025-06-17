@@ -1,103 +1,125 @@
 /* Formulário: layout em coluna com espaçamento entre elementos */ 
 .product-form {
   display: flex;               /* Usa Flexbox para um layout flexível */
-  flex-direction: column;      /* Coloca os campos em uma coluna vertical */
-  gap: 20px;                   /* Espaçamento entre os campos */
-  margin-top: 10px;            /* Espaçamento superior */
-  padding: 0 5px;              /* Espaçamento horizontal pequeno */
+  flex-wrap: wrap;            /* Permite quebra de linha para responsividade */
+  gap: 20px;                  /* Espaçamento entre os campos */
+  margin-top: 10px;           /* Espaçamento superior */
+  padding: 0 5px;             /* Espaçamento horizontal pequeno */
+  flex-direction: row;        /* Alinha os campos em linha (coluna no mobile por wrap) */
 }
 
 /* Garante que os campos ocupem toda a largura disponível */
 .full-width {
-  width: 100%;                 /* Preenche 100% da largura do container pai */
-  box-sizing: border-box;      /* Inclui padding e borda no cálculo de largura */
+  width: 100%;                /* Preenche 100% da largura do container pai */
+  box-sizing: border-box;     /* Inclui padding e borda no cálculo de largura */
+}
+
+/* Define metade da largura para telas maiores */
+.half-width {
+  width: 48%;                 /* Quase metade para caber o gap */
+  box-sizing: border-box;     /* Importante para cálculo correto */
+  min-width: 280px;           /* Largura mínima para evitar ficar muito estreito */
 }
 
 /* Cartão que envolve o formulário com estilo moderno e limpo */
 .product-card {
-  max-width: 550px;        /* Limita a largura máxima do card */
-  margin: 40px auto;       /* Centraliza horizontalmente e adiciona espaçamento vertical */
+  max-width: 650px;           /* Limita a largura máxima do card */
+  margin: 40px auto;          /* Centraliza horizontalmente e adiciona espaçamento vertical */
   padding: 32px 24px;         /* Espaçamento interno para conforto visual */
-  border-radius: 50px;            /* Bordas arredondadas */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);       /* Sombra para profundidade */
-  background-color: #ffffff;                      /* Cor de fundo escura e elegante */
-  color: #2C3E50;                                 /* Cor do texto branca pura para contraste */
-  transition: box-shadow 1.5s ease;               /* Animação suave em interações */
+  border-radius: 50px;        /* Bordas arredondadas */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra para profundidade */
+  background-color: #ffffff;  /* Cor de fundo branca */
+  color: #2C3E50;             /* Cor do texto escura para contraste */
+  transition: box-shadow 1.5s ease; /* Animação suave em interações */
 }
 
 /* Container dos botões alinhado à direita com espaçamento entre eles */
 .button-container {
-  display: flex;               /* Layout flexível para alinhar botões */
-  justify-content: flex-end;   /* Alinha os botões à direita */
-  gap: 16px;                   /* Espaço entre os botões */
-  margin-top: 24px;            /* Espaço acima dos botões */
+  display: flex;              /* Layout flexível para alinhar botões */
+  justify-content: flex-end;  /* Alinha os botões à direita */
+  gap: 16px;                  /* Espaço entre os botões */
+  margin-top: 24px;           /* Espaço acima dos botões */
 }
 
-/* Estilo base de todos os botões salvar e cancelar*/
+/* Estilo base de todos os botões salvar e cancelar */
 button {
-  background-color: #ffffff;                            /* Fundo branco */
-  padding: 12px 28px;                                   /* Área clicável maior */
-  border-radius: 45px;                                  /* Bordas arredondadas */
-  border: none;                                         /* Remove bordas padrão */
-  cursor: pointer;                                      /* Muda o cursor para indicar que é clicável */
+  background-color: #ffffff;                     /* Fundo branco */
+  padding: 12px 28px;                            /* Área clicável maior */
+  border-radius: 45px;                           /* Bordas arredondadas */
+  border: none;                                  /* Remove bordas padrão */
+  cursor: pointer;                               /* Cursor pointer para indicar clicável */
   transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Animações suaves */
 }
 
 /* Botão principal (ex: Salvar) com verde suave */
 button[color="primary"] {
-  background-color: #388e3c;                            /* Verde mais sóbrio e moderno */
-  color: #ffffff;                                       /* Texto branco */
-  box-shadow: 0 4px 12px rgba(56, 142, 60, 0.4);         /* Sombra verde suave */
+  background-color: #388e3c;                     /* Verde sóbrio e moderno */
+  color: #ffffff;                                /* Texto branco */
+  box-shadow: 0 4px 12px rgba(56, 142, 60, 0.4); /* Sombra verde suave */
 }
 
 /* Efeito hover do botão principal */
 button[color="primary"]:hover {
-  background-color: #2e7d32;                            /* Verde mais escuro ao passar o mouse */
-  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.6);         /* Sombra mais forte */
+  background-color: #2e7d32;                     /* Verde mais escuro no hover */
+  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.6); /* Sombra mais forte */
 }
 
 /* Botão de cancelamento (ou ações perigosas) com vermelho sóbrio */
 button[color="warn"] {
-  background-color: #c73e3e;                            /* Vermelho forte e limpo */
-  color: #ffffff;                                       /* Texto branco */
-  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.4);         /* Sombra vermelha suave */
+  background-color: #c73e3e;                     /* Vermelho forte e limpo */
+  color: #ffffff;                                /* Texto branco */
+  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.4); /* Sombra vermelha suave */
 }
 
 /* Efeito hover do botão de aviso */
 button[color="warn"]:hover {
-  background-color: #f80000;                            /* Vermelho mais escuro */
-  box-shadow: 0 6px 16px rgba(183, 28, 28, 0.6);         /* Sombra mais intensa */
+  background-color: #f80000;                     /* Vermelho mais escuro */
+  box-shadow: 0 6px 16px rgba(183, 28, 28, 0.6); /* Sombra mais intensa */
 }
 
 /* Botão "Salvar" branco com texto branco puro */
 button[color="white-save"] {
-  background-color: #ffffff;                            /* Fundo branco puro */
-  color: #ffffff;                                       /* Texto branco puro */
-  border: 2px solid #ffffff;                            /* Borda branca */
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);       /* Sombra branca suave */
+  background-color: #ffffff;                     /* Fundo branco puro */
+  color: #ffffff;                                /* Texto branco puro */
+  border: 2px solid #ffffff;                     /* Borda branca */
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2); /* Sombra branca suave */
 }
 
 /* Efeito hover do botão "Salvar" branco */
 button[color="white-save"]:hover {
-  background-color: #ffffff;                            /* Branco acinzentado no hover */
-  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.4);       /* Sombra mais forte branca */
+  background-color: #ffffff;                     /* Branco acinzentado no hover */
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.4); /* Sombra mais forte branca */
 }
 
 /* Ajustes de responsividade para telas pequenas */
 @media (max-width: 640px) {
   .product-card {
-    margin: 20px 12px;             /* Margem mais compacta */
-    padding: 24px 16px;            /* Padding reduzido para mobile */
+    margin: 20px 12px;           /* Margem mais compacta */
+    padding: 24px 16px;          /* Padding reduzido para mobile */
   }
 
   button {
-    width: 100%;                   /* Botões ocupam a largura total no mobile */
-    padding: 14px 0;               /* Padding vertical aumentado */
+    width: 100%;                 /* Botões ocupam a largura total no mobile */
+    padding: 14px 0;             /* Padding vertical aumentado */
   }
 
   .button-container {
-    flex-direction: column;        /* Botões empilhados verticalmente */
-    gap: 12px;                     /* Espaçamento entre botões */
-    justify-content: center;       /* Centraliza os botões no container */
+    flex-direction: column;      /* Botões empilhados verticalmente */
+    gap: 12px;                   /* Espaçamento entre botões */
+    justify-content: center;     /* Centraliza os botões no container */
   }
-}                
+
+  /* No mobile, faz os campos ocupar toda largura */
+  .half-width {
+    width: 100% !important;
+    min-width: unset;
+  }
+
+  .white-input {
+    background-color: white;
+    color: #000;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+  }
+}

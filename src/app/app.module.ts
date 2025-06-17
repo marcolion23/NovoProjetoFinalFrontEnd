@@ -1,6 +1,11 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
+// Import para forms reativos
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -99,6 +104,7 @@ registerLocaleData(localePt)
     EstoqueCreateComponent,
     EstoqueCrudComponent,
 
+
   ],
  imports: [
   BrowserModule,
@@ -120,6 +126,10 @@ registerLocaleData(localePt)
   MatSelectModule, 
   FormsModule, 
   MatIconModule,
+  MatDatepickerModule,      // ✅ Novo
+  MatNativeDateModule,       // ✅ Novo
+  ReactiveFormsModule,
+  MatInputModule,
 
 ],
 

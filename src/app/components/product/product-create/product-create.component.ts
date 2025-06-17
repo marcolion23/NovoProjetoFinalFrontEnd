@@ -9,23 +9,13 @@ import { Product } from '../product.model';
   styleUrls: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
-formValid() {
-throw new Error('Method not implemented.');
-}
 
- product: Product = {
-  proNome: '',
-  proPrecoCusto: 0,
-  proPrecoVenda: 0,
-  proCategoria: '',
-  proMarca: '',
-  proCodigoBarras: '',
-  proEstoque: 0,
-  proAtivo: true
+  // Variável de data de cadastro (opcional, caso queira mostrar no formulário)
+  dataCadastro: Date = new Date();
+  maxDate: Date = new Date();
 
-}
-limpar(): void {
-  this.product = {
+  // Objeto do Produto
+  product: Product = {
     proNome: '',
     proPrecoCusto: 0,
     proPrecoVenda: 0,
@@ -35,24 +25,43 @@ limpar(): void {
     proEstoque: 0,
     proAtivo: true
   };
-}
 
-  //importando productService
-  constructor(private productService: ProductService,
-    private router: Router) { }
-  
+  constructor(
+    private productService: ProductService,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
-    
+    // Caso queira fazer algo ao iniciar o componente
   }
 
-  createProduct(): void {
+  // Método para salvar (criar produto no backend)
+  salvar(): void {
     this.productService.create(this.product).subscribe(() => {
-      this.productService.showMessage('Produto criado!')
-      this.router.navigate(['/products'])
-    })
+      this.productService.showMessage('Produto criado com sucesso!');
+      this.router.navigate(['/products']);
+    }, error => {
+      console.error('Erro ao salvar produto:', error);
+    });
   }
 
+  // Método para limpar o formulário
+  limpar(): void {
+    this.product = {
+      proNome: '',
+      proPrecoCusto: 0,
+      proPrecoVenda: 0,
+      proCategoria: '',
+      proMarca: '',
+      proCodigoBarras: '',
+      proEstoque: 0,
+      proAtivo: true
+    };
+  }
+
+  // Método para cancelar e voltar para a listagem de produtos
   cancel(): void {
-    this.router.navigate(['/products'])
-  }  
+    this.router.navigate(['/products']);
+  }
+
 }
