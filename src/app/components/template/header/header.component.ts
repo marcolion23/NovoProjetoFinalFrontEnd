@@ -9,8 +9,12 @@ import { SidenavService } from '../../../services/sidenav.service';
 export class HeaderComponent {
   constructor(private sidenavService: SidenavService) {}
 
+  menuOpen = true;
+
   onToggleMenu() {
-    this.sidenavService.toggle();
-    
+    this.menuOpen = !this.menuOpen;
+    this.sidenavService.toggle(); // <-- aciona a abertura/fechamento do menu
   }
-}
+  
+  }
+

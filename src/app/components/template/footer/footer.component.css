@@ -1,38 +1,68 @@
+/* ===== Footer - Rodapé ===== */
 .footer {
-    position: fixed;                /* Fixa no rodapé */
+    position: fixed;                        /* Fixa na parte inferior da tela */
     bottom: 0;
-    width: 100%;                    /* Ocupa toda a largura */
-    background-color: #2C3E50;      /* Cor de fundo igual ao header/sidenav */
-    display: flex;
-    justify-content: flex-end;      /* Alinha o texto à direita */
-    align-items: center;            /* Centraliza verticalmente */
-    padding: 12px 24px;             /* Espaçamento interno */
-    color: #ecf0f1;                 /* Cor branca suave */
-    font-family: 'Roboto', sans-serif;
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Sombra no topo do footer */
-    z-index: 1000;                  /* Garante que fique acima de tudo */
+    width: 100%;                            /* Largura total */
+    background-color: #2C3E50;              /* Cor de fundo igual ao header/nav */
+    display: flex;                          /* Flexbox horizontal */
+    justify-content: flex-end;              /* Conteúdo alinhado à direita */
+    align-items: center;                    /* Centraliza verticalmente */
+    padding: 12px 24px;                     /* Espaço interno */
+    color: #ecf0f1;                         /* Cor do texto */
+    font-family: 'Roboto', sans-serif;      /* Fonte moderna */
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Sombra superior */
+    z-index: 1000;                          /* Fica acima de tudo */
 }
 
 /* Texto dentro do footer */
 .footer > span {
-    font-size: 1rem;               /* Tamanho adequado */
-    font-weight: 500;              /* Peso leve para aparência suave */
+    font-size: 1rem;                        /* Tamanho do texto */
+    font-weight: 500;                       /* Peso médio */
 }
-/* Container dos ícones sociais, no canto direito */
+
+/* Container dos ícones sociais */
 .social-icons {
-    display: flex;                         /* Exibe ícones lado a lado */
-    gap: 16px;                             /* Espaço entre cada ícone */
-    align-items: center;                   /* Alinha verticalmente */
+    display: flex;                          /* Flexbox horizontal */
+    gap: 16px;                              /* Espaço entre ícones */
+    align-items: center;                    /* Centraliza verticalmente */
 }
 
-/* Estilo base dos ícones */
+/* Estilo base dos ícones sociais */
 .social-icons a {
-    color: #ecf0f1;                        /* Cor branca suave */
-    font-size: 1.4rem;                     /* Tamanho confortável */
-    transition: color 0.3s ease;           /* Transição suave de cor */
+    color: #ecf0f1;                         /* Branco suave */
+    font-size: 1.4rem;                      /* Tamanho dos ícones */
+    transition: color 0.3s ease;            /* Animação suave */
+    position: relative;                     /* Necessário para o tooltip */
+    display: inline-block;                  /* Trata como bloco inline */
+    margin: 0 8px;                          /* Espaçamento lateral */
+    text-decoration: none;                  /* Sem sublinhado */
 }
 
-/* Estilo ao passar o mouse nos ícones */
+/* Hover nos ícones sociais */
 .social-icons a:hover {
-    color: #21CBF3;                        /* Azul claro ao passar o mouse */
+    color: #21CBF3;                         /* Azul claro ao passar o mouse */
+}
+
+/* Tooltip (mensagem que aparece ao passar o mouse) */
+.social-icons a::after {
+    content: attr(aria-label);              /* Texto do tooltip vem do aria-label */
+    position: absolute;                     /* Posição absoluta em relação ao link */
+    bottom: 125%;                           /* Aparece acima do ícone */
+    left: 50%;                              /* Centralizado horizontalmente */
+    transform: translateX(-50%);            /* Ajuste fino da centralização */
+    background-color: #333;                 /* Fundo escuro */
+    color: #fff;                            /* Texto branco */
+    padding: 6px 10px;                      /* Espaço interno */
+    border-radius: 4px;                     /* Bordas arredondadas */
+    white-space: nowrap;                    /* Impede quebra de linha */
+    opacity: 0;                             /* Invisível inicialmente */
+    pointer-events: none;                   /* Não captura eventos do mouse */
+    transition: opacity 0.3s;               /* Animação de fade-in */
+    font-size: 13px;                        /* Tamanho pequeno de texto */
+    z-index: 100;                           /* Fica sobre os ícones */
+}
+
+/* Exibe o tooltip no hover */
+.social-icons a:hover::after {
+    opacity: 1;                             /* Torna o tooltip visível */
 }

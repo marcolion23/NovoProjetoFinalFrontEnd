@@ -1,10 +1,17 @@
 <header class="header">
   <div class="header-content">
-    <button class="hamburger" (click)="onToggleMenu()">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
+    <button
+    class="hamburger"
+    [class.open]="menuOpen"
+    (click)="onToggleMenu()"
+    aria-label="Abrir ou fechar menu"
+    [attr.aria-expanded]="menuOpen">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+  
+  
     
     
     <a href="#" class="logo-link">

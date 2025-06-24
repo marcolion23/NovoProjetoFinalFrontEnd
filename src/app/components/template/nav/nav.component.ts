@@ -13,15 +13,23 @@ export class NavComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   private toggleSubscription!: Subscription;
 
+  menuOpen = true; // ✅ Novo: controla se o menu está aberto ou fechado
+
   constructor(private sidenavService: SidenavService) {}
 
   ngOnInit(): void {
     this.toggleSubscription = this.sidenavService.toggle$.subscribe(() => {
-      this.sidenav.toggle();
+      this.toggleMenu();
     });
   }
 
   ngOnDestroy(): void {
     this.toggleSubscription.unsubscribe();
+  }
+
+  // ✅ Novo método: Faz o toggle e atualiza o estado do menu
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+
   }
 }

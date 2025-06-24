@@ -1,46 +1,87 @@
-/* Menu lateral com design mais refinado */
+/* ===== Menu lateral - Sidenav ===== */
 .sidenav {
-    background-color: #2C3E50; /* Azul escuro mais elegante */
-    width: 240px;              /* Largura mais confortável */
-    color: #ecf0f1;            /* Tom de branco suave para melhor contraste */
-    padding-top: 24px;         /* Espaço superior extra */
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15); /* Sombra suave mais profunda */
-    display: flex;
+    background-color: #2C3E50;              /* Fundo azul escuro */
+    width: 225px;                           /* Largura padrão */
+    color: #ecf0f1;                         /* Texto branco suave */
+    padding-top: 24px;                      /* Espaço superior */
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15); /* Sombra lateral */
+    display: flex;                          /* Flexbox vertical */
     flex-direction: column;
-    gap: 8px;                  /* Espaço entre os itens do menu */
+    gap: 8px;                               /* Espaço entre os itens */
+    transition: width 0.3s ease;            /* Transição ao expandir/fechar */
+    position: fixed;                        /* Fixa na lateral */
+    height: 100vh;                          /* Altura total da tela */
+    top: 64px;                              /* Abaixo do header */
+    left: 0;                                /* Alinhado à esquerda */
+    z-index: 500; /* Agora o nav fica abaixo do header (que tem 1000) */
 }
 
-/* Links de navegação do menu */
+/* Estilo dos links de navegação */
 .sidenav a {
-    display: flex;             /* Ícone e texto lado a lado */
-    align-items: center;       /* Alinhamento vertical */
-    padding: 14px 20px;        /* Espaçamento interno aprimorado */
-    text-decoration: none;     /* Remove o sublinhado */
-    color: inherit;            /* Usa a cor definida no .sidenav */
-    font-weight: 500;          /* Texto um pouco mais forte */
-    border-radius: 8px;        /* Borda arredondada moderna */
- 
+    display: flex;                          /* Ícone + texto em linha */
+    align-items: center;                    /* Centraliza verticalmente */
+    padding: 11px 1px;                      /* Espaçamento interno */
+    text-decoration: none;                  /* Sem sublinhado */
+    color: inherit;                         /* Mantém cor padrão */
+    font-weight: 500;                       /* Texto mais forte */
+    border-radius: 50px;                    /* Bordas arredondadas */
+    cursor: pointer;                        /* Cursor de clique */
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease; /* Animações rápidas */
 }
 
-/* Efeito ao passar o mouse no link */
+/* Hover nos links */
 .sidenav a:hover {
-    background-color: rgba(255, 255, 255, 0.08); /* Destaque leve */
-    transform: translateX(4px); /* Animação de leve movimento para direita */
+    background-color: rgba(255, 255, 255, 0.08); /* Fundo levemente claro */
+    transform: translateX(4px);                  /* Move um pouco para a direita */
 }
 
-/* Estilo dos ícones (material icons) */
-.sidenav i {
-    margin-right: 12px;        /* Espaço entre ícone e texto */
-    font-size: 22px;           /* Ícone um pouco maior */
-    color: #BBDEFB;            /* Azul claro para contraste visual */
+/* Ícones dentro do menu */
+.sidenav i.material-icons {
+    margin-right: 20px;                   /* Espaço entre ícone e texto */
+    font-size: 22px;                      /* Tamanho maior */
+    color: #ffffff;                       /* Branco */
 }
 
-/* Área de conteúdo principal */
-.content {
-    padding: 32px;             /* Espaço interno generoso */
-    background-color: #f4f6f9; /* Fundo cinza-claro moderno */
-    min-height: 100vh;         /* Ocupa 100% da altura da tela */
-    font-family: 'Roboto', sans-serif; /* Fonte moderna e padrão do Material */
-    color: #2c3e50;            /* Texto escuro para boa leitura */
+/* Animação de clique (efeito de pressão) */
+.sidenav a:active {
+    transform: scale(0.97);                /* Leve redução */
+    background-color: rgba(255, 255, 255, 0.12); /* Fundo mais escuro */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra interna */
 }
 
+/* ===== Modo fechado (compacto) ===== */
+.sidenav.closed {
+    width: 60px;                           /* Reduz a largura */
+    overflow-x: hidden;                    /* Esconde conteúdo que ultrapassar */
+    transition: width 0.3s ease;           /* Animação suave */
+}
+
+/* Some o texto dos links quando fechado */
+.sidenav.closed a span {
+    display: none !important;
+}
+
+/* Centraliza os ícones no modo fechado */
+.sidenav.closed a i.material-icons {
+    margin: 0 auto;
+    display: block;
+    text-aalign: center;                   /* Corrige alinhamento */
+    font-size: 24px;
+}
+
+/* Quando o mouse passa por cima do menu fechado */
+.sidenav.closed:hover {
+    width: 240px;                          /* Expande temporariamente */
+}
+
+/* Exibe o texto no hover */
+.sidenav.closed:hover a span {
+    display: inline-block !important;
+}
+
+/* Reposiciona ícones no hover */
+.sidenav.closed:hover a i.material-icons {
+    margin-right: 12px;
+    margin-left: 0;
+    text-align: left;
+}
