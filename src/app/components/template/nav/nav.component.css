@@ -1,85 +1,77 @@
 /* ===== Menu lateral - Sidenav ===== */
 .sidenav {
-    background-color: #2C3E50;              /* Fundo azul escuro */
-    width: 225px;                           /* Largura padrão */
-    color: #ecf0f1;                         /* Texto branco suave */
-    padding-top: 24px;                      /* Espaço superior */
+    background-color: #0D3B66;              /* Fundo azul escuro */
+    width: 215px;                           /* Largura padrão */
+    color: #ffffff;                         /* Texto branco suave */
+    padding: 21px 1px;                      /* Espaço superior e lateral */
     box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15); /* Sombra lateral */
     display: flex;                          /* Flexbox vertical */
     flex-direction: column;
     gap: 8px;                               /* Espaço entre os itens */
-    transition: width 0.3s ease;            /* Transição ao expandir/fechar */
-    position: fixed;                        /* Fixa na lateral */
-    height: 100vh;                          /* Altura total da tela */
-    top: 64px;                              /* Abaixo do header */
-    left: 0;                                /* Alinhado à esquerda */
-    z-index: 500; /* Agora o nav fica abaixo do header (que tem 1000) */
+    transition: width 0.2s ease;
+    position: fixed;
+    height: calc(100vh - 90px);             /* Altura da tela menos o header */
+    top: 90px;                              /* Começa logo abaixo do header */
+    left: 0;
+    z-index: 900;
 }
 
 /* Estilo dos links de navegação */
 .sidenav a {
-    display: flex;                          /* Ícone + texto em linha */
-    align-items: center;                    /* Centraliza verticalmente */
-    padding: 11px 1px;                      /* Espaçamento interno */
-    text-decoration: none;                  /* Sem sublinhado */
-    color: inherit;                         /* Mantém cor padrão */
-    font-weight: 500;                       /* Texto mais forte */
-    border-radius: 50px;                    /* Bordas arredondadas */
-    cursor: pointer;                        /* Cursor de clique */
-    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease; /* Animações rápidas */
+    display: flex;
+    align-items: center;
+    padding: 14px 0px;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
 }
 
-/* Hover nos links */
 .sidenav a:hover {
-    background-color: rgba(255, 255, 255, 0.08); /* Fundo levemente claro */
-    transform: translateX(4px);                  /* Move um pouco para a direita */
+    background-color: rgba(255, 255, 255, 0.08);
+    transform: translateX(4px);
 }
 
-/* Ícones dentro do menu */
 .sidenav i.material-icons {
-    margin-right: 20px;                   /* Espaço entre ícone e texto */
-    font-size: 22px;                      /* Tamanho maior */
-    color: #ffffff;                       /* Branco */
+    margin-right: 20px;
+    font-size: 22px;
+    color: #ffffff;
 }
 
-/* Animação de clique (efeito de pressão) */
 .sidenav a:active {
-    transform: scale(0.97);                /* Leve redução */
-    background-color: rgba(255, 255, 255, 0.12); /* Fundo mais escuro */
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra interna */
+    transform: scale(0.97);
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== Modo fechado (compacto) ===== */
+/* Modo fechado (compacto) */
 .sidenav.closed {
-    width: 60px;                           /* Reduz a largura */
-    overflow-x: hidden;                    /* Esconde conteúdo que ultrapassar */
-    transition: width 0.3s ease;           /* Animação suave */
+    width: 60px;
+    overflow-x: hidden;
+    transition: width 0.3s ease;
 }
 
-/* Some o texto dos links quando fechado */
 .sidenav.closed a span {
     display: none !important;
 }
 
-/* Centraliza os ícones no modo fechado */
 .sidenav.closed a i.material-icons {
     margin: 0 auto;
     display: block;
-    text-aalign: center;                   /* Corrige alinhamento */
+    text-align: center;
     font-size: 24px;
 }
 
-/* Quando o mouse passa por cima do menu fechado */
 .sidenav.closed:hover {
-    width: 240px;                          /* Expande temporariamente */
+    width: 240px;
 }
 
-/* Exibe o texto no hover */
 .sidenav.closed:hover a span {
     display: inline-block !important;
 }
 
-/* Reposiciona ícones no hover */
 .sidenav.closed:hover a i.material-icons {
     margin-right: 12px;
     margin-left: 0;

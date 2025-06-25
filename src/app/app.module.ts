@@ -65,6 +65,11 @@ import { EstoqueReadComponent } from './components/estoque/estoque-read/estoque-
 import { EstoqueUpdateComponent } from './components/estoque/estoque-update/estoque-update.component';
 import { EstoqueCreateComponent } from './components/estoque/estoque-create/estoque-create.component';
 import { EstoqueCrudComponent } from './views/estoque-crud/estoque-crud.component';
+import { FornecedorCrudComponent } from './views/fornecedor-crud/fornecedor-crud.component';
+import { FornecedorCreateComponent } from './components/fornecedor/fornecedor-create/fornecedor-create.component';
+import { FornecedorUpdateComponent } from './components/fornecedor/fornecedor-update/fornecedor-update.component';
+import { FornecedorDeleteComponent } from './components/fornecedor/fornecedor-delete/fornecedor-delete.component';
+import { AgendamentoComponent } from './components/agendamentos/agendamento/agendamento.component';
 
 registerLocaleData(localePt)
 
@@ -103,6 +108,11 @@ registerLocaleData(localePt)
     EstoqueUpdateComponent,
     EstoqueCreateComponent,
     EstoqueCrudComponent,
+    FornecedorCrudComponent,
+    FornecedorCreateComponent,
+    FornecedorUpdateComponent,
+    FornecedorDeleteComponent,
+    AgendamentoComponent,
 
 
   ],

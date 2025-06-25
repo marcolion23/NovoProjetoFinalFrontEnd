@@ -8,6 +8,7 @@
     margin: 40px auto;                                     /* Centraliza na tela */
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);            /* Sombra profunda */
     transition: transform 0.3s ease;                       /* Animação suave no hover */
+    margin: 130px auto 40px; /* 90px (header) + 40px */
   }
   
   /* Animação sutil ao passar o mouse */

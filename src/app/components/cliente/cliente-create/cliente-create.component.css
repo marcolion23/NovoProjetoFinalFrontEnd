@@ -4,6 +4,7 @@
     margin: 40px auto; /* Centraliza verticalmente com espaçamento */
     padding: 30px; /* Espaçamento interno */
     border-radius: 12px; /* Bordas arredondadas para um visual mais moderno */
+    margin: 130px auto 40px; /* 90px (header) + 40px */ /*faz com que nao sobrepoe*/
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
   }
   

@@ -5,6 +5,7 @@
   gap: 20px;                  /* Espaçamento entre os campos */
   margin-top: 10px;           /* Espaçamento superior */
   padding: 0 5px;             /* Espaçamento horizontal pequeno */
+  margin: 130px auto 40px; /* 90px (header) + 40px */ /*faz com que nao sobrepoe*/
   flex-direction: row;        /* Alinha os campos em linha (coluna no mobile por wrap) */
 }
 

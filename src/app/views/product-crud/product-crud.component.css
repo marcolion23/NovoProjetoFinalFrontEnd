@@ -5,6 +5,7 @@
   flex-wrap: wrap;
   gap: 32px;
   margin-bottom: 24px;
+  margin: 130px auto 40px; /* 90px (header) + 40px */ /*faz com que nao sobrepoe*/
 }
 
 /* Botões agora têm mesma largura (50% do container de 80% da tela) */
