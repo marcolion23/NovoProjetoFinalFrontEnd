@@ -1,27 +1,53 @@
-<!-- Cartão principal que envolve o conteúdo da página inicial -->
-<mat-card class="home mat-elevation-z4"> <!-- Elevação para sombra moderna -->
+<!-- CARD DE ACESSO RÁPIDO MODERNO -->
+<mat-card class="quick-access-card mat-elevation-z12">
+  <div style="height: 75px;"></div>
   
-    <!-- Container flexível para alinhar ícone e textos lado a lado -->
-    <div class="home-content">
-      
-      <!-- Ícone gamer centralizado e com destaque -->
-      <div class="home-icon">
-        <i class="material-icons">sports_esports</i> <!-- Ícone de controle gamer -->
-      </div>
-  
-      <!-- Texto de boas-vindas e subtítulo -->
-      <div>
-        <!-- Título principal com destaque no nome do sistema -->
-        <mat-card-title class="title">
-          Bem-vindo ao <span class="highlight">GameOn</span>!
-        </mat-card-title>
-        
-        <!-- Subtítulo explicando a função do sistema -->
-        <mat-card-subtitle class="subtitle">
-          Gerencie seu estoque, clientes e relatórios com muito estilo e performance para sua Loja Gamer!
-        </mat-card-subtitle>
-      </div>
-  
+<!-- CARD DE BOAS-VINDAS MODERNO -->
+<mat-card class="welcome-card mat-elevation-z12">
+  <!-- Título com ícone -->
+  <div class="welcome-title">
+    <mat-icon class="title-icon">waving_hand</mat-icon>
+    <span>Bem-vindo ao Sistema GameOn!</span>
+  </div>
+</mat-card>
+
+
+    <!-- Frase com ícone acima dos botões -->
+    <div class="quick-access-title">
+      <div style="height: 3px;"></div>
+      <mat-icon class="title-icon">bolt</mat-icon>
+      <span>Acesso Rápido</span>
     </div>
-  </mat-card>
-  
+  <!-- Conteúdo com os botões -->
+  <mat-card-content>
+    <div class="quick-access-buttons">
+      <div style="height: 25px;"></div>
+
+      <button mat-raised-button color="primary" [routerLink]="'/products/create'">
+        
+        <mat-icon>inventory_2</mat-icon> Criar Produto
+      </button>
+
+      <button mat-raised-button [routerLink]="'/fornecedores/create'">
+        <mat-icon>local_shipping</mat-icon> Criar Fornecedor
+      </button>
+
+      <button mat-raised-button color="primary" [routerLink]="'/reports/create'">
+        <mat-icon>assessment</mat-icon> Criar Relatório
+      </button>
+
+      <button mat-raised-button  [routerLink]="'/perfil/create'">
+        <mat-icon>person</mat-icon> Criar Perfil
+      </button>
+
+      <button mat-raised-button color="primary" [routerLink]="'/agendamento/create'">
+        <mat-icon>event</mat-icon> Criar Agendamento
+      </button>
+
+      <button mat-raised-button  [routerLink]=  "'clientes/create'">
+      <mat-icon>person</mat-icon> Criar cliente 
+      </button>
+
+    </div>
+  </mat-card-content>
+</mat-card>

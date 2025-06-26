@@ -1,57 +1,163 @@
-/* Estilização geral do card da home */
-.home {
-    background: linear-gradient(135deg, #1e293b, #0f172a); /* Gradiente escuro estilo gamer */
-    color: #e0f2f1;                                        /* Cor de texto suave */
-    padding: 40px;                                         /* Espaçamento interno */
-    border-radius: 16px;                                   /* Bordas arredondadas */
-    max-width: 800px;                                      /* Largura máxima */
-    margin: 40px auto;                                     /* Centraliza na tela */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);            /* Sombra profunda */
-    transition: transform 0.3s ease;                       /* Animação suave no hover */
-    margin: 130px auto 40px; /* 90px (header) + 40px */
-  }
-  
-  /* Animação sutil ao passar o mouse */
-  .home:hover {
-    transform: scale(1.1); /* Cresce levemente ao passar o mouse */
-  }
-  
-  /* Layout flexível para o conteúdo interno do card */
-  .home-content {
-    display: flex;            /* Alinha ícone e texto lado a lado */
-    align-items: center;      /* Alinha verticalmente */
-    gap: 24px;                /* Espaço entre ícone e texto */
-  }
-  
-  /* Ícone principal estilizado com efeito visual */
-  .home-icon {
-    font-size: 25px;                                      /* Tamanho do ícone */
-    color: #ffffff;                                       /* Cor azul clara */
-    background-color: #2C3E50;                            /* Fundo azul escuro */
-    border-radius:90%;                                   /* Forma circular */
-    padding: 25px;                                        /* Espaçamento interno */
-    box-shadow: 0 0 12px rgba(66, 165, 245, 0.6);          /* Brilho ao redor */
-  }
-  
-  /* Título principal do card */
-  .title {
-    font-size: 2.2rem;            /* Tamanho grande */
-    font-weight: 700;             /* Negrito */
-    margin-bottom: 15px;           /* Espaço abaixo */
-    color: #ffffff;               /* Branco puro */
-  }
-  
-  /* Parte do título com efeito de gradiente */
-  .title .highlight {
-    background: linear-gradient(to right, #2196f3, #21cbf3); /* Gradiente azul neon */
-    -webkit-background-clip: text;       /* Aplica gradiente no texto */
-    -webkit-text-fill-color: transparent;/* Torna o texto transparente para o gradiente aparecer */
-  }
-  
-  /* Subtítulo do card */
-  .subtitle {
-    font-size: 1.2rem;            /* Tamanho confortável */
-    font-weight: 500;             /* Peso padrão */
-    color: #cfd8dc;               /* Cinza azulado leve */
-  }
-  
+/* ===== CARD DE BOAS-VINDAS (mesmo estilo do acesso rápido) ===== */
+.welcome-card {
+  position: relative;                      /* Permite posicionamento sem fixar na tela */
+  margin: 80px auto 24px auto;             /* Centraliza e dá espaço do topo */
+  width: 50%;                              /* Mesma largura do card de acesso rápido */
+  background-color: #0D3B66;               /* Fundo escuro estilo gamer */
+  padding: 32px;                           /* Espaço interno confortável */
+  border-radius: 16px;                     /* Bordas arredondadas */
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25); /* Sombra leve para destaque */
+  text-align: center;                      /* Centraliza o conteúdo */
+  color: #ecf0f1;                          /* Texto claro */
+  font-family: 'Roboto', sans-serif;      /* Fonte moderna */
+}
+
+/* ===== TÍTULO COM ÍCONE NO CARD DE BOAS-VINDAS ===== */
+.welcome-title {
+  display: flex;                           /* Layout horizontal: ícone + texto */
+  align-items: center;                     /* Alinha verticalmente */
+  justify-content: center;                 /* Centraliza na horizontal */
+  font-size: 1.6rem;                        /* Tamanho do texto */
+  font-weight: 700;                        /* Negrito */
+  color: #21CBF3;                          /* Azul neon gamer */
+  gap: 10px;                               /* Espaço entre ícone e texto */
+}
+
+/* ===== ÍCONE DO TÍTULO ===== */
+.title-icon {
+  font-size: 28px;                         /* Tamanho do ícone */
+  color: #21CBF3;                          /* Cor do ícone */
+}
+
+
+
+/* ===== CARD PRINCIPAL DE ACESSO RÁPIDO ===== */
+.quick-access-card {
+  position: fixed;                       /* Fixa o card no fundo da tela */
+  bottom: 0;                             /* Coloca o card no final da viewport */
+  align-items: center;                          /* Alinha verticalmente ao centro */
+  margin-bottom: 80px;                  /* Espaço antes do footer (caso ele também esteja fixo) */
+  left: 50%;                             /* Posição inicial no centro da tela */
+  transform: translateX(-50%);           /* Centraliza horizontalmente */
+  width: 50%;                            /* Largura do card */
+  background-color: #0D3B66;             /* Cor de fundo escura */
+  padding: 24px;                         /* Espaçamento interno */
+  color: #ecf0f1;                        /* Cor do texto */
+  font-family: 'Roboto', sans-serif;    /* Fonte moderna */
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Sombra superior */
+  z-index: 1000;                         /* Sobrepõe outros elementos */
+  border-radius: 16px;                   /* Bordas arredondadas */
+  overflow: auto;                        /* Previne vazamento de conteúdo */
+}
+
+/* ===== TÍTULO DO CARD COM ÍCONE AO LADO ===== */
+.quick-access-title {
+  display: flex;                         /* Ícone e texto lado a lado */
+  align-items: center;                  /* Alinhamento vertical */
+  justify-content: center;              /* Alinhamento central horizontal */
+  font-size: 1.6rem;                     /* Tamanho da fonte */
+  font-weight: 700;                     /* Negrito */
+  color: #21CBF3;                       /* Cor azul neon (estilo gamer) */
+  margin-bottom: 28px;                  /* Espaço abaixo do título */
+  gap: 10px;                            /* Espaço entre o ícone e o texto */
+}
+
+/* ===== ÍCONE DO TÍTULO ===== */
+.title-icon {
+  font-size: 28px;                      /* Tamanho do ícone */
+  color: #21CBF3;                       /* Cor do ícone */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== CARD PRINCIPAL DE ACESSO RÁPIDO ===== */
+.quick-access-card {
+  position: fixed;                       /* Fixa o card no fundo da tela */
+  bottom: 0;                             /* Coloca o card no final da viewport */
+  margin-bottom: 80px;                  /* Espaço antes do footer (caso ele também esteja fixo) */
+  left: 50%;                             /* Posição inicial no centro da tela */
+  transform: translateX(-50%);           /* Centraliza horizontalmente */
+  width: 50%;                            /* Largura do card */
+  background-color: #0D3B66;             /* Cor de fundo escura */
+  padding: 24px;                         /* Espaçamento interno */
+  color: #ecf0f1;                        /* Cor do texto */
+  font-family: 'Roboto', sans-serif;    /* Fonte moderna */
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Sombra superior */
+  z-index: 1000;                         /* Sobrepõe outros elementos */
+  border-radius: 16px;                   /* Bordas arredondadas */
+  overflow: auto;                        /* Previne vazamento de conteúdo */
+}
+
+/* ===== TÍTULO DO CARD COM ÍCONE AO LADO ===== */
+.quick-access-title {
+  display: flex;                         /* Ícone e texto lado a lado */
+  align-items: center;                  /* Alinhamento vertical */
+  justify-content: center;              /* Alinhamento central horizontal */
+  font-size: 1.6rem;                     /* Tamanho da fonte */
+  font-weight: 700;                     /* Negrito */
+  color: #21CBF3;                       /* Cor azul neon (estilo gamer) */
+  margin-bottom: 28px;                  /* Espaço abaixo do título */
+  gap: 10px;                            /* Espaço entre o ícone e o texto */
+}
+
+/* ===== ÍCONE DO TÍTULO ===== */
+.title-icon {
+  font-size: 28px;                      /* Tamanho do ícone */
+  color: #21CBF3;                       /* Cor do ícone */
+}
+
+/* ===== CONTAINER DOS BOTÕES ===== */
+.quick-access-buttons {
+  display: flex;                        /* Usa Flexbox para layout em linha */
+  flex-wrap: wrap;                      /* Quebra de linha automática */
+  gap: 20px;                            /* Espaçamento entre os botões */
+  justify-content: center;             /* Centraliza todos os botões */
+}
+
+.quick-access-buttons {
+  display: flex;                  /* Layout em linha com flexbox */
+  flex-wrap: wrap;                /* Permite quebra de linha */
+  justify-content: center;       /* Centraliza todos os botões */
+  gap: 20px 30px;                 /* Espaço entre linhas (vertical) e colunas (horizontal) */
+}
+
+/* Botões com largura fixa para alinhamento uniforme */
+.quick-access-buttons button {
+  width: 220px;                   /* ⚠️ Largura igual para todos */
+  height: 52px;                   /* Altura fixa para todos */
+  display: flex;                 
+  align-items: center;           /* Centraliza ícone e texto verticalmente */
+  justify-content: center;       /* Centraliza horizontalmente */
+  gap: 10px;                     /* Espaço entre ícone e texto */
+  padding: 0 16px;               /* Espaço interno horizontal (o vertical será controlado pela altura) */
+  border-radius: 12px;           
+  font-weight: 500;              
+  text-transform: none;          
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  white-space: nowrap;           /* Impede quebra de linha dentro do botão */
+}
+
+/* Ícones dentro dos botões */
+.quick-access-buttons button mat-icon {
+  font-size: 22px;
+  color: inherit;
+}

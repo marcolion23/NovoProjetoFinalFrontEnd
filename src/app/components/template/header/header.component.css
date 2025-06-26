@@ -126,8 +126,7 @@
 }
 
 .icon:hover {
-    color: #00ffcc;                /* Cor neon ao passar o mouse */
-    transform: scale(1.2);         /* Leve zoom no hover */
+    transform: scale(1.1);         /* Leve zoom no hover */
 }
 
 /* ===== BADGE PARA ÍCONES COM CONTADOR ===== */
@@ -148,6 +147,12 @@
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+.icon a:active{
+    transform: scale(0.97);               /* Encolhe ligeiramente o link, criando efeito de "apertar" */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra interna para dar profundidade */
+  
+}
+
 .header-content {
     position: relative; /* Necessário para o .right-icons absolute funcionar */
 }
@@ -160,12 +165,12 @@
     background-color: #000000;                   /* Fundo preto */
     color: #ffffff;                              /* Texto branco */
     padding: 6px 10px;                           /* Espaçamento interno */
-    border-radius: 4px;                          /* Cantos arredondados */
+    border-radius: 25px;                          /* Cantos arredondados */
     font-size: 0.75rem;                          /* Tamanho da fonte */
     white-space: nowrap;                         /* Impede quebra de linha */
     opacity: 0;                                   /* Invisível por padrão */
     visibility: hidden;                          /* Oculto por padrão */
-    transition: opacity 0.3s ease;               /* Transição suave */
+    transition: opacity 0.5s ease;               /* Transição suave */
     pointer-events: none;                        /* Não interfere no hover */
     z-index: 1002;                                /* Fica acima do cabeçalho */
 }

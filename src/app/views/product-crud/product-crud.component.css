@@ -1,65 +1,71 @@
-/* Container com alinhamento central e quebra de linha se necessário */
+/* ============ CONTAINER DOS BOTÕES "NOVO PRODUTO", ETC ============ */
 .novo-produto-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 32px;
-  margin-bottom: 24px;
-  margin: 130px auto 40px; /* 90px (header) + 40px */ /*faz com que nao sobrepoe*/
+  display: flex;                    /* Usa Flexbox para alinhar os botões */
+  justify-content: center;         /* Centraliza os botões horizontalmente */
+  flex-wrap: wrap;                 /* Permite que os botões quebrem linha em telas pequenas */
+  gap: 32px;                       /* Espaço entre os botões */
+  margin-bottom: 24px;            /* Espaço abaixo do container */
+  margin: 130px auto 40px;        /* Centraliza e evita sobreposição com header (90px do header + 40px de espaço) */
 }
 
-/* Botões agora têm mesma largura (50% do container de 80% da tela) */
+/* ============ ESTILO DOS BOTÕES EXPANDIDOS ============ */
 .expanded-btn {
-  width: 40%; /* 40% cada botão, 80% somado */
-  min-width: 280px; /* Evita quebra total em telas muito pequenas */
-  background-color: #0af8c1;
-  color: #2C3E50;
-  font-weight: bold;
-  padding: 32px 0; /* Aumenta altura do botão */
-  font-size: 2rem;
-  border: none;
-  border-radius: 28px;
-  cursor: pointer;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 8px 24px rgba(10, 248, 193, 0.4);
-  transition: all 0.3s ease-in-out;
-  text-align: center;
+  width: 40%;                      /* Cada botão ocupa 40% da largura do container */
+  min-width: 280px;               /* Largura mínima para não ficar muito pequeno em telas pequenas */
+  background-color: #0D3B66;      /* Cor de fundo azul escuro */
+  color: #ffffff;                 /* Cor do texto branca */
+  font-weight: bold;              /* Texto em negrito */
+  padding: 32px 0;                /* Aumenta a altura do botão (verticalmente) */
+  font-size: 2rem;                /* Tamanho grande para o texto do botão */
+  border: none;                   /* Remove a borda padrão */
+  border-radius: 28px;            /* Bordas arredondadas suaves */
+  cursor: pointer;                /* Mostra cursor de clique */
+  font-family: 'Segoe UI', sans-serif; /* Fonte moderna */
+  box-shadow: 0 8px 24px rgba(10, 248, 193, 0.4); /* Sombra com leve tom neon */
+  transition: all 0.3s ease-in-out; /* Suaviza animações (hover, etc) */
+  text-align: center;             /* Centraliza o texto dentro do botão */
 }
+
+/* ============ CONTAINER DOS PAINÉIS DO DASHBOARD ============ */
 .dashboard-panels {
-  width: 100vw;
-  max-width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 30px;
-  padding: 30px 50px;
-  box-sizing: border-box;
+  width: 100vw;                    /* Ocupa toda a largura da viewport */
+  max-width: 100%;                /* Garante que não passe da largura da tela */
+  display: grid;                  /* Usa Grid Layout para os painéis */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+  /* Cria colunas automáticas com no mínimo 320px e no máximo o espaço disponível */
+  gap: 30px;                      /* Espaço entre os painéis */
+  padding: 30px 50px;             /* Espaçamento interno (topo/baixo 30px, laterais 50px) */
+  box-sizing: border-box;         /* Inclui padding na largura total do elemento */
 }
 
+/* ============ ESTILO DE CADA PAINEL INFORMATIVO ============ */
 .panel-info {
-  background: white;
-  border-radius: 24px;
-  padding: 40px 30px;
-  box-shadow: 0 10px 30px rgba(0, 255, 200, 0.25);
-  text-align: center;
-  height: 300px; /* Altura fixa para teste, pode ajustar depois */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-family: 'Segoe UI', sans-serif;
-  transition: transform 0.3s ease;
+  background: white;              /* Fundo branco */
+  border-radius: 24px;            /* Bordas arredondadas */
+  padding: 40px 30px;             /* Espaçamento interno (topo/baixo 40px, laterais 30px) */
+  text-align: center;             /* Centraliza o texto dentro do painel */
+  height: 300px;                  /* Altura fixa do painel (pode ajustar depois) */
+  display: flex;                  /* Flexbox para alinhar conteúdo verticalmente */
+  flex-direction: column;        /* Coloca os itens em coluna (vertical) */
+  justify-content: center;       /* Centraliza o conteúdo verticalmente */
+  font-family: 'Segoe UI', sans-serif; /* Fonte moderna */
+  transition: transform 0.3s ease;     /* Animação suave ao aplicar transformação */
 }
 
+/* Efeito ao passar o mouse sobre o painel */
 .panel-info:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px);   /* Move o painel levemente para cima no hover */
 }
 
+/* ============ TÍTULO DENTRO DO PAINEL ============ */
 .panel-info h2 {
-  font-size: 26px;
-  margin-bottom: 15px;
-  color: #111;
+  font-size: 26px;               /* Tamanho do título */
+  margin-bottom: 15px;           /* Espaço abaixo do título */
+  color: #111;                   /* Cor preta suave */
 }
 
+/* ============ PARÁGRAFO DENTRO DO PAINEL ============ */
 .panel-info p {
-  font-size: 22px;
-  color: #444;
+  font-size: 22px;               /* Tamanho da fonte do parágrafo */
+  color: #000000;                /* Cor preta */
 }

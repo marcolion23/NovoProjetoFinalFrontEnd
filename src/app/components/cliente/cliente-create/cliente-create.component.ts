@@ -13,7 +13,7 @@ import { FormControl, Validators } from '@angular/forms';
 export class ClienteCreateComponent implements OnInit {
   dataNascimento = new FormControl('', [Validators.required]);
 
-  maxDate = new Date(); // não permite data futura
+  
   startDate = new Date(1990, 0, 1); // abre o calendário em 1990 (ano que preferir)
   // Declarando o objeto cliente com valores iniciais válidos
   cliente: Cliente = {
