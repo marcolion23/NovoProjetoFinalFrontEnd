@@ -1,79 +1,87 @@
 /* ===== Menu lateral - Sidenav ===== */
 .sidenav {
-    background-color: #0D3B66;              /* Fundo azul escuro */
-    width: 215px;                           /* Largura padrão */
-    color: #ffffff;                         /* Texto branco suave */
-    padding: 21px 1px;                      /* Espaço superior e lateral */
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15); /* Sombra lateral */
-    display: flex;                          /* Flexbox vertical */
-    flex-direction: column;
-    gap: 8px;                               /* Espaço entre os itens */
-    transition: width 0.2s ease;
-    position: fixed;
-    height: calc(100vh - 90px);             /* Altura da tela menos o header */
-    top: 90px;                              /* Começa logo abaixo do header */
-    left: 0;
-    z-index: 900;
+    background-color: #0D3B66;              /* Define a cor de fundo azul escuro */
+    width: 230px;                           /* Largura padrão do menu lateral */
+    color: #ffffff;                         /* Cor do texto em branco */
+    padding: 21px 0px;                      /* Espaço interno: 21px em cima e embaixo, 0 nas laterais */
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15); /* Sombra à direita do menu para dar profundidade */
+    display: flex;                          /* Ativa flexbox para organizar itens em coluna */
+    flex-direction: column;                 /* Itens organizados verticalmente */
+    gap: 8px;                              /* Espaço entre os itens dentro do menu */
+    transition: width 0.2s ease;           /* Animação suave na mudança de largura do menu */
+    position: fixed;                       /* Fixado na tela (não rola junto com o conteúdo) */
+    height: calc(100vh - 90px);            /* Altura total da janela menos 90px (provavelmente altura do header) */
+    top: 90px;                            /* Posiciona o topo do menu 90px abaixo do topo da página */
+    left: 0;                             /* Posicionado à esquerda da tela */
+    z-index: 900;                        /* Fica sobreposto a outros elementos com z-index menor */
 }
 
-/* Estilo dos links de navegação */
+/* Estilo dos links de navegação dentro do menu */
 .sidenav a {
-    display: flex;
-    align-items: center;
-    padding: 14px 0px;
-    text-decoration: none;
-    color: inherit;
-    font-weight: 500;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
+    display: flex;                        /* Usa flexbox para alinhar ícone e texto */
+    align-items: center;                  /* Alinha verticalmente no centro */
+    padding: 32px 0px;                    /* Espaçamento vertical grande e sem espaçamento horizontal */
+    text-decoration: none;                /* Remove sublinhado dos links */
+    color: inherit;                      /* Herda a cor do texto definida no .sidenav */
+    font-weight: 500;                    /* Peso da fonte um pouco mais forte que normal */
+    border-radius: 50px;                 /* Bordas arredondadas (botão "pill") */
+    cursor: pointer;                    /* Cursor muda para mãozinha ao passar */
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease; /* Transições suaves para transformações, sombra e cor de fundo */
 }
 
+/* Estado hover (quando o mouse passa sobre o link) */
 .sidenav a:hover {
-    background-color: rgba(255, 255, 255, 0.08);
-    transform: translateX(4px);
+    background-color: rgba(255, 255, 255, 0.08); /* Fundo levemente branco translúcido */
+    transform: translateX(4px);                    /* Move o link 4px para a direita */
 }
 
+/* Ícones do Google Material Icons dentro do menu */
 .sidenav i.material-icons {
-    margin-right: 20px;
-    font-size: 22px;
-    color: #ffffff;
+    margin-right: 20px;                 /* Espaço à direita entre o ícone e o texto */
+    font-size: 22px;                   /* Tamanho da fonte do ícone */
+    color: #ffffff;                    /* Cor branca para o ícone */
 }
 
+/* Estado quando o link está ativo (clicado) */
 .sidenav a:active {
-    transform: scale(0.97);
-    background-color: rgba(255, 255, 255, 0.12);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    transform: scale(0.97);               /* Encolhe ligeiramente o link, criando efeito de "apertar" */
+    background-color: rgba(255, 255, 255, 0.12); /* Fundo um pouco mais opaco */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra interna para dar profundidade */
 }
 
-/* Modo fechado (compacto) */
+/* Modo fechado (compacto) do menu lateral */
 .sidenav.closed {
-    width: 60px;
-    overflow-x: hidden;
-    transition: width 0.3s ease;
+    width: 60px;                         /* Largura reduzida */
+    overflow-x: hidden;                 /* Esconde o que ultrapassar a largura horizontal */
+    transition: width 0.3s ease;        /* Transição suave ao mudar a largura */
 }
 
+/* Quando o menu está fechado, os textos dos links são escondidos */
 .sidenav.closed a span {
-    display: none !important;
+    display: none !important;            /* Esconde o texto dos links */
 }
 
+/* Ícones no modo fechado são centralizados e aumentados */
 .sidenav.closed a i.material-icons {
-    margin: 0 auto;
-    display: block;
-    text-align: center;
-    font-size: 24px;
+    margin: 0 auto;                     /* Remove margem direita, centraliza o ícone */
+    display: block;                    /* Força a exibição como bloco */
+    text-align: center;                /* Centraliza o texto do ícone */
+    font-size: 24px;                   /* Ícones um pouco maiores */
 }
 
+/* Quando o menu fechado recebe hover */
 .sidenav.closed:hover {
-    width: 240px;
+    width: 240px;                      /* Expande para o modo aberto */
 }
 
+/* Ao passar o mouse com menu fechado, mostra os textos novamente */
 .sidenav.closed:hover a span {
-    display: inline-block !important;
+    display: inline-block !important; /* Mostra os textos dos links */
 }
 
+/* Ícones voltam ao posicionamento normal com hover no menu fechado */
 .sidenav.closed:hover a i.material-icons {
-    margin-right: 12px;
-    margin-left: 0;
-    text-align: left;
+    margin-right: 12px;                /* Espaço à direita do ícone */
+    margin-left: 0;                   /* Remove margem esquerda */
+    text-align: left;                 /* Alinha o ícone à esquerda */
 }

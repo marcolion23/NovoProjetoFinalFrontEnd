@@ -1,71 +1,82 @@
 /* ===== Footer - Rodapé ===== */
 .footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #000000;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 12px 24px;
-  color: #ecf0f1;
-  font-family: 'Roboto', sans-serif;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  padding: 45px;
+  position: fixed;                  /* Fixa o rodapé na parte inferior da tela */
+  bottom: 0;                       /* Posiciona o rodapé exatamente no fundo da janela */
+  width: 100%;                     /* Ocupa toda a largura da tela */
+  background-color: #0D3B66;       /* Fundo preto para o rodapé */
+  display: flex;                   /* Usa flexbox para organizar os elementos internos */
+  justify-content: flex-end;       /* Alinha os itens no final da linha (direita) */
+  align-items: center;             /* Centraliza os itens verticalmente */
+  padding: 12px 24px;              /* Espaçamento interno: 12px vertical, 24px horizontal */
+  color: #ecf0f1;                 /* Cor do texto em tom claro */
+  font-family: 'Roboto', sans-serif; /* Define a fonte Roboto para o texto */
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil acima do rodapé para destacar */
+  z-index: 1000;                  /* Garante que o rodapé fique sobre outros elementos */
+  padding: 45px;                  /* Sobrescreve o padding anterior para 45px em todos os lados */
 }
 
 .footer > span {
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1rem;                /* Tamanho da fonte definido para 16px (1 rem) */
+  font-weight: 500;               /* Peso médio da fonte para destaque */
 }
 
 .social-icons {
-  display: flex;
-  gap: 16px;
-  align-items: center;
+  display: flex;                  /* Flexbox para alinhar ícones sociais na horizontal */
+  gap: 10px;                     /* Espaço de 16px entre os ícones */
+  align-items: center;           /* Alinha verticalmente os ícones ao centro */
 }
 
 .social-icons a {
-  color: #cccccc;
-  font-size: 22px;
-  margin: 0 10px;
-  transition: color 0.3s ease;
-  position: relative;
-  display: inline-block;
-  text-decoration: none;
+  color: #ffffff;                /* Cor cinza clara para os links dos ícones */
+  font-size: 22px;               /* Tamanho da fonte dos ícones */
+  margin: 0 10px;                /* Margem horizontal de 10px entre os ícones */
+  transition: color 0.3s ease;  /* Animação suave para mudança de cor ao passar o mouse */
+  position: relative;            /* Para posicionar pseudo-elementos relativos ao link */
+  display: inline-block;         /* Exibe o link como bloco inline para respeitar dimensões */
+  text-decoration: none;         /* Remove sublinhado dos links */
 }
 
-.social-icons a.whatsapp:hover {
-  color: #25D366;
+/* Cor específica ao passar o mouse no ícone do WhatsApp */
+.social-icons a.whatsapp {
+  color: #25D366;                /* Verde WhatsApp */
 }
 
-.social-icons a.instagram:hover {
-  color: #d81337;
+/* Cor específica ao passar o mouse no ícone do Instagram */
+.social-icons a.instagram{
+  color: #ee0630;                /* Vermelho Instagram */
 }
 
-.social-icons a.linkedin:hover {
-  color: #0077B5;
+/* Cor específica ao passar o mouse no ícone do LinkedIn */
+.social-icons a.linkedin{
+  color: #05a5fc;                /* Azul LinkedIn */
 }
 
-.social-icons a::after {
-  content: attr(aria-label);
-  position: absolute;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 4px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
-  font-size: 13px;
-  z-index: 100;
+/* ===== TOOLTIP PERSONALIZADO - FOOTER (ACIMA DO ÍCONE) ===== */
+/* ===== TOOLTIP PERSONALIZADO - FOOTER (ACIMA DO ÍCONE) ===== */
+.social-icons a {
+  position: relative; /* Necessário para posicionar a tooltip dentro do link */
 }
 
-.social-icons a:hover::after {
-  opacity: 1;
+.social-icons a .custom-tooltip {
+  position: absolute;                /* Permite posicionar a tooltip fora do fluxo normal do layout */
+  bottom: 108%;                      /* Posiciona a tooltip acima do ícone (100% + espaçamento extra) */
+  left: 50%;                         /* Centraliza horizontalmente em relação ao link pai */
+  transform: translateX(-50%);       /* Corrige o alinhamento exato para o centro */
+  background-color: #000000;         /* Fundo preto para contraste */
+  color: #ffffff;                    /* Texto branco para boa visibilidade */
+  padding: 6px 10px;                 /* Espaçamento interno do tooltip (altura x largura) */
+  border-radius: 4px;                /* Bordas levemente arredondadas */
+  font-size: 0.90rem;                /* Tamanho pequeno do texto (≈ 12px) */
+  white-space: nowrap;              /* Impede que o texto quebre em várias linhas */
+  opacity: 0;                        /* Inicialmente invisível */
+  visibility: hidden;               /* Oculta visualmente e para leitores de tela */
+  transition: opacity 0.3s ease;    /* Suaviza a transição ao aparecer */
+  pointer-events: none;             /* Tooltip não interfere com o mouse */
+  z-index: 1002;                    /* Fica acima de outros elementos para não ser cortado */
+   font-weight: 450;  /* semi-negrito */
+}
+
+.social-icons a:hover .custom-tooltip {
+  opacity: 1;                        /* Torna visível ao passar o mouse */
+  visibility: visible;              /* Ativa a visibilidade */
 }
