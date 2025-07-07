@@ -1,53 +1,94 @@
-<!-- CARD DE ACESSO RÁPIDO MODERNO -->
-<mat-card class="quick-access-card mat-elevation-z12">
-  <div style="height: 75px;"></div>
-  
-<!-- CARD DE BOAS-VINDAS MODERNO -->
+<!-- ===== CARD DE BOAS-VINDAS FIXO NO TOPO (ABAIXO DO HEADER) ===== -->
 <mat-card class="welcome-card mat-elevation-z12">
   <!-- Título com ícone -->
   <div class="welcome-title">
-    <mat-icon class="title-icon">waving_hand</mat-icon>
     <span>Bem-vindo ao Sistema GameOn!</span>
   </div>
+
+  <!-- Frase abaixo do título -->
+  <div class="welcome-subtitle">
+Aqui você controla produtos, fornecedores, clientes
+ e relatórios com facilidade, 
+deixando sua loja gamer mais moderna,
+ organizada e pronta para vencer qualquer desafio!  </div>
 </mat-card>
 
 
-    <!-- Frase com ícone acima dos botões -->
-    <div class="quick-access-title">
-      <div style="height: 3px;"></div>
-      <mat-icon class="title-icon">bolt</mat-icon>
-      <span>Acesso Rápido</span>
+<!-- ===== CARD DE ESTATÍSTICAS RÁPIDAS (abaixo do welcome card e acima do acesso rápido) ===== -->
+<mat-card class="stats-card mat-elevation-z12">
+  <!-- Título com ícone -->
+  <div class="stats-title">
+    <mat-icon class="title-icon">bar_chart</mat-icon>
+    <span>Estatísticas Rápidas</span>
+  </div>
+
+  <!-- Container das estatísticas -->
+  <div class="stats-container">
+    <!-- Card de estatística individual -->
+    <div class="stat-item">
+      <mat-icon class="stat-icon">inventory_2</mat-icon>
+    
+      <div class="stat-label">Produtos em Estoque</div>
     </div>
-  <!-- Conteúdo com os botões -->
+    <div class="stat-item">
+      <mat-icon class="stat-icon">groups</mat-icon>
+      <div class="stat-label">Clientes Cadastrados</div>
+    </div>
+    <div class="stat-item">
+      <mat-icon class="stat-icon">attach_money</mat-icon>
+
+      <div class="stat-label">Faturamento do Mês</div>
+    </div>
+  </div>
+</mat-card>
+
+<!-- ===== CARD DE ACESSO RÁPIDO FIXO NO RODAPÉ (ACIMA DO FOOTER) ===== -->
+<mat-card class="quick-access-card mat-elevation-z12">
+  
+  <!-- Título "Acesso Rápido" com ícone -->
+  <div class="quick-access-title">
+    <mat-icon class="title-icon">bolt</mat-icon>
+    <span>Acesso Rápido</span>
+  </div>
+  
+  <!-- Container dos botões -->
   <mat-card-content>
     <div class="quick-access-buttons">
-      <div style="height: 25px;"></div>
-
+      <!-- Botão Criar Produto -->
       <button mat-raised-button color="primary" [routerLink]="'/products/create'">
-        
-        <mat-icon>inventory_2</mat-icon> Criar Produto
+        <mat-icon>inventory_2</mat-icon>
+        Criar Produto
       </button>
 
+      <!-- Botão Criar Fornecedor -->
       <button mat-raised-button [routerLink]="'/fornecedores/create'">
-        <mat-icon>local_shipping</mat-icon> Criar Fornecedor
+        <mat-icon>local_shipping</mat-icon>
+        Criar Fornecedor
       </button>
 
+      <!-- Botão Criar Relatório -->
       <button mat-raised-button color="primary" [routerLink]="'/reports/create'">
-        <mat-icon>assessment</mat-icon> Criar Relatório
+        <mat-icon>assessment</mat-icon>
+        Criar Relatório
       </button>
 
-      <button mat-raised-button  [routerLink]="'/perfil/create'">
-        <mat-icon>person</mat-icon> Criar Perfil
+      <!-- Botão Criar Perfil -->
+      <button mat-raised-button [routerLink]="'/perfil/create'">
+        <mat-icon>person</mat-icon>
+        Criar Perfil
       </button>
 
+      <!-- Botão Criar Agendamento -->
       <button mat-raised-button color="primary" [routerLink]="'/agendamento/create'">
-        <mat-icon>event</mat-icon> Criar Agendamento
+        <mat-icon>event</mat-icon>
+        Criar Agendamento
       </button>
 
-      <button mat-raised-button  [routerLink]=  "'clientes/create'">
-      <mat-icon>person</mat-icon> Criar cliente 
+      <!-- Botão Criar Cliente -->
+      <button mat-raised-button [routerLink]="'clientes/create'">
+        <mat-icon>person</mat-icon>
+        Criar Cliente
       </button>
-
     </div>
   </mat-card-content>
 </mat-card>

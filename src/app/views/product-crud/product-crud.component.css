@@ -21,9 +21,13 @@
   border-radius: 28px;            /* Bordas arredondadas suaves */
   cursor: pointer;                /* Mostra cursor de clique */
   font-family: 'Segoe UI', sans-serif; /* Fonte moderna */
-  box-shadow: 0 8px 24px rgba(10, 248, 193, 0.4); /* Sombra com leve tom neon */
+  box-shadow: 0 8px 24px rgba(0, 17, 255, 0.26); /* Sombra com leve tom neon */
   transition: all 0.3s ease-in-out; /* Suaviza animações (hover, etc) */
   text-align: center;             /* Centraliza o texto dentro do botão */
+}
+/* Efeito ao passar o mouse sobre o painel */
+.expanded-btn:hover {
+  transform: translateY(-5px);   /* Move o painel levemente para cima no hover */
 }
 
 /* ============ CONTAINER DOS PAINÉIS DO DASHBOARD ============ */
@@ -40,7 +44,7 @@
 
 /* ============ ESTILO DE CADA PAINEL INFORMATIVO ============ */
 .panel-info {
-  background: white;              /* Fundo branco */
+  background-color: #0D3B66;              /* Fundo branco */
   border-radius: 24px;            /* Bordas arredondadas */
   padding: 40px 30px;             /* Espaçamento interno (topo/baixo 40px, laterais 30px) */
   text-align: center;             /* Centraliza o texto dentro do painel */
@@ -52,20 +56,24 @@
   transition: transform 0.3s ease;     /* Animação suave ao aplicar transformação */
 }
 
-/* Efeito ao passar o mouse sobre o painel */
-.panel-info:hover {
-  transform: translateY(-5px);   /* Move o painel levemente para cima no hover */
-}
 
 /* ============ TÍTULO DENTRO DO PAINEL ============ */
 .panel-info h2 {
   font-size: 26px;               /* Tamanho do título */
   margin-bottom: 15px;           /* Espaço abaixo do título */
-  color: #111;                   /* Cor preta suave */
+  color: #ffffff;                   /* Cor preta suave */
 }
 
 /* ============ PARÁGRAFO DENTRO DO PAINEL ============ */
 .panel-info p {
   font-size: 22px;               /* Tamanho da fonte do parágrafo */
-  color: #000000;                /* Cor preta */
+  color: #ffffff;                /* Cor preta */
+}
+
+.mat-icon {
+  color: #ffffff;                /* Cor branca para os ícones */
+  display: inline-block;         /* Permite aplicar margin e padding */
+  font-size: 31px;               /* Tamanho dos ícones */
+  margin-right: 10px;            /* Espaço à direita dos ícones */
+  
 }

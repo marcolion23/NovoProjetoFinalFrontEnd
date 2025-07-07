@@ -6,6 +6,7 @@
     mat-raised-button
     class="novo-produto-btn expanded-btn"
     [routerLink]="'/products/create'">
+    <mat-icon>add</mat-icon>
     Novo Produto
   </button>
 
@@ -14,8 +15,20 @@
     mat-raised-button
     class="big-button expanded-btn"
     [routerLink]="'/products/read'">
+    <mat-icon>manage_search</mat-icon>
     Gerenciamento de Produtos
   </button>
+
+ <!-- Botão "Excluir Produto" -->
+  <button 
+    mat-raised-button
+    class="big-button expanded-btn"
+    [routerLink]="'/products/delete'">
+    <mat-icon>delete</mat-icon>
+    Excluir Produto
+  </button>
+
+  
 <!-- Painéis de Resumo -->
 <div class="dashboard-panels">
   <mat-card class="panel-info">

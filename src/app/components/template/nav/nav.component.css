@@ -1,7 +1,7 @@
 /* ===== Menu lateral - Sidenav ===== */
 .sidenav {
     background-color: #0D3B66;              /* Define a cor de fundo azul escuro */
-    width: 230px;                           /* Largura padrão do menu lateral */
+    width: 300px;                           /* Largura padrão do menu lateral */
     color: #ffffff;                         /* Cor do texto em branco */
     padding: 21px 0px;                      /* Espaço interno: 21px em cima e embaixo, 0 nas laterais */
     box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15); /* Sombra à direita do menu para dar profundidade */
@@ -20,7 +20,7 @@
 .sidenav a {
     display: flex;                        /* Usa flexbox para alinhar ícone e texto */
     align-items: center;                  /* Alinha verticalmente no centro */
-    padding: 14px 0px;                    /* Espaçamento vertical grande e sem espaçamento horizontal */
+    padding: 32px 0px;                    /* Espaçamento vertical grande e sem espaçamento horizontal */
     text-decoration: none;                /* Remove sublinhado dos links */
     color: inherit;                      /* Herda a cor do texto definida no .sidenav */
     font-weight: 500;                    /* Peso da fonte um pouco mais forte que normal */
