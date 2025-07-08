@@ -6,74 +6,136 @@
   gap: 32px;                       /* Espaço entre os botões */
   margin-bottom: 24px;            /* Espaço abaixo do container */
   margin: 130px auto 40px;        /* Centraliza e evita sobreposição com header (90px do header + 40px de espaço) */
+  align-items: center;            /* Centraliza verticalmente */
 }
 
-/* ============ ESTILO DOS BOTÕES EXPANDIDOS ============ */
-.expanded-btn {
-  width: 40%;                      /* Cada botão ocupa 40% da largura do container */
-  min-width: 280px;               /* Largura mínima para não ficar muito pequeno em telas pequenas */
-  background-color: #0D3B66;      /* Cor de fundo azul escuro */
-  color: #ffffff;                 /* Cor do texto branca */
-  font-weight: bold;              /* Texto em negrito */
-  padding: 32px 0;                /* Aumenta a altura do botão (verticalmente) */
-  font-size: 2rem;                /* Tamanho grande para o texto do botão */
-  border: none;                   /* Remove a borda padrão */
-  border-radius: 28px;            /* Bordas arredondadas suaves */
-  cursor: pointer;                /* Mostra cursor de clique */
-  font-family: 'Segoe UI', sans-serif; /* Fonte moderna */
-  box-shadow: 0 8px 24px rgba(0, 17, 255, 0.26); /* Sombra com leve tom neon */
-  transition: all 0.3s ease-in-out; /* Suaviza animações (hover, etc) */
-  text-align: center;             /* Centraliza o texto dentro do botão */
+/* ============ CONTAINER GERENCIAMENTO DE PRODUTOS ============ */
+.gerenciamento-produtos-container {
+  background-color: aquamarine;    /* Cor de fundo apenas para visual */
+  display: flex;                   /* Usa Flexbox para alinhar os botões */
+  justify-content: center;         /* Centraliza os botões horizontalmente */
+  flex-wrap: wrap;                 /* Permite quebra de linha em telas menores */
+  gap: 32px;                       /* Espaço entre os botões */
+  margin-bottom: 24px;             /* Espaço abaixo do container */
+  margin: 40px auto;               /* Centraliza e posiciona abaixo do header */
+  align-items: center;             /* Centraliza verticalmente */
 }
-/* Efeito ao passar o mouse sobre o painel */
+
+/* ============ ESTILO BASE DOS BOTÕES EXPANDIDOS ============ */
+.expanded-btn {
+  width: 40%;                       /* Cada botão ocupa 40% da largura do container */
+  min-width: 280px;                /* Largura mínima para não ficar pequeno */
+  background-color: #0D3B66;       /* Cor de fundo padrão (azul escuro) */
+  color: #ffffff;                  /* Texto branco */
+  font-weight: bold;               /* Texto em negrito */
+  padding: 32px 0;                 /* Altura do botão (espaço vertical) */
+  font-size: 2rem;                 /* Tamanho grande do texto */
+  border: none;                    /* Remove a borda padrão */
+  border-radius: 28px;             /* Bordas arredondadas */
+  cursor: pointer;                 /* Cursor de clique */
+  font-family: 'Segoe UI', sans-serif; /* Fonte moderna */
+  box-shadow: 0 8px 24px rgba(0, 17, 255, 0.26); /* Sombra azulada suave */
+  transition: all 0.3s ease-in-out; /* Transição suave em hover */
+  text-align: center;              /* Centraliza o texto no botão */
+}
+
+/* ======== Efeito hover para todos os botões ======== */
 .expanded-btn:hover {
-  transform: translateY(-5px);   /* Move o painel levemente para cima no hover */
+  transform: translateY(-5px);     /* Move o botão levemente para cima no hover */
 }
 
 /* ============ CONTAINER DOS PAINÉIS DO DASHBOARD ============ */
 .dashboard-panels {
   width: 100vw;                    /* Ocupa toda a largura da viewport */
-  max-width: 100%;                /* Garante que não passe da largura da tela */
-  display: grid;                  /* Usa Grid Layout para os painéis */
+  max-width: 100%;                 /* Garante que não ultrapasse a largura da tela */
+  display: grid;                   /* Usa Grid Layout para os painéis */
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-  /* Cria colunas automáticas com no mínimo 320px e no máximo o espaço disponível */
-  gap: 30px;                      /* Espaço entre os painéis */
-  padding: 30px 50px;             /* Espaçamento interno (topo/baixo 30px, laterais 50px) */
-  box-sizing: border-box;         /* Inclui padding na largura total do elemento */
+  /* Cria colunas flexíveis a partir de 320px */
+  gap: 30px;                       /* Espaço entre os painéis */
+  padding: 30px 50px;              /* Espaço interno */
+  box-sizing: border-box;          /* Inclui o padding na largura */
 }
 
 /* ============ ESTILO DE CADA PAINEL INFORMATIVO ============ */
 .panel-info {
-  background-color: #0D3B66;              /* Fundo branco */
-  border-radius: 24px;            /* Bordas arredondadas */
-  padding: 40px 30px;             /* Espaçamento interno (topo/baixo 40px, laterais 30px) */
-  text-align: center;             /* Centraliza o texto dentro do painel */
-  height: 300px;                  /* Altura fixa do painel (pode ajustar depois) */
-  display: flex;                  /* Flexbox para alinhar conteúdo verticalmente */
-  flex-direction: column;        /* Coloca os itens em coluna (vertical) */
-  justify-content: center;       /* Centraliza o conteúdo verticalmente */
+  background-color: #0D3B66;              /* Cor de fundo do painel */
+  border-radius: 24px;             /* Bordas arredondadas */
+  padding: 40px 30px;              /* Espaço interno */
+  text-align: center;              /* Centraliza o texto */
+  height: 300px;                   /* Altura fixa */
+  display: flex;                   /* Flexbox para alinhar conteúdo */
+  flex-direction: column;         /* Itens em coluna */
+  justify-content: center;        /* Centraliza verticalmente */
   font-family: 'Segoe UI', sans-serif; /* Fonte moderna */
-  transition: transform 0.3s ease;     /* Animação suave ao aplicar transformação */
+  transition: transform 0.3s ease; /* Transição suave em hover */
 }
-
 
 /* ============ TÍTULO DENTRO DO PAINEL ============ */
 .panel-info h2 {
-  font-size: 26px;               /* Tamanho do título */
-  margin-bottom: 15px;           /* Espaço abaixo do título */
-  color: #ffffff;                   /* Cor preta suave */
+  font-size: 35px;                /* Tamanho do título */
+  margin-bottom: 15px;            /* Espaço abaixo do título */
+  color: #ffffff;                 /* Cor branca */
 }
 
 /* ============ PARÁGRAFO DENTRO DO PAINEL ============ */
 .panel-info p {
-  font-size: 22px;               /* Tamanho da fonte do parágrafo */
-  color: #ffffff;                /* Cor preta */
+  font-size: 25px;                /* Tamanho do parágrafo */
+  color: #ffffff;                 /* Cor branca */
 }
 
-.mat-icon {
-  color: #ffffff;                /* Cor branca para os ícones */
-  display: inline-block;         /* Permite aplicar margin e padding */
-  font-size: 31px;               /* Tamanho dos ícones */
-  margin-right: 10px;            /* Espaço à direita dos ícones */
-  
+/* ============ CONTAINER INTERNO PARA ALINHAR ÍCONE E TEXTO ============ */
+.icon-text-container {
+  display: flex;                   /* Coloca ícone e texto lado a lado */
+  align-items: center;             /* Centraliza verticalmente */
+  justify-content: center;         /* Centraliza horizontalmente dentro do botão */
 }
+
+/* ============ ESTILO DO ÍCONE (mat-icon) ============ */
+.mat-icon {
+  color: #ffffff;                  /* Cor do ícone */
+  font-size: 30px;                 /* Tamanho do ícone */
+  margin-right: 10px;              /* Espaço entre o ícone e o texto */
+  line-height: 1;                  /* Evita espaço extra vertical */
+}
+
+/* ========================================================= */
+/* ====== ESTILO ESPECÍFICO DE CADA BOTÃO POR COR ========= */
+/* ========================================================= */
+
+/* Botão "Novo Produto" mantém a cor azul escuro padrão */
+.btn-novo-produto {
+  background-color: #0D3B66;      /* Azul escuro */
+}
+
+/* Botão "Gerenciamento de Produtos" com verde escuro */
+.btn-gerenciamento-produtos {
+  background-color: #14532D;      /* Verde escuro */
+}
+
+/* Botão "Excluir Produto" com vermelho escuro */
+.btn-excluir-produto {
+  background-color: #991B1B;      /* Vermelho escuro */
+}
+
+/* Cor do texto branca em todos */
+.btn-novo-produto,
+.btn-gerenciamento-produtos,
+.btn-excluir-produto {
+  color: #ffffff;                 /* Texto branco */
+}
+
+/* Efeito hover consistente para todos */
+.btn-novo-produto:hover,
+.btn-gerenciamento-produtos:hover,
+.btn-excluir-produto:hover {
+  transition: all 0.3s ease-in-out; /* Transição suave em hover */
+  
+  }
+/* Ajuste extra no mat-icon para alinhar melhor com texto */
+.material-icons {
+    align-items: center;
+    margin-right: 5px;                 /* Espaço à direita entre o ícone e o texto */
+    font-size: 56px;                   /* Tamanho da fonte do ícone */
+    color: #ffffff;                    /* Cor branca para o ícone */
+    line-height: 1;                    /* Evita espaço extra vertical */
+    }
