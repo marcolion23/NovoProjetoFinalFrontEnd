@@ -10,11 +10,9 @@ import { Product } from '../product.model';
 })
 export class ProductCreateComponent implements OnInit {
 
-  // Variável de data de cadastro (opcional, caso queira mostrar no formulário)
   dataCadastro: Date = new Date();
   maxDate: Date = new Date();
 
-  // Objeto do Produto
   product: Product = {
     proNome: '',
     proPrecoCusto: 0,
@@ -35,7 +33,6 @@ export class ProductCreateComponent implements OnInit {
     // Caso queira fazer algo ao iniciar o componente
   }
 
-  // Método para salvar (criar produto no backend)
   salvar(): void {
     this.productService.create(this.product).subscribe(() => {
       this.productService.showMessage('Produto criado com sucesso!');
@@ -45,7 +42,6 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
-  // Método para limpar o formulário
   limpar(): void {
     this.product = {
       proNome: '',
@@ -59,10 +55,42 @@ export class ProductCreateComponent implements OnInit {
     };
   }
 
-  // Método para cancelar e voltar para a listagem de produtos
   cancel(): void {
     this.router.navigate(['/products']);
   }
-  
 
+  // Função genérica para formatar preço no padrão BR (ex: 1.234,56)
+  onPrecoInput(event: any, campo: 'proPrecoCusto' | 'proPrecoVenda'): void {
+    let valor = event.target.value;
+
+    // Remove tudo que não for dígito
+    valor = valor.replace(/\D/g, '');
+
+    if (valor.length === 0) {
+      this.product[campo] = 0;
+      event.target.value = '';
+      return;
+    }
+
+    // Garante pelo menos 3 dígitos para formatação correta
+    while (valor.length < 3) {
+      valor = '0' + valor;
+    }
+
+    // Divide inteiro e decimal
+    const inteiro = valor.slice(0, valor.length - 2);
+    const decimal = valor.slice(valor.length - 2);
+
+    // Formata inteiro com ponto como separador de milhar
+    const inteiroFormatado = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+    // Monta valor final formatado com vírgula decimal
+    const valorFormatado = `${inteiroFormatado},${decimal}`;
+
+    // Atualiza o campo visível
+    event.target.value = valorFormatado;
+
+    // Atualiza o model convertendo para número (ex: "1.234,56" -> 1234.56)
+    this.product[campo] = parseFloat(valorFormatado.replace(/\./g, '').replace(',', '.'));
+  }
 }

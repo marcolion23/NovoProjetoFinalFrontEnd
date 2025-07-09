@@ -2,12 +2,15 @@
 .product-form {
   display: flex;               /* Usa Flexbox para um layout flexível */
   flex-wrap: wrap;            /* Permite quebra de linha para responsividade */
-  gap: 20px;                  /* Espaçamento entre os campos */
-  margin-top: 10px;           /* Espaçamento superior */
+  gap: 25px;                  /* Espaçamento entre os campos */
+  margin-top: 30px; /* espaçamento extra após o padding-top do body */
   padding: 0 5px;             /* Espaçamento horizontal pequeno */
-  margin: 130px auto 40px; /* 90px (header) + 40px */ /*faz com que nao sobrepoe*/
+  margin: 10px auto 40px; /* 90px (header) + 40px */ /*faz com que nao sobrepoe*/
   flex-direction: row;        /* Alinha os campos em linha (coluna no mobile por wrap) */
 }
+
+
+
 
 /* Garante que os campos ocupem toda a largura disponível */
 .full-width {
@@ -24,7 +27,7 @@
 
 /* Cartão que envolve o formulário com estilo moderno e limpo */
 .product-card {
-  max-width: 650px;           /* Limita a largura máxima do card */
+  max-width: 900px;           /* Limita a largura máxima do card */
   margin: 40px auto;          /* Centraliza horizontalmente e adiciona espaçamento vertical */
   padding: 32px 24px;         /* Espaçamento interno para conforto visual */
   border-radius: 50px;        /* Bordas arredondadas */

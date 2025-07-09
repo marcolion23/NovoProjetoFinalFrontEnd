@@ -54,6 +54,15 @@
   gap: 30px;                       /* Espaço entre os painéis */
   padding: 30px 50px;              /* Espaço interno */
   box-sizing: border-box;          /* Inclui o padding na largura */
+  
+}
+.dashboard-panels > * {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-panels > *:hover {
+  transform: translateY(-8px); /* "Ergue" o painel */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra para dar efeito de flutuar */
 }
 
 /* ============ ESTILO DE CADA PAINEL INFORMATIVO ============ */
