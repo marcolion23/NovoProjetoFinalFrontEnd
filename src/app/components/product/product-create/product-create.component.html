@@ -1,218 +1,191 @@
-<!-- Componente de cartão que envolve todo o formulário --> 
-<mat-card class="product-card">
-  <!-- Título do formulário -->
-  <div class="centralizado">
-    
-    
-    <mat-card class="product-card">
-      <mat-card-title>ADICIONE SEU PRODUTO </mat-card-title>
-    </mat-card>
-  </div>
+<!-- CONTAINER GERAL que empurra todo o conteúdo abaixo do header fixo -->
+<div class="container-geral">
 
-  <!-- Formulário com layout moderno usando Flexbox -->
-  <form class="product-form">
+  <!-- CARD do formulário com sombra e arredondamento -->
+  <mat-card class="product-card">
     
-    <!-- Nome do Produto -->
-    <mat-form-field appearance="outline" class="half-width">
-      <mat-label>Nome do Produto </mat-label> 
-      <input matInput placeholder="Ex: Teclado Gamer" [(ngModel)]="product.proNome" name="proNome" required>
-    </mat-form-field>
+    <!-- Título do formulário -->
+    <mat-card-title>ADICIONE SEU PRODUTO</mat-card-title>
     
-    <!-- Código de Barras -->
-    <mat-form-field appearance="outline" class="half-width">
-      <mat-label>Código de Barras</mat-label>
-      <input matInput placeholder="Ex: 7891234567890" [(ngModel)]="product.proCodigoBarras" name="proCodigoBarras" required>
-    </mat-form-field>
+    <!-- Formulário flexível -->
+    <form class="product-form">
+      
+      <!-- Nome do Produto -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Nome do Produto</mat-label>
+        <input matInput placeholder="Ex: Teclado Gamer" [(ngModel)]="product.proNome" name="proNome" required>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Descrição</mat-label>
-      <textarea matInput placeholder="Ex: Teclado mecânico com iluminação RGB" rows="4" [(ngModel)]="product.proDescricao" name="proDescricao"></textarea>
-    </mat-form-field>
+      <!-- Código de Barras -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Código de Barras</mat-label>
+        <input matInput placeholder="Ex: 7891234567890" [(ngModel)]="product.proCodigoBarras" name="proCodigoBarras" required>
+      </mat-form-field>
 
+      <!-- Descrição -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput placeholder="Ex: Teclado mecânico com iluminação RGB" rows="4" [(ngModel)]="product.proDescricao" name="proDescricao"></textarea>
+      </mat-form-field>
 
-    <!-- Categoria -->
-    <!-- ... (Mantém as categorias que você já fez) ... -->
-<!-- Categoria -->
+<!-- === CAMPO: Categoria com ícones e imagens === -->
 <mat-form-field appearance="outline" class="half-width">
   <mat-label>Categoria</mat-label>
   <mat-select [(ngModel)]="product.proCategoria" name="proCategoria" required>
-
+    
     <mat-option value="teclado">
-      <mat-icon class="option-icon">keyboard</mat-icon>
+      <mat-icon style="margin-right: 8px;">keyboard</mat-icon>
       Teclado
     </mat-option>
-
+    
     <mat-option value="mouse">
-      <mat-icon class="option-icon">mouse</mat-icon>
+      <mat-icon style="margin-right: 8px;">mouse</mat-icon>
       Mouse
     </mat-option>
-
+    
     <mat-option value="monitor">
-      <mat-icon class="option-icon">tv</mat-icon> 
+      <mat-icon style="margin-right: 8px;">tv</mat-icon>
       Monitor
     </mat-option>
-
+    
     <mat-option value="headset">
-      <mat-icon class="option-icon">headset</mat-icon>
+      <mat-icon style="margin-right: 8px;">headset</mat-icon>
       Headset
     </mat-option>
-
+    
     <mat-option value="mousepad">
-      <img src="assets/img/mousepad.png" width="20" style="margin-right: 8px;" class="option-img" />
+      <img src="assets/img/mousepad.png" width="20" style="margin-right: 8px;" />
       MousePad
     </mat-option>
-
+    
     <mat-option value="cadeira">
-      <img src="assets/img/cadeira-gamer.png"  width="20" style="margin-right: 8px;" class="option-img" />
+      <img src="assets/img/cadeira-gamer.png" width="20" style="margin-right: 8px;" />
       Cadeira Gamer
     </mat-option>
-
-    <mat-option value="Console">
-      <img src="assets/img/console-de-videogame.png" width="20" style="margin-right: 8px;" class="option-img" />
+    
+    <mat-option value="console">
+      <img src="assets/img/console-de-videogame.png" width="20" style="margin-right: 8px;" />
       Console
     </mat-option>
-
-    <mat-option value="Controle">
-      <img src="assets/img/controle-de-video-game.png" width="20" style="margin-right: 8px;" class="option-img" />
+    
+    <mat-option value="controle">
+      <img src="assets/img/controle-de-video-game.png" width="20" style="margin-right: 8px;" />
       Controle
     </mat-option>
-
+    
     <mat-option value="acessorios">
-      <img src="assets/img/outra.png" width="20" style="margin-right: 8px;" class="option-img" />
+      <img src="assets/img/outra.png" width="20" style="margin-right: 8px;" />
       Acessórios
     </mat-option>
     
   </mat-select>
 </mat-form-field>
 
-    <!-- Marca -->
-    <!-- ... (Mantém as marcas que você já fez) ... -->
-<!-- Marca -->
+ <!-- === CAMPO: Marca com logos das marcas === -->
 <mat-form-field appearance="outline" class="half-width">
   <mat-label>Marca</mat-label>
   <mat-select [(ngModel)]="product.proMarca" name="proMarca" required>
-
+    
     <mat-option value="razer">
-      <img src="assets/img/razer.png" width="20" style="margin-right: 8px;" class="option-img" />
+      <img src="assets/img/razer.png" width="20" style="margin-right: 8px;" />
       Razer
     </mat-option>
-
+    
     <mat-option value="hyperx">
-      <img src="assets/img/hyperx.png" width="20" style="margin-right: 8px;" class="option-img" />
+      <img src="assets/img/hyperx.png" width="20" style="margin-right: 8px;" />
       HyperX
     </mat-option>
-
+    
     <mat-option value="nzxt">
-      <img src="assets/img/NZXT.png" width="20" style="margin-right: 8px;" class="option-img" />
+      <img src="assets/img/NZXT.png" width="20" style="margin-right: 8px;" />
       NZXT
     </mat-option>
-
+    
     <mat-option value="Dell">
-      <img src="assets/img/Dell.png" width="20" style="margin-right: 8px;" class="option-img" />
+      <img src="assets/img/Dell.png" width="20" style="margin-right: 8px;" />
       Dell
     </mat-option>
-
+    
     <mat-option value="Lian Li">
-      <img src="assets/img/LianLi.png" width="20" style="margin-right: 8px;" class="option-img" />
+      <img src="assets/img/LianLi.png" width="20" style="margin-right: 8px;" />
       Lian Li
     </mat-option>
-
+    
     <mat-option value="logitech">
-      <img src="assets/img/LogiTech.png" width="20" style="margin-right: 8px;" class="option-img" />
+      <img src="assets/img/LogiTech.png" width="20" style="margin-right: 8px;" />
       Logitech
     </mat-option>
-
+    
     <mat-option value="steelseries">
-      <img src="assets/img/steelseries.png" width="20" style="margin-right: 8px;" class="option-img" />
+      <img src="assets/img/steelseries.png" width="20" style="margin-right: 8px;" />
       SteelSeries
     </mat-option>
-
+    
     <mat-option value="reddragon">
-      <img src="assets/img/redragons.png" width="20" style="margin-right: 8px;" class="option-img" />
+      <img src="assets/img/redragons.png" width="20" style="margin-right: 8px;" />
       RedDragon
     </mat-option>
-
+    
     <mat-option value="outra">
-      <img src="assets/img/outra.png" width="20" style="margin-right: 8px;" class="option-img" />
+      <img src="assets/img/outra.png" width="20" style="margin-right: 8px;" />
       Outra Marca
     </mat-option>
-
+    
   </mat-select>
 </mat-form-field>
 
-<!-- Preço de Custo -->
-<mat-form-field appearance="outline" class="half-width" required>
-  <mat-label>Preço de Custo (R$)</mat-label>
-  <input
-    matInput
-    type="text"
-    placeholder="Ex: 150,00"
-    [ngModel]="product.proPrecoCusto ? product.proPrecoCusto.toFixed(2).replace('.', ',') : ''"
-    (input)="onPrecoInput($event, 'proPrecoCusto')"
-    name="proPrecoCusto"
-    required
-  />
-</mat-form-field>
+      <!-- Preço de Custo -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Preço de Custo (R$)</mat-label>
+        <input matInput type="text" placeholder="Ex: 150,00"
+          [ngModel]="product.proPrecoCusto ? product.proPrecoCusto.toFixed(2).replace('.', ',') : ''"
+          (input)="onPrecoInput($event, 'proPrecoCusto')" name="proPrecoCusto" required>
+      </mat-form-field>
 
-<!-- Preço de Venda -->
-<mat-form-field appearance="outline" class="half-width" required>
-  <mat-label>Preço de Venda (R$)</mat-label>
-  <input
-    matInput
-    type="text"
-    placeholder="Ex: 250,00"
-    [ngModel]="product.proPrecoVenda ? product.proPrecoVenda.toFixed(2).replace('.', ',') : ''"
-    (input)="onPrecoInput($event, 'proPrecoVenda')"
-    name="proPrecoVenda"
-    required
-  />
-</mat-form-field>
+      <!-- Preço de Venda -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Preço de Venda (R$)</mat-label>
+        <input matInput type="text" placeholder="Ex: 250,00"
+          [ngModel]="product.proPrecoVenda ? product.proPrecoVenda.toFixed(2).replace('.', ',') : ''"
+          (input)="onPrecoInput($event, 'proPrecoVenda')" name="proPrecoVenda" required>
+      </mat-form-field>
 
+      <!-- Estoque Atual -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Estoque Atual</mat-label>
+        <input matInput type="number" placeholder="Ex: 100" [(ngModel)]="product.proEstoque" name="proEstoque" min="0" required>
+      </mat-form-field>
 
-<!-- Estoque Atual -->
-<mat-form-field appearance="outline" class="half-width" required>
-  <mat-label>Estoque Atual</mat-label>
-  <input matInput type="number" placeholder="Ex: 100" [(ngModel)]="product.proEstoque" name="proEstoque" min="0" required>
-</mat-form-field>
+      <!-- Data de Cadastro -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Data de Cadastro</mat-label>
+        <input matInput [matDatepicker]="picker" placeholder="DD/MM/AAAA" name="dataCadastro" readonly>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
-<!-- Campo: Data de Nascimento com Datepicker do Angular Material -->
-<mat-form-field appearance="outline" class="half-width">
-  <mat-label>Data de Cadastro</mat-label>
-  <input 
-    matInput 
-    [matDatepicker]="picker" 
-    placeholder="DD/MM/AAAA" 
-    name="cliDataNascimento" 
-    required 
-    [max]="maxDate" 
-    readonly
-  />
-  
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
+      <!-- Status -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="product.proAtivo" name="proAtivo" required>
+          <mat-option [value]="true">Ativo</mat-option>
+          <mat-option [value]="false">Inativo</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-<!-- Status do Produto (Ativo / Inativo) -->
-<mat-form-field appearance="outline" class="full-width">
-  <mat-label>Status</mat-label>
-  <mat-select [(ngModel)]="product.proAtivo" name="proAtivo" required>
-    <mat-option [value]="true">Ativo</mat-option>
-    <mat-option [value]="false">Inativo</mat-option>
-  </mat-select>
-</mat-form-field>
+      <!-- Botões -->
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="salvar()">Salvar</button>
+        <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+        <button mat-raised-button color="blue" (click)="limpar()">Limpar</button>
+      </div>
+      
+    </form>
+  </mat-card>
 
-<!-- Botões de ação -->
-<div class="button-container">
-  <button mat-raised-button color="primary" (click)="salvar()">
-    Salvar
-  </button>
-  <button mat-raised-button color="warn" (click)="cancel()">
-    Cancelar
-  </button>
-  <button mat-raised-button color="blue" (click)="limpar()">
-    Limpar
-  </button>
+  <!-- TABELA abaixo do formulário -->
+  <div class="tabela-container">
+    <!-- Aqui entra sua tabela -->
+  </div>
+
 </div>
-
-</form>
-</mat-card>

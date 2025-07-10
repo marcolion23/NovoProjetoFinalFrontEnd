@@ -1,129 +1,118 @@
-/* Formulário: layout em coluna com espaçamento entre elementos */ 
-.product-form {
-  display: flex;               /* Usa Flexbox para um layout flexível */
-  flex-wrap: wrap;            /* Permite quebra de linha para responsividade */
-  gap: 25px;                  /* Espaçamento entre os campos */
-  margin-top: 30px; /* espaçamento extra após o padding-top do body */
-  padding: 0 5px;             /* Espaçamento horizontal pequeno */
-  margin: 10px auto 40px; /* 90px (header) + 40px */ /*faz com que nao sobrepoe*/
-  flex-direction: row;        /* Alinha os campos em linha (coluna no mobile por wrap) */
+/* === CONTAINER GERAL: empurra tudo abaixo do header fixo === */
+.container-geral {
+  display: flex;                        /* Layout em coluna */
+  flex-direction: column;
+  align-items: center;                  /* Centraliza horizontalmente */
+  justify-content: flex-start;
+  margin-top: 100px;                    /* Espaço para header fixo (90px) + 10px de respiro */
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-
-
-
-/* Garante que os campos ocupem toda a largura disponível */
-.full-width {
-  width: 100%;                /* Preenche 100% da largura do container pai */
-  box-sizing: border-box;     /* Inclui padding e borda no cálculo de largura */
-}
-
-/* Define metade da largura para telas maiores */
-.half-width {
-  width: 48%;                 /* Quase metade para caber o gap */
-  box-sizing: border-box;     /* Importante para cálculo correto */
-  min-width: 280px;           /* Largura mínima para evitar ficar muito estreito */
-}
-
-/* Cartão que envolve o formulário com estilo moderno e limpo */
+/* === CARD do formulário === */
 .product-card {
-  max-width: 900px;           /* Limita a largura máxima do card */
-  margin: 40px auto;          /* Centraliza horizontalmente e adiciona espaçamento vertical */
-  padding: 32px 24px;         /* Espaçamento interno para conforto visual */
-  border-radius: 50px;        /* Bordas arredondadas */
+  max-width: 900px;                     /* Largura máxima */
+  width: 100%;
+  margin-bottom: 40px;                   /* Espaço até a tabela */
+  padding: 32px 24px;                   /* Espaçamento interno */
+  border-radius: 50px;                  /* Bordas arredondadas */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra para profundidade */
-  background-color: #ffffff;  /* Cor de fundo branca */
-  color: #2C3E50;             /* Cor do texto escura para contraste */
-  transition: box-shadow 1.5s ease; /* Animação suave em interações */
+  background-color: #ffffff;            /* Fundo branco */
+  color: #2C3E50;                       /* Cor de texto escura */
 }
 
-/* Container dos botões alinhado à direita com espaçamento entre eles */
+/* === FORMULÁRIO: layout flexível com espaçamento === */
+.product-form {
+  display: flex;                        /* Flexbox */
+  flex-wrap: wrap;                      /* Permite quebra em telas menores */
+  gap: 25px;                            /* Espaço entre campos */
+  margin-top: 30px;
+  padding: 0 5px;
+}
+
+/* === CAMPOS === */
+.full-width {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.half-width {
+  width: 48%;                           /* Quase metade, considerando gap */
+  box-sizing: border-box;
+  min-width: 280px;                     /* Evita ficar muito pequeno */
+}
+
+/* === CONTAINER DOS BOTÕES === */
 .button-container {
-  display: flex;              /* Layout flexível para alinhar botões */
-  justify-content: flex-end;  /* Alinha os botões à direita */
-  gap: 16px;                  /* Espaço entre os botões */
-  margin-top: 24px;           /* Espaço acima dos botões */
+  display: flex;
+  justify-content: flex-end;            /* Alinha à direita */
+  gap: 16px;                            /* Espaço entre botões */
+  margin-top: 24px;
 }
 
-/* Estilo base de todos os botões salvar e cancelar */
+/* === BOTÕES PADRÃO === */
 button {
-  background-color: #ffffff;                     /* Fundo branco */
-  padding: 12px 28px;                            /* Área clicável maior */
-  border-radius: 45px;                           /* Bordas arredondadas */
-  border: none;                                  /* Remove bordas padrão */
-  cursor: pointer;                               /* Cursor pointer para indicar clicável */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Animações suaves */
+  background-color: #ffffff;
+  padding: 12px 28px;
+  border-radius: 45px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Botão principal (ex: Salvar) com verde suave */
+/* Botão Salvar */
 button[color="primary"] {
-  background-color: #388e3c;                     /* Verde sóbrio e moderno */
-  color: #ffffff;                                /* Texto branco */
-  box-shadow: 0 4px 12px rgba(56, 142, 60, 0.4); /* Sombra verde suave */
+  background-color: #388e3c;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(56, 142, 60, 0.4);
 }
 
-/* Efeito hover do botão principal */
 button[color="primary"]:hover {
-  background-color: #2e7d32;                     /* Verde mais escuro no hover */
-  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.6); /* Sombra mais forte */
+  background-color: #2e7d32;
+  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.6);
 }
 
-/* Botão de cancelamento (ou ações perigosas) com vermelho sóbrio */
+/* Botão Cancelar */
 button[color="warn"] {
-  background-color: #c73e3e;                     /* Vermelho forte e limpo */
-  color: #ffffff;                                /* Texto branco */
-  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.4); /* Sombra vermelha suave */
+  background-color: #c73e3e;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.4);
 }
 
-/* Efeito hover do botão de aviso */
 button[color="warn"]:hover {
-  background-color: #f80000;                     /* Vermelho mais escuro */
-  box-shadow: 0 6px 16px rgba(183, 28, 28, 0.6); /* Sombra mais intensa */
+  background-color: #f80000;
+  box-shadow: 0 6px 16px rgba(183, 28, 28, 0.6);
 }
 
-/* Botão "Salvar" branco com texto branco puro */
-button[color="white-save"] {
-  background-color: #ffffff;                     /* Fundo branco puro */
-  color: #ffffff;                                /* Texto branco puro */
-  border: 2px solid #ffffff;                     /* Borda branca */
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2); /* Sombra branca suave */
+/* === TABELA abaixo do formulário === */
+.tabela-container {
+  max-width: 900px;                      /* Mesmo tamanho do card */
+  width: 100%;
+  margin-top: 40px;                       /* Espaço abaixo do card */
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
-/* Efeito hover do botão "Salvar" branco */
-button[color="white-save"]:hover {
-  background-color: #ffffff;                     /* Branco acinzentado no hover */
-  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.4); /* Sombra mais forte branca */
-}
-
-/* Ajustes de responsividade para telas pequenas */
+/* === RESPONSIVO para telas pequenas === */
 @media (max-width: 640px) {
-  .product-card {
-    margin: 20px 12px;           /* Margem mais compacta */
-    padding: 24px 16px;          /* Padding reduzido para mobile */
-  }
-
-  button {
-    width: 100%;                 /* Botões ocupam a largura total no mobile */
-    padding: 14px 0;             /* Padding vertical aumentado */
-  }
-
-  .button-container {
-    flex-direction: column;      /* Botões empilhados verticalmente */
-    gap: 12px;                   /* Espaçamento entre botões */
-    justify-content: center;     /* Centraliza os botões no container */
-  }
-
-  /* No mobile, faz os campos ocupar toda largura */
   .half-width {
     width: 100% !important;
     min-width: unset;
   }
 
-  .white-input {
-    background-color: white;
-    color: #000;
-    border: 1px solid #ccc;
-    padding: 8px;
-    border-radius: 4px;
+  .product-card {
+    margin: 20px 12px;
+    padding: 24px 16px;
+  }
+
+  .button-container {
+    flex-direction: column;              /* Empilha botões */
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  button {
+    width: 100%;                         /* Botão ocupa toda largura */
   }
 }
