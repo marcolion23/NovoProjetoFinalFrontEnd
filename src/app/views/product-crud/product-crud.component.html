@@ -17,15 +17,18 @@
   Gerenciamento de Produtos
 </button>
 
- <!-- Botão "Excluir Produto" -->
-<button 
+<button
   mat-raised-button
   class="big-button expanded-btn btn-excluir-produto"
-  [routerLink]="'/products/delete'">
+  [routerLink]="['/products/delete', 123]">
   <div class="icon-text-container">
     <span>Excluir Produto</span>
   </div>
 </button>
+
+
+
+
   
 <!-- Painéis de Resumo -->
 <div class="dashboard-panels">
