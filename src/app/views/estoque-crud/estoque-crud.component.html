@@ -1,35 +1,96 @@
-<div class="estoque-container">
-    <h2>Gerenciamento de Estoque</h2>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+<!-- ============ CONTAINER DOS BOTÕES DO ESTOQUE ============ -->
+<div class="estoque-btns-container">
+  <!-- Botão "Movimentar Estoque" -->
+  <button 
+    class="expanded-btn btn-movimentar-estoque"
+    [routerLink]="'/estoque/movimentar'">
+    Movimentar Estoque
+  </button>
 
-  
-    <div class="lista-produtos">
-   
-      <input type="search" id="buscaProduto" placeholder="Buscar produto..." />
-  
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Quantidade</th>
-            <th>Fornecedor</th>
-            <th>Preço</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody id="produtosTableBody">
-          
+  <!-- Botão "Relatórios de Estoque" -->
+  <button 
+    class="expanded-btn btn-relatorios-estoque"
+    [routerLink]="'/estoque/relatorios'">
+    Relatórios de Estoque
+  </button>
+</div>
 
-            <button class="btn-editar">
-                <span class="material-icons">edit</span>
-              </button>
-              
-              <button class="btn-deletar">
-                <span class="material-icons">delete</span>
-              </button>
-          <!-- Mais produtos aqui -->
-        </tbody>
-      </table>
-    </div>
+<!-- ============ PAINÉIS DO DASHBOARD ============ -->
+<div class="dashboard-panels">
+  <!-- Painel de Itens Cadastrados -->
+  <div class="panel-info">
+    <i class="material-icons">inventory</i>
+    <h2>Itens Cadastrados</h2>
+    <p>{{ totalItens }}</p>
   </div>
-  
+
+  <!-- Painel de Itens Baixo Estoque (em vermelho escuro) -->
+  <div class="panel-info baixo-estoque">
+    <i class="material-icons">warning</i>
+    <h2>Itens Baixo Estoque</h2>
+    <p>{{ baixoEstoque }}</p>
+  </div>
+
+  <!-- Painel de Última Atualização -->
+  <div class="panel-info">
+    <i class="material-icons">update</i>
+    <h2>Última Atualização</h2>
+    <p>{{ ultimaAtualizacao }}</p>
+  </div>
+</div>
+
+<!-- ============ TABELA DE GERENCIAMENTO DO ESTOQUE ============ -->
+<div class="estoque-tabela-container">
+  <h2 class="estoque-titulo">Gerenciamento de Estoque</h2>
+
+  <!-- Container para permitir rolagem horizontal em telas pequenas -->
+  <div class="tabela-scroll">
+    <table class="estoque-tabela">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Categoria</th>
+          <th>Quantidade</th>
+          <th>Preço Unitário</th>
+          <th>Última Entrada</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Exemplo de linha (depois substituir pelos dados reais) -->
+        <tr>
+          <td>Mouse Gamer XYZ</td>
+          <td>Acessórios</td>
+          <td>25</td>
+          <td>R$ 199,90</td>
+          <td>12/07/2025</td>
+          <td>
+            <!-- Botão Editar com ícone -->
+            <button class="btn-acao editar">
+              <i class="material-icons">edit</i> Editar
+            </button>
+            <!-- Botão Remover com ícone -->
+            <button class="btn-acao remover">
+              <i class="material-icons">delete</i> Remover
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Teclado Mecânico Pro</td>
+          <td>Periféricos</td>
+          <td>10</td>
+          <td>R$ 459,90</td>
+          <td>10/07/2025</td>
+          <td>
+            <button class="btn-acao editar">
+              <i class="material-icons">edit</i> Editar
+            </button>
+            <button class="btn-acao remover">
+              <i class="material-icons">delete</i> Remover
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
