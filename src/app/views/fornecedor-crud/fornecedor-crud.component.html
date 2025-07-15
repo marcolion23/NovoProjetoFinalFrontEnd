@@ -1,1 +1,76 @@
-<p>fornecedor-crud works!</p>
+<!-- CONTAINER PRINCIPAL DOS BOTÕES DO MÓDULO DE FORNECEDORES -->
+<div class="fornecedores-btns-container">
+
+  <!-- Botão "Novo Fornecedor" -->
+  <button class="expanded-btn btn-novo-fornecedor"
+    [routerLink]="'/fornecedores/create'">
+    Novo Fornecedor
+  </button>
+
+  <!-- Botão "Relatórios de Fornecedores" -->
+  <button class="expanded-btn btn-relatorios-fornecedores">
+    Relatórios de Fornecedores
+  </button>
+
+</div>
+
+<!-- PAINÉIS DE RESUMO PARA DADOS GERAIS DOS FORNECEDORES -->
+<div class="dashboard-panels">
+  <div class="panel-info">
+    <i class="material-icons">group</i>
+    <h2>Total de Fornecedores</h2>
+    <p>{{ totalFornecedores }}</p> <!-- Vai ser preenchido pelo backend -->
+  </div>
+
+  <div class="panel-info">
+    <i class="material-icons">verified_user</i>
+    <h2>Ativos</h2>
+    <p>{{ fornecedoresAtivos }}</p> <!-- Vai ser preenchido pelo backend -->
+  </div>
+
+  <div class="panel-info-inativo">
+    <i class="material-icons">remove_circle</i>
+    <h2>Inativos</h2>
+    <p>{{ fornecedoresInativos }}</p> <!-- Vai ser preenchido pelo backend -->
+  </div>
+</div>
+
+<!-- CONTAINER DA TABELA DE FORNECEDORES -->
+<div class="fornecedores-tabela-container">
+  <h2 class="fornecedores-titulo">Lista de Fornecedores</h2>
+
+  <!-- Tabela responsiva -->
+  <div class="tabela-scroll">
+    <table class="fornecedores-tabela">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>CNPJ</th>
+          <th>Telefone</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Exemplo estático; vai ser substituído pelo backend -->
+        <tr>
+          <td>Gamer Distribuidora</td>
+          <td>12.345.678/0001-99</td>
+          <td>(11) 99999-9999</td>
+          <td>contato@gamerdistribuidora.com</td>
+          <td>Ativo</td>
+          <td>
+            <button class="btn-acao editar">
+              <span class="material-icons">edit</span> Editar
+            </button>
+            <button class="btn-acao remover">
+              <span class="material-icons">delete</span> Remover
+            </button>
+          </td>
+        </tr>
+        <!-- ... mais linhas -->
+      </tbody>
+    </table>
+  </div>
+</div>

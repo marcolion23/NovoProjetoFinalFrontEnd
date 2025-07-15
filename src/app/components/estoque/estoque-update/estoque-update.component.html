@@ -1,1 +1,37 @@
-<p>estoque-update works!</p>
+<!-- CONTAINER PRINCIPAL DA TELA -->
+<div class="container-movimentar">
+  <h2 class="titulo-movimentar">Movimentar Estoque</h2>
+
+  <form class="form-movimentar">
+    <!-- Seleção do produto -->
+    <div class="campo-form">
+      <label for="produto">Produto:</label>
+      <select id="produto" name="produto">
+        <option>Mouse Gamer XYZ</option>
+        <option>Teclado Mecânico Pro</option>
+        <option>Headset Super Bass</option>
+        <!-- Substituir por dados reais do backend -->
+      </select>
+    </div>
+
+    <!-- Tipo de movimentação -->
+    <div class="campo-form">
+      <label for="tipo">Tipo de movimentação:</label>
+      <select id="tipo" name="tipo">
+        <option>Entrada</option>
+        <option>Saída</option>
+      </select>
+    </div>
+
+    <!-- Quantidade -->
+    <div class="campo-form">
+      <label for="quantidade">Quantidade:</label>
+      <input type="number" id="quantidade" name="quantidade" min="1" required>
+    </div>
+
+    <!-- Botão de enviar -->
+    <button type="submit" class="btn-movimentar-confirmar">
+      Confirmar Movimentação
+    </button>
+  </form>
+</div>

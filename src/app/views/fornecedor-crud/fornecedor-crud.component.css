@@ -1,0 +1,220 @@
+/* ============ CONTAINER DOS BOTÕES ============ */
+.fornecedores-btns-container {
+  display: flex;                    /* Flexbox para alinhar os botões */
+  justify-content: center;          /* Centraliza horizontalmente */
+  flex-wrap: wrap;                  /* Permite quebrar linha em telas menores */
+  gap: 32px;                        /* Espaço entre botões */
+  margin: 130px auto 40px;          /* Espaço no topo e rodapé */
+  align-items: center;              /* Centraliza verticalmente */
+}
+
+/* ============ ESTILO BASE DOS BOTÕES EXPANDIDOS ============ */
+.expanded-btn {
+  width: 40%;                       /* Ocupa 40% do container */
+  min-width: 280px;                 /* Largura mínima */
+  font-size: 2rem;                  /* Texto grande */
+  font-weight: bold;                /* Negrito */
+  padding: 32px 0;                  /* Altura do botão */
+  border: none;                     /* Remove borda */
+  border-radius: 28px;              /* Bordas arredondadas */
+  cursor: pointer;                  /* Mãozinha ao passar o mouse */
+  color: #ffffff;                   /* Texto branco */
+  font-family: 'Segoe UI', sans-serif; /* Fonte moderna */
+  box-shadow: 0 8px 24px rgba(0, 17, 255, 0.26); /* Sombra suave */
+  transition: all 0.3s ease-in-out; /* Suaviza efeitos */
+  text-align: center;               /* Centraliza o texto */
+}
+
+/* Efeito hover nos botões */
+.expanded-btn:hover {
+  transform: translateY(-5px);     /* Sobe levemente */
+}
+
+/* Botão "Novo Fornecedor" - azul escuro */
+.btn-novo-fornecedor {
+  background-color: #0D3B66;
+}
+
+/* Botão "Relatórios de Fornecedores" - vermelho escuro */
+.btn-relatorios-fornecedores {
+  background-color: #14532D;
+}
+
+/* ============ PAINÉIS DE RESUMO ============ */
+.dashboard-panels {
+  width: 100vw;                                     /* Toda a largura da tela */
+  max-width: 100%;                                  /* Não ultrapassa o limite */
+  display: grid;                                    /* Grid para responsividade */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;                                        /* Espaço entre painéis */
+  padding: 30px 50px;                               /* Espaço interno */
+  box-sizing: border-box;                           /* Inclui padding no cálculo */
+}
+
+/* Animação ao passar o mouse */
+.dashboard-panels > * {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover nos painéis */
+.dashboard-panels > *:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Painel individual */
+.panel-info {
+  background-color: #0D3B66;                        /* Azul escuro */
+  border-radius: 24px;                              /* Bordas arredondadas */
+  padding: 40px 30px;                               /* Espaço interno */
+  text-align: center;                               /* Centraliza conteúdo */
+  height: 300px;                                    /* Altura fixa */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+.panel-info-inativo {
+  background-color: #991B1B;
+  border-radius: 24px;
+  padding: 40px 30px;
+  text-align: center;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+.panel-info-inativo h2 {
+  font-size: 40px;  /* aumenta o tamanho do título */
+  margin-bottom: 15px;
+}
+
+.panel-info-inativo p {
+  font-size: 25px;  /* mantém o número em tamanho confortável */
+}
+
+
+/* Título do painel */
+.panel-info h2 {
+  font-size: 35px;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+/* Quantidade ou valor */
+.panel-info p {
+  font-size: 25px;
+  color: #ffffff;
+}
+
+/* Ícone dentro do painel */
+.material-icons {
+  font-size: 56px;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+/* ============ TABELA DE FORNECEDORES ============ */
+.fornecedores-tabela-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Título da tabela */
+.fornecedores-titulo {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Rolagem horizontal se necessário */
+.tabela-scroll {
+  overflow-x: auto;
+}
+
+/* Tabela principal */
+.fornecedores-tabela {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #0D3B66;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+/* Cabeçalho da tabela */
+.fornecedores-tabela thead {
+  background-color: #1e293b;
+}
+
+/* Células do cabeçalho */
+.fornecedores-tabela th {
+  padding: 16px 12px;
+  text-align: left;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-bottom: 2px solid #991B1B; /* Linha inferior vermelha */
+}
+
+/* Células do corpo */
+.fornecedores-tabela td {
+  padding: 14px 12px;
+  color: #e0e0e0;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Linhas alternadas com cor sutil */
+.fornecedores-tabela tbody tr:nth-child(odd) {
+  background-color: rgba(255,255,255,0.04);
+}
+
+/* Hover nas linhas */
+.fornecedores-tabela tbody tr:hover {
+  background-color: rgba(255,255,255,0.08);
+  transition: background-color 0.2s;
+}
+
+/* ============ BOTÕES DE AÇÃO NA TABELA ============ */
+.btn-acao {
+  display: inline-flex;                           /* Ícone e texto alinhados */
+  align-items: center;
+  padding: 6px 10px;
+  margin-right: 6px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #ffffff;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Ícone do botão */
+.btn-acao .material-icons {
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+/* Botão editar - azul */
+.btn-acao.editar {
+  background-color: #2563eb;
+}
+
+/* Botão remover - vermelho */
+.btn-acao.remover {
+  background-color: #dc2626;
+}
+
+/* Hover nos botões de ação */
+.btn-acao:hover {
+  transform: scale(1.05);
+}

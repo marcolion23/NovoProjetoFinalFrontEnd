@@ -1,1 +1,136 @@
-<p>fornecedor-create works!</p>
+<!-- Card principal que envolve todo o formulário -->
+<mat-card class="fornecedor-card">
+
+  <!-- Título do formulário -->
+  <mat-card-title>Cadastro de Fornecedor</mat-card-title>
+
+  <!-- Formulário com layout flexível -->
+  <form class="fornecedor-form" #formFornecedor="ngForm">
+
+    <!-- Nome do fornecedor - campo obrigatório -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Nome</mat-label>
+      <input matInput placeholder="Nome do fornecedor" [(ngModel)]="fornecedor.nome" name="nome" required #nome="ngModel" />
+      <mat-error *ngIf="nome.invalid && nome.touched">Nome é obrigatório</mat-error>
+    </mat-form-field>
+
+    <!-- CNPJ - campo obrigatório com validação de tamanho -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>CNPJ</mat-label>
+      <input matInput placeholder="00.000.000/0000-00" [(ngModel)]="fornecedor.cnpj" name="cnpj" required minlength="14" maxlength="18" #cnpj="ngModel" />
+      <mat-error *ngIf="cnpj.invalid && cnpj.touched">CNPJ inválido</mat-error>
+    </mat-form-field>
+
+    <!-- Inscrição Estadual - opcional -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Inscrição Estadual</mat-label>
+      <input matInput placeholder="Inscrição Estadual" [(ngModel)]="fornecedor.inscricaoEstadual" name="inscricaoEstadual" />
+    </mat-form-field>
+
+    <!-- Telefone - obrigatório -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Telefone</mat-label>
+      <input matInput placeholder="(99) 99999-9999" [(ngModel)]="fornecedor.telefone" name="telefone" required #telefone="ngModel" />
+      <mat-error *ngIf="telefone.invalid && telefone.touched">Telefone é obrigatório</mat-error>
+    </mat-form-field>
+
+    <!-- Email - obrigatório com validação -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="email@exemplo.com" [(ngModel)]="fornecedor.email" name="email" required email #email="ngModel" />
+      <mat-error *ngIf="email.invalid && email.touched">Email inválido</mat-error>
+    </mat-form-field>
+
+    <!-- Rua - obrigatório -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Rua</mat-label>
+      <input matInput placeholder="Endereço" [(ngModel)]="fornecedor.rua" name="rua" required #rua="ngModel" />
+      <mat-error *ngIf="rua.invalid && rua.touched">Rua é obrigatória</mat-error>
+    </mat-form-field>
+
+    <!-- Número - obrigatório -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Número</mat-label>
+      <input matInput type="number" placeholder="Número" [(ngModel)]="fornecedor.numero" name="numero" required #numero="ngModel" />
+      <mat-error *ngIf="numero.invalid && numero.touched">Número é obrigatório</mat-error>
+    </mat-form-field>
+
+    <!-- Bairro - obrigatório -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Bairro</mat-label>
+      <input matInput placeholder="Bairro" [(ngModel)]="fornecedor.bairro" name="bairro" required #bairro="ngModel" />
+      <mat-error *ngIf="bairro.invalid && bairro.touched">Bairro é obrigatório</mat-error>
+    </mat-form-field>
+
+    <!-- Cidade - obrigatório -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Cidade</mat-label>
+      <input matInput placeholder="Cidade" [(ngModel)]="fornecedor.cidade" name="cidade" required #cidade="ngModel" />
+      <mat-error *ngIf="cidade.invalid && cidade.touched">Cidade é obrigatória</mat-error>
+    </mat-form-field>
+
+    <!-- Estado - select obrigatório -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Estado</mat-label>
+      <mat-select [(ngModel)]="fornecedor.estado" name="estado" required #estado="ngModel">
+        <mat-option value="SP">São Paulo</mat-option>
+        <mat-option value="RJ">Rio de Janeiro</mat-option>
+        <mat-option value="MG">Minas Gerais</mat-option>
+        <mat-option value="RS">Rio Grande do Sul</mat-option>
+        <mat-option value="Outros">Outros</mat-option>
+      </mat-select>
+      <mat-error *ngIf="estado.invalid && estado.touched">Estado é obrigatório</mat-error>
+    </mat-form-field>
+
+    <!-- CEP - obrigatório -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>CEP</mat-label>
+      <input matInput placeholder="00000-000" [(ngModel)]="fornecedor.cep" name="cep" required #cep="ngModel" />
+      <mat-error *ngIf="cep.invalid && cep.touched">CEP é obrigatório</mat-error>
+    </mat-form-field>
+
+    <!-- Contato Principal - obrigatório -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Contato Principal</mat-label>
+      <input matInput placeholder="Nome do contato" [(ngModel)]="fornecedor.contatoPrincipal" name="contatoPrincipal" required #contatoPrincipal="ngModel" />
+      <mat-error *ngIf="contatoPrincipal.invalid && contatoPrincipal.touched">Contato principal é obrigatório</mat-error>
+    </mat-form-field>
+
+    <!-- Telefone do Contato - obrigatório -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Telefone do Contato</mat-label>
+      <input matInput placeholder="(99) 99999-9999" [(ngModel)]="fornecedor.telefoneContato" name="telefoneContato" required #telefoneContato="ngModel" />
+      <mat-error *ngIf="telefoneContato.invalid && telefoneContato.touched">Telefone do contato é obrigatório</mat-error>
+    </mat-form-field>
+
+    <!-- Observações - campo maior para texto -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Observações</mat-label>
+      <textarea matInput placeholder="Observações adicionais" [(ngModel)]="fornecedor.observacoes" name="observacoes" rows="4"></textarea>
+    </mat-form-field>
+
+    <!-- Status do fornecedor - ativo/inativo -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="fornecedor.status" name="status" required #status="ngModel">
+        <mat-option [value]="true">Ativo</mat-option>
+        <mat-option [value]="false">Inativo</mat-option>
+      </mat-select>
+      <mat-error *ngIf="status.invalid && status.touched">Status é obrigatório</mat-error>
+    </mat-form-field>
+
+    <!-- Botões do formulário -->
+    <div class="button-container">
+      <!-- Botão salvar, desabilitado se formulário inválido -->
+      <button class="save-btn" [disabled]="formFornecedor.invalid" (click)="salvar()">Salvar</button>
+
+      <!-- Botão cancelar -->
+      <button class="cancel-btn" (click)="cancelar()">Cancelar</button>
+
+      <!-- Botão limpar campos -->
+      <button class="clear-btn" type="button" (click)="limpar()">Limpar</button>
+    </div>
+
+  </form>
+
+</mat-card>

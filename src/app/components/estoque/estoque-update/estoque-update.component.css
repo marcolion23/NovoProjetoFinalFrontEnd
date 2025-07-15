@@ -1,0 +1,64 @@
+/* CONTAINER PRINCIPAL */
+.container-movimentar {
+  max-width: 600px;                          /* Largura máxima */
+  margin: 100px auto;                        /* Centraliza na tela */
+  background-color: #0D3B66;                 /* Azul escuro combinando */
+  border-radius: 20px;                       /* Bordas arredondadas */
+  padding: 40px;                             /* Espaço interno */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);    /* Sombra */
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Título */
+.titulo-movimentar {
+  color: #ffffff;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+/* FORMULÁRIO */
+.form-movimentar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;                                 /* Espaço entre campos */
+}
+
+/* Cada campo */
+.campo-form label {
+  color: #ffffff;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* Input e select */
+.campo-form input,
+.campo-form select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background-color: #1e293b;                 /* Fundo mais escuro */
+  color: #ffffff;
+}
+
+/* Botão confirmar */
+.btn-movimentar-confirmar {
+  padding: 14px;
+  background-color: #14532D;                 /* Verde escuro */
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Hover botão */
+.btn-movimentar-confirmar:hover {
+  background-color: #166534;                 /* Verde levemente mais claro */
+  transform: translateY(-3px);
+}
