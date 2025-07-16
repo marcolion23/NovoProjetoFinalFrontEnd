@@ -12,5 +12,8 @@ export interface Cliente {
     cliEstado?: string;           // Opcional - estado
     cliCep?: string;              // Opcional - CEP
     cliAtivo?: boolean;           // Opcional - status do cliente
+
+
+    
   }
   

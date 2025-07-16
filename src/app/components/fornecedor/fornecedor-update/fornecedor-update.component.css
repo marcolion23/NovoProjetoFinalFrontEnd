@@ -1,0 +1,97 @@
+/* Card principal do relatório */
+.estoque-card {
+  max-width: 1000px;
+  margin: 120px auto 40px;        /* espaço do header fixo + inferior */
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  background: #fff;
+}
+
+/* Título centralizado */
+mat-card-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Container dos filtros */
+.filtros-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+/* Cada filtro ocupa tamanho flexível */
+.filtro-item {
+  flex: 1 1 200px;
+}
+
+/* Botão de filtrar */
+.filtrar-btn {
+  height: 40px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Container da tabela para responsividade */
+.tabela-container {
+  overflow-x: auto;               /* rolagem horizontal em telas menores */
+}
+
+/* Tabela geral */
+.tabela-estoque {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Cabeçalho da tabela */
+.tabela-estoque thead {
+  background-color: #f5f5f5;
+}
+
+.tabela-estoque th, .tabela-estoque td {
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Linha hover */
+.tabela-estoque tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Totalizadores */
+.totalizadores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Card de cada totalizador */
+.total-card {
+  flex: 1 1 200px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+/* Ajuste do label e valor */
+.total-label {
+  color: #333;
+}
+
+.total-valor {
+  color: #4caf50;
+}

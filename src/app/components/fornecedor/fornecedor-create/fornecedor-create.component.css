@@ -1,94 +1,52 @@
-/* Card principal do formulário de fornecedor */
+/* Estilo geral do card do formulário */
 .fornecedor-card {
-  max-width: 800px;                /* Largura máxima do card */
-  margin: 100px auto 40px;         /* Espaço superior (para header fixo) e centralizado */
-  padding: 25px 30px;              /* Espaço interno */
-  border-radius: 12px;             /* Bordas arredondadas */
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Sombra externa suave */
-  background: #fff;                /* Fundo branco */
-}
-
-/* Formulário flexível com espaçamento */
-.fornecedor-form {
-  display: flex;
-  flex-wrap: wrap;                 /* Permite quebrar para próxima linha */
-  gap: 15px 20px;                  /* Espaço entre campos vertical e horizontal */
-}
-
-/* Campos que ocupam metade da largura (lado a lado) */
-.half-width {
-  flex: 1 1 45%;
-  min-width: 220px;                /* Mínimo para responsividade */
-}
-
-/* Campos que ocupam largura total */
-.full-width {
-  flex: 1 1 100%;
-}
-
-/* Ajustes gerais dos campos Material */
-mat-form-field {
-  width: 100%;                     /* Sempre ocupar toda a coluna */
-  background: #f9f9f9;             /* Fundo claro e uniforme */
-  border-radius: 6px;              /* Bordas arredondadas */
-}
-
-/* Remove sombra/contorno interno e deixa mais clean */
-::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
-  background-color: transparent !important;  /* Fundo transparente interno */
-  border-radius: 6px;                        /* Bordas suaves */
-  padding: 0 !important;                     /* Remove padding interno */
-}
-
-/* Ajusta altura dos inputs para ficar uniforme */
-mat-form-field input,
-mat-form-field textarea,
-mat-form-field .mat-select-trigger {
-  height: 40px;
-  padding: 0 12px;
-  box-sizing: border-box;
-}
-
-/* Campos de texto maior (textarea) */
-mat-form-field textarea {
-  min-height: 80px;
-  height: auto;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-/* Ajusta container dos botões para direita */
-.button-container {
-  display: flex;
-  justify-content: flex-end;
-  gap: 15px;                       /* Espaço entre os botões */
-  margin-top: 25px;
-}
-
-/* Estilo geral dos botões */
-button {
-  min-width: 120px;
-  height: 40px;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-}
-
-/* Botão salvar - verde */
-button.save-btn {
-  background-color: #4caf50;
-  color: white;
-}
-
-/* Botão cancelar - vermelho */
-button.cancel-btn {
-  background-color: #f44336;
-  color: white;
-}
-
-/* Botão limpar - cinza */
-button.clear-btn {
-  background-color: #607d8b;
-  color: white;
-}
+    max-width: 900px; /* Largura máxima para não ficar muito esticado em telas grandes */
+    margin: 40px auto; /* Centraliza verticalmente com espaçamento */
+    padding: 30px; /* Espaçamento interno */
+    border-radius: 12px; /* Bordas arredondadas para um visual mais moderno */
+    margin: 130px auto 40px; /* 90px (header) + 40px */ /*faz com que nao sobrepoe*/
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+  
+  /* Layout do formulário usando flexbox */
+  .fornecedor-form {
+    display: flex;
+    flex-wrap: wrap; /* Permite quebra de linha dos campos */
+    gap: 20px; /* Espaçamento entre os campos */
+  }
+  
+  /* Campos que ocupam 100% da largura */
+  .full-width {
+    flex: 1 1 100%;
+  }
+  
+  /* Campos que ocupam metade da largura (para campos lado a lado) */
+  .half-width {
+    flex: 1 1 45%;
+  }
+  
+  /* Container dos botões */
+  .button-container {
+    display: flex;
+    justify-content: space-between; /* Espaço entre os botões */
+    margin-top: 20px; /* Espaço acima dos botões */
+  }
+  
+  /* Estilo geral dos botões */
+  button {
+    min-width: 120px; /* Largura mínima para todos os botões */
+  }
+  
+  /* Estilo padrão para todos os campos do Material */
+  mat-form-field {
+    background-color: #fff; /* Fundo branco nos campos */
+    border-radius: 6px; /* Arredondamento das bordas dos campos */
+  }
+  
+  /* Estilo do título do formulário */
+  mat-card-title {
+    text-align: center; /* Centraliza o título */
+    font-size: 24px; /* Tamanho da fonte */
+    margin-bottom: 20px; /* Espaço abaixo do título */
+  }
+  

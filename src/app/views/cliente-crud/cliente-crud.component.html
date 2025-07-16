@@ -1,5 +1,67 @@
-<button mat-raised-button (click)="navigateToClienteCreate()" color="primary">
-    Novo Cliente
-</button>
+<mat-card class="cliente-crud-wrapper">
 
-<app-cliente-read></app-cliente-read>
+  <!-- Título da página -->
+  <h2 class="page-title">Gerenciar Clientes</h2>
+
+  <!-- Barra de busca fixa no topo -->
+  <div class="search-bar">
+    <mat-form-field appearance="fill" class="search-input">
+      <mat-label>Buscar clientes</mat-label>
+      <input matInput (input)="applyFilter($event)" placeholder="Digite nome, CPF ou email">
+      <button mat-icon-button matSuffix aria-label="Limpar busca" *ngIf="filterValue" (click)="clearFilter()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <!-- Grid responsivo de cards -->
+  <div class="cliente-grid">
+
+    <mat-card *ngFor="let cliente of filteredClientes" class="cliente-card" >
+
+      <div class="cliente-header">
+        <h3 class="cliente-nome">{{ cliente.nome }}</h3>
+        <mat-chip color="{{ cliente.status ? 'primary' : 'warn' }}" selected>
+          {{ cliente.status ? 'Ativo' : 'Inativo' }}
+        </mat-chip>
+      </div>
+
+      <div class="cliente-info">
+        <p><strong>CPF:</strong> {{ cliente.cpf }}</p>
+        <p><strong>Email:</strong> {{ cliente.email }}</p>
+        <p><strong>Telefone:</strong> {{ cliente.telefone || '-' }}</p>
+      </div>
+
+      <div class="cliente-actions">
+        <button mat-stroked-button color="primary" (click)="onEditar(cliente)">
+          <mat-icon>edit</mat-icon> Editar
+        </button>
+        <button mat-stroked-button color="warn" (click)="onExcluir(cliente)">
+          <mat-icon>delete</mat-icon> Excluir
+        </button>
+      </div>
+
+    </mat-card>
+
+    <!-- Mensagem quando não há clientes -->
+    <p *ngIf="filteredClientes.length === 0" class="empty-message">
+      Nenhum cliente encontrado.
+    </p>
+
+  </div>
+
+  <!-- Paginação simples -->
+  <div class="pagination">
+    <button mat-icon-button (click)="previousPage()" [disabled]="pageIndex === 0" aria-label="Página anterior">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+
+    <span>Página {{ pageIndex + 1 }} de {{ totalPages }}</span>
+
+    <button mat-icon-button (click)="nextPage()" [disabled]="pageIndex >= totalPages - 1" aria-label="Próxima página">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+
+</mat-card>

@@ -1,1 +1,77 @@
-<p>fornecedor-update works!</p>
+<!-- Card principal do relatório -->
+<mat-card class="estoque-card">
+
+  <!-- Título -->
+  <mat-card-title>Relatório de Estoque</mat-card-title>
+
+  <!-- Filtros (exemplo) -->
+  <div class="filtros-container">
+    <mat-form-field appearance="fill" class="filtro-item">
+      <mat-label>Categoria</mat-label>
+      <mat-select>
+        <mat-option value="">Todas</mat-option>
+        <mat-option value="hardware">Hardware</mat-option>
+        <mat-option value="perifericos">Periféricos</mat-option>
+        <mat-option value="jogos">Jogos</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="filtro-item">
+      <mat-label>Status</mat-label>
+      <mat-select>
+        <mat-option value="">Todos</mat-option>
+        <mat-option value="disponivel">Disponível</mat-option>
+        <mat-option value="esgotado">Esgotado</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button class="filtrar-btn">Filtrar</button>
+  </div>
+
+  <!-- Tabela de estoque -->
+  <div class="tabela-container">
+    <table class="tabela-estoque">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Categoria</th>
+          <th>Quantidade</th>
+          <th>Preço Unitário</th>
+          <th>Estoque Mínimo</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mouse Gamer XYZ</td>
+          <td>Periféricos</td>
+          <td>25</td>
+          <td>R$ 199,90</td>
+          <td>5</td>
+          <td>Disponível</td>
+        </tr>
+        <tr>
+          <td>Placa de Vídeo ABC</td>
+          <td>Hardware</td>
+          <td>2</td>
+          <td>R$ 2.599,00</td>
+          <td>3</td>
+          <td>Esgotado</td>
+        </tr>
+        <!-- Mais linhas aqui... -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Totalizadores (exemplo) -->
+  <div class="totalizadores">
+    <div class="total-card">
+      <span class="total-label">Total de Produtos:</span>
+      <span class="total-valor">27</span>
+    </div>
+    <div class="total-card">
+      <span class="total-label">Valor Total do Estoque:</span>
+      <span class="total-valor">R$ 15.000,00</span>
+    </div>
+  </div>
+</mat-card>

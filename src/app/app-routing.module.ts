@@ -22,6 +22,7 @@ import { FornecedorCrudComponent } from './views/fornecedor-crud/fornecedor-crud
 import { FornecedorCreateComponent } from './components/fornecedor/fornecedor-create/fornecedor-create.component';
 import { FornecedorUpdateComponent } from './components/fornecedor/fornecedor-update/fornecedor-update.component';
 import { FornecedorDeleteComponent } from './components/fornecedor/fornecedor-delete/fornecedor-delete.component';
+import { FornecedorReadComponent } from './components/fornecedor/fornecedor-read/fornecedor-read.component';
 
 // Clientes
 import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.component';
@@ -66,6 +67,7 @@ const routes: Routes = [
   { path: 'fornecedores/create', component: FornecedorCreateComponent },
   { path: 'fornecedores/update/:fornId', component: FornecedorUpdateComponent },
   { path: 'fornecedores/delete/:fornId', component: FornecedorDeleteComponent },
+  {path: 'fornecedores/read/:fornId', component: FornecedorReadComponent},
 
   // Clientes
   { path: 'clientes', component: ClienteCrudComponent },

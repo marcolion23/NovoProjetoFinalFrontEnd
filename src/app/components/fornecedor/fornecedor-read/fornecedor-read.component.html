@@ -1,0 +1,60 @@
+<!-- Card principal para organizar visualmente -->
+<div class="relatorio-card">
+  <!-- Título -->
+  <h2 class="relatorio-title">Relatório de Fornecedores</h2>
+
+  <!-- Área de filtros/pesquisa -->
+  <div class="filtros-container">
+    <input type="text" placeholder="Buscar fornecedor..." class="filtro-input">
+    <div class="buttons-filtros">
+      <button class="btn-azul">Atualizar</button>
+      <button class="btn-verde">Exportar PDF</button>
+      <button class="btn-cinza">Exportar Excel</button>
+    </div>
+  </div>
+
+  <!-- Tabela responsiva -->
+  <div class="tabela-container">
+    <table class="tabela-fornecedor">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>CNPJ</th>
+          <th>Email</th>
+          <th>Telefone</th>
+          <th>Cidade</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Exemplo de linha (repita com *ngFor depois) -->
+        <tr>
+          <td>Fornecedor X</td>
+          <td>00.000.000/0001-00</td>
+          <td>fornecedor@email.com</td>
+          <td>(11) 98765-4321</td>
+          <td>São Paulo</td>
+          <td><span class="status ativo">Ativo</span></td>
+          <td>
+            <button class="btn-verde">Ver</button>
+            <button class="btn-cinza">Editar</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Fornecedor Y</td>
+          <td>11.111.111/0001-11</td>
+          <td>contato@exemplo.com</td>
+          <td>(21) 91234-5678</td>
+          <td>Rio de Janeiro</td>
+          <td><span class="status inativo">Inativo</span></td>
+          <td>
+            <button class="btn-verde">Ver</button>
+            <button class="btn-cinza">Editar</button>
+          </td>
+        </tr>
+        <!-- ... -->
+      </tbody>
+    </table>
+  </div>
+</div>
