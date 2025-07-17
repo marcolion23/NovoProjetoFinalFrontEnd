@@ -74,6 +74,7 @@ const routes: Routes = [
   { path: 'clientes/create', component: ClienteCreateComponent },
   { path: 'clientes/update/:cliId', component: ClienteUpdateComponent },
   { path: 'clientes/delete/:cliId', component: ClienteDeleteComponent },
+  { path: 'clientes/read/:cliId', component: ClienteCrudComponent },  
 
   // Pagamentos
   { path: 'fpagamentos', component: FormaPagamentoCrudComponent },

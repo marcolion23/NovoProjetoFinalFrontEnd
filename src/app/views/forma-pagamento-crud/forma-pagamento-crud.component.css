@@ -1,3 +1,182 @@
-button{
-    margin-bottom: 30px;
+/* ======================================== */
+/* === BOTÕES SUPERIORES (CADASTRO / HISTÓRICO) === */
+/* ======================================== */
+.pagamento-btns-container {
+  display: flex;                  /* Layout em linha para os botões */
+  justify-content: center;        /* Centraliza horizontalmente */
+  flex-wrap: wrap;                /* Quebra para próxima linha em telas pequenas */
+  gap: 32px;                      /* Espaço entre botões */
+  margin: 130px auto 40px;        /* Espaço acima e abaixo */
+  align-items: center;            /* Alinha verticalmente ao centro */
+}
+
+.expanded-btn {
+  width: 40%;                     /* Largura relativa */
+  min-width: 280px;               /* Largura mínima */
+  font-size: 2rem;                /* Texto grande */
+  font-weight: bold;             /* Negrito */
+  padding: 32px 0;               /* Espaço interno */
+  border: none;                  /* Sem borda */
+  border-radius: 28px;           /* Bordas arredondadas */
+  cursor: pointer;               /* Mãozinha ao passar o mouse */
+  color: #ffffff;                /* Texto branco */
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 8px 24px rgba(0, 17, 255, 0.26); /* Sombra azul leve */
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+}
+
+.expanded-btn:hover {
+  transform: translateY(-5px);   /* Efeito de elevação */
+}
+
+/* Cores específicas dos botões */
+.btn-movimentar-estoque {
+  background-color: #14532D;     /* Verde escuro */
+}
+.btn-relatorios-estoque {
+  background-color: #991B1B;     /* Vermelho escuro */
+}
+
+/* ======================================== */
+/* ========== PAINÉIS DE INFORMAÇÃO ======= */
+/* ======================================== */
+.dashboard-panels {
+  width: 100vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Layout responsivo */
+  gap: 30px;
+  padding: 30px 50px;
+  box-sizing: border-box;
+}
+
+.dashboard-panels > * {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.dashboard-panels > *:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+.panel-info {
+  background-color: #0D3B66;
+  border-radius: 24px;
+  padding: 40px 30px;
+  text-align: center;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.panel-info .material-icons {
+  font-size: 56px;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.panel-info h2 {
+  font-size: 35px;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.panel-info p {
+  font-size: 25px;
+  color: #ffffff;
+}
+
+/* ======================================== */
+/* ============ TABELA DE PAGAMENTOS ====== */
+/* ======================================== */
+.pagamento-tabela-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.pagamento-titulo {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.tabela-scroll {
+  overflow-x: auto; /* Permite rolagem horizontal em telas pequenas */
+}
+
+.pagamento-tabela {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #0D3B66;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.pagamento-tabela thead {
+  background-color: #000000;
+}
+
+.pagamento-tabela th {
+  padding: 20px 12px;
+  text-align: left;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 480;
+  border-bottom: 2px solid #991B1B;
+}
+
+.pagamento-tabela td {
+  padding: 14px 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.pagamento-tabela tbody tr:nth-child(odd) {
+  background-color: rgba(255,255,255,0.04); /* Zebra effect */
+}
+
+.pagamento-tabela tbody tr:hover {
+  background-color: rgba(255,255,255,0.08);
+  transition: background-color 0.2s;
+}
+
+/* ======================================== */
+/* ======== BOTÕES DE AÇÃO (TABELA) ======= */
+/* ======================================== */
+.btn-acao {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  margin-right: 6px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #ffffff;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-acao .material-icons {
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+.btn-acao.editar {
+  background-color: #2563eb; /* Azul */
+}
+
+.btn-acao.remover {
+  background-color: #ff0000; /* Vermelho */
+}
+
+.btn-acao:hover {
+  transform: scale(1.05); /* Efeito de zoom */
 }

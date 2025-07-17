@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
+// Interface que representa um Cliente
 interface Cliente {
   id: number;
   nome: string;
   cpf: string;
   email: string;
   telefone?: string;
-  status: boolean;
+  status: boolean; // true = ativo, false = inativo
 }
 
 @Component({
@@ -17,118 +17,84 @@ interface Cliente {
 })
 export class ClienteCrudComponent implements OnInit {
 
-  // Lista total de clientes simulada
-  clientes: Cliente[] = [
-    { id: 1, nome: 'João da Silva', cpf: '123.456.789-00', email: 'joao@email.com', telefone: '(11) 99999-9999', status: true },
-    { id: 2, nome: 'Maria Oliveira', cpf: '987.654.321-00', email: 'maria@email.com', telefone: '(21) 98888-8888', status: false },
-    { id: 3, nome: 'Carlos Pereira', cpf: '111.222.333-44', email: 'carlos@email.com', status: true },
-    { id: 4, nome: 'Ana Souza', cpf: '555.666.777-88', email: 'ana@email.com', telefone: '(31) 97777-7777', status: true },
-    { id: 5, nome: 'Pedro Gomes', cpf: '999.888.777-66', email: 'pedro@email.com', status: false },
-    { id: 6, nome: 'Fernanda Lima', cpf: '444.555.666-77', email: 'fernanda@email.com', telefone: '(41) 96666-6666', status: true },
-    // mais clientes podem ser adicionados
-  ];
+  // Lista completa de clientes (pode vir do backend futuramente)
+  clientes: Cliente[] = [];
 
-  // Controle da busca
-  filterValue: string = '';
+  // Lista filtrada para exibição na tabela (de acordo com a busca)
+  clientesFiltrados: Cliente[] = [];
 
-  // Clientes filtrados e paginados que aparecem na tela
-  filteredClientes: Cliente[] = [];
+  // Filtro de busca (string para filtrar clientes pelo nome, cpf, email etc)
+  filtroBusca: string = '';
 
-  // Controle de paginação simples
-  pageSize = 4;   // quantos cards por página
-  pageIndex = 0;  // página atual (0 = primeira)
-  totalPages = 0;
+  // Propriedades para os painéis de resumo
+  totalClientes: number = 0;
+  clientesInativos: number = 0;
+  ultimaAtualizacaoClientes: string = '';
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.applyFilter(); // inicializa lista filtrada e paginada
+    // Inicializa os dados (exemplo estático, substitua com dados do backend)
+    this.clientes = [
+      { id: 1, nome: 'Marco Antonio', cpf: '123.456.789-00', email: 'marco@email.com', telefone: '11999999999', status: true },
+      { id: 2, nome: 'Ana Silva', cpf: '987.654.321-00', email: 'ana@email.com', telefone: '11988888888', status: false }
+      // Adicione mais clientes reais aqui
+    ];
+
+    // Inicializa o filtro e lista filtrada
+    this.clientesFiltrados = [...this.clientes];
+
+    // Calcula os totais para os painéis
+    this.atualizarTotais();
+
+    // Data da última atualização (exemplo)
+    this.ultimaAtualizacaoClientes = new Date().toLocaleDateString();
   }
 
-  /**
-   * Filtra clientes pelo termo da busca (nome, cpf, email)
-   * e aplica paginação.
-   */
-  applyFilter(event?: Event): void {
-    if (event) {
-      this.filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-      this.pageIndex = 0; // resetar paginação quando filtrar
-    }
+  // Atualiza os totais e quantidade de clientes inativos
+  atualizarTotais() {
+    this.totalClientes = this.clientes.length;
+    this.clientesInativos = this.clientes.filter(c => !c.status).length;
+  }
 
-    const filtro = this.filterValue;
+  // Método chamado ao digitar no filtro de busca para filtrar a lista
+  filtrarClientes() {
+    const filtro = this.filtroBusca.toLowerCase().trim();
 
-    // Filtra clientes pelo nome, cpf ou email
-    const clientesFiltrados = this.clientes.filter(c => {
-      return (
-        c.nome.toLowerCase().includes(filtro) ||
-        c.cpf.toLowerCase().includes(filtro) ||
-        c.email.toLowerCase().includes(filtro)
+    if (filtro === '') {
+      this.clientesFiltrados = [...this.clientes];
+    } else {
+      this.clientesFiltrados = this.clientes.filter(cliente =>
+        cliente.nome.toLowerCase().includes(filtro) ||
+        cliente.cpf.includes(filtro) ||
+        cliente.email.toLowerCase().includes(filtro) ||
+        (cliente.telefone && cliente.telefone.includes(filtro))
       );
-    });
-
-    // Atualiza o total de páginas conforme filtro
-    this.totalPages = Math.ceil(clientesFiltrados.length / this.pageSize);
-
-    // Aplica paginação no resultado filtrado
-    const start = this.pageIndex * this.pageSize;
-    const end = start + this.pageSize;
-    this.filteredClientes = clientesFiltrados.slice(start, end);
-  }
-
-  /**
-   * Limpa o filtro e atualiza a lista.
-   */
-  clearFilter(): void {
-    this.filterValue = '';
-    this.applyFilter();
-  }
-
-  /**
-   * Navega para o formulário de edição do cliente
-   * na rota '/clientes/edit/:id'
-   */
-  onEditar(cliente: Cliente): void {
-    this.router.navigate(['/clientes/edit', cliente.id]);
-  }
-
-  /**
-   * Remove cliente da lista com confirmação.
-   * Atualiza a lista filtrada e paginada.
-   */
-  onExcluir(cliente: Cliente): void {
-    if (confirm(`Deseja realmente excluir o cliente "${cliente.nome}"?`)) {
-      // Remove cliente da lista original
-      this.clientes = this.clientes.filter(c => c.id !== cliente.id);
-
-      // Reaplica filtro e paginação para atualizar a tela
-      this.applyFilter();
-      
-      // Ajusta pageIndex caso fique fora do totalPages
-      if(this.pageIndex >= this.totalPages && this.pageIndex > 0) {
-        this.pageIndex--;
-        this.applyFilter();
-      }
     }
   }
 
-  /**
-   * Vai para página anterior, se existir.
-   */
-  previousPage(): void {
-    if (this.pageIndex > 0) {
-      this.pageIndex--;
-      this.applyFilter();
-    }
+  // Abre o formulário para criar um novo cliente (implemente o modal ou navegação)
+  abrirFormularioNovoCliente() {
+    alert('Abrir formulário para adicionar novo cliente - implementar');
   }
 
-  /**
-   * Vai para próxima página, se existir.
-   */
-  nextPage(): void {
-    if (this.pageIndex < this.totalPages -1) {
-      this.pageIndex++;
-      this.applyFilter();
-    }
+  // Exporta os clientes (exemplo: exportar para CSV ou Excel)
+  exportarClientes() {
+    alert('Exportar lista de clientes - implementar');
   }
 
+  // Edita um cliente pelo id (abre formulário para edição)
+  editarCliente(id: number) {
+    alert(`Editar cliente com id ${id} - implementar`);
+  }
+
+  // Remove um cliente pelo id (confirmação e remoção)
+  removerCliente(id: number) {
+    const confirmacao = confirm('Tem certeza que deseja remover este cliente?');
+    if (confirmacao) {
+      this.clientes = this.clientes.filter(c => c.id !== id);
+      this.filtrarClientes(); // Atualiza a lista filtrada
+      this.atualizarTotais();
+    }
+  }
 }

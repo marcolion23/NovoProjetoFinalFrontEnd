@@ -1,157 +1,241 @@
-/* Container geral */
-.cliente-crud-wrapper {
-  max-width: 960px;
-  margin: 80px auto 40px;
-  padding: 20px 30px;
-  background: #fafafa;
-  border-radius: 16px;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
-  display: flex;
-  flex-direction: column;
+/* ============ CONTAINER DOS BOTÕES ============ */
+.cliente-btns-container {
+  display: flex;                    /* Flexbox para alinhar botões na horizontal */
+  justify-content: center;          /* Centraliza horizontalmente */
+  flex-wrap: wrap;                  /* Permite quebra de linha em telas pequenas */
+  gap: 32px;                       /* Espaço entre os botões */
+  margin: 130px auto 40px;          /* Margem topo, automático centralizado e abaixo */
+  align-items: center;              /* Centraliza verticalmente */
 }
 
-/* Título da página */
-.page-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: #1976d2;
-  margin-bottom: 24px;
+/* ============ BOTÕES GRANDES ============ */
+.expanded-btn {
+  width: 40%;                      /* Botões ocupam 40% da largura do container */
+  min-width: 280px;                /* Largura mínima para responsividade */
+  font-size: 2rem;                 /* Texto grande */
+  font-weight: bold;               /* Negrito */
+  padding: 32px 0;                 /* Altura dos botões */
+  border: none;                   /* Remove bordas padrão */
+  border-radius: 28px;            /* Bordas arredondadas */
+  cursor: pointer;                /* Cursor pointer */
+  color: #ffffff;                 /* Texto branco */
+  font-family: 'Segoe UI', sans-serif;  /* Fonte moderna */
+  box-shadow: 0 8px 24px rgba(0, 17, 255, 0.26); /* Sombra azul suave */
+  transition: all 0.3s ease-in-out;  /* Transição suave */
+  text-align: center;             /* Centraliza texto */
+}
+
+/* Hover: sobe botão */
+.expanded-btn:hover {
+  transform: translateY(-5px);
+}
+
+/* Botão Adicionar Cliente */
+.btn-adicionar-cliente {
+  background-color: #0D3B66; /* Azul vibrante */
+}
+
+/* Botão Exportar Clientes */
+.btn-exportar-cliente {
+  background-color: #14532D; /* Verde escuro */
+}
+
+/* Botão Relatórios Clientes */
+.btn-relatorios-cliente {
+  background-color: #991B1B; /* Vermelho escuro */
+}
+
+/* ============ CONTAINER DOS PAINÉIS ============ */
+.dashboard-panels {
+  width: 100vw;                                     /* Largura total da tela */
+  max-width: 100%;                                  /* Limite de largura */
+  display: grid;                                    /* Grid responsivo */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Colunas responsivas */
+  gap: 30px;                                        /* Espaço entre painéis */
+  padding: 30px 50px;                               /* Espaço interno */
+  box-sizing: border-box;                           /* Inclui padding na largura */
+}
+
+/* Animação painel */
+.dashboard-panels > * {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover sobe painel */
+.dashboard-panels > *:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Painel padrão azul escuro */
+.panel-info {
+  background-color: #0D3B66;
+  border-radius: 24px;
+  padding: 40px 30px;
   text-align: center;
-  letter-spacing: 0.04em;
-}
-
-/* Barra de busca */
-.search-bar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: #fafafa;
-  padding-bottom: 16px;
-  margin-bottom: 24px;
-  border-bottom: 1px solid #ddd;
-}
-
-/* Campo de busca com sombra leve e borda arredondada */
-.search-input {
-  width: 100%;
-  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.15);
-  border-radius: 40px;
-}
-
-.search-input.mat-form-field-appearance-fill .mat-form-field-flex {
-  border-radius: 40px;
-}
-
-/* Grid responsivo para cards */
-.cliente-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-  justify-items: center;
-}
-
-/* Card de cada cliente */
-.cliente-card {
-  width: 100%;
-  max-width: 320px;
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-  padding: 20px 24px;
+  height: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: #ffffff;
+}
+
+/* Painel clientes inativos com vermelho */
+.inativos {
+  background-color: #991B1B;
+}
+
+/* Título painel */
+.panel-info h2 {
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
+/* Texto painel */
+.panel-info p {
+  font-size: 25px;
+}
+
+/* Ícones material */
+.material-icons {
+  font-size: 56px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+/* ============ CONTAINER DA TABELA DE CLIENTES ============ */
+.cliente-tabela-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Título da tabela */
+.cliente-titulo {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Container scroll para responsividade */
+.tabela-scroll {
+  overflow-x: auto;
+}
+
+/* Estilo da tabela */
+.cliente-tabela {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #0D3B66;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+/* Cabeçalho */
+.cliente-tabela thead {
+  background-color: #000000;
+}
+
+/* Cabeças das colunas */
+.cliente-tabela th {
+  padding: 20px 12px;
+  text-align: left;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 480;
+  border-bottom: 2px solid #991B1B;
+}
+
+/* Células */
+.cliente-tabela td {
+  padding: 14px 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Zebra effect nas linhas ímpares */
+.cliente-tabela tbody tr:nth-child(odd) {
+  background-color: rgba(255,255,255,0.04);
+}
+
+/* Hover nas linhas */
+.cliente-tabela tbody tr:hover {
+  background-color: rgba(255,255,255,0.08);
+  transition: background-color 0.2s;
+}
+
+/* ============ BOTÕES DE AÇÃO (Editar, Remover) ============ */
+.btn-acao {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  margin-right: 6px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #ffffff;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Ícones dos botões */
+.btn-acao .material-icons {
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+/* Botão editar azul */
+.btn-acao.editar {
+  background-color: #2563eb;
+}
+
+/* Botão remover vermelho */
+.btn-acao.remover {
+  background-color: #ff0000;
+}
+
+/* Hover nos botões */
+.btn-acao:hover {
+  transform: scale(1.05);
+}
+
+
+.cliente-busca-container input[type="search"] {
+  width: 300px;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1.5px solid #2563eb;
+  font-size: 1rem;
+  outline: none;
   transition: box-shadow 0.3s ease;
 }
 
-.cliente-card:hover {
-  box-shadow: 0 12px 32px rgba(25, 118, 210, 0.4);
+.cliente-busca-container input[type="search"]:focus {
+  box-shadow: 0 0 10px #2563eb;
+  border-color: #2563eb;
 }
 
-/* Cabeçalho do card: nome e status */
-.cliente-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-}
+/* ============ RESPONSIVIDADE ============ */
+@media (max-width: 768px) {
+  .expanded-btn {
+    width: 90%;
+    min-width: unset;
+    font-size: 1.6rem;
+  }
 
-.cliente-nome {
-  font-size: 20px;
-  font-weight: 700;
-  color: #0d47a1;
-  margin: 0;
-}
+  .cliente-busca-container {
+    text-align: center;
+  }
 
-/* Informações do cliente */
-.cliente-info p {
-  margin: 6px 0;
-  font-size: 14px;
-  color: #37474f;
-  line-height: 1.3;
-}
-
-/* Botões ações alinhados */
-.cliente-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 18px;
-}
-
-/* Botões estilo outlined com ícones */
-.cliente-actions button {
-  flex: 1;
-  margin: 0 4px;
-  font-weight: 600;
-  text-transform: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cliente-actions button mat-icon {
-  margin-right: 6px;
-}
-
-/* Mensagem quando não há clientes */
-.empty-message {
-  grid-column: 1 / -1;
-  text-align: center;
-  font-style: italic;
-  color: #999;
-  font-size: 16px;
-  margin-top: 40px;
-}
-
-/* Paginação simples centralizada */
-.pagination {
-  margin-top: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  font-weight: 600;
-  color: #1976d2;
-}
-
-/* Botões da paginação */
-.pagination button {
-  border-radius: 50%;
-  border: 1.5px solid #1976d2;
-  color: #1976d2;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  transition: background-color 0.2s ease;
-}
-
-.pagination button:hover:not(:disabled) {
-  background-color: #1976d2;
-  color: white;
-}
-
-.pagination button:disabled {
-  border-color: #aaa;
-  color: #aaa;
-  cursor: default;
+  .cliente-busca-container input[type="search"] {
+    width: 90%;
+    max-width: 400px;
+  }
 }

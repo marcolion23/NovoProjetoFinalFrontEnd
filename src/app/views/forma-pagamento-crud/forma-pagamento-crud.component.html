@@ -1,5 +1,70 @@
-<button mat-raised-button (click)="navigateToFormaPagamentoCreate()" color="primary">
-    Nova Forma de Pagamento
+<!-- ============ BOTÕES SUPERIORES (CADASTRO / HISTÓRICO) ============ -->
+<div class="pagamento-btns-container">
+  <!-- Botão para cadastrar nova forma de pagamento -->
+  <button class="expanded-btn btn-movimentar-estoque" [routerLink]="'/pagamento/create'">
+    Cadastrar Pagamento
+  </button>
+
+  <!-- Botão para visualizar relatórios ou histórico -->
+  <button class="expanded-btn btn-relatorios-estoque" [routerLink]="'/pagamento/historico'">
+    Histórico de Pagamentos
+  </button>
+</div>
+
+<!-- ============ PAINÉIS DE INFORMAÇÃO ============ -->
+<div class="dashboard-panels">
+  <!-- Painel com total de formas de pagamento cadastradas -->
+  <div class="panel-info">
+    <i class="material-icons">payments</i>
+    <h2>Pagamentos Cadastrados</h2>
+    <p>{{ totalPagamentos }}</p>
+  </div>
+
+  <!-- Painel com data/horário da última atualização -->
+  <div class="panel-info">
+    <i class="material-icons">update</i>
+    <h2>Última Atualização</h2>
+    <p>{{ ultimaAtualizacao }}</p>
+  </div>
+</div>
+
+<!-- ============ TABELA DE PAGAMENTOS ============ -->
+<div class="pagamento-tabela-container">
+  <h2 class="pagamento-titulo">Formas de Pagamento</h2>
+
+  <!-- Container com rolagem horizontal para responsividade -->
+  <div class="tabela-scroll">
+    <table class="pagamento-tabela">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Tipo</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Percorre lista de pagamentos dinamicamente -->
+        <tr *ngFor="let pagamento of listaPagamentos">
+          <td>{{ pagamento.nome }}</td>
+          <td>{{ pagamento.tipo }}</td>
+          <td>{{ pagamento.status ? 'Ativo' : 'Inativo' }}</td>
+          <td>
+            <!-- Botão para editar pagamento -->
+<button [attr.aria-label]="'Editar pagamento ' + pagamento.nome">
+              <i class="material-icons">edit</i> Editar
+            </button>
+
+           <button 
+  class="btn-acao remover" 
+  (click)="removerPagamento(pagamento.id)" 
+  [attr.aria-label]="'Remover pagamento ' + pagamento.nome">
+  <i class="material-icons">delete</i> Remover
 </button>
 
-<app-forma-pagamento-read></app-forma-pagamento-read>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
