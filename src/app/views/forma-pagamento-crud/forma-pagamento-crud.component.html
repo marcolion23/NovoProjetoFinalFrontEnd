@@ -1,26 +1,27 @@
-<!-- ============ BOTÕES SUPERIORES (CADASTRO / HISTÓRICO) ============ -->
-<div class="pagamento-btns-container">
-  <!-- Botão para cadastrar nova forma de pagamento -->
-  <button class="expanded-btn btn-movimentar-estoque" [routerLink]="'/pagamento/create'">
-    Cadastrar Pagamento
+<!-- ============ BOTÕES DE PAGAMENTOS ============ -->
+<div class="pagamentos-btns-container">
+  <button class="expanded-btn btn-add-pagamento" (click)="adicionarPagamento()">
+    <i class="material-icons">add</i> Adicionar Pagamento
   </button>
-
-  <!-- Botão para visualizar relatórios ou histórico -->
-  <button class="expanded-btn btn-relatorios-estoque" [routerLink]="'/pagamento/historico'">
-    Histórico de Pagamentos
+  <button class="expanded-btn btn-relatorios-pagamento" [routerLink]="'/pagamentos/relatorios'">
+    <i class="material-icons">bar_chart</i> Relatórios
   </button>
 </div>
 
-<!-- ============ PAINÉIS DE INFORMAÇÃO ============ -->
+<!-- ============ DASHBOARD DE RESUMO ============ -->
 <div class="dashboard-panels">
-  <!-- Painel com total de formas de pagamento cadastradas -->
   <div class="panel-info">
     <i class="material-icons">payments</i>
-    <h2>Pagamentos Cadastrados</h2>
+    <h2>Total Pagamentos</h2>
     <p>{{ totalPagamentos }}</p>
   </div>
 
-  <!-- Painel com data/horário da última atualização -->
+  <div class="panel-info baixo-estoque">
+    <i class="material-icons">warning</i>
+    <h2>Pagamentos Atrasados</h2>
+    <p>{{ pagamentosAtrasados }}</p>
+  </div>
+
   <div class="panel-info">
     <i class="material-icons">update</i>
     <h2>Última Atualização</h2>
@@ -29,39 +30,38 @@
 </div>
 
 <!-- ============ TABELA DE PAGAMENTOS ============ -->
-<div class="pagamento-tabela-container">
-  <h2 class="pagamento-titulo">Formas de Pagamento</h2>
-
-  <!-- Container com rolagem horizontal para responsividade -->
+<div class="pagamentos-tabela-container">
+  <h2 class="pagamentos-titulo">Gerenciamento de Pagamentos</h2>
   <div class="tabela-scroll">
-    <table class="pagamento-tabela">
+    <table class="pagamentos-tabela">
       <thead>
         <tr>
-          <th>Nome</th>
-          <th>Tipo</th>
+          <th>Cliente</th>
+          <th>Valor</th>
+          <th>Data</th>
           <th>Status</th>
+          <th>Forma de Pagamento</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Percorre lista de pagamentos dinamicamente -->
         <tr *ngFor="let pagamento of listaPagamentos">
           <td>{{ pagamento.nome }}</td>
-          <td>{{ pagamento.tipo }}</td>
-          <td>{{ pagamento.status ? 'Ativo' : 'Inativo' }}</td>
+          <td>R$ {{ pagamento.valor | number:'1.2-2' }}</td>
+          <td>{{ pagamento.dataCriacao }}</td>
           <td>
-            <!-- Botão para editar pagamento -->
-<button [attr.aria-label]="'Editar pagamento ' + pagamento.nome">
+            <span class="status-badge" [ngClass]="pagamento.status ? 'status-pago' : 'status-pendente'">
+              {{ pagamento.status ? 'Pago' : 'Pendente' }}
+            </span>
+          </td>
+          <td>{{ pagamento.tipo }}</td>
+          <td>
+            <button class="btn-acao editar" (click)="editarPagamento(pagamento.id)">
               <i class="material-icons">edit</i> Editar
             </button>
-
-           <button 
-  class="btn-acao remover" 
-  (click)="removerPagamento(pagamento.id)" 
-  [attr.aria-label]="'Remover pagamento ' + pagamento.nome">
-  <i class="material-icons">delete</i> Remover
-</button>
-
+            <button class="btn-acao remover" (click)="removerPagamento(pagamento.id)">
+              <i class="material-icons">delete</i> Remover
+            </button>
           </td>
         </tr>
       </tbody>

@@ -1,11 +1,113 @@
-table{
+/* Container principal */
+.table-container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background-color: #0D3B66; /* azul escuro */
+  padding: 20px 15px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+  overflow-x: auto;
+  font-family: 'Roboto', sans-serif;
+  padding-top: 90px; /* espaço para o cabeçalho fixo */
+}
+
+/* Tabela Angular Material customizada */
+.gamer-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  color: #fff;
+}
+
+/* Cabeçalho da tabela */
+.gamer-table th.mat-header-cell {
+  background-color: #044a99;
+  color: #f1f1f1;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 12px 15px;
+  text-align: left;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  user-select: none;
+}
+
+/* Células da tabela */
+.gamer-table td.mat-cell {
+  background-color: #145da0;
+  padding: 12px 15px;
+  font-size: 0.95rem;
+  vertical-align: middle;
+  transition: background-color 0.3s ease;
+}
+
+/* Espaço entre linhas */
+.gamer-table tr.mat-row {
+  border-radius: 10px;
+}
+
+/* Hover nas linhas */
+.gamer-table tr.mat-row:hover td.mat-cell {
+  background-color: #0b2e60;
+  cursor: pointer;
+}
+
+/* Estilo para status ativo e inativo */
+.ativo {
+  color: #39d353; /* verde vibrante */
+  font-weight: 600;
+}
+
+.inativo {
+  color: #e63946; /* vermelho suave */
+  font-weight: 600;
+}
+
+/* Botões de ação */
+.action-btn {
+  color: #f1f1f1;
+  transition: color 0.3s ease;
+  margin-right: 8px;
+}
+
+.action-btn.edit:hover {
+  color: #39d353; /* verde ao passar mouse */
+}
+
+.action-btn.delete:hover {
+  color: #e63946; /* vermelho ao passar mouse */
+}
+
+/* Ícones */
+mat-icon {
+  font-size: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 800px) {
+  .table-container {
     width: 100%;
+    margin: 20px 5px;
+    padding: 15px 10px;
+  }
+  .gamer-table th.mat-header-cell,
+  .gamer-table td.mat-cell {
+    padding: 10px 8px;
+    font-size: 0.85rem;
+  }
 }
 
-.edit > i{
-    color: #d9cd26;
-}
-
-.delete > i{
-    color: #e35e6b;
+/* Para telas muito pequenas, exibir tabela como bloco */
+@media (max-width: 450px) {
+  .gamer-table {
+    display: block;
+    overflow-x: auto;
+  }
+  .gamer-table tr.mat-header-row,
+  .gamer-table tr.mat-row {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
 }

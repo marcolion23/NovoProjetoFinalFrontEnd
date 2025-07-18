@@ -29,6 +29,7 @@ import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.componen
 import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
+import { ClienteReadComponent } from './components/cliente/cliente-read/cliente-read.component';
 
 // Pagamentos
 import { FormaPagamentoCrudComponent } from './views/forma-pagamento-crud/forma-pagamento-crud.component';
@@ -74,7 +75,7 @@ const routes: Routes = [
   { path: 'clientes/create', component: ClienteCreateComponent },
   { path: 'clientes/update/:cliId', component: ClienteUpdateComponent },
   { path: 'clientes/delete/:cliId', component: ClienteDeleteComponent },
-  { path: 'clientes/read/:cliId', component: ClienteCrudComponent },  
+  { path: 'clientes/read/:cliId', component: ClienteReadComponent },  
 
   // Pagamentos
   { path: 'fpagamentos', component: FormaPagamentoCrudComponent },
