@@ -59,38 +59,46 @@ export class ProductCreateComponent implements OnInit {
     this.router.navigate(['/products']);
   }
 
-  // Função genérica para formatar preço no padrão BR (ex: 1.234,56)
-  onPrecoInput(event: any, campo: 'proPrecoCusto' | 'proPrecoVenda'): void {
-    let valor = event.target.value;
+  // Método para formatar número no padrão brasileiro com R$
+  formatarReal(valor: number): string {
+    if (valor === null || valor === undefined || valor === 0) return '';
+    // Formata com separador de milhar (.) e decimal (,), ex: R$ 25.000,00
+    return 'R$ ' + valor.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
+  // Função para formatar preço em tempo real no padrão brasileiro com R$
+  onPrecoInput(event: Event, campo: 'proPrecoCusto' | 'proPrecoVenda'): void {
+    const input = event.target as HTMLInputElement;
+    let valor = input.value;
 
     // Remove tudo que não for dígito
     valor = valor.replace(/\D/g, '');
 
     if (valor.length === 0) {
       this.product[campo] = 0;
-      event.target.value = '';
+      input.value = '';
       return;
     }
 
-    // Garante pelo menos 3 dígitos para formatação correta
+    // Garante pelo menos 3 dígitos para formatação correta (ex: 000)
     while (valor.length < 3) {
       valor = '0' + valor;
     }
 
-    // Divide inteiro e decimal
+    // Divide parte inteira e decimal
     const inteiro = valor.slice(0, valor.length - 2);
     const decimal = valor.slice(valor.length - 2);
 
-    // Formata inteiro com ponto como separador de milhar
+    // Formata inteiro com separador de milhares
     const inteiroFormatado = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
-    // Monta valor final formatado com vírgula decimal
-    const valorFormatado = `${inteiroFormatado},${decimal}`;
+    // Monta o valor final formatado com R$
+    const valorFormatado = `R$ ${inteiroFormatado},${decimal}`;
 
-    // Atualiza o campo visível
-    event.target.value = valorFormatado;
+    // Atualiza valor visível no input
+    input.value = valorFormatado;
 
-    // Atualiza o model convertendo para número (ex: "1.234,56" -> 1234.56)
-    this.product[campo] = parseFloat(valorFormatado.replace(/\./g, '').replace(',', '.'));
+    // Atualiza o model convertendo para número float (ex: "25000,00" => 25000.00)
+    this.product[campo] = parseFloat((inteiro + decimal) ? `${inteiro}${decimal}`.replace(/^0+/, '') : '0') / 100;
   }
 }

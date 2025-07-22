@@ -1,6 +1,7 @@
 <!-- ============ BOTÕES DE PAGAMENTOS ============ -->
 <div class="pagamentos-btns-container">
-  <button class="expanded-btn btn-add-pagamento" (click)="adicionarPagamento()">
+  <button class="expanded-btn btn-add-pagamento"
+   [routerLink]="'/fpagamentos/create/'">
     <i class="material-icons">add</i> Adicionar Pagamento
   </button>
   <button class="expanded-btn btn-relatorios-pagamento" [routerLink]="'/pagamentos/relatorios'">

@@ -17,6 +17,7 @@ import { EstoqueDeleteComponent } from './components/estoque/estoque-delete/esto
 import { EstoqueReadComponent } from './components/estoque/estoque-read/estoque-read.component';
 import { EstoqueUpdateComponent } from './components/estoque/estoque-update/estoque-update.component';
 
+
 // Fornecedores (🔧 Verifique se os caminhos estão corretos)
 import { FornecedorCrudComponent } from './views/fornecedor-crud/fornecedor-crud.component';
 import { FornecedorCreateComponent } from './components/fornecedor/fornecedor-create/fornecedor-create.component';

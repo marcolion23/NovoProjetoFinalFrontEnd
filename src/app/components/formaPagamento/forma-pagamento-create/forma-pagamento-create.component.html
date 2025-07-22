@@ -1,0 +1,86 @@
+<mat-card class="client-card">
+
+  <mat-card-title>Cadastro de Pagamento</mat-card-title>
+
+  <form class="client-form">
+
+    <!-- Cliente (select) -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Cliente</mat-label>
+      <mat-select [(ngModel)]="formaPagamento.clienteId" name="clienteId" required>
+        <mat-option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nome }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Tipo de pagamento -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Tipo</mat-label>
+      <mat-select [(ngModel)]="formaPagamento.tipo" name="tipo" required>
+        <mat-option value="Dinheiro">Dinheiro</mat-option>
+        <mat-option value="Cartão de Crédito">Cartão de Crédito</mat-option>
+        <mat-option value="Cartão de Débito">Cartão de Débito</mat-option>
+        <mat-option value="Pix">Pix</mat-option>
+        <mat-option value="Boleto">Boleto</mat-option>
+        <mat-option value="Outro">Outro</mat-option>
+      </mat-select>
+    </mat-form-field>
+<mat-form-field appearance="outline" class="half-width">
+  <mat-label>Valor</mat-label>
+  <input
+    matInput
+    type="text"
+    [value]="valorFormatado"
+    (input)="onValorInput($event)"
+    name="valor"
+    required
+    placeholder="0,00"
+  >
+</mat-form-field>
+
+
+    <!-- Data -->
+  <mat-form-field appearance="outline" class="half-width">
+  <mat-label>Data do Pagamento</mat-label>
+  <input matInput 
+         [matDatepicker]="picker" 
+         [(ngModel)]="formaPagamento.data" 
+         name="data" 
+         [max]="maxDate"
+         required>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+
+    <!-- Número de parcelas -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Parcelas</mat-label>
+      <input matInput type="number" [(ngModel)]="formaPagamento.parcelas" name="parcelas" placeholder="1" min="1" max="36">
+    </mat-form-field>
+
+    <!-- Status -->
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="formaPagamento.status" name="status" required>
+        <mat-option value="Pendente">Pendente</mat-option>
+        <mat-option value="Pago">Pago</mat-option>
+        <mat-option value="Cancelado">Cancelado</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Observações -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Observações</mat-label>
+      <textarea matInput rows="4" [(ngModel)]="formaPagamento.observacao" name="observacao" placeholder="Anotações adicionais"></textarea>
+    </mat-form-field>
+
+    <!-- Botões -->
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="createFormaPagamento()">Salvar</button>
+      <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+      <button mat-raised-button type="button" (click)="limpar()">Limpar</button>
+    </div>
+
+  </form>
+
+</mat-card>

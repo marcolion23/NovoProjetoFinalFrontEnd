@@ -1,1 +1,70 @@
-<p>agendamentos works!</p>
+<!-- ============ BOTÕES DE AGENDAMENTOS ============ -->
+<div class="agendamentos-btns-container">
+  <button class="expanded-btn btn-add-agendamento" [routerLink]="'/agendamentos/create/'">
+    <i class="material-icons">add</i> Adicionar Agendamento
+  </button>
+  <button class="expanded-btn btn-relatorios-agendamento" [routerLink]="'/agendamentos/relatorios'">
+    <i class="material-icons">bar_chart</i> Relatórios
+  </button>
+</div>
+
+<!-- ============ DASHBOARD DE RESUMO ============ -->
+<div class="dashboard-panels">
+  <div class="panel-info">
+    <i class="material-icons">event</i>
+    <h2>Total Agendamentos</h2>
+    <p>{{ totalAgendamentos }}</p>
+  </div>
+
+  <div class="panel-info atrasados">
+    <i class="material-icons">warning</i>
+    <h2>Agendamentos Atrasados</h2>
+    <p>{{ agendamentosAtrasados }}</p>
+  </div>
+
+  <div class="panel-info">
+    <i class="material-icons">update</i>
+    <h2>Última Atualização</h2>
+    <p>{{ ultimaAtualizacao }}</p>
+  </div>
+</div>
+
+<!-- ============ TABELA DE AGENDAMENTOS ============ -->
+<div class="agendamentos-tabela-container">
+  <h2 class="agendamentos-titulo">Gerenciamento de Agendamentos</h2>
+  <div class="tabela-scroll">
+    <table class="agendamentos-tabela">
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Serviço</th>
+          <th>Data</th>
+          <th>Hora</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let agendamento of listaAgendamentos">
+          <td>{{ agendamento.clienteNome }}</td>
+          <td>{{ agendamento.servico }}</td>
+          <td>{{ agendamento.data | date:'dd/MM/yyyy' }}</td>
+          <td>{{ agendamento.hora }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="agendamento.status === 'Concluído' ? 'status-concluido' : 'status-pendente'">
+              {{ agendamento.status }}
+            </span>
+          </td>
+          <td>
+            <button class="btn-acao editar" (click)="editarAgendamento(agendamento.id)">
+              <i class="material-icons">edit</i> Editar
+            </button>
+            <button class="btn-acao remover" (click)="removerAgendamento(agendamento.id)">
+              <i class="material-icons">delete</i> Remover
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -134,21 +134,31 @@
   </mat-select>
 </mat-form-field>
 
-      <!-- Preço de Custo -->
-      <mat-form-field appearance="outline" class="half-width">
-        <mat-label>Preço de Custo (R$)</mat-label>
-        <input matInput type="text" placeholder="Ex: 150,00"
-          [ngModel]="product.proPrecoCusto ? product.proPrecoCusto.toFixed(2).replace('.', ',') : ''"
-          (input)="onPrecoInput($event, 'proPrecoCusto')" name="proPrecoCusto" required>
-      </mat-form-field>
+<!-- Preço de Custo -->
+<mat-form-field appearance="outline" class="half-width">
+  <mat-label>Preço de Custo (R$)</mat-label>
+  <input matInput
+         type="text"
+         placeholder="Ex: R$ 25.000,00"
+         [ngModel]="formatarReal(product.proPrecoCusto)"
+         (input)="onPrecoInput($event, 'proPrecoCusto')"
+         name="proPrecoCusto"
+         required>
+</mat-form-field>
 
-      <!-- Preço de Venda -->
-      <mat-form-field appearance="outline" class="half-width">
-        <mat-label>Preço de Venda (R$)</mat-label>
-        <input matInput type="text" placeholder="Ex: 250,00"
-          [ngModel]="product.proPrecoVenda ? product.proPrecoVenda.toFixed(2).replace('.', ',') : ''"
-          (input)="onPrecoInput($event, 'proPrecoVenda')" name="proPrecoVenda" required>
-      </mat-form-field>
+<!-- Preço de Venda -->
+<mat-form-field appearance="outline" class="half-width">
+  <mat-label>Preço de Venda (R$)</mat-label>
+  <input matInput
+         type="text"
+         placeholder="Ex: R$ 25.000,00"
+         [ngModel]="formatarReal(product.proPrecoVenda)"
+         (input)="onPrecoInput($event, 'proPrecoVenda')"
+         name="proPrecoVenda"
+         required>
+</mat-form-field>
+
+
 
       <!-- Estoque Atual -->
       <mat-form-field appearance="outline" class="half-width">
