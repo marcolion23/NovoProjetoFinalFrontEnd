@@ -1,12 +1,13 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+
 
 // Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -50,7 +51,7 @@ import { FormaPagamentoCrudComponent } from './views/forma-pagamento-crud/forma-
 import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.component';
 import { EstoqueCrudComponent } from './views/estoque-crud/estoque-crud.component';
 import { FornecedorCrudComponent } from './views/fornecedor-crud/fornecedor-crud.component';
-import { RelatoriosComponent } from './views/relatorios-crud/relatorios-crud.component'; // <-- Padrão novo
+import { RelatoriosCrudComponent } from './views/relatorios-crud/relatorios-crud.component'; // <-- Padrão novo
 
 // Produtos
 import { ProductCreateComponent } from './components/product/product-create/product-create.component';
@@ -98,7 +99,11 @@ import { AgendamentoDeleteComponent } from './components/agendamentos/agendament
 // Outros
 import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
+import { AgendamentoCrudComponent } from './views/agendamentos-crud/agendamentos-crud.component';
+import { PerfilCreateComponent } from './components/perfil/perfil-create/perfil-create.component';
+import { PerfilReadComponent } from './components/perfil/perfil-read/perfil-read.component';
+import { PerfilUpdateComponent } from './components/perfil/perfil-update/perfil-update.component';
+import { PerfilDeleteComponent } from './components/perfil/perfil-delete/perfil-delete.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +119,7 @@ import { FornecedoresComponent } from './components/fornecedores/fornecedores.co
     ClienteCrudComponent,
     EstoqueCrudComponent,
     FornecedorCrudComponent,
-    RelatoriosComponent,
+    RelatoriosCrudComponent,
 
     // Componentes CRUD
     ProductCreateComponent,
@@ -147,6 +152,8 @@ import { FornecedoresComponent } from './components/fornecedores/fornecedores.co
     RelatorioUpdateComponent,
     RelatorioDeleteComponent,
 
+
+    AgendamentoCrudComponent,
     AgendamentosComponent,
     AgendamentoCreateComponent,
     AgendamentoReadComponent,
@@ -155,10 +162,13 @@ import { FornecedoresComponent } from './components/fornecedores/fornecedores.co
 
     AjustesComponent,
     PerfilComponent,
-    FornecedoresComponent,
 
     // Diretivas
     RedDirective,
+      PerfilCreateComponent,
+      PerfilReadComponent,
+      PerfilUpdateComponent,
+      PerfilDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -182,6 +192,7 @@ import { FornecedoresComponent } from './components/fornecedores/fornecedores.co
     MatDatepickerModule,
     MatNativeDateModule,
     MatChipsModule,
+    MatCardModule,
 
     // Forms
     FormsModule,

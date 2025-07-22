@@ -39,19 +39,25 @@ import { FormaPagamentoUpdateComponent } from './components/formaPagamento/forma
 import { FormaPagamentoDeleteComponent } from './components/formaPagamento/forma-pagamento-delete/forma-pagamento-delete.component';
 
 // Agendamentos
+import { AgendamentoCrudComponent } from './views/agendamentos-crud/agendamentos-crud.component';
 import { AgendamentoCreateComponent } from './components/agendamentos/agendamento-create/agendamento-create.component';
 import { AgendamentoReadComponent } from './components/agendamentos/agendamento-read/agendamento-read.component';
 import { AgendamentoUpdateComponent } from './components/agendamentos/agendamento-update/agendamento-update.component';
 import { AgendamentoDeleteComponent } from './components/agendamentos/agendamento-delete/agendamento-delete.component';
 
 // Relatórios CRUD
+import { RelatoriosCrudComponent } from './views/relatorios-crud/relatorios-crud.component';
 import { RelatorioCreateComponent } from './components/relatorios/relatorio-create/relatorio-create.component';
 import { RelatorioReadComponent } from './components/relatorios/relatorio-read/relatorio-read.component';
 import { RelatorioUpdateComponent } from './components/relatorios/relatorio-update/relatorio-update.component';
 import { RelatorioDeleteComponent } from './components/relatorios/relatorio-delete/relatorio-delete.component';
 
 // Perfil
-import { PerfilComponent } from './components/perfil/perfil.component';
+import { PerfilCrudComponent } from './views/perfil-crud/perfil-crud.component';
+import { PerfilCreateComponent } from './components/perfil/perfil-create/perfil-create.component';
+import { PerfilReadComponent } from './components/perfil/perfil-read/perfil-read.component';
+import { PerfilUpdateComponent } from './components/perfil/perfil-update/perfil-update.component';
+import { PerfilDeleteComponent } from './components/perfil/perfil-delete/perfil-delete.component';
 
 // Ajustes
 import { AjustesComponent } from './components/ajustes/ajustes.component';
@@ -96,19 +102,24 @@ const routes: Routes = [
   { path: 'fpagamentos/delete/:fpgId', component: FormaPagamentoDeleteComponent },
 
   // Rotas Agendamentos
+  { path: 'agendamentos', component: AgendamentoCrudComponent },
   { path: 'agendamentos/create', component: AgendamentoCreateComponent },
   { path: 'agendamentos/read', component: AgendamentoReadComponent },
   { path: 'agendamentos/update/:agId', component: AgendamentoUpdateComponent },
   { path: 'agendamentos/delete/:agId', component: AgendamentoDeleteComponent },
 
   // Rotas Relatórios CRUD
-  { path: 'relatorios', component: RelatorioReadComponent }, // Lista de relatórios
+  { path: 'relatorios', component: RelatoriosCrudComponent },
   { path: 'relatorios/create', component: RelatorioCreateComponent },
   { path: 'relatorios/update/:relId', component: RelatorioUpdateComponent },
   { path: 'relatorios/delete/:relId', component: RelatorioDeleteComponent },
 
-  // Rotas Perfil
-  { path: 'perfil', component: PerfilComponent },
+  // Rotas Perfil CRUD
+  { path: 'perfil', component: PerfilCrudComponent },
+  { path: 'perfil/create', component: PerfilCreateComponent },
+  { path: 'perfil/read', component: PerfilReadComponent },
+  { path: 'perfil/update/:id', component: PerfilUpdateComponent },
+  { path: 'perfil/delete/:id', component: PerfilDeleteComponent },
 
   // Rotas Ajustes
   { path: 'ajustes', component: AjustesComponent },

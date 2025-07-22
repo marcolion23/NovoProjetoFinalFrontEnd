@@ -1,78 +1,57 @@
-<!-- ============ BOTÕES DE AGENDAMENTOS ============ -->
-<div class="agendamentos-btns-container">
-  <!-- Botão: Adicionar Agendamento -->
-  <button class="expanded-btn btn-add-agendamento"
-          [routerLink]="['/agendamentos/create']">
-    <span class="material-icons">add</span>
-    Adicionar Agendamento
-  </button>
+<!-- Container dos botões CRUD de Agendamento -->
+<div class="novo-agendamento-container">
 
-  <!-- Botão: Relatórios de Agendamentos -->
-  <button class="expanded-btn btn-relatorios-agendamento"
-          [routerLink]="['/agendamentos/relatorios']">
-    <span class="material-icons">bar_chart</span>
-    Relatórios
-  </button>
-</div>
-
-
-<!-- ============ DASHBOARD DE RESUMO ============ -->
-<div class="dashboard-panels">
-  <div class="panel-info">
-    <i class="material-icons">event</i>
-    <h2>Total Agendamentos</h2>
-    <p>{{ totalAgendamentos }}</p>
+    <!-- Botão "Novo Agendamento" -->
+    <button
+      mat-raised-button
+      class="expanded-btn btn-novo-agendamento"
+      [routerLink]="'/agendamentos/create'">
+      Novo Agendamento
+    </button>
+  
+    <!-- Botão "Gerenciar Agendamentos" -->
+    <button
+      mat-raised-button
+      class="expanded-btn btn-gerenciamento-agendamento"
+      [routerLink]="'/agendamentos/read'">
+      Gerenciamento de Agendamentos
+    </button>
+  
+    <!-- Botão "Excluir Agendamento" -->
+    <button
+      mat-raised-button
+      class="expanded-btn btn-excluir-agendamento"
+      [routerLink]="'/agendamentos/delete/123'">
+      Excluir Agendamento
+    </button>
+  
+    <!-- Botão "Relatórios de Agendamentos" -->
+    <button
+      mat-raised-button
+      class="expanded-btn btn-relatorios-agendamento"
+      [routerLink]="'/agendamentos/relatorios'">
+      Relatórios de Agendamentos
+    </button>
   </div>
-
-  <div class="panel-info atrasados">
-    <i class="material-icons">warning</i>
-    <h2>Agendamentos Atrasados</h2>
-    <p>{{ agendamentosAtrasados }}</p>
+  
+  <!-- Painéis de Resumo -->
+  <div class="dashboard-panels">
+    <mat-card class="panel-info">
+      <i class="material-icons">event_available</i>
+      <h2>Total de Agendamentos</h2>
+      <p>{{ totalAgendamentos }}</p>
+    </mat-card>
+  
+    <mat-card class="panel-info">
+      <i class="material-icons">schedule</i>
+      <h2>Agendamentos Pendentes</h2>
+      <p>{{ agendamentosPendentes }}</p>
+    </mat-card>
+  
+    <mat-card class="panel-info">
+      <i class="material-icons">done_all</i>
+      <h2>Agendamentos Concluídos</h2>
+      <p>{{ agendamentosConcluidos }}</p>
+    </mat-card>
   </div>
-
-  <div class="panel-info">
-    <i class="material-icons">update</i>
-    <h2>Última Atualização</h2>
-    <p>{{ ultimaAtualizacao }}</p>
-  </div>
-</div>
-
-<!-- ============ TABELA DE AGENDAMENTOS ============ -->
-<div class="agendamentos-tabela-container">
-  <h2 class="agendamentos-titulo">Gerenciamento de Agendamentos</h2>
-  <div class="tabela-scroll">
-    <table class="agendamentos-tabela">
-      <thead>
-        <tr>
-          <th>Cliente</th>
-          <th>Serviço</th>
-          <th>Data</th>
-          <th>Hora</th>
-          <th>Status</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let agendamento of listaAgendamentos">
-          <td>{{ agendamento.clienteNome }}</td>
-          <td>{{ agendamento.servico }}</td>
-          <td>{{ agendamento.data | date:'dd/MM/yyyy' }}</td>
-          <td>{{ agendamento.hora }}</td>
-          <td>
-            <span class="status-badge" [ngClass]="agendamento.status === 'Concluído' ? 'status-concluido' : 'status-pendente'">
-              {{ agendamento.status }}
-            </span>
-          </td>
-          <td>
-            <button class="btn-acao editar" (click)="editarAgendamento(agendamento.id)">
-              <i class="material-icons">edit</i> Editar
-            </button>
-            <button class="btn-acao remover" (click)="removerAgendamento(agendamento.id)">
-              <i class="material-icons">delete</i> Remover
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+  

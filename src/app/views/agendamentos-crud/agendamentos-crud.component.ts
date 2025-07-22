@@ -11,21 +11,24 @@ interface Agendamento {
 }
 
 @Component({
-  selector: 'app-agendamento-read',
+  selector: 'app-agendamento-crud',
   templateUrl: './agendamentos-crud.component.html',
   styleUrls: ['./agendamentos-crud.component.css']
 })
-export class AgendamentoReadComponent implements OnInit {
+export class AgendamentoCrudComponent implements OnInit {
 
   listaAgendamentos: Agendamento[] = [];
+
   totalAgendamentos = 0;
   agendamentosAtrasados = 0;
+  agendamentosPendentes = 0;
+  agendamentosConcluidos = 0;
   ultimaAtualizacao = '';
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // Exemplo: carregar agendamentos (aqui mock)
+    // Simulação de dados, substituir por chamada real na sua API
     this.listaAgendamentos = [
       { id: 1, clienteNome: 'João', servico: 'Troca de placa', data: new Date('2025-07-20'), hora: '14:00', status: 'Pendente' },
       { id: 2, clienteNome: 'Maria', servico: 'Formatação', data: new Date('2025-07-19'), hora: '10:00', status: 'Concluído' },
@@ -36,11 +39,22 @@ export class AgendamentoReadComponent implements OnInit {
   }
 
   atualizarDashboard(): void {
+    const agora = new Date();
+
     this.totalAgendamentos = this.listaAgendamentos.length;
-    this.agendamentosAtrasados = this.listaAgendamentos.filter(a => 
-      a.status === 'Pendente' && a.data < new Date()
-    ).length;
-    this.ultimaAtualizacao = new Date().toLocaleString();
+
+    // Considerando data e hora para atraso
+    this.agendamentosAtrasados = this.listaAgendamentos.filter(a => {
+      const dataHora = new Date(a.data);
+      const [hora, minuto] = a.hora.split(':').map(Number);
+      dataHora.setHours(hora, minuto, 0, 0);
+      return a.status === 'Pendente' && dataHora < agora;
+    }).length;
+
+    this.agendamentosPendentes = this.listaAgendamentos.filter(a => a.status === 'Pendente').length;
+    this.agendamentosConcluidos = this.listaAgendamentos.filter(a => a.status === 'Concluído').length;
+
+    this.ultimaAtualizacao = agora.toLocaleString('pt-BR');
   }
 
   editarAgendamento(id: number): void {

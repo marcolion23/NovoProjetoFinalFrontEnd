@@ -1,0 +1,111 @@
+/* perfil-crud.component.css */
+
+.perfil-crud-container {
+    max-width: 1200px;
+    margin: 130px auto 40px;
+    padding: 0 20px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .perfil-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  
+  .btn {
+    width: 180px;
+    height: 60px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 28px;
+    box-shadow: 0 6px 20px rgba(0, 17, 255, 0.26);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .btn-novo {
+    background-color: #0D3B66;
+    color: white;
+  }
+  
+  .btn-gerenciar {
+    background-color: #14532D;
+    color: white;
+  }
+  
+  .btn-editar {
+    background-color: #F59E0B; /* amarelo */
+    color: white;
+  }
+  
+  .btn-excluir {
+    background-color: #991B1B;
+    color: white;
+  }
+  
+  .btn:hover {
+    transform: translateY(-5px);
+    cursor: pointer;
+  }
+  
+  .dashboard-panels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+  
+  .panel-info {
+    background-color: #0D3B66;
+    border-radius: 24px;
+    padding: 40px 30px;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 250px;
+    transition: transform 0.3s ease;
+  }
+  
+  .panel-info:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .panel-info i.material-icons {
+    font-size: 48px;
+    margin-bottom: 10px;
+  }
+  
+  .panel-info h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+  
+  .panel-info p {
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .table-card {
+    padding: 20px;
+    border-radius: 20px;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .active {
+    color: #22C55E; /* verde */
+    font-weight: 600;
+  }
+  
+  .inactive {
+    color: #EF4444; /* vermelho */
+    font-weight: 600;
+  }
+  

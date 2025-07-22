@@ -1,46 +1,72 @@
-<!-- ========================== -->
-<!-- Container principal da tela -->
-<!-- ========================== -->
-<div class="gamer-container">
-    <h2 class="titulo-pagina">Central de Relatórios</h2>
-  
-    <!-- Subtítulo explicativo -->
-    <p class="descricao">Selecione abaixo o tipo de relatório que deseja visualizar ou gerar:</p>
-  
-    <!-- ========================== -->
-    <!-- Botões de relatório -->
-    <!-- ========================== -->
-    <div class="relatorio-grid">
-      <!-- Relatório de Produtos -->
-      <button mat-raised-button class="gamer-button">
-        [routerlink]
-        Relatório de Produtos
-      </button>
-  
-      <!-- Relatório de Estoque -->
-      <button mat-raised-button class="gamer-button" >
-        Relatório de Estoque
-      </button>
-  
-      <!-- Relatório de Fornecedores -->
-      <button mat-raised-button class="gamer-button" >
-        Relatório de Fornecedores
-      </button>
-  
-      <!-- Relatório de Clientes -->
-      <button mat-raised-button class="gamer-button" >
-        Relatório de Clientes
-      </button>
-  
-      <!-- Relatório de Pagamentos -->
-      <button mat-raised-button class="gamer-button" >
-        Relatório de Pagamentos
-      </button>
-  
-      <!-- Relatório de Agendamentos -->
-      <button mat-raised-button class="gamer-button" >
-        Relatório de Agendamentos
-      </button>
-    </div>
-  </div>
-  
+<!-- Container com flexbox para centralizar e expandir os botões -->
+<div class="novos-relatorios-container">
+
+  <!-- Botão "Relatório Produtos" -->
+  <button 
+    mat-raised-button
+    class="expanded-btn btn-relatorio-produto"
+    [routerLink]="'/produtos/relatorios'">
+    <i class="material-icons">inventory_2</i> Relatório Produtos
+  </button>
+
+  <!-- Botão "Relatório Estoque" -->
+  <button 
+    mat-raised-button
+    class="expanded-btn btn-relatorio-estoque"
+    [routerLink]="'/estoque/relatorios'">
+    <i class="material-icons">store</i> Relatório Estoque
+  </button>
+
+  <!-- Botão "Relatório Fornecedores" -->
+  <button 
+    mat-raised-button
+    class="expanded-btn btn-relatorio-fornecedor"
+    [routerLink]="'/fornecedores/relatorios'">
+    <i class="material-icons">local_shipping</i> Relatório Fornecedores
+  </button>
+
+  <!-- Botão "Relatório Clientes" -->
+  <button 
+    mat-raised-button
+    class="expanded-btn btn-relatorio-clientes"
+    [routerLink]="'/clientes/relatorios'">
+    <i class="material-icons">people</i> Relatório Clientes
+  </button>
+
+  <!-- Botão "Relatório Pagamentos" -->
+  <button 
+    mat-raised-button
+    class="expanded-btn btn-relatorio-pagamentos"
+    [routerLink]="'/pagamentos/relatorios'">
+    <i class="material-icons">payments</i> Relatório Pagamentos
+  </button>
+
+  <!-- Botão "Relatório Agendamentos" -->
+  <button 
+    mat-raised-button
+    class="expanded-btn btn-relatorio-agendamentos"
+    [routerLink]="'/agendamentos/relatorios'">
+    <i class="material-icons">event</i> Relatório Agendamentos
+  </button>
+</div>
+
+<!-- Painéis de Resumo -->
+<div class="dashboard-panels">
+  <mat-card class="panel-info">
+    <i class="material-icons">bar_chart</i>
+    <h2>Total Relatórios Gerados</h2>
+    <p>{{ totalRelatoriosGerados }}</p>
+  </mat-card>
+
+  <mat-card class="panel-info">
+    <i class="material-icons">update</i>
+    <h2>Última Geração</h2>
+    <p>{{ ultimaGeracao }}</p>
+  </mat-card>
+
+  <mat-card class="panel-info">
+    <i class="material-icons">star</i>
+    <h2>Relatório Mais Acessado</h2>
+    <p>{{ relatorioMaisAcessado }}</p>
+  </mat-card>
+</div>

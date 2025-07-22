@@ -1,197 +1,115 @@
-/* ============ CONTAINER DOS BOTÕES ============ */
-.agendamentos-btns-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 32px;
-  margin: 100px auto 40px;
-  align-items: center;
-}
-
-/* ============ BOTÕES PADRÃO ============ */
-.expanded-btn {
-  width: 40%;
-  min-width: 280px;
-  font-size: 2rem;
-  font-weight: bold;
-  padding: 32px 0;
-  border: none;
-  border-radius: 28px;
-  cursor: pointer;
-  color: #ffffff;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 8px 24px rgba(0, 17, 255, 0.26);
-  transition: all 0.3s ease-in-out;
-  text-align: center;
-}
-
-.expanded-btn:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 17, 255, 0.4);
-}
-
-.btn-add-agendamento {
-  background: linear-gradient(135deg, #16a34a, #14532d); /* Verde gamer */
-}
-
-.btn-relatorios-agendamento {
-  background: linear-gradient(135deg, #b91c1c, #7f1d1d); /* Vermelho gamer */
-}
-
-/* ============ DASHBOARD DE RESUMO ============ */
-.dashboard-panels {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  padding: 30px 50px;
-  box-sizing: border-box;
-}
-
-.panel-info {
-  background: linear-gradient(135deg, #0D3B66, #092447);
-  border-radius: 24px;
-  padding: 40px 30px;
-  text-align: center;
-  height: 260px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Segoe UI', sans-serif;
-  color: #ffffff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.panel-info:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
-}
-
-.panel-info.atrasados {
-  background: linear-gradient(135deg, #991B1B, #7f1d1d);
-}
-
-.panel-info h2 {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
-
-.panel-info p {
-  font-size: 26px;
-  font-weight: bold;
-}
-
-.material-icons {
-  font-size: 60px;
-  margin-bottom: 10px;
-}
-
-/* ============ TABELA DE AGENDAMENTOS ============ */
-.agendamentos-tabela-container {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.agendamentos-titulo {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #ffffff;
-  text-align: center;
-}
-
-.tabela-scroll {
-  overflow-x: auto;
-}
-
-.agendamentos-tabela {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background: linear-gradient(135deg, #0D3B66, #092447);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-}
-
-.agendamentos-tabela thead {
-  background-color: #000000;
-}
-
-.agendamentos-tabela th {
-  padding: 20px 12px;
-  text-align: left;
-  color: #ffffff;
-  font-size: 1.2rem;
-  font-weight: 500;
-  border-bottom: 2px solid #16a34a;
-}
-
-.agendamentos-tabela td {
-  padding: 14px 12px;
-  color: #e2e8f0;
-  font-size: 1rem;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.agendamentos-tabela tbody tr:nth-child(odd) {
-  background-color: rgba(255,255,255,0.05);
-}
-
-.agendamentos-tabela tbody tr:hover {
-  background-color: rgba(255,255,255,0.12);
-  transition: background-color 0.2s;
-}
-
-/* ============ STATUS (Concluído/Pendente) ============ */
-.status-badge {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-}
-
-.status-concluido {
-  background-color: #16a34a;
-  color: #fff;
-}
-
-.status-pendente {
-  background-color: #b91c1c;
-  color: #fff;
-}
-
-/* ============ BOTÕES DE AÇÃO ============ */
-.btn-acao {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 10px;
-  margin-right: 6px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.9rem;
-  color: #ffffff;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.btn-acao .material-icons {
-  font-size: 18px;
-  margin-right: 4px;
-}
-
-.btn-acao.editar {
-  background-color: #2563eb;
-}
-
-.btn-acao.remover {
-  background-color: #dc2626;
-}
-
-.btn-acao:hover {
-  transform: scale(1.05);
-}
+/* Container dos botões "Novo Agendamento", etc */
+.novo-agendamento-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin: 130px auto 40px;
+    align-items: center;
+  }
+  
+  /* Estilo base dos botões grandes */
+  .expanded-btn {
+    width: 40%;
+    min-width: 280px;
+    background-color: #0D3B66; /* Azul escuro padrão */
+    color: #fff;
+    font-weight: bold;
+    padding: 32px 0;
+    font-size: 2rem;
+    border: none;
+    border-radius: 28px;
+    cursor: pointer;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 8px 24px rgba(0, 17, 255, 0.26);
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+  }
+  
+  /* Hover geral */
+  .expanded-btn:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Botão "Novo Agendamento" - azul escuro */
+  .btn-novo-agendamento {
+    background-color: #0D3B66;
+  }
+  
+  /* Botão "Gerenciamento" - verde escuro */
+  .btn-gerenciamento-agendamento {
+    background-color: #14532D;
+  }
+  
+  /* Botão "Excluir" - vermelho escuro */
+  .btn-excluir-agendamento {
+    background-color: #991B1B;
+  }
+  
+  /* Botão "Relatórios" - laranja escuro */
+  .btn-relatorios-agendamento {
+    background-color: #D97706; /* tom de laranja escuro */
+  }
+  
+  /* Texto branco para todos os botões */
+  .btn-novo-agendamento,
+  .btn-gerenciamento-agendamento,
+  .btn-excluir-agendamento,
+  .btn-relatorios-agendamento {
+    color: #ffffff;
+  }
+  
+  /* Painéis do dashboard */
+  .dashboard-panels {
+    width: 100vw;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    padding: 30px 50px;
+    box-sizing: border-box;
+  }
+  
+  .dashboard-panels > * {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .dashboard-panels > *:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Estilo de cada painel */
+  .panel-info {
+    background-color: #0D3B66;
+    border-radius: 24px;
+    padding: 40px 30px;
+    text-align: center;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Segoe UI', sans-serif;
+    transition: transform 0.3s ease;
+    color: #fff;
+  }
+  
+  /* Título dos painéis */
+  .panel-info h2 {
+    font-size: 35px;
+    margin-bottom: 15px;
+  }
+  
+  /* Texto dos painéis */
+  .panel-info p {
+    font-size: 25px;
+  }
+  
+  /* Ícones nos painéis */
+  .material-icons {
+    font-size: 56px;
+    color: #ffffff;
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+  
