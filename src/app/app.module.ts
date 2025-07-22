@@ -82,12 +82,17 @@ import { FornecedorReadComponent } from './components/fornecedor/fornecedor-read
 import { FornecedorUpdateComponent } from './components/fornecedor/fornecedor-update/fornecedor-update.component';
 import { FornecedorDeleteComponent } from './components/fornecedor/fornecedor-delete/fornecedor-delete.component';
 
-// Outros componentes variados
+// Agendamentos (✅ mantido apenas o que você está usando)
+import { AgendamentosComponent } from './components/agendamentos/agendamentos.component';
+import { AgendamentoCreateComponent } from './components/agendamentos/agendamento-create/agendamento-create.component';
+import { AgendamentoReadComponent } from './components/agendamentos/agendamento-read/agendamento-read.component';
+import { AgendamentoUpdateComponent } from './components/agendamentos/agendamento-update/agendamento-update.component';
+import { AgendamentoDeleteComponent } from './components/agendamentos/agendamento-delete/agendamento-delete.component';
+
+// Outros componentes
 import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { RelatoriosComponent } from './components/relatorios/relatorios.component';
 import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
-import { AgendamentosComponent } from './components/agendamentos/agendamentos.component';
-import { AgendamentoComponent } from './components/agendamentos/agendamento/agendamento.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 
 // Diretivas
@@ -95,15 +100,14 @@ import { RedDirective } from './directives/red.directive';
 
 @NgModule({
   declarations: [
-    // Componente principal da aplicação
     AppComponent,
 
-    // Template (componentes de layout)
+    // Template
     HeaderComponent,
     FooterComponent,
     NavComponent,
 
-    // Views principais
+    // Views
     HomeComponent,
     ProductCrudComponent,
     FormaPagamentoCrudComponent,
@@ -111,45 +115,50 @@ import { RedDirective } from './directives/red.directive';
     EstoqueCrudComponent,
     FornecedorCrudComponent,
 
-    // Componentes do módulo Produto
+    // Produtos
     ProductCreateComponent,
     ProductReadComponent,
     ProductUpdateComponent,
     ProductDeleteComponent,
 
-    // Componentes do módulo FormaPagamento
+    // Pagamentos
     FormaPagamentoReadComponent,
     FormaPagamentoCreateComponent,
     FormaPagamentoUpdateComponent,
     FormaPagamentoDeleteComponent,
 
-    // Componentes do módulo Cliente
+    // Clientes
     ClienteCreateComponent,
     ClienteReadComponent,
     ClienteUpdateComponent,
     ClienteDeleteComponent,
 
-    // Componentes do módulo Estoque
+    // Estoque
     EstoqueCreateComponent,
     EstoqueReadComponent,
     EstoqueUpdateComponent,
     EstoqueDeleteComponent,
 
-    // Componentes do módulo Fornecedor
+    // Fornecedores
     FornecedorCreateComponent,
     FornecedorReadComponent,
     FornecedorUpdateComponent,
     FornecedorDeleteComponent,
 
-    // Outros componentes
+    // Agendamentos (✅ apenas os corretos)
+    AgendamentosComponent,
+    AgendamentoCreateComponent,
+    AgendamentoReadComponent,
+    AgendamentoUpdateComponent,
+    AgendamentoDeleteComponent,
+
+    // Outros
     AjustesComponent,
     RelatoriosComponent,
     FornecedoresComponent,
-    AgendamentosComponent,
-    AgendamentoComponent,
     PerfilComponent,
 
-    // Diretivas personalizadas
+    // Diretivas
     RedDirective
   ],
   imports: [
@@ -157,7 +166,7 @@ import { RedDirective } from './directives/red.directive';
     AppRoutingModule,
     BrowserAnimationsModule,
 
-    // Angular Material Modules
+    // Angular Material
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
@@ -175,20 +184,19 @@ import { RedDirective } from './directives/red.directive';
     MatNativeDateModule,
     MatChipsModule,
 
-    // Forms Modules
+    // Forms
     FormsModule,
     ReactiveFormsModule,
-    
 
-    // HTTP Client
+    // HTTP
     HttpClientModule,
   ],
   providers: [
     {
       provide: LOCALE_ID,
-      useValue: 'pt-BR' // Define a localidade para pt-BR (Português do Brasil)
+      useValue: 'pt-BR'
     }
   ],
-  bootstrap: [AppComponent] // Componente raiz para bootstrap
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

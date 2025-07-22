@@ -11,22 +11,21 @@ interface Agendamento {
 }
 
 @Component({
-  selector: 'app-agendamentos',
+  selector: 'app-agendamento-read',
   templateUrl: './agendamentos.component.html',
   styleUrls: ['./agendamentos.component.css']
 })
-export class AgendamentosComponent implements OnInit {
+export class AgendamentoReadComponent implements OnInit {
 
   listaAgendamentos: Agendamento[] = [];
-
   totalAgendamentos = 0;
   agendamentosAtrasados = 0;
   ultimaAtualizacao = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // Simula carregamento dos agendamentos (substitua pela chamada ao serviço real)
+    // Exemplo: carregar agendamentos (aqui mock)
     this.listaAgendamentos = [
       { id: 1, clienteNome: 'João', servico: 'Troca de placa', data: new Date('2025-07-20'), hora: '14:00', status: 'Pendente' },
       { id: 2, clienteNome: 'Maria', servico: 'Formatação', data: new Date('2025-07-19'), hora: '10:00', status: 'Concluído' },
@@ -38,14 +37,13 @@ export class AgendamentosComponent implements OnInit {
 
   atualizarDashboard(): void {
     this.totalAgendamentos = this.listaAgendamentos.length;
-    this.agendamentosAtrasados = this.listaAgendamentos.filter(a =>
+    this.agendamentosAtrasados = this.listaAgendamentos.filter(a => 
       a.status === 'Pendente' && a.data < new Date()
     ).length;
     this.ultimaAtualizacao = new Date().toLocaleString();
   }
 
   editarAgendamento(id: number): void {
-    // Navega para a tela de edição com o ID
     this.router.navigate(['/agendamentos/edit', id]);
   }
 
@@ -55,5 +53,4 @@ export class AgendamentosComponent implements OnInit {
       this.atualizarDashboard();
     }
   }
-
 }

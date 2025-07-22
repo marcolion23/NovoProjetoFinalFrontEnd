@@ -1,12 +1,20 @@
 <!-- ============ BOTÕES DE AGENDAMENTOS ============ -->
 <div class="agendamentos-btns-container">
-  <button class="expanded-btn btn-add-agendamento" [routerLink]="'/agendamentos/create/'">
-    <i class="material-icons">add</i> Adicionar Agendamento
+  <!-- Botão: Adicionar Agendamento -->
+  <button class="expanded-btn btn-add-agendamento"
+          [routerLink]="['/agendamentos/create']">
+    <span class="material-icons">add</span>
+    Adicionar Agendamento
   </button>
-  <button class="expanded-btn btn-relatorios-agendamento" [routerLink]="'/agendamentos/relatorios'">
-    <i class="material-icons">bar_chart</i> Relatórios
+
+  <!-- Botão: Relatórios de Agendamentos -->
+  <button class="expanded-btn btn-relatorios-agendamento"
+          [routerLink]="['/agendamentos/relatorios']">
+    <span class="material-icons">bar_chart</span>
+    Relatórios
   </button>
 </div>
+
 
 <!-- ============ DASHBOARD DE RESUMO ============ -->
 <div class="dashboard-panels">

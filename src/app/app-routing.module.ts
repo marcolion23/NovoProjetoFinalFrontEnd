@@ -17,8 +17,7 @@ import { EstoqueDeleteComponent } from './components/estoque/estoque-delete/esto
 import { EstoqueReadComponent } from './components/estoque/estoque-read/estoque-read.component';
 import { EstoqueUpdateComponent } from './components/estoque/estoque-update/estoque-update.component';
 
-
-// Fornecedores (🔧 Verifique se os caminhos estão corretos)
+// Fornecedores
 import { FornecedorCrudComponent } from './views/fornecedor-crud/fornecedor-crud.component';
 import { FornecedorCreateComponent } from './components/fornecedor/fornecedor-create/fornecedor-create.component';
 import { FornecedorUpdateComponent } from './components/fornecedor/fornecedor-update/fornecedor-update.component';
@@ -38,11 +37,16 @@ import { FormaPagamentoCreateComponent } from './components/formaPagamento/forma
 import { FormaPagamentoUpdateComponent } from './components/formaPagamento/forma-pagamento-update/forma-pagamento-update.component';
 import { FormaPagamentoDeleteComponent } from './components/formaPagamento/forma-pagamento-delete/forma-pagamento-delete.component';
 
-// Relatórios, Agendamentos, Perfil e Ajustes (🔧 Verifique os caminhos!)
+// Relatórios, Perfil e Ajustes
 import { RelatoriosComponent } from './components/relatorios/relatorios.component';
-import { AgendamentoComponent } from './components/agendamentos/agendamento/agendamento.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
+
+// Agendamentos
+import { AgendamentoCreateComponent } from './components/agendamentos/agendamento-create/agendamento-create.component';
+import { AgendamentoReadComponent } from './components/agendamentos/agendamento-read/agendamento-read.component';
+import { AgendamentoUpdateComponent } from './components/agendamentos/agendamento-update/agendamento-update.component';
+import { AgendamentoDeleteComponent } from './components/agendamentos/agendamento-delete/agendamento-delete.component';
 
 // ============================ Rotas ============================
 
@@ -69,14 +73,14 @@ const routes: Routes = [
   { path: 'fornecedores/create', component: FornecedorCreateComponent },
   { path: 'fornecedores/update/:fornId', component: FornecedorUpdateComponent },
   { path: 'fornecedores/delete/:fornId', component: FornecedorDeleteComponent },
-  {path: 'fornecedores/read/:fornId', component: FornecedorReadComponent},
+  { path: 'fornecedores/read/:fornId', component: FornecedorReadComponent },
 
   // Clientes
   { path: 'clientes', component: ClienteCrudComponent },
   { path: 'clientes/create', component: ClienteCreateComponent },
   { path: 'clientes/update/:cliId', component: ClienteUpdateComponent },
   { path: 'clientes/delete/:cliId', component: ClienteDeleteComponent },
-  { path: 'clientes/read/:cliId', component: ClienteReadComponent },  
+  { path: 'clientes/read/:cliId', component: ClienteReadComponent },
 
   // Pagamentos
   { path: 'fpagamentos', component: FormaPagamentoCrudComponent },
@@ -84,11 +88,14 @@ const routes: Routes = [
   { path: 'fpagamentos/update/:fpgId', component: FormaPagamentoUpdateComponent },
   { path: 'fpagamentos/delete/:fpgId', component: FormaPagamentoDeleteComponent },
 
+  // Agendamentos
+  { path: 'agendamentos/create', component: AgendamentoCreateComponent },
+  { path: 'agendamentos/read', component: AgendamentoReadComponent },
+  { path: 'agendamentos/update/:agId', component: AgendamentoUpdateComponent },
+  { path: 'agendamentos/delete/:agId', component: AgendamentoDeleteComponent },
+
   // Relatórios
   { path: 'relatorios', component: RelatoriosComponent },
-
-  // Agendamentos
-  { path: 'agendamentos', component: AgendamentoComponent },
 
   // Perfil
   { path: 'perfil', component: PerfilComponent },
