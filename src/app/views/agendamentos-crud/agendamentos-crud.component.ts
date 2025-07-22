@@ -12,8 +12,8 @@ interface Agendamento {
 
 @Component({
   selector: 'app-agendamento-read',
-  templateUrl: './agendamentos.component.html',
-  styleUrls: ['./agendamentos.component.css']
+  templateUrl: './agendamentos-crud.component.html',
+  styleUrls: ['./agendamentos-crud.component.css']
 })
 export class AgendamentoReadComponent implements OnInit {
 

@@ -45,7 +45,8 @@ import { FooterComponent } from './components/template/footer/footer.component';
 import { NavComponent } from './components/template/nav/nav.component';
 
 // Views
-import { HomeComponent } from './views/home/home.component';
+import { HomeComponent } from './views/home-crud/home-crud.component'; // Corrigido para home-crud!
+
 import { ProductCrudComponent } from './views/product-crud/product-crud.component';
 import { FormaPagamentoCrudComponent } from './views/forma-pagamento-crud/forma-pagamento-crud.component';
 import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.component';
@@ -82,7 +83,7 @@ import { FornecedorReadComponent } from './components/fornecedor/fornecedor-read
 import { FornecedorUpdateComponent } from './components/fornecedor/fornecedor-update/fornecedor-update.component';
 import { FornecedorDeleteComponent } from './components/fornecedor/fornecedor-delete/fornecedor-delete.component';
 
-// Agendamentos (✅ mantido apenas o que você está usando)
+// Agendamentos
 import { AgendamentosComponent } from './components/agendamentos/agendamentos.component';
 import { AgendamentoCreateComponent } from './components/agendamentos/agendamento-create/agendamento-create.component';
 import { AgendamentoReadComponent } from './components/agendamentos/agendamento-read/agendamento-read.component';
@@ -145,7 +146,7 @@ import { RedDirective } from './directives/red.directive';
     FornecedorUpdateComponent,
     FornecedorDeleteComponent,
 
-    // Agendamentos (✅ apenas os corretos)
+    // Agendamentos
     AgendamentosComponent,
     AgendamentoCreateComponent,
     AgendamentoReadComponent,
