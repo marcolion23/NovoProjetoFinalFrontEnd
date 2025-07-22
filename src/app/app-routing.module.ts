@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// =================== Importação dos componentes ===================
-// Ajuste os caminhos conforme o local correto no seu projeto
-
-// Home - componente principal da página inicial
+// Home
 import { HomeComponent } from './views/home-crud/home-crud.component';
 
 // Produtos
@@ -47,8 +44,11 @@ import { AgendamentoReadComponent } from './components/agendamentos/agendamento-
 import { AgendamentoUpdateComponent } from './components/agendamentos/agendamento-update/agendamento-update.component';
 import { AgendamentoDeleteComponent } from './components/agendamentos/agendamento-delete/agendamento-delete.component';
 
-// Relatórios
-import { RelatoriosComponent } from './components/relatorios/relatorios.component';
+// Relatórios CRUD
+import { RelatorioCreateComponent } from './components/relatorios/relatorio-create/relatorio-create.component';
+import { RelatorioReadComponent } from './components/relatorios/relatorio-read/relatorio-read.component';
+import { RelatorioUpdateComponent } from './components/relatorios/relatorio-update/relatorio-update.component';
+import { RelatorioDeleteComponent } from './components/relatorios/relatorio-delete/relatorio-delete.component';
 
 // Perfil
 import { PerfilComponent } from './components/perfil/perfil.component';
@@ -56,7 +56,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 // Ajustes
 import { AjustesComponent } from './components/ajustes/ajustes.component';
 
-// =================== Definição das rotas ===================
+// Rotas definidas
 const routes: Routes = [
   // Página inicial (Home)
   { path: '', component: HomeComponent },
@@ -64,14 +64,14 @@ const routes: Routes = [
   // Rotas Produtos
   { path: 'products', component: ProductCrudComponent },
   { path: 'products/create', component: ProductCreateComponent },
-  { path: 'products/read/:proId', component: ProductReadComponent },  // detalhe do produto
+  { path: 'products/read/:proId', component: ProductReadComponent },
   { path: 'products/update/:proId', component: ProductUpdateComponent },
   { path: 'products/delete/:proId', component: ProductDeleteComponent },
 
   // Rotas Estoque
   { path: 'estoque', component: EstoqueCrudComponent },
   { path: 'estoque/create', component: EstoqueCreateComponent },
-  { path: 'estoque/read/:estoqueId', component: EstoqueReadComponent }, // detalhe estoque
+  { path: 'estoque/read/:estoqueId', component: EstoqueReadComponent },
   { path: 'estoque/update/:estoqueId', component: EstoqueUpdateComponent },
   { path: 'estoque/delete/:estoqueId', component: EstoqueDeleteComponent },
 
@@ -101,8 +101,11 @@ const routes: Routes = [
   { path: 'agendamentos/update/:agId', component: AgendamentoUpdateComponent },
   { path: 'agendamentos/delete/:agId', component: AgendamentoDeleteComponent },
 
-  // Rotas Relatórios
-  { path: 'relatorios', component: RelatoriosComponent },
+  // Rotas Relatórios CRUD
+  { path: 'relatorios', component: RelatorioReadComponent }, // Lista de relatórios
+  { path: 'relatorios/create', component: RelatorioCreateComponent },
+  { path: 'relatorios/update/:relId', component: RelatorioUpdateComponent },
+  { path: 'relatorios/delete/:relId', component: RelatorioDeleteComponent },
 
   // Rotas Perfil
   { path: 'perfil', component: PerfilComponent },
@@ -114,7 +117,6 @@ const routes: Routes = [
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
-// =================== Módulo de roteamento ===================
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

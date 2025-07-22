@@ -1,7 +1,8 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// Angular Material Modules
+// Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -22,66 +23,70 @@ import { MatChipsModule } from '@angular/material/chips';
 // Forms
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-// HTTP Client
+// HTTP
 import { HttpClientModule } from '@angular/common/http';
 
-// Angular core modules
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-// Localization (Portuguese - Brasil)
-import localePt from '@angular/common/locales/pt';
+// Localização (Português Brasil)
 import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 registerLocaleData(localePt);
 
-// Routing module
+// Routing
 import { AppRoutingModule } from './app-routing.module';
 
-// Component imports
+// Componentes Base
 import { AppComponent } from './app.component';
-
-// Template components
 import { HeaderComponent } from './components/template/header/header.component';
 import { FooterComponent } from './components/template/footer/footer.component';
 import { NavComponent } from './components/template/nav/nav.component';
 
-// Views
-import { HomeComponent } from './views/home-crud/home-crud.component'; // Corrigido para home-crud!
+// Diretivas
+import { RedDirective } from './directives/red.directive';
 
+// Views (CRUDs principais)
+import { HomeComponent } from './views/home-crud/home-crud.component';
 import { ProductCrudComponent } from './views/product-crud/product-crud.component';
 import { FormaPagamentoCrudComponent } from './views/forma-pagamento-crud/forma-pagamento-crud.component';
 import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.component';
 import { EstoqueCrudComponent } from './views/estoque-crud/estoque-crud.component';
 import { FornecedorCrudComponent } from './views/fornecedor-crud/fornecedor-crud.component';
+import { RelatoriosComponent } from './views/relatorios-crud/relatorios-crud.component'; // <-- Padrão novo
 
-// Product Components
+// Produtos
 import { ProductCreateComponent } from './components/product/product-create/product-create.component';
 import { ProductReadComponent } from './components/product/product-read/product-read.component';
 import { ProductUpdateComponent } from './components/product/product-update/product-update.component';
 import { ProductDeleteComponent } from './components/product/product-delete/product-delete.component';
 
-// FormaPagamento Components
-import { FormaPagamentoReadComponent } from './components/formaPagamento/forma-pagamento-read/forma-pagamento-read.component';
+// Forma de Pagamento
 import { FormaPagamentoCreateComponent } from './components/formaPagamento/forma-pagamento-create/forma-pagamento-create.component';
+import { FormaPagamentoReadComponent } from './components/formaPagamento/forma-pagamento-read/forma-pagamento-read.component';
 import { FormaPagamentoUpdateComponent } from './components/formaPagamento/forma-pagamento-update/forma-pagamento-update.component';
 import { FormaPagamentoDeleteComponent } from './components/formaPagamento/forma-pagamento-delete/forma-pagamento-delete.component';
 
-// Cliente Components
+// Clientes
 import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
 import { ClienteReadComponent } from './components/cliente/cliente-read/cliente-read.component';
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
 
-// Estoque Components
+// Estoque
 import { EstoqueCreateComponent } from './components/estoque/estoque-create/estoque-create.component';
 import { EstoqueReadComponent } from './components/estoque/estoque-read/estoque-read.component';
 import { EstoqueUpdateComponent } from './components/estoque/estoque-update/estoque-update.component';
 import { EstoqueDeleteComponent } from './components/estoque/estoque-delete/estoque-delete.component';
 
-// Fornecedor Components
+// Fornecedores
 import { FornecedorCreateComponent } from './components/fornecedor/fornecedor-create/fornecedor-create.component';
 import { FornecedorReadComponent } from './components/fornecedor/fornecedor-read/fornecedor-read.component';
 import { FornecedorUpdateComponent } from './components/fornecedor/fornecedor-update/fornecedor-update.component';
 import { FornecedorDeleteComponent } from './components/fornecedor/fornecedor-delete/fornecedor-delete.component';
+
+// Relatórios
+import { RelatorioCreateComponent } from './components/relatorios/relatorio-create/relatorio-create.component';
+import { RelatorioReadComponent } from './components/relatorios/relatorio-read/relatorio-read.component';
+import { RelatorioUpdateComponent } from './components/relatorios/relatorio-update/relatorio-update.component';
+import { RelatorioDeleteComponent } from './components/relatorios/relatorio-delete/relatorio-delete.component';
 
 // Agendamentos
 import { AgendamentosComponent } from './components/agendamentos/agendamentos.component';
@@ -90,20 +95,14 @@ import { AgendamentoReadComponent } from './components/agendamentos/agendamento-
 import { AgendamentoUpdateComponent } from './components/agendamentos/agendamento-update/agendamento-update.component';
 import { AgendamentoDeleteComponent } from './components/agendamentos/agendamento-delete/agendamento-delete.component';
 
-// Outros componentes
+// Outros
 import { AjustesComponent } from './components/ajustes/ajustes.component';
-import { RelatoriosComponent } from './components/relatorios/relatorios.component';
-import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-
-// Diretivas
-import { RedDirective } from './directives/red.directive';
+import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-
-    // Template
     HeaderComponent,
     FooterComponent,
     NavComponent,
@@ -115,57 +114,56 @@ import { RedDirective } from './directives/red.directive';
     ClienteCrudComponent,
     EstoqueCrudComponent,
     FornecedorCrudComponent,
+    RelatoriosComponent,
 
-    // Produtos
+    // Componentes CRUD
     ProductCreateComponent,
     ProductReadComponent,
     ProductUpdateComponent,
     ProductDeleteComponent,
 
-    // Pagamentos
-    FormaPagamentoReadComponent,
     FormaPagamentoCreateComponent,
+    FormaPagamentoReadComponent,
     FormaPagamentoUpdateComponent,
     FormaPagamentoDeleteComponent,
 
-    // Clientes
     ClienteCreateComponent,
     ClienteReadComponent,
     ClienteUpdateComponent,
     ClienteDeleteComponent,
 
-    // Estoque
     EstoqueCreateComponent,
     EstoqueReadComponent,
     EstoqueUpdateComponent,
     EstoqueDeleteComponent,
 
-    // Fornecedores
     FornecedorCreateComponent,
     FornecedorReadComponent,
     FornecedorUpdateComponent,
     FornecedorDeleteComponent,
 
-    // Agendamentos
+    RelatorioCreateComponent,
+    RelatorioReadComponent,
+    RelatorioUpdateComponent,
+    RelatorioDeleteComponent,
+
     AgendamentosComponent,
     AgendamentoCreateComponent,
     AgendamentoReadComponent,
     AgendamentoUpdateComponent,
     AgendamentoDeleteComponent,
 
-    // Outros
     AjustesComponent,
-    RelatoriosComponent,
-    FornecedoresComponent,
     PerfilComponent,
+    FornecedoresComponent,
 
     // Diretivas
-    RedDirective
+    RedDirective,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
 
     // Angular Material
     MatToolbarModule,
@@ -193,10 +191,7 @@ import { RedDirective } from './directives/red.directive';
     HttpClientModule,
   ],
   providers: [
-    {
-      provide: LOCALE_ID,
-      useValue: 'pt-BR'
-    }
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]
 })
