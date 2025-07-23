@@ -119,17 +119,12 @@
       <mat-error *ngIf="status.invalid && status.touched">Status é obrigatório</mat-error>
     </mat-form-field>
 
-    <!-- Botões do formulário -->
-    <div class="button-container">
-      <!-- Botão salvar, desabilitado se formulário inválido -->
-      <button class="save-btn" [disabled]="formFornecedor.invalid" (click)="salvar()">Salvar</button>
-
-      <!-- Botão cancelar -->
-      <button class="cancel-btn" (click)="cancelar()">Cancelar</button>
-
-      <!-- Botão limpar campos -->
-      <button class="clear-btn" type="button" (click)="limpar()">Limpar</button>
-    </div>
+      <!-- Botões -->
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="salvar()">Salvar</button>
+<button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+        <button mat-raised-button color="blue" (click)="limpar()">Limpar</button>
+      </div>
 
   </form>
 

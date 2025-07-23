@@ -119,11 +119,12 @@
 
 /* ============ TABELA DE FORNECEDORES ============ */
 .fornecedores-tabela-container {
-  max-width: 1200px;
+  max-width: 1400px; /* ou aumente para 1600px ou mais */
   margin: 40px auto;
   padding: 0 20px;
   font-family: 'Segoe UI', sans-serif;
 }
+
 
 /* Título da tabela */
 .fornecedores-titulo {

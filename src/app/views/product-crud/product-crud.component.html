@@ -2,59 +2,111 @@
 <div class="novo-produto-container">
 
   <!-- Botão "Novo Produto" -->
-<button 
-  mat-raised-button
-  class="novo-produto-btn expanded-btn btn-novo-produto"
-  [routerLink]="'/products/create'">
-  Novo Produto
-</button>
+  <button 
+    mat-raised-button
+    class="novo-produto-btn expanded-btn btn-novo-produto"
+    [routerLink]="'/products/create'">
+    Novo Produto
+  </button>
 
   <!-- Botão "Gerenciamento de Produtos" -->
-<button 
-  mat-raised-button
-  class="big-button expanded-btn btn-gerenciamento-produtos"
-  [routerLink]=" '/products/read/:proId'">
-  Gerenciamento de Produtos
-</button>
-
-<button
-  mat-raised-button
-  class="big-button expanded-btn btn-excluir-produto"
-  [routerLink]="['/products/delete', 123]">
-  <div class="icon-text-container">
-    <span>Excluir Produto</span>
-  </div>
-</button>
-
-     <!-- Botão "Relatórios de Produtos" -->
   <button 
-   mat-raised-button
+    mat-raised-button
+    class="big-button expanded-btn btn-gerenciamento-produtos"
+    [routerLink]=" '/products/read/:proId'">
+    Gerenciamento de Produtos
+  </button>
+
+  <!-- Botão "Excluir Produto" -->
+  <button
+    mat-raised-button
+    class="big-button expanded-btn btn-excluir-produto"
+    [routerLink]="['/products/delete', 123]">
+    <div class="icon-text-container">
+      <span>Excluir Produto</span>
+    </div>
+  </button>
+
+  <!-- Botão "Relatórios de Produtos" -->
+  <button 
+    mat-raised-button
     class="big-button expanded-btn btn-relatorios-produtos"
     [routerLink]="'/products/update/:fornId'">
     Relatórios de Produtos
   </button>
-
-
-
-
   
-<!-- Painéis de Resumo -->
-<div class="dashboard-panels">
-  <mat-card class="panel-info">
-  <i class="material-icons">sports_esports</i>
-    <h2>Total de Produtos</h2>
-    <p>{{ totalProdutos }}</p>
-  </mat-card>
+  <!-- Painéis de Resumo -->
+  <div class="dashboard-panels">
+    <mat-card class="panel-info">
+      <i class="material-icons">sports_esports</i>
+      <h2>Total de Produtos</h2>
+      <p>{{ totalProdutos }}</p>
+    </mat-card>
 
-  <mat-card class="panel-info">
-     <i class="material-icons">inventory_2</i>
-    <h2>Estoque Crítico</h2>
-    <p>{{ estoqueCritico }} produtos</p>
-  </mat-card>
+    <mat-card class="panel-info">
+      <i class="material-icons">inventory_2</i>
+      <h2>Estoque Crítico</h2>
+      <p>{{ estoqueCritico }} produtos</p>
+    </mat-card>
 
-  <mat-card class="panel-info">
-    <i class="material-icons">trending_up</i>
-    <h2>Mais Vendido</h2>
-    <p>{{ maisVendido }}</p>
-  </mat-card>
-</div>
+    <mat-card class="panel-info">
+      <i class="material-icons">trending_up</i>
+      <h2>Mais Vendido</h2>
+      <p>{{ maisVendido }}</p>
+    </mat-card>
+  </div> <!-- Fim dashboard-panels -->
+
+  <!-- Tabela de Produtos - fica fora dos painéis, abaixo deles -->
+  <div class="produtos-tabela-container">
+    <h2 class="produtos-titulo">Lista de Produtos</h2>
+    
+    <div class="tabela-scroll">
+      <table class="produtos-tabela">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>001</td>
+            <td>Mouse </td>
+            <td>Mouse Gamer Redragon</td>
+            <td>R$ 89,90</td>
+            <td>4</td>
+            <td>
+              <button class="btn-acao editar" title="Editar">
+                <span class="material-icons">edit</span> Editar
+              </button>
+              <button class="btn-acao remover" title="Remover">
+                <span class="material-icons">delete</span> Remover
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>002</td>
+            <td>Headset</td>
+            <td>Headset Gamer Havit</td>
+            <td>R$ 162,90</td>
+            <td>6</td>
+            <td>
+              <button class="btn-acao editar" title="Editar">
+                <span class="material-icons">edit</span> Editar
+              </button>
+              <button class="btn-acao remover" title="Remover">
+                <span class="material-icons">delete</span> Remover
+              </button>
+            </td>
+          </tr>
+          <!-- Mais linhas de produtos aqui -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div> <!-- Fim novo-produto-container -->
