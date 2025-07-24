@@ -21,6 +21,7 @@
   align-items: center;             /* Centraliza verticalmente */
 }
 
+
 /* ============ ESTILO BASE DOS BOTÕES EXPANDIDOS ============ */
 .expanded-btn {
   width: 40%;                       /* Cada botão ocupa 40% da largura do container */
@@ -120,10 +121,10 @@
 .btn-gerenciamento-produtos {
   background-color: #14532D;      /* Verde escuro */
 }
+/* Botão "Relatorio de Produtos" com azul claro */
 
-/* Botão "Excluir Produto" com vermelho escuro */
-.btn-excluir-produto {
-  background-color: #991B1B;      /* Vermelho escuro */
+.btn-relatorios-produtos {
+  background-color: #2563eb;
 }
 
 /* Cor do texto branca em todos */
@@ -250,4 +251,36 @@
 /* Hover nos botões de ação */
 .btn-acao:hover {
   transform: scale(1.05);
+}
+/* ============ AJUSTES PARA EXEMPLOS DE DADOS ============ */
+
+/* Ajusta a cor do texto das células de dados (exemplo criado manualmente) */
+.gamer-table td {
+  color: #e0e0e0; /* Mantém tom claro padrão */
+  font-size: 14px; /* Ajuste fino no tamanho */
+}
+
+/* Ajusta fundo de células se algum estilo de inserção deixar branco */
+.gamer-table td, 
+.gamer-table tr {
+  background-color: transparent !important;
+}
+
+/* Garante contraste nos botões de ação */
+.action-btn mat-icon {
+  color: inherit; /* Herda a cor definida individualmente */
+}
+
+/* Reforça o estilo dos botões para edição/exclusão mesmo nos exemplos */
+.action-btn.edit:hover mat-icon {
+  color: #ffe600; /* Tom amarelo neon no hover */
+}
+
+.action-btn.delete:hover mat-icon {
+  color: #ff5a5a; /* Tom vermelho vibrante no hover */
+}
+
+/* Remove quaisquer estilos herdados que deixem o fundo branco */
+table.gamer-table td {
+  background-color: rgba(0, 0, 0, 0.02); /* Muito sutil escurecimento */
 }

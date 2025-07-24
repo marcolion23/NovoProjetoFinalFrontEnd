@@ -17,16 +17,6 @@
     Gerenciamento de Produtos
   </button>
 
-  <!-- Botão "Excluir Produto" -->
-  <button
-    mat-raised-button
-    class="big-button expanded-btn btn-excluir-produto"
-    [routerLink]="['/products/delete', 123]">
-    <div class="icon-text-container">
-      <span>Excluir Produto</span>
-    </div>
-  </button>
-
   <!-- Botão "Relatórios de Produtos" -->
   <button 
     mat-raised-button
@@ -56,57 +46,4 @@
     </mat-card>
   </div> <!-- Fim dashboard-panels -->
 
-  <!-- Tabela de Produtos - fica fora dos painéis, abaixo deles -->
-  <div class="produtos-tabela-container">
-    <h2 class="produtos-titulo">Lista de Produtos</h2>
-    
-    <div class="tabela-scroll">
-      <table class="produtos-tabela">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Preço</th>
-            <th>Quantidade</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>001</td>
-            <td>Mouse </td>
-            <td>Mouse Gamer Redragon</td>
-            <td>R$ 89,90</td>
-            <td>4</td>
-            <td>
-              <button class="btn-acao editar" title="Editar">
-                <span class="material-icons">edit</span> Editar
-              </button>
-              <button class="btn-acao remover" title="Remover">
-                <span class="material-icons">delete</span> Remover
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>002</td>
-            <td>Headset</td>
-            <td>Headset Gamer Havit</td>
-            <td>R$ 162,90</td>
-            <td>6</td>
-            <td>
-              <button class="btn-acao editar" title="Editar">
-                <span class="material-icons">edit</span> Editar
-              </button>
-              <button class="btn-acao remover" title="Remover">
-                <span class="material-icons">delete</span> Remover
-              </button>
-            </td>
-          </tr>
-          <!-- Mais linhas de produtos aqui -->
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-</div> <!-- Fim novo-produto-container -->
+ 

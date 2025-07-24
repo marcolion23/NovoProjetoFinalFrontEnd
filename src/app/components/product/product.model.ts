@@ -1,5 +1,5 @@
 export interface Product {
-  proId?: number;   
+  proId?: number;
   proNome: string;
   proPrecoCusto: number;
   proPrecoVenda: number;
@@ -10,8 +10,6 @@ export interface Product {
   proAtivo: boolean;
   proStatus?: string;
   dataCadastro?: Date;
-
-  // Novos campos que estavam faltando no seu model:
   proEstoqueMinimo?: number;
   proDescricao?: string;
   proImagemUrl?: string;

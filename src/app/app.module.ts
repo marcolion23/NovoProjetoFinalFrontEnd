@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 
 
 // Angular Material
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -193,6 +194,7 @@ import { PerfilDeleteComponent } from './components/perfil/perfil-delete/perfil-
     MatNativeDateModule,
     MatChipsModule,
     MatCardModule,
+    MatTooltipModule,
 
     // Forms
     FormsModule,

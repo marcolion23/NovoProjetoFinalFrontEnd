@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../product.model';
-import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-product-read',
@@ -9,7 +7,7 @@ import { ProductService } from '../product.service';
 })
 export class ProductReadComponent implements OnInit {
 
-  products!: Product[]
+  // Define as colunas visíveis da tabela
   displayedColumns: string[] = [
     'proId',
     'proNome',
@@ -19,15 +17,37 @@ export class ProductReadComponent implements OnInit {
     'proEstoque',
     'proStatus',
     'proAtualizadoEm',
-    'action'
+    'action' // Coluna de ações
   ];
-  constructor(private productService: ProductService) { }
+
+  // Dados simulados de produtos (mock)
+  products = [
+    {
+      proId: 1,
+      proNome: 'Mouse Gamer RGB',
+      proCategoria: 'Periféricos',
+      proPrecoCusto: 80.00,
+      proPrecoVenda: 139.90,
+      proEstoque: 35,
+      proStatus: 'Ativo',
+      proAtualizadoEm: new Date()
+    },
+    {
+      proId: 2,
+      proNome: 'Teclado Mecânico',
+      proCategoria: 'Periféricos',
+      proPrecoCusto: 150.00,
+      proPrecoVenda: 249.99,
+      proEstoque: 20,
+      proStatus: 'Ativo',
+      proAtualizadoEm: new Date()
+    }
+  ];
+
+  constructor() {}
 
   ngOnInit(): void {
-    this.productService.read().subscribe(products => {
-      this.products = products
-      console.log(products)  
-    })
+    // No futuro, aqui você irá chamar o backend com um service
+    // this.productService.getAll().subscribe(data => this.products = data);
   }
-
 }

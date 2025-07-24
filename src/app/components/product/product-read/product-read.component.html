@@ -56,24 +56,33 @@
       <td mat-cell *matCellDef="let row">{{ row.proAtualizadoEm | date:'shortDate' }}</td>
     </ng-container>
 
-    <!-- Coluna: Ações (Editar e Excluir) -->
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>Ações</th>
-      <td mat-cell *matCellDef="let row">
-        <!-- Botão de editar (ícone edit) -->
-        <button mat-icon-button color="primary"
-                [routerLink]="'/products/update/' + row.proId"
-                class="action-btn edit">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <!-- Botão de excluir (ícone delete) -->
-        <button mat-icon-button color="warn"
-                [routerLink]="'/products/delete/' + row.proId"
-                class="action-btn delete">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+    
+<!-- Coluna: Ações (Editar e Excluir) -->
+<ng-container matColumnDef="action">
+  <th mat-header-cell *matHeaderCellDef>Ações</th>
+  <td mat-cell *matCellDef="let row">
+    <div class="btn-actions-container">
+      <!-- Botão Editar -->
+      <button mat-icon-button class="action-btn edit"
+              [routerLink]="'/products/update/' + row.proId"
+              matTooltip="Editar Produto"
+              matTooltipClass="tooltip-edit">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <!-- Botão Excluir -->
+      <button mat-icon-button class="action-btn delete"
+              [routerLink]="'/products/delete/' + row.proId"
+              matTooltip="Excluir Produto"
+              matTooltipClass="tooltip-delete">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </td>
+</ng-container>
+
+
+
 
     <!-- Linha do cabeçalho da tabela, que usa os nomes definidos no displayedColumns -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

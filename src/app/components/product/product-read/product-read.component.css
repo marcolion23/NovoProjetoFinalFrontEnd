@@ -48,7 +48,8 @@ table.gamer-table th::after {
 /* Células comuns */
 table.gamer-table td {
     padding: 14px; /* Espaçamento interno */
-    border-bottom: 1px solid #444; /* Linha divisória discreta */
+    box-shadow: 0 0 0 1px #0af8c1; /* Glow */ 
+    background-color: #ffffff;   
 }
 
 /* Linhas ao passar o mouse */
@@ -69,16 +70,86 @@ table.gamer-table tr:hover {
 
 /* Efeito de "zoom leve" e glow ao passar o mouse */
 .action-btn:hover {
-    transform: scale(1.1); /* Leve aumento */
-    box-shadow: 0 0 6px rgba(10, 248, 193, 0.5); /* Glow neon ao hover */
+    transform: scale(1.2); /* Leve aumento */
 }
 
 /* Ícone do botão de edição */
 .edit mat-icon {
-    color: #f4d03f; /* Amarelo gamer para edição */
+    color: #0D3B66; /* Amarelo gamer para edição */
 }
 
 /* Ícone do botão de exclusão */
 .delete mat-icon {
-    color: #e35e6b; /* Vermelho forte para ação perigosa */
+    color: #f80000; /* Vermelho forte para ação perigosa */
 }
+
+.btn-actions-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .action-btn {
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  
+  .action-btn mat-icon {
+    font-size: 22px;
+    transition: transform 0.2s ease;
+  }
+/* ===== TOOLTIP PERSONALIZADO - MINHA CONTA ===== */
+.tooltip-edit {
+    position: absolute;                          /* Permite posicionamento flutuante */
+    bottom: -35px;                               /* Posiciona abaixo do ícone */
+    left: 50%;                                   /* Centraliza horizontalmente */
+    transform: translateX(-50%);                 /* Corrige a centralização */
+    background-color: #000000;                   /* Fundo preto */
+    color: #ffffff;                              /* Texto branco */
+    padding: 6px 10px;                           /* Espaçamento interno */
+    border-radius: 4px;                          /* Cantos arredondados */
+    font-size: 0.75rem;                          /* Tamanho da fonte */
+    white-space: nowrap;                         /* Impede quebra de linha */
+    opacity: 0;                                   /* Invisível por padrão */
+    visibility: hidden;                          /* Oculto por padrão */
+    transition: opacity 0.3s ease;               /* Transição suave */
+    pointer-events: none;                        /* Não interfere no hover */
+    z-index: 1002;                                /* Fica acima do cabeçalho */
+}
+/* ===== TOOLTIP PERSONALIZADO - MINHA CONTA ===== */
+.tooltip-delete {
+    position: absolute;                          /* Permite posicionamento flutuante */
+    bottom: -35px;                               /* Posiciona abaixo do ícone */
+    left: 50%;                                   /* Centraliza horizontalmente */
+    transform: translateX(-50%);                 /* Corrige a centralização */
+    background-color: #000000;                   /* Fundo preto */
+    color: #ffffff;                              /* Texto branco */
+    padding: 6px 10px;                           /* Espaçamento interno */
+    border-radius: 4px;                          /* Cantos arredondados */
+    font-size: 0.75rem;                          /* Tamanho da fonte */
+    white-space: nowrap;                         /* Impede quebra de linha */
+    opacity: 0;                                   /* Invisível por padrão */
+    visibility: hidden;                          /* Oculto por padrão */
+    transition: opacity 0.3s ease;               /* Transição suave */
+    pointer-events: none;                        /* Não interfere no hover */
+    z-index: 1002;                                /* Fica acima do cabeçalho */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

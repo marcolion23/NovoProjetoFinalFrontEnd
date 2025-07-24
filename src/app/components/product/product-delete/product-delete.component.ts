@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
+import { Product } from '../product.model';  // importe o model para usar o tipo correto
 
 @Component({
   selector: 'app-product-delete',
@@ -10,7 +11,7 @@ import { ProductService } from '../product.service';
 export class ProductDeleteComponent implements OnInit {
 
   productId!: number;  // ID que vem pela URL
-  product: any;        // Objeto produto carregado para exibir na tela
+  product?: Product;   // Usar o tipo Product e opcional
 
   constructor(
     private route: ActivatedRoute,
@@ -32,11 +33,11 @@ export class ProductDeleteComponent implements OnInit {
 
   // Busca o produto pelo ID para mostrar na tela
   loadProduct(): void {
-    this.productService.getProductById(this.productId).subscribe({
-      next: (data) => {
+    this.productService.readById(this.productId).subscribe({
+      next: (data: Product) => {
         this.product = data;
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Erro ao carregar produto:', err);
         this.router.navigate(['/products']);
       }
@@ -45,12 +46,12 @@ export class ProductDeleteComponent implements OnInit {
 
   // Exclui o produto
   deleteProduct(): void {
-    this.productService.deleteProduct(this.productId).subscribe({
+    this.productService.delete(this.productId).subscribe({
       next: () => {
         console.log('Produto excluído com sucesso!');
         this.router.navigate(['/products']);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Erro ao excluir produto:', err);
       }
     });
