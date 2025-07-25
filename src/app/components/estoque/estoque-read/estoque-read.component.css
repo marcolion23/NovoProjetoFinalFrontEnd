@@ -4,8 +4,8 @@
   margin: 120px auto 40px;
   padding: 25px 30px;
   border-radius: 12px;
-  background: #1e293b;                   /* fundo escuro gamer */
-  color: #e0e0e0;                        /* texto claro */
+  background: #ffffff;                   /* fundo escuro gamer */
+  color: #000000;                        /* texto claro */
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
@@ -40,7 +40,7 @@ mat-card-title {
   backdrop-filter: blur(4px);
   border: 1px solid rgba(76, 175, 80, 0.4);
   border-radius: 8px;
-  color: #4caf50;
+  color: #2d00f8;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s;
@@ -70,7 +70,7 @@ mat-card-title {
 .tabela-estoque th {
   padding: 14px 12px;
   text-align: left;
-  color: #4caf50;                        /* verde destaque */
+  color: #1605ff;                        /* verde destaque */
   font-weight: 600;
 }
 
@@ -97,7 +97,7 @@ mat-card-title {
 }
 .status.esgotado {
   background: rgba(244, 67, 54, 0.2);
-  color: #f44336;
+  color: #ff1100;
 }
 
 /* Totalizadores */

@@ -1,11 +1,16 @@
 <!-- ============ BOTÕES DE PAGAMENTOS ============ -->
 <div class="pagamentos-btns-container">
+
   <button class="expanded-btn btn-add-pagamento"
    [routerLink]="'/fpagamentos/create/'">
     <i class="material-icons">add</i> Adicionar Pagamento
   </button>
   <button class="expanded-btn btn-relatorios-pagamento" [routerLink]="'/pagamentos/relatorios'">
     <i class="material-icons">bar_chart</i> Relatórios
+  </button>
+
+  <button class="expanded-btn btn-gerenciamento-pagamento" [routerLink]="'/fpagamentos/update/:fpgId'">
+    <i class="material-icons">bar_chart</i> Gerenciamento de Pagamentos
   </button>
 </div>
 
@@ -27,45 +32,5 @@
     <i class="material-icons">update</i>
     <h2>Última Atualização</h2>
     <p>{{ ultimaAtualizacao }}</p>
-  </div>
-</div>
-
-<!-- ============ TABELA DE PAGAMENTOS ============ -->
-<div class="pagamentos-tabela-container">
-  <h2 class="pagamentos-titulo">Gerenciamento de Pagamentos</h2>
-  <div class="tabela-scroll">
-    <table class="pagamentos-tabela">
-      <thead>
-        <tr>
-          <th>Cliente</th>
-          <th>Valor</th>
-          <th>Data</th>
-          <th>Status</th>
-          <th>Forma de Pagamento</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let pagamento of listaPagamentos">
-          <td>{{ pagamento.nome }}</td>
-          <td>R$ {{ pagamento.valor | number:'1.2-2' }}</td>
-          <td>{{ pagamento.dataCriacao }}</td>
-          <td>
-            <span class="status-badge" [ngClass]="pagamento.status ? 'status-pago' : 'status-pendente'">
-              {{ pagamento.status ? 'Pago' : 'Pendente' }}
-            </span>
-          </td>
-          <td>{{ pagamento.tipo }}</td>
-          <td>
-            <button class="btn-acao editar" (click)="editarPagamento(pagamento.id)">
-              <i class="material-icons">edit</i> Editar
-            </button>
-            <button class="btn-acao remover" (click)="removerPagamento(pagamento.id)">
-              <i class="material-icons">delete</i> Remover
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>

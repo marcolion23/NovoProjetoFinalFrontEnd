@@ -19,13 +19,21 @@
         <input matInput placeholder="Ex: 123.456.789-00" [(ngModel)]="cliente.cliCpf" name="cliCpf" required>
       </mat-form-field>
   
-      <!-- Campo: Data de Nascimento com Datepicker do Angular Material -->
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Data de Nascimento</mat-label>
-        <input matInput [matDatepicker]="picker" placeholder="DD/MM/AAAA" [(ngModel)]="cliente.cliDataNascimento" name="cliDataNascimento" required>
+        <input 
+          matInput 
+          [matDatepicker]="picker" 
+          placeholder="DD/MM/AAAA" 
+          [(ngModel)]="cliente.cliDataNascimento" 
+          name="cliDataNascimento" 
+          required
+          [max]="maxDate"
+        >
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
+      
   
       <!-- Campo: Telefone -->
       <mat-form-field appearance="outline" class="half-width">

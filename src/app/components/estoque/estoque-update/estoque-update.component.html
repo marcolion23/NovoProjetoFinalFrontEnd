@@ -1,37 +1,55 @@
-<!-- CONTAINER PRINCIPAL DA TELA -->
-<div class="container-movimentar">
-  <h2 class="titulo-movimentar">Movimentar Estoque</h2>
+<!-- ============ TABELA DE GERENCIAMENTO DO ESTOQUE ============ -->
+<div class="estoque-tabela-container">
+  <h2 class="estoque-titulo">Gerenciamento de Estoque</h2>
 
-  <form class="form-movimentar">
-    <!-- Seleção do produto -->
-    <div class="campo-form">
-      <label for="produto">Produto:</label>
-      <select id="produto" name="produto">
-        <option>Mouse Gamer XYZ</option>
-        <option>Teclado Mecânico Pro</option>
-        <option>Headset Super Bass</option>
-        <!-- Substituir por dados reais do backend -->
-      </select>
-    </div>
-
-    <!-- Tipo de movimentação -->
-    <div class="campo-form">
-      <label for="tipo">Tipo de movimentação:</label>
-      <select id="tipo" name="tipo">
-        <option>Entrada</option>
-        <option>Saída</option>
-      </select>
-    </div>
-
-    <!-- Quantidade -->
-    <div class="campo-form">
-      <label for="quantidade">Quantidade:</label>
-      <input type="number" id="quantidade" name="quantidade" min="1" required>
-    </div>
-
-    <!-- Botão de enviar -->
-    <button type="submit" class="btn-movimentar-confirmar">
-      Confirmar Movimentação
-    </button>
-  </form>
+  <!-- Container para permitir rolagem horizontal em telas pequenas -->
+  <div class="tabela-scroll">
+    <table class="estoque-tabela">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Categoria</th>
+          <th>Quantidade</th>
+          <th>Preço Unitário</th>
+          <th>Última Entrada</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Exemplo de linha (depois substituir pelos dados reais) -->
+        <tr>
+          <td>Mouse Gamer XYZ</td>
+          <td>Acessórios</td>
+          <td>25</td>
+          <td>R$ 199,90</td>
+          <td>12/07/2025</td>
+          <td>
+            <!-- Botão Editar com ícone -->
+            <button class="btn-acao editar">
+              <i class="material-icons">edit</i> Editar
+            </button>
+            <!-- Botão Remover com ícone -->
+            <button class="btn-acao remover">
+              <i class="material-icons">delete</i> Remover
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Teclado Mecânico Pro</td>
+          <td>Periféricos</td>
+          <td>10</td>
+          <td>R$ 459,90</td>
+          <td>10/07/2025</td>
+          <td>
+            <button class="btn-acao editar">
+              <i class="material-icons">edit</i> Editar
+            </button>
+            <button class="btn-acao remover">
+              <i class="material-icons">delete</i> Remover
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

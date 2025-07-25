@@ -62,3 +62,104 @@
   background-color: #166534;                 /* Verde levemente mais claro */
   transform: translateY(-3px);
 }
+/* ============ CONTAINER DA TABELA DE ESTOQUE ============ */
+.estoque-tabela-container {
+  max-width: 1200px;                                 /* Largura máxima */
+  margin: 40px auto;                                 /* Centraliza na tela */
+  padding: 0 20px;                                   /* Espaço lateral */
+  font-family: 'Segoe UI', sans-serif;                /* Fonte moderna */
+}
+
+/* Título acima da tabela */
+.estoque-titulo {
+  font-size: 2rem;                                   /* Tamanho grande */
+  margin-bottom: 20px;                               /* Espaço abaixo */
+  color: #ffffff;                                    /* Branco */
+  text-align: center;                                /* Centraliza */
+}
+
+/* Container para rolagem horizontal (responsivo) */
+.tabela-scroll {
+  overflow-x: auto;                                  /* Rolagem horizontal se precisar */
+}
+
+/* Estilo principal da tabela */
+.estoque-tabela {
+  width: 100%;                                       /* Ocupa toda largura */
+  border-collapse: separate;                          /* Permite bordas arredondadas */
+  border-spacing: 0;                                 /* Remove espaços internos */
+  background-color: #0D3B66;                         /* Azul escuro igual painel */
+  border-radius: 12px;                               /* Bordas arredondadas */
+  overflow: hidden;                                  /* Esconde bordas fora */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);            /* Sombra elegante */
+}
+
+/* Cabeçalho da tabela */
+.estoque-tabela thead {
+  background-color: #000000;                          /* Tom mais escuro */
+}
+
+/* Células do cabeçalho */
+.estoque-tabela th {
+  padding: 20px 12px;                                /* Espaço interno */
+  text-align: left;                                  /* Alinha à esquerda */
+  color: #ffffff;                                    /* Branco */
+  font-size: 1.2rem;                                 /* Tamanho médio */
+  font-weight: 480;                                  /* Negrito */
+  border-bottom: 2px solid #991B1B;                  /* Linha inferior vermelha */
+}
+
+/* Células do corpo */
+.estoque-tabela td {
+  padding: 14px 12px;                                /* Espaço interno */
+  color: #ffffff;                                    /* Cinza claro */
+  font-size: 1rem;                                   /* Tamanho normal */
+  border-bottom: 1px solid rgba(255,255,255,0.1);     /* Linha sutil de divisão */
+}
+
+/* Zebra effect: linhas alternadas com tom levemente mais claro */
+.estoque-tabela tbody tr:nth-child(odd) {
+  background-color: rgba(255,255,255,0.04);          /* Leve destaque */
+}
+
+/* Hover nas linhas: destaque suave */
+.estoque-tabela tbody tr:hover {
+  background-color: rgba(255,255,255,0.08);          /* Tom mais claro ao passar o mouse */
+  transition: background-color 0.2s;                 /* Suaviza mudança */
+}
+
+/* ============ BOTÕES DE AÇÃO (Editar e Remover) ============ */
+.btn-acao {
+  display: inline-flex;                              /* Ícone e texto na mesma linha */
+  align-items: center;                               /* Centraliza verticalmente */
+  padding: 6px 10px;                                 /* Espaço interno */
+  margin-right: 6px;                                 /* Espaço entre botões */
+  border: none;                                      /* Remove borda */
+  border-radius: 6px;                                /* Bordas arredondadas */
+  cursor: pointer;                                   /* Mãozinha ao passar o mouse */
+  font-weight: 500;                                  /* Negrito médio */
+  font-size: 0.9rem;                                 /* Tamanho pequeno */
+  color: #ffffff;                                    /* Branco */
+  transition: background-color 0.3s, transform 0.2s; /* Suaviza hover */
+}
+
+/* Ícone dentro do botão */
+.btn-acao .material-icons {
+  font-size: 18px;                                   /* Tamanho pequeno do ícone */
+  margin-right: 4px;                                 /* Espaço entre ícone e texto */
+}
+
+/* Botão Editar em azul */
+.btn-acao.editar {
+  background-color: #2563eb;                         /* Azul vibrante */
+}
+
+/* Botão Remover em vermelho */
+.btn-acao.remover {
+  background-color: #ff0000;                          /* Vermelho vibrante */
+}
+
+/* Hover: botão cresce levemente */
+.btn-acao:hover {
+  transform: scale(1.05);                            /* Aumenta suavemente */
+}

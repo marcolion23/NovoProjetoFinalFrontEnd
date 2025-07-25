@@ -1,4 +1,4 @@
-<!-- ============ CONTAINER DOS BOTÕES DE AÇÃO ============ -->
+clientes/update/:cliId<!-- ============ CONTAINER DOS BOTÕES DE AÇÃO ============ -->
 <div class="cliente-btns-container">
   <!-- Botão para novo cliente -->
   <button class="expanded-btn btn-adicionar-cliente" 
@@ -8,13 +8,13 @@
 
   <!-- Botão para GERENCIAR CLIENTE -->
   <button class="expanded-btn btn-exportar-cliente"    
-   [routerLink]="'/clientes/read/:cliId'">
+   [routerLink]="'/clientes/update/:cliId'">
     Gerenciar Clientes
   </button>
 
   <!-- Botão para acessar relatórios relacionados a clientes -->
   <button class="expanded-btn btn-relatorios-cliente" 
-  [routerLink]="'/clientes/update/:cliId'">
+  [routerLink]="'/clientes/read/:cliId'">
     Relatórios de Clientes
   </button>
 </div>

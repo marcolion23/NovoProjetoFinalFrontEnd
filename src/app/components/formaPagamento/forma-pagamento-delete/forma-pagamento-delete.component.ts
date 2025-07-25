@@ -15,24 +15,30 @@ export class FormaPagamentoDeleteComponent implements OnInit {
   constructor(
     private formaPagamentoService: FormaPagamentoService, 
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    const proId = this.route.snapshot.paramMap.get('fpgId');
-    this.formaPagamentoService.readById(proId!).subscribe(formaPagamento =>{
-      this.formaPagamento = formaPagamento
-    })
+    const proIdStr = this.route.snapshot.paramMap.get('fpgId');
+    if (proIdStr) {
+      const proId = Number(proIdStr);
+      this.formaPagamentoService.readById(proId).subscribe(formaPagamento => {
+        this.formaPagamento = formaPagamento;
+      });
+    }
   }
 
   deleteFormaPagamento(): void {
-    this.formaPagamentoService.delete(this.formaPagamento.fpgId!).subscribe(() =>{
-    this.formaPagamentoService.showMessage('Produto excluido com sucesso!')  
-    this.router.navigate(['/fpagamentos'])
-    })
+    if (this.formaPagamento.fpgId) {
+      this.formaPagamentoService.delete(this.formaPagamento.fpgId).subscribe(() => {
+        this.formaPagamentoService.showMessage('Forma de pagamento excluída com sucesso!');
+        this.router.navigate(['/fpagamentos']);
+      });
+    }
   }
 
-  cancel(): void{
-    this.router.navigate(['/fpagamentos'])
+  cancel(): void {
+    this.router.navigate(['/fpagamentos']);
   }
 
 }

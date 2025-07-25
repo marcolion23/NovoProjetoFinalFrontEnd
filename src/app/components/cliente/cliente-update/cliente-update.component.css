@@ -1,8 +1,78 @@
-form{
+.cliente-update-container {
+    max-width: 1200px;                 /* mesma largura da tabela */
+    margin: 40px auto 80px;            /* centralizado com espaçamento vertical */
+    background-color: #0D3B66;        /* azul escuro igual tabela */
+    padding: 40px 50px;
+    border-radius: 12px;              /* bordas arredondadas */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3); /* sombra forte */
+    font-family: 'Segoe UI', sans-serif;
+    color: #ffffff;
+  }
+  
+  .titulo {
+    font-size: 2.4rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0af8c1;                  /* verde-água do tema */
+    font-weight: 600;
+  }
+  
+  .cliente-form {
     display: flex;
-    flex-direction: column;
-}
-
-button{
-    margin: 20px 15px 0px 0px;
-}
+    flex-wrap: wrap;                 /* permite quebrar linha */
+    gap: 24px;                      /* espaçamento entre campos */
+    justify-content: space-between;
+  }
+  
+  .form-campo {
+    flex: 1 1 48%;                  /* dois campos por linha, flexível */
+    background-color: #12355b;      /* fundo azul mais escuro que container */
+    border-radius: 10px;
+    padding: 12px;
+  }
+  
+  /* Ajusta campos para ocupar 100% em telas pequenas */
+  @media (max-width: 720px) {
+    .form-campo {
+      flex-basis: 100%;
+    }
+  }
+  
+  .botoes-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 30px;
+  }
+  
+  button[mat-flat-button] {
+    background-color: #14532D;  /* verde escuro */
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 14px 36px;
+    border-radius: 12px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  button[mat-flat-button]:hover:not(:disabled) {
+    background-color: #166534;
+    transform: translateY(-3px);
+  }
+  
+  button[mat-stroked-button] {
+    border-color: #991B1B;
+    color: #991B1B;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 14px 36px;
+    border-radius: 12px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  button[mat-stroked-button]:hover {
+    background-color: #991B1B;
+    color: white;
+    cursor: pointer;
+  }
+  

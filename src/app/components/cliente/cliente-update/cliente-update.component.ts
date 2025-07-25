@@ -12,25 +12,41 @@ export class ClienteUpdateComponent implements OnInit {
 
   cliente!: Cliente;
 
-  constructor(private clienteService: ClienteService, 
+  constructor(
+    private clienteService: ClienteService, 
     private router: Router, 
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    const cliId = this.route.snapshot.paramMap.get('cliId')
-    this.clienteService.readById(cliId!).subscribe((cliente: Cliente) =>{
-      this.cliente = cliente
-    })
+    const cliId = this.route.snapshot.paramMap.get('cliId');
+    if (cliId) {
+      this.clienteService.readById(cliId).subscribe((cliente: Cliente) => {
+        this.cliente = cliente;
+      });
+    } else {
+      // Se não tiver cliId, redireciona ou tratar erro
+      this.router.navigate(['/clientes']);
+    }
   }
 
-  updateCliente(): void {
+  // Método com nome igual ao usado no HTML: atualizarCliente()
+  atualizarCliente(): void {
     this.clienteService.update(this.cliente).subscribe(() => {
-      this.clienteService.showMessage('Cliente atualizado com sucesso!')
-      this.router.navigate(['/clientes'])
-    })
+      this.clienteService.showMessage('Cliente atualizado com sucesso!');
+      this.router.navigate(['/clientes']);
+    });
   }
 
-  cancel(): void {
-    this.router.navigate(['/clientes'])
+  // Método para cancelar edição
+  cancelar(): void {
+    this.router.navigate(['/clientes']);
   }
+  updateCliente(): void {
+    // código
+  }
+  
+  cancel(): void {
+    // código
+  }  
 }

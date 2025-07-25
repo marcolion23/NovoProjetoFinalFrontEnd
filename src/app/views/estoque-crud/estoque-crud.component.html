@@ -3,17 +3,19 @@
   <!-- Botão "Movimentar Estoque" -->
   <button 
     class="expanded-btn btn-movimentar-estoque"
-    [routerLink]="'/estoque/update'">
-    Movimentar Estoque
+    [routerLink]="'/estoque/update/:estoqueId'">
+   Gerenciamento de Estoque
   </button>
 
   <!-- Botão "Relatórios de Estoque" -->
   <button 
     class="expanded-btn btn-relatorios-estoque"
-    [routerLink]="'/estoque/read'">
+    [routerLink]="'/estoque/read/:estoqueId'">
     Relatórios de Estoque
   </button>
 </div>
+
+
 
 <!-- ============ PAINÉIS DO DASHBOARD ============ -->
 <div class="dashboard-panels">
@@ -39,58 +41,3 @@
   </div>
 </div>
 
-<!-- ============ TABELA DE GERENCIAMENTO DO ESTOQUE ============ -->
-<div class="estoque-tabela-container">
-  <h2 class="estoque-titulo">Gerenciamento de Estoque</h2>
-
-  <!-- Container para permitir rolagem horizontal em telas pequenas -->
-  <div class="tabela-scroll">
-    <table class="estoque-tabela">
-      <thead>
-        <tr>
-          <th>Produto</th>
-          <th>Categoria</th>
-          <th>Quantidade</th>
-          <th>Preço Unitário</th>
-          <th>Última Entrada</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Exemplo de linha (depois substituir pelos dados reais) -->
-        <tr>
-          <td>Mouse Gamer XYZ</td>
-          <td>Acessórios</td>
-          <td>25</td>
-          <td>R$ 199,90</td>
-          <td>12/07/2025</td>
-          <td>
-            <!-- Botão Editar com ícone -->
-            <button class="btn-acao editar">
-              <i class="material-icons">edit</i> Editar
-            </button>
-            <!-- Botão Remover com ícone -->
-            <button class="btn-acao remover">
-              <i class="material-icons">delete</i> Remover
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>Teclado Mecânico Pro</td>
-          <td>Periféricos</td>
-          <td>10</td>
-          <td>R$ 459,90</td>
-          <td>10/07/2025</td>
-          <td>
-            <button class="btn-acao editar">
-              <i class="material-icons">edit</i> Editar
-            </button>
-            <button class="btn-acao remover">
-              <i class="material-icons">delete</i> Remover
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>

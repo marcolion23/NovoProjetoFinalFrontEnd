@@ -9,9 +9,10 @@ import { Product } from '../product.model';
   styleUrls: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
-
-  dataCadastro: Date = new Date();
   maxDate: Date = new Date();
+
+  dataCadastro!: Date;
+  
 
   product: Product = {
     proNome: '',

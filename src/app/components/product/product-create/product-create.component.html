@@ -166,13 +166,21 @@
         <input matInput type="number" placeholder="Ex: 100" [(ngModel)]="product.proEstoque" name="proEstoque" min="0" required>
       </mat-form-field>
 
-      <!-- Data de Cadastro -->
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Data de Cadastro</mat-label>
-        <input matInput [matDatepicker]="picker" placeholder="DD/MM/AAAA" name="dataCadastro" readonly>
+        <input 
+          matInput 
+          [matDatepicker]="picker" 
+          placeholder="DD/MM/AAAA" 
+          name="dataCadastro" 
+          [max]="maxDate" 
+          readonly
+          [(ngModel)]="dataCadastro"
+        >
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
+      
 
       <!-- Status -->
       <mat-form-field appearance="outline" class="full-width">

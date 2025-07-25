@@ -1,21 +1,44 @@
-<mat-card>
-    <mat-card-title>Alterar Forma de Pagamento</mat-card-title>
-    <form>
-        <mat-form-field>
-            <input matInput placeholder="Descrição" [(ngModel)]="formaPagamento.fpgDescricao" name="fpgDescricao">
-        </mat-form-field>        
-    </form>
-
-    <button mat-raised-button (click)="updateFormaPagamento()" color="primary">
-        Atualizar
-    </button>
-    
-    <button mat-raised-button (click)="cancel()">
-        Cancelar
-    </button>
-
-</mat-card>
-
-
-
-
+<div class="pagamentos-tabela-container">
+  <h2 class="pagamentos-titulo">Gerenciamento de Pagamentos</h2>
+  <div class="tabela-scroll">
+    <table class="pagamentos-tabela">
+      <thead>
+        <tr>
+          <th>Cliente ID</th>
+          <th>Descrição</th>
+          <th>Valor</th>
+          <th>Data</th>
+          <th>Status</th>
+          <th>Tipo</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pagamento of listaPagamentos">
+          <td>{{ pagamento.clienteId }}</td>
+          <td>{{ pagamento.fpgDescricao }}</td>
+          <td>R$ {{ pagamento.valor | number:'1.2-2' }}</td>
+          <td>{{ pagamento.data | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="{
+              'status-pago': pagamento.status === 'Pago',
+              'status-pendente': pagamento.status === 'Pendente',
+              'status-cancelado': pagamento.status === 'Cancelado'
+            }">
+              {{ pagamento.status }}
+            </span>
+          </td>
+          <td>{{ pagamento.tipo }}</td>
+          <td>
+            <button class="btn-acao editar" (click)="editarPagamento(pagamento.fpgId)">
+              <i class="material-icons">edit</i> Editar
+            </button>
+            <button class="btn-acao remover" (click)="removerPagamento(pagamento.fpgId)">
+              <i class="material-icons">delete</i> Remover
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

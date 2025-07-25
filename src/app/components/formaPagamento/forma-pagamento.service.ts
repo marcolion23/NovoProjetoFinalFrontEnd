@@ -9,39 +9,41 @@ import { Observable } from 'rxjs';
 })
 export class FormaPagamentoService {
 
-  baseUrl = "http://localhost:8080/fpagamentos"
+  baseUrl = "http://localhost:8080/fpagamentos";
 
   constructor(private snackBar: MatSnackBar, private http: HttpClient) { }
 
   showMessage(msg: string): void {
-    this.snackBar.open(msg, 'X',{
+    this.snackBar.open(msg, 'X', {
       duration: 3000,
       horizontalPosition: "right",
       verticalPosition: "top"
-    })
+    });
   }
 
-  create(formaPagamento: FormaPagamento): Observable<FormaPagamento>{
-    return this.http.post<FormaPagamento>(this.baseUrl, formaPagamento)
+  create(formaPagamento: FormaPagamento): Observable<FormaPagamento> {
+    return this.http.post<FormaPagamento>(this.baseUrl, formaPagamento);
   }
 
-  read(): Observable<FormaPagamento[]>{
-    return this.http.get<FormaPagamento[]>(this.baseUrl)
+  read(): Observable<FormaPagamento[]> {
+    return this.http.get<FormaPagamento[]>(this.baseUrl);
   }
 
-  readById(fpgId: string): Observable<FormaPagamento>{
-    const url = `${this.baseUrl}/${fpgId}`
-    return this.http.get<FormaPagamento>(url)
-  }
- 
-  update(formaPagamento: FormaPagamento): Observable<FormaPagamento>{
-    const url = `${this.baseUrl}/${formaPagamento.fpgId}`
-    return this.http.put<FormaPagamento>(url, formaPagamento)
-  }
-  
-  delete(fpgId: number): Observable<FormaPagamento>{    
-    const url = `${this.baseUrl}/${fpgId}`
-    return this.http.delete<FormaPagamento>(url)
+  readById(fpgId: number): Observable<FormaPagamento> {
+    const url = `${this.baseUrl}/${fpgId}`;
+    return this.http.get<FormaPagamento>(url);
   }
 
+  update(formaPagamento: FormaPagamento): Observable<FormaPagamento> {
+    if (!formaPagamento.fpgId) {
+      throw new Error('FormaPagamento ID is required for update.');
+    }
+    const url = `${this.baseUrl}/${formaPagamento.fpgId}`;
+    return this.http.put<FormaPagamento>(url, formaPagamento);
+  }
+
+  delete(fpgId: number): Observable<void> {
+    const url = `${this.baseUrl}/${fpgId}`;
+    return this.http.delete<void>(url);
+  }
 }

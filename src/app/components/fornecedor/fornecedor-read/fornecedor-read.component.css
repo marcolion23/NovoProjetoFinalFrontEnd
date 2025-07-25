@@ -123,3 +123,107 @@ button {
   word-wrap: break-word;
   max-width: 180px;
 }
+
+
+.fornecedores-tabela-container {
+  max-width: 1600px;
+  padding: 120px 20px 20px; /* padding-top aumentado */
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0 auto; /* centraliza horizontalmente */
+}
+
+
+
+/* Título da tabela */
+.fornecedores-titulo {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Rolagem horizontal se necessário */
+.tabela-scroll {
+  overflow-x: auto;
+}
+
+/* Tabela principal */
+.fornecedores-tabela {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #0D3B66;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+/* Cabeçalho da tabela */
+.fornecedores-tabela thead {
+  background-color: #1e293b;
+}
+
+/* Células do cabeçalho */
+.fornecedores-tabela th {
+  padding: 16px 12px;
+  text-align: left;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-bottom: 2px solid #991B1B; /* Linha inferior vermelha */
+}
+
+/* Células do corpo */
+.fornecedores-tabela td {
+  padding: 14px 12px;
+  color: #e0e0e0;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Linhas alternadas com cor sutil */
+.fornecedores-tabela tbody tr:nth-child(odd) {
+  background-color: rgba(255,255,255,0.04);
+}
+
+/* Hover nas linhas */
+.fornecedores-tabela tbody tr:hover {
+  background-color: rgba(255,255,255,0.08);
+  transition: background-color 0.2s;
+}
+
+/* ============ BOTÕES DE AÇÃO NA TABELA ============ */
+.btn-acao {
+  display: inline-flex;                           /* Ícone e texto alinhados */
+  align-items: center;
+  padding: 6px 10px;
+  margin-right: 6px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #ffffff;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Ícone do botão */
+.btn-acao .material-icons {
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+/* Botão editar - azul */
+.btn-acao.editar {
+  background-color: #2563eb;
+}
+
+/* Botão remover - vermelho */
+.btn-acao.remover {
+  background-color: #dc2626;
+}
+
+/* Hover nos botões de ação */
+.btn-acao:hover {
+  transform: scale(1.05);
+}
