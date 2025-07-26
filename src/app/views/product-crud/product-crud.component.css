@@ -79,6 +79,53 @@
   font-family: 'Segoe UI', sans-serif; /* Fonte moderna */
   transition: transform 0.3s ease; /* Transição suave em hover */
 }
+.panel-info2 {
+  background-color: #991B1B;              /* Cor de fundo do painel */
+   border-radius: 24px;             /* Bordas arredondadas */
+  padding: 40px 30px;              /* Espaço interno */
+  text-align: center;              /* Centraliza o texto */
+  height: 300px;                   /* Altura fixa */
+  display: flex;                   /* Flexbox para alinhar conteúdo */
+  flex-direction: column;         /* Itens em coluna */
+  justify-content: center;        /* Centraliza verticalmente */
+  font-family: 'Segoe UI', sans-serif; /* Fonte moderna */
+  transition: transform 0.3s ease; /* Transição suave em hover */
+}
+/* ============ TÍTULO DENTRO DO PAINEL ============ */
+.panel-info2 h2 {
+  font-size: 35px;                /* Tamanho do título */
+  margin-bottom: 15px;            /* Espaço abaixo do título */
+  color: #ffffff;                 /* Cor branca */
+}
+
+/* ============ PARÁGRAFO DENTRO DO PAINEL ============ */
+.panel-info2 p {
+  font-size: 25px;                /* Tamanho do parágrafo */
+  color: #ffffff;                 /* Cor branca */
+}
+.panel-info3 {
+  background-color: #14532D;              /* Cor de fundo do painel */
+   border-radius: 24px;             /* Bordas arredondadas */
+  padding: 40px 30px;              /* Espaço interno */
+  text-align: center;              /* Centraliza o texto */
+  height: 300px;                   /* Altura fixa */
+  display: flex;                   /* Flexbox para alinhar conteúdo */
+  flex-direction: column;         /* Itens em coluna */
+  justify-content: center;        /* Centraliza verticalmente */
+  font-family: 'Segoe UI', sans-serif; /* Fonte moderna */
+  transition: transform 0.3s ease; /* Transição suave em hover */
+}
+.panel-info3 h2 {
+  font-size: 35px;                /* Tamanho do título */
+  margin-bottom: 15px;            /* Espaço abaixo do título */
+  color: #ffffff;                 /* Cor branca */
+}
+
+/* ============ PARÁGRAFO DENTRO DO PAINEL ============ */
+.panel-info3 p {
+  font-size: 25px;                /* Tamanho do parágrafo */
+  color: #ffffff;                 /* Cor branca */
+}
 
 /* ============ TÍTULO DENTRO DO PAINEL ============ */
 .panel-info h2 {

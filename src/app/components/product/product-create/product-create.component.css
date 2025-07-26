@@ -14,12 +14,26 @@
 .product-card {
   max-width: 900px;                     /* Largura máxima */
   width: 100%;
-  margin-bottom: 40px;                   /* Espaço até a tabela */
+  margin-bottom: 40px;                  /* Espaço até a tabela */
   padding: 32px 24px;                   /* Espaçamento interno */
-  border-radius: 50px;                  /* Bordas arredondadas */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra para profundidade */
-  background-color: #ffffff;            /* Fundo branco */
-  color: #2C3E50;                       /* Cor de texto escura */
+  border-radius: 24px;                  /* Bordas arredondadas */
+  background: #ffffff;                  /* Fundo branco */
+  color: #000000;                       /* Cor de texto escura */
+
+  /* Sombra destacada */
+  box-shadow:
+    0 0 0 6px rgb(5, 32, 180), /* contorno azul ciano claro */
+    0 10px 25px rgba(0, 0, 0, 0.25);    /* sombra principal */
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito ao passar o mouse */
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 0 0 2px rgba(34, 211, 238, 0.3),
+    0 16px 30px rgba(0, 0, 0, 0.35);
 }
 
 /* === FORMULÁRIO: layout flexível com espaçamento === */
@@ -53,8 +67,7 @@
 
 /* === BOTÕES PADRÃO === */
 button {
-  background-color: #ffffff;
-  padding: 12px 28px;
+background-color: #b0bec5;   padding: 12px 28px;
   border-radius: 45px;
   border: none;
   cursor: pointer;
@@ -89,7 +102,7 @@ button[color="warn"]:hover {
 .tabela-container {
   max-width: 900px;                      /* Mesmo tamanho do card */
   width: 100%;
-  margin-top: 40px;                       /* Espaço abaixo do card */
+  margin-top: 40px;                      /* Espaço abaixo do card */
   padding: 0 16px;
   box-sizing: border-box;
 }
