@@ -2,19 +2,19 @@ clientes/update/:cliId<!-- ============ CONTAINER DOS BOTÕES DE AÇÃO ========
 <div class="cliente-btns-container">
   <!-- Botão para novo cliente -->
   <button class="expanded-btn btn-adicionar-cliente" 
-    [routerLink]="'/clientes/create'">
+    [routerLink]="'/cliente/create'">
     Novo Cliente
   </button>
 
   <!-- Botão para GERENCIAR CLIENTE -->
   <button class="expanded-btn btn-exportar-cliente"    
-   [routerLink]="'/clientes/update/:cliId'">
+   [routerLink]="'/cliente/read/:cliId'">
     Gerenciar Clientes
   </button>
 
   <!-- Botão para acessar relatórios relacionados a clientes -->
   <button class="expanded-btn btn-relatorios-cliente" 
-  [routerLink]="'/clientes/read/:cliId'">
+  [routerLink]="'/cliente/read/:cliId'">
     Relatórios de Clientes
   </button>
 </div>
@@ -40,59 +40,5 @@ clientes/update/:cliId<!-- ============ CONTAINER DOS BOTÕES DE AÇÃO ========
     <i class="material-icons">update</i>
     <h2>Última Atualização</h2>
     <p>{{ ultimaAtualizacaoClientes }}</p>
-  </div>
-</div>
-
-<!-- ============ TABELA DE LISTAGEM E GERENCIAMENTO DE CLIENTES ============ -->
-<div class="cliente-tabela-container">
-  <h2 class="cliente-titulo">Gerenciamento de Clientes</h2>
-
-  <!-- Container para scroll horizontal em telas pequenas -->
-  <div class="tabela-scroll">
-    <table class="cliente-tabela" aria-describedby="Gerenciamento de clientes cadastrados">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>CPF</th>
-          <th>Email</th>
-          <th>Telefone</th>
-          <th>Status</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Exemplo de linha - substituir por dados reais dinamicamente -->
-        <tr *ngFor="let cliente of clientesFiltrados">
-          <td>{{ cliente.nome }}</td>
-          <td>{{ cliente.cpf }}</td>
-          <td>{{ cliente.email }}</td>
-          <td>{{ cliente.telefone || '-' }}</td>
-          <td>
-            <!-- Exibe status ativo/inativo com cores -->
-            <span [style.color]="cliente.status ? '#22c55e' : '#ef4444'">
-              {{ cliente.status ? 'Ativo' : 'Inativo' }}
-            </span>
-          </td>
-          <td>
-            <!-- Botão Editar -->
-<button class="btn-acao editar" (click)="editarCliente(cliente.id)" [attr.aria-label]="'Editar cliente ' + cliente.nome">
-              <i class="material-icons">edit</i> Editar
-            </button>
-
-            <!-- Botão Remover -->
-<button class="btn-acao remover" (click)="removerCliente(cliente.id)" [attr.aria-label]="'Remover cliente ' + cliente.nome">
-              <i class="material-icons">delete</i> Remover
-            </button>
-          </td>
-        </tr>
-
-        <!-- Caso não tenha clientes após filtro -->
-        <tr *ngIf="clientesFiltrados.length === 0">
-          <td colspan="6" style="text-align:center; color:#ddd; padding: 30px;">
-            Nenhum cliente encontrado.
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>

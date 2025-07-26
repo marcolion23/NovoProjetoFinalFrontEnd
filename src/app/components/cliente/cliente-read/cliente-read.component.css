@@ -1,113 +1,98 @@
-/* Container principal */
+/* Container principal com fundo gradiente gamer, sombra e bordas arredondadas */
 .table-container {
-  width: 95%;
-  max-width: 1200px;
-  margin: 40px auto;
-  background-color: #0D3B66; /* azul escuro */
-  padding: 20px 15px;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-  overflow-x: auto;
-  font-family: 'Roboto', sans-serif;
-  padding-top: 90px; /* espaço para o cabeçalho fixo */
+    overflow-x: auto; /* Permite rolagem horizontal se necessário */
+    width: 82%; /* Largura máxima de 82% */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background-color: #0D3B66; /* Fundo estilo gamer azul escuro */
+    padding: 18px; /* Espaçamento interno */
+    margin-top: 150px; /* Espaço para header fixo + margem superior */
+    border-radius: 12px; /* Bordas arredondadas */
+    box-shadow: 0 0 15px rgba(48, 22, 199, 0.3); /* Sombra neon suave */
 }
 
-/* Tabela Angular Material customizada */
-.gamer-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 10px;
-  color: #fff;
+/* Tabela principal com layout moderno e espaçado */
+table.gamer-table {
+    width: 95%; /* Ocupa quase toda a largura do container */
+    margin: 0 auto; /* Centraliza a tabela */
+    border: 1px solid #0af8c1; /* Borda neon ao redor */
+    border-collapse: collapse; /* Remove espaçamento entre células */
+    font-family: 'Segoe UI', sans-serif; /* Fonte legível e moderna */
+    color: #e0e0e0; /* Cor do texto clara */
+    background-color: rgba(44, 62, 80, 0.2); /* Fundo translúcido escuro */
+    border-radius: 8px; /* Bordas arredondadas */
+    overflow: hidden; /* Evita "vazamentos" nas bordas */
 }
 
-/* Cabeçalho da tabela */
-.gamer-table th.mat-header-cell {
-  background-color: #044a99;
-  color: #f1f1f1;
-  font-weight: 700;
-  font-size: 1rem;
-  padding: 12px 15px;
-  text-align: left;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  user-select: none;
+/* Cabeçalho das colunas com borda neon e destaque */
+table.gamer-table th {
+    background-color: #ffffff; /* Fundo branco para contraste */
+    color: #2C3E50; /* Texto escuro */
+    font-weight: 600; /* Texto em negrito */
+    padding: 14px; /* Espaço interno */
+    text-align: left; /* Alinhamento do texto */
+    border-bottom: 2px solid #0af8c1; /* Linha inferior neon */
+    border: 1px solid #0af8c1; /* Borda completa */
+    position: relative; /* Necessário para usar ::after */
+
+    font-size: 1.2rem; /* Aumento do tamanho da fonte dos nomes dos campos */
 }
 
-/* Células da tabela */
-.gamer-table td.mat-cell {
-  background-color: #145da0;
-  padding: 12px 15px;
-  font-size: 0.95rem;
-  vertical-align: middle;
-  transition: background-color 0.3s ease;
+/* Efeito glow no cabeçalho */
+table.gamer-table th::after {
+    content: ''; /* Elemento visual extra */
+    position: absolute; /* Posicionamento relativo ao th */
+    left: 0; right: 0; bottom: 0; /* Posição da linha */
+    height: 2px; /* Espessura da linha */
+    background: #0af8c1; /* Cor neon */
+    box-shadow: 0 0 8px #0af8c1; /* Efeito glow */
 }
 
-/* Espaço entre linhas */
-.gamer-table tr.mat-row {
-  border-radius: 10px;
+/* Células comuns da tabela */
+table.gamer-table td {
+    padding: 14px; /* Espaçamento interno */
+    box-shadow: 0 0 0 1px #0af8c1; /* Contorno neon */
+    background-color: #ffffff; /* Fundo branco para contraste */
+    font-size: 1rem; /* Tamanho padrão dos dados */
 }
 
-/* Hover nas linhas */
-.gamer-table tr.mat-row:hover td.mat-cell {
-  background-color: #0b2e60;
-  cursor: pointer;
+/* Efeito ao passar o mouse sobre as linhas */
+table.gamer-table tr:hover {
+    background-color: rgba(42, 61, 80, 0.6); /* Cor de fundo ao hover */
+    transition: background-color 0.2s ease-in-out; /* Transição suave */
 }
 
-/* Estilo para status ativo e inativo */
-.ativo {
-  color: #39d353; /* verde vibrante */
-  font-weight: 600;
+/* ============ BOTÕES DE AÇÃO (Editar e Remover) ============ */
+.btn-acao {
+  display: inline-flex;                              /* Ícone + texto na mesma linha */
+  align-items: center;                               /* Alinhamento vertical central */
+  padding: 10px 10px;                                /* Espaço interno */
+  margin-right: 15px;                                /* Espaço entre os botões */
+  border: none;                                      /* Sem bordas */
+  border-radius: 6px;                                /* Bordas levemente arredondadas */
+  cursor: pointer;                                   /* Cursor em forma de mão */
+  font-weight: 500;                                  /* Peso médio do texto */
+  font-size: 1.0rem;                                 /* Tamanho padrão do texto */
+  color: #ffffff;                                    /* Cor branca no texto */
+  transition: background-color 0.3s, transform 0.2s; /* Transições suaves */
 }
 
-.inativo {
-  color: #e63946; /* vermelho suave */
-  font-weight: 600;
+/* Ícones dentro dos botões */
+.btn-acao .material-icons {
+  font-size: 18px;                                   /* Tamanho dos ícones */
+  margin-right: 4px;                                 /* Espaço entre ícone e texto */
 }
 
-/* Botões de ação */
-.action-btn {
-  color: #f1f1f1;
-  transition: color 0.3s ease;
-  margin-right: 8px;
+/* Botão Editar com cor azul vibrante */
+.btn-acao.editar {
+  background-color: #2563eb;                         /* Cor azul gamer */
 }
 
-.action-btn.edit:hover {
-  color: #39d353; /* verde ao passar mouse */
+/* Botão Remover com cor vermelha vibrante */
+.btn-acao.remover {
+  background-color: #ff0000;                         /* Vermelho forte */
 }
 
-.action-btn.delete:hover {
-  color: #e63946; /* vermelho ao passar mouse */
-}
-
-/* Ícones */
-mat-icon {
-  font-size: 20px;
-}
-
-/* Responsividade */
-@media (max-width: 800px) {
-  .table-container {
-    width: 100%;
-    margin: 20px 5px;
-    padding: 15px 10px;
-  }
-  .gamer-table th.mat-header-cell,
-  .gamer-table td.mat-cell {
-    padding: 10px 8px;
-    font-size: 0.85rem;
-  }
-}
-
-/* Para telas muito pequenas, exibir tabela como bloco */
-@media (max-width: 450px) {
-  .gamer-table {
-    display: block;
-    overflow-x: auto;
-  }
-  .gamer-table tr.mat-header-row,
-  .gamer-table tr.mat-row {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-  }
+/* Aumenta levemente ao passar o mouse */
+.btn-acao:hover {
+  transform: scale(1.05);                            /* Efeito de zoom leve */
 }

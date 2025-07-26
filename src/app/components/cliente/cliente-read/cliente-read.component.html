@@ -1,75 +1,64 @@
-<!-- ======================== -->
-<!-- Container principal -->
-<!-- ======================== -->
+<!-- Container principal com sombra, fundo gradiente e cantos arredondados -->
 <div class="table-container mat-elevation-z8">
 
-  <!-- Tabela estilizada com Angular Material -->
+  <!-- Tabela principal usando Angular Material (mat-table) e classe gamer-table para customizar -->
   <table mat-table [dataSource]="clientes" class="gamer-table">
 
-    <!-- Coluna: ID -->
-    <ng-container matColumnDef="id">
+    <!-- Coluna: ID do Cliente -->
+    <ng-container matColumnDef="cliId">
       <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let cliente">{{ cliente.id }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.cliId }}</td>
     </ng-container>
 
-    <!-- Coluna: Nome -->
-    <ng-container matColumnDef="nome">
+    <!-- Coluna: Nome do Cliente -->
+    <ng-container matColumnDef="cliNome">
       <th mat-header-cell *matHeaderCellDef>Nome</th>
-      <td mat-cell *matCellDef="let cliente">{{ cliente.nome }}</td>
-    </ng-container>
-
-    <!-- Coluna: CPF -->
-    <ng-container matColumnDef="cpf">
-      <th mat-header-cell *matHeaderCellDef>CPF</th>
-      <td mat-cell *matCellDef="let cliente">{{ cliente.cpf }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.cliNome }}</td>
     </ng-container>
 
     <!-- Coluna: Email -->
-    <ng-container matColumnDef="email">
+    <ng-container matColumnDef="cliEmail">
       <th mat-header-cell *matHeaderCellDef>Email</th>
-      <td mat-cell *matCellDef="let cliente">{{ cliente.email }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.cliEmail }}</td>
     </ng-container>
 
     <!-- Coluna: Telefone -->
-    <ng-container matColumnDef="telefone">
+    <ng-container matColumnDef="cliTelefone">
       <th mat-header-cell *matHeaderCellDef>Telefone</th>
-      <td mat-cell *matCellDef="let cliente">{{ cliente.telefone || '-' }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.cliTelefone }}</td>
     </ng-container>
 
     <!-- Coluna: Status -->
-    <ng-container matColumnDef="status">
+    <ng-container matColumnDef="cliStatus">
       <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let cliente">
-        <span [ngClass]="cliente.status ? 'ativo' : 'inativo'">
-          {{ cliente.status ? 'Ativo' : 'Inativo' }}
-        </span>
-      </td>
+      <td mat-cell *matCellDef="let row">{{ row.cliStatus }}</td>
     </ng-container>
 
-    <!-- Coluna: Ações -->
+    <!-- Coluna: Data de Cadastro -->
+    <ng-container matColumnDef="cliDataCadastro">
+      <th mat-header-cell *matHeaderCellDef>Cadastrado em</th>
+      <td mat-cell *matCellDef="let row">{{ row.cliDataCadastro | date:'shortDate' }}</td>
+    </ng-container>
+
+    <!-- Coluna: Ações (Editar e Remover) -->
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Ações</th>
-      <td mat-cell *matCellDef="let cliente">
-
-        <!-- Botão: Editar -->
-        <button mat-icon-button class="action-btn edit"
-                [routerLink]="'/clientes/update/' + cliente.id"
-        [attr.aria-label]="'Editar cliente ' + cliente.nome">          
-        <mat-icon>edit</mat-icon>
-        </button>
-
-        <!-- Botão: Excluir -->
-        <button mat-icon-button class="action-btn delete"
-                [routerLink]="'/clientes/delete/' + cliente.id"
-                 [attr.aria-label]="'Excluir cliente ' + cliente.nome">
-          <mat-icon>delete</mat-icon>
-        </button>
-
+      <td mat-cell *matCellDef="let row">
+        <div class="btn-actions-container">
+          <button class="btn-acao editar" (click)="editarCliente(row)">
+            <i class="material-icons">edit</i> Editar
+          </button>
+          <button class="btn-acao remover" (click)="removerCliente(row)">
+            <i class="material-icons">delete</i> Remover
+          </button>
+        </div>
       </td>
     </ng-container>
 
-    <!-- Renderização do cabeçalho e linhas -->
+    <!-- Linha do cabeçalho da tabela -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <!-- Linhas com dados -->
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
   </table>

@@ -1,155 +1,99 @@
 /* Container principal com fundo gradiente gamer, sombra e bordas arredondadas */
 .table-container {
     overflow-x: auto; /* Permite rolagem horizontal se necessário */
-    width: 82%; /* Largura máxima de 90% */
+    width: 82%; /* Largura máxima de 82% */
     margin: 0 auto; /* Centraliza horizontalmente */
-    background-color: #0D3B66;/* Gradiente escuro estilo gamer */
+    background-color: #0D3B66; /* Fundo estilo gamer azul escuro */
     padding: 18px; /* Espaçamento interno */
-    margin-top: 100px; /* Espaço para header fixo (90px) + respiro */
-    border-radius: 12px; /* Cantos arredondados para suavizar */
-    box-shadow: 0 0 15px rgba(48, 22, 199, 0.3); /* Sombra neon suave ao redor */
+    margin-top: 150px; /* Espaço para header fixo + margem superior */
+    border-radius: 12px; /* Bordas arredondadas */
+    box-shadow: 0 0 15px rgba(48, 22, 199, 0.3); /* Sombra neon suave */
 }
 
 /* Tabela principal com layout moderno e espaçado */
 table.gamer-table {
-    width: 95%; /* Ocupa toda a largura disponível */
+    width: 95%; /* Ocupa quase toda a largura do container */
     margin: 0 auto; /* Centraliza a tabela */
-    border: 1px solid #0af8c1; /* Borda neon s
+    border: 1px solid #0af8c1; /* Borda neon ao redor */
     border-collapse: collapse; /* Remove espaçamento entre células */
-    font-family: 'Segoe UI', sans-serif; /* Fonte moderna e legível */
-    color: #e0e0e0; /* Cor clara para contrastar com fundo escuro */
-    background-color: rgba(44, 62, 80, 0.2); /* Fundo levemente translúcido */
-    border-radius: 8px; /* Cantos arredondados para a tabela */
-    overflow: hidden; /* Evita cantos vazando */
+    font-family: 'Segoe UI', sans-serif; /* Fonte legível e moderna */
+    color: #e0e0e0; /* Cor do texto clara */
+    background-color: rgba(44, 62, 80, 0.2); /* Fundo translúcido escuro */
+    border-radius: 8px; /* Bordas arredondadas */
+    overflow: hidden; /* Evita "vazamentos" nas bordas */
 }
 
-/* Cabeçalho das colunas com borda neon e efeito sutil */
+/* Cabeçalho das colunas com borda neon e destaque */
 table.gamer-table th {
-    background-color: #ffffff; /* Fundo branco para destaque */
-    color: #2C3E50; /* Texto escuro para contraste */
-    font-weight: 600; /* Negrito */
-    padding: 14px; /* Espaçamento interno */
-    text-align: left; /* Alinhamento à esquerda */
+    background-color: #ffffff; /* Fundo branco para contraste */
+    color: #2C3E50; /* Texto escuro */
+    font-weight: 600; /* Texto em negrito */
+    padding: 14px; /* Espaço interno */
+    text-align: left; /* Alinhamento do texto */
     border-bottom: 2px solid #0af8c1; /* Linha inferior neon */
-    border: 1px solid #0af8c1; /* Borda completa ao redor */
-    position: relative; /* Necessário para pseudo-elementos */
+    border: 1px solid #0af8c1; /* Borda completa */
+    position: relative; /* Necessário para usar ::after */
+
+    font-size: 1.2rem; /* <<< AUMENTO DO TAMANHO DA FONTE DOS NOMES DOS CAMPOS */
+    /* Comentário: Isso torna os títulos das colunas mais visíveis */
 }
 
-/* Adiciona leve efeito glow no cabeçalho */
+/* Efeito glow no cabeçalho */
 table.gamer-table th::after {
-    content: ''; /* Pseudo-elemento vazio */
-    position: absolute; /* Posiciona em relação ao th */
-    left: 0; right: 0; bottom: 0; /* Preenche toda a largura inferior */
-    height: 2px; /* Altura da linha neon extra */
+    content: ''; /* Elemento visual extra */
+    position: absolute; /* Posicionamento relativo ao th */
+    left: 0; right: 0; bottom: 0; /* Posição da linha */
+    height: 2px; /* Espessura da linha */
     background: #0af8c1; /* Cor neon */
-    box-shadow: 0 0 8px #0af8c1; /* Glow */
+    box-shadow: 0 0 8px #0af8c1; /* Efeito glow */
 }
 
-/* Células comuns */
+/* Células comuns da tabela */
 table.gamer-table td {
     padding: 14px; /* Espaçamento interno */
-    box-shadow: 0 0 0 1px #0af8c1; /* Glow */ 
-    background-color: #ffffff;   
+    box-shadow: 0 0 0 1px #0af8c1; /* Contorno neon */
+    background-color: #ffffff; /* Fundo branco para contraste */
+    font-size: 1rem; /* Tamanho padrão dos dados */
 }
 
-/* Linhas ao passar o mouse */
+/* Efeito ao passar o mouse sobre as linhas */
 table.gamer-table tr:hover {
-    background-color: rgba(42, 61, 80, 0.6); /* Tom mais claro */
+    background-color: rgba(42, 61, 80, 0.6); /* Cor de fundo ao hover */
     transition: background-color 0.2s ease-in-out; /* Transição suave */
 }
 
-/* Estilo base dos botões de ação */
-.action-btn {
-    margin-right: 8px; /* Espaço entre os botões */
-    border-radius: 50%; /* Botões arredondados */
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transição suave */
-    background: rgba(255, 255, 255, 0.05); /* Fundo levemente visível */
-    padding: 6px; /* Tamanho interno */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
+/* ============ BOTÕES DE AÇÃO (Editar e Remover) ============ */
+.btn-acao {
+  display: inline-flex;                              /* Ícone + texto na mesma linha */
+  align-items: center;                               /* Alinhamento vertical central */
+  padding: 10px 10px;                                /* Espaço interno */
+  margin-right: 15px;                                /* Espaço entre os botões */
+  border: none;                                      /* Sem bordas */
+  border-radius: 6px;                                /* Bordas levemente arredondadas */
+  cursor: pointer;                                   /* Cursor em forma de mão */
+  font-weight: 500;                                  /* Peso médio do texto */
+  font-size: 1.0rem;                                 /* Tamanho padrão do texto */
+  color: #ffffff;                                    /* Cor branca no texto */
+  transition: background-color 0.3s, transform 0.2s; /* Transições suaves */
 }
 
-/* Efeito de "zoom leve" e glow ao passar o mouse */
-.action-btn:hover {
-    transform: scale(1.2); /* Leve aumento */
+/* Ícones dentro dos botões */
+.btn-acao .material-icons {
+  font-size: 18px;                                   /* Tamanho dos ícones */
+  margin-right: 4px;                                 /* Espaço entre ícone e texto */
 }
 
-/* Ícone do botão de edição */
-.edit mat-icon {
-    color: #0D3B66; /* Amarelo gamer para edição */
+/* Botão Editar com cor azul vibrante */
+.btn-acao.editar {
+  background-color: #2563eb;                         /* Cor azul gamer */
 }
 
-/* Ícone do botão de exclusão */
-.delete mat-icon {
-    color: #f80000; /* Vermelho forte para ação perigosa */
+/* Botão Remover com cor vermelha vibrante */
+.btn-acao.remover {
+  background-color: #ff0000;                         /* Vermelho forte */
 }
 
-.btn-actions-container {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-  }
-  
-  .action-btn {
-    border-radius: 8px;
-    transition: all 0.3s ease;
-  }
-
-  
-  .action-btn mat-icon {
-    font-size: 22px;
-    transition: transform 0.2s ease;
-  }
-/* ===== TOOLTIP PERSONALIZADO - MINHA CONTA ===== */
-.tooltip-edit {
-    position: absolute;                          /* Permite posicionamento flutuante */
-    bottom: -35px;                               /* Posiciona abaixo do ícone */
-    left: 50%;                                   /* Centraliza horizontalmente */
-    transform: translateX(-50%);                 /* Corrige a centralização */
-    background-color: #000000;                   /* Fundo preto */
-    color: #ffffff;                              /* Texto branco */
-    padding: 6px 10px;                           /* Espaçamento interno */
-    border-radius: 4px;                          /* Cantos arredondados */
-    font-size: 0.75rem;                          /* Tamanho da fonte */
-    white-space: nowrap;                         /* Impede quebra de linha */
-    opacity: 0;                                   /* Invisível por padrão */
-    visibility: hidden;                          /* Oculto por padrão */
-    transition: opacity 0.3s ease;               /* Transição suave */
-    pointer-events: none;                        /* Não interfere no hover */
-    z-index: 1002;                                /* Fica acima do cabeçalho */
+/* Aumenta levemente ao passar o mouse */
+.btn-acao:hover {
+  transform: scale(1.05);                            /* Efeito de zoom leve */
 }
-/* ===== TOOLTIP PERSONALIZADO - MINHA CONTA ===== */
-.tooltip-delete {
-    position: absolute;                          /* Permite posicionamento flutuante */
-    bottom: -35px;                               /* Posiciona abaixo do ícone */
-    left: 50%;                                   /* Centraliza horizontalmente */
-    transform: translateX(-50%);                 /* Corrige a centralização */
-    background-color: #000000;                   /* Fundo preto */
-    color: #ffffff;                              /* Texto branco */
-    padding: 6px 10px;                           /* Espaçamento interno */
-    border-radius: 4px;                          /* Cantos arredondados */
-    font-size: 0.75rem;                          /* Tamanho da fonte */
-    white-space: nowrap;                         /* Impede quebra de linha */
-    opacity: 0;                                   /* Invisível por padrão */
-    visibility: hidden;                          /* Oculto por padrão */
-    transition: opacity 0.3s ease;               /* Transição suave */
-    pointer-events: none;                        /* Não interfere no hover */
-    z-index: 1002;                                /* Fica acima do cabeçalho */
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

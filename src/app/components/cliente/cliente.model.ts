@@ -12,4 +12,6 @@ export interface Cliente {
   cliEstado?: string;            // Opcional - estado (sigla)
   cliCep?: string;               // Opcional - CEP
   cliAtivo?: boolean;            // Opcional - status (true = ativo, false = inativo)
+  cliStatus?: string;            // Opcional - status do cliente (ex: Ativo, Inativo)
+  cliDataCadastro?: string;      // Adicionado para data de cadastro (formato ISO string)
 }

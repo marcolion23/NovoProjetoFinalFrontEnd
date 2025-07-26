@@ -1,39 +1,87 @@
-// Importações principais do Angular
 import { Component, OnInit } from '@angular/core';
-
-// Modelo de dados do cliente (interface)
 import { Cliente } from '../cliente.model';
-
-// Serviço responsável por buscar os clientes do backend
 import { ClienteService } from '../cliente.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-cliente-read', // Nome do seletor usado no HTML
-  templateUrl: './cliente-read.component.html', // Template HTML da tabela de clientes
-  styleUrls: ['./cliente-read.component.css']   // Estilo visual do componente
+  selector: 'app-cliente-read',
+  templateUrl: './cliente-read.component.html',
+  styleUrls: ['./cliente-read.component.css']
 })
 export class ClienteReadComponent implements OnInit {
 
-  // Lista de clientes que será preenchida ao carregar o componente
   clientes: Cliente[] = [];
 
-  // Colunas visíveis na tabela HTML (devem bater com o matColumnDef do HTML)
-  displayedColumns: string[] = ['cliId', 'cliNome', 'cliCpf', 'cliEmail', 'cliTelefone', 'action'];
+  // Ajuste: As colunas precisam bater exatamente com o HTML
+  displayedColumns: string[] = ['cliId', 'cliNome', 'cliEmail', 'cliTelefone', 'cliStatus', 'cliDataCadastro', 'action'];
 
-  // Injeta o serviço de cliente para fazer requisição ao backend
-  constructor(private clienteService: ClienteService) {}
+  constructor(
+    private clienteService: ClienteService,
+    private router: Router
+  ) {}
 
-  // Método executado ao iniciar o componente
   ngOnInit(): void {
-    // Chama o serviço para obter a lista de clientes e inscreve-se para receber a resposta
+    // Dados fixos para teste com todos os campos usados na tabela
+this.clientes = [
+  {
+    cliId: 1,
+    cliNome: 'João Silva',
+    cliCpf: '123.456.789-00',
+    cliEmail: 'joao.silva@email.com',
+    cliTelefone: '(11) 91234-5678',
+    cliStatus: 'Ativo',
+    cliAtivo: true,
+    cliDataCadastro: '2024-01-01'
+  },
+  {
+    cliId: 2,
+    cliNome: 'Maria Oliveira',
+    cliCpf: '987.654.321-99',
+    cliEmail: 'maria.oliveira@email.com',
+    cliTelefone: '(21) 99876-5432',
+    cliStatus: 'Ativo',
+    cliAtivo: false,
+    cliDataCadastro: '2024-05-15'
+  }
+];
+
+
+    // Para usar backend, comente o bloco acima e descomente a linha abaixo:
+    // this.loadClientes();
+  }
+
+  loadClientes(): void {
     this.clienteService.read().subscribe({
-      next: (clientes) => {
-        this.clientes = clientes; // Atribui os dados recebidos à variável local
-        console.log('Clientes carregados:', clientes); // Log para depuração
+      next: (clientes: Cliente[]) => {
+        this.clientes = clientes;
       },
-      error: (err) => {
-        console.error('Erro ao buscar clientes:', err); // Tratamento básico de erro
+      error: (error) => {
+        console.error('Erro ao buscar clientes:', error);
       }
     });
+  }
+
+  editarCliente(cliente: Cliente): void {
+    if (cliente.cliId !== undefined) {
+      this.router.navigate(['/clientes/update', cliente.cliId]);
+    } else {
+      console.error('Cliente sem ID válido para edição.');
+    }
+  }
+
+  removerCliente(cliente: Cliente): void {
+    if (cliente.cliId !== undefined) {
+      this.clienteService.delete(cliente.cliId).subscribe({
+        next: () => {
+          this.clienteService.showMessage('Cliente removido com sucesso!');
+          this.ngOnInit(); // Atualiza a lista após exclusão
+        },
+        error: err => {
+          console.error('Erro ao remover cliente:', err);
+        }
+      });
+    } else {
+      console.error('Cliente sem ID válido para remoção.');
+    }
   }
 }

@@ -1,54 +1,59 @@
-<!-- Container principal da tabela -->
-<div class="tabela-scroll fornecedores-tabela-container">
-  <table class="fornecedores-tabela gamer-table">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>CNPJ</th>
-        <th>Telefone</th> 
-        <th>Email</th>
-        <th>Status</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Linha de exemplo 1 -->
-      <tr>
-        <td>Gamer Distribuidora</td>
-        <td>12.345.678/0001-99</td>
-        <td>(11) 99999-9999</td>
-        <td>contatoemail.com</td>
-        <td>Ativo</td>
-        <td class="btn-actions-container">
-          <button class="action-btn btn-editar" matTooltip="Editar">
-            <mat-icon>edit</mat-icon>
-            <span class="tooltip-custom">Editar</span>
-          </button>
-          <button class="action-btn btn-excluir" matTooltip="Remover">
-            <mat-icon>delete</mat-icon>
-            <span class="tooltip-custom">Remover</span>
-          </button>
-        </td>
-      </tr>
+<div class="table-container mat-elevation-z8">
+  <table mat-table [dataSource]="fornecedores" class="gamer-table" matSort>
 
-      <!-- Linha de exemplo 2 -->
-      <tr>
-        <td>Tech Supplies Ltda</td>
-        <td>98.765.432/0001-11</td>
-        <td>(21) 98888-7777</td>
-        <td>suportemail.com.br</td>
-        <td>Ativo</td>
-        <td class="btn-actions-container">
-          <button class="action-btn btn-editar" matTooltip="Editar">
-            <mat-icon>edit</mat-icon>
-            <span class="tooltip-custom">Editar</span>
+    <!-- Coluna: ID do Fornecedor -->
+    <ng-container matColumnDef="forId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let row">{{ row.forId }}</td>
+    </ng-container>
+
+    <!-- Coluna: Nome -->
+    <ng-container matColumnDef="forNome">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+      <td mat-cell *matCellDef="let row">{{ row.forNome }}</td>
+    </ng-container>
+
+    <!-- Coluna: CNPJ -->
+    <ng-container matColumnDef="forCnpj">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>CNPJ</th>
+      <td mat-cell *matCellDef="let row">{{ row.forCnpj }}</td>
+    </ng-container>
+
+    <!-- Coluna: Email -->
+    <ng-container matColumnDef="forEmail">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let row">{{ row.forEmail }}</td>
+    </ng-container>
+
+    <!-- Coluna: Telefone -->
+    <ng-container matColumnDef="forTelefone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefone</th>
+      <td mat-cell *matCellDef="let row">{{ row.forTelefone }}</td>
+    </ng-container>
+
+    <!-- Coluna: Status -->
+    <ng-container matColumnDef="forStatus">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let row">{{ row.forStatus }}</td>
+    </ng-container>
+
+    <!-- Coluna Ações -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <td mat-cell *matCellDef="let row">
+        <div class="btn-actions-container">
+          <button class="btn-acao editar" (click)="editarFornecedor(row)">
+            <i class="material-icons">edit</i> Editar
           </button>
-          <button class="action-btn btn-excluir" matTooltip="Remover">
-            <mat-icon>delete</mat-icon>
-            <span class="tooltip-custom">Remover</span>
+          <button class="btn-acao remover" (click)="removerFornecedor(row)">
+            <i class="material-icons">delete</i> Remover
           </button>
-        </td>
-      </tr>
-    </tbody>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
   </table>
 </div>

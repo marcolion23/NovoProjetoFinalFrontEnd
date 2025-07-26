@@ -195,7 +195,7 @@ import { PerfilDeleteComponent } from './components/perfil/perfil-delete/perfil-
     MatChipsModule,
     MatCardModule,
     MatTooltipModule,
-
+    MatTableModule,
     // Forms
     FormsModule,
     ReactiveFormsModule,

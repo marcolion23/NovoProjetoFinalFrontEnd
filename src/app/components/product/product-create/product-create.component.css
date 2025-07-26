@@ -1,147 +1,157 @@
 /* === CONTAINER GERAL: empurra tudo abaixo do header fixo === */
 .container-geral {
-  display: flex;                        /* Layout em coluna */
-  flex-direction: column;
-  align-items: center;                  /* Centraliza horizontalmente */
-  justify-content: flex-start;
-  margin-top: 100px;                    /* Espaço para header fixo (90px) + 10px de respiro */
-  padding: 20px;
-  width: 100%;
-  box-sizing: border-box;
+  display: flex;                        /* Define container como flexbox para layout flexível */
+  flex-direction: column;              /* Alinha os filhos em coluna (vertical) */
+  align-items: center;                 /* Centraliza os filhos horizontalmente dentro do container */
+  justify-content: flex-start;         /* Alinha os filhos ao topo (início) verticalmente */
+  margin-top: 150px;                   /* Espaço acima para deslocar conteúdo abaixo do header fixo (90px + 10px de folga) */
+  padding: 50px;                      /* Espaço interno geral ao redor do conteúdo */
+  width: 100%;                       /* Container ocupa toda a largura disponível */
+  box-sizing: border-box;            /* Padding e border são considerados dentro da largura total */
 }
 
 /* === CARD do formulário === */
 .product-card {
-  max-width: 1100px;                     /* Largura máxima */
-  width: 100%;
-  margin-bottom: 40px;                  /* Espaço até a tabela */
-  padding: 32px 24px;                   /* Espaçamento interno */
-  border-radius: 24px;                  /* Bordas arredondadas */
-  background: #ffffff;                  /* Fundo branco */
-  color: #000000;                       /* Cor de texto escura */
+  max-width: 1150px;                  /* Define largura máxima do card para não esticar demais em telas grandes */
+  width: 100%;                       /* Card ocupa 100% da largura disponível (até o max-width) */
+  margin-bottom: 40px;               /* Espaço abaixo do card para separar da tabela ou próximo conteúdo */
+  padding: 32px 24px;                /* Espaçamento interno: 32px vertical, 24px horizontal */
+  border-radius: 24px;               /* Bordas arredondadas para suavizar o visual */
+  background: #ffffff;               /* Fundo branco para o card */
+  color: #000000;                   /* Cor do texto preta para contraste legível */
 
-  /* Sombra destacada */
+  /* Sombra destacada para o card */
   box-shadow:
-    0 0 0 6px rgb(5, 32, 180), /* contorno azul ciano claro */
-    0 10px 25px rgba(0, 0, 0, 0.25);    /* sombra principal */
+    0 0 0 6px rgb(5, 32, 180),     /* Contorno azul ciano claro de 6px ao redor */
+    0 10px 25px rgba(0, 0, 0, 0.25); /* Sombra principal projetada para baixo para efeito de profundidade */
 
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação suave para transformações e sombra */
 }
-
-
+.titulo-formulario {
+  text-align: center;       /* Centraliza horizontalmente */
+  width: 100%;              /* Ocupa a largura do card */
+  font-size: 24px;          /* Tamanho da fonte */
+  margin-bottom: 16px;      /* Espaço abaixo do título */
+  color: #1a1a1a;           /* Cor escura (opcional) */
+}
 
 /* === FORMULÁRIO: layout flexível com espaçamento === */
 .product-form {
-  display: flex;                        /* Flexbox */
-  flex-wrap: wrap;                      /* Permite quebra em telas menores */
-  gap: 25px;                            /* Espaço entre campos */
-  margin-top: 30px;
-  padding: 0 5px;
+  display: flex;                   /* Usa flexbox para dispor os campos */
+  flex-wrap: wrap;                 /* Permite quebra de linha quando não cabe em uma linha */
+  gap: 25px;                      /* Espaçamento de 25px entre os campos flexíveis */
+  margin-top: 30px;               /* Espaço acima do formulário */
+  padding: 0 5px;                 /* Pequeno padding horizontal interno */
+  
 }
 
 /* === CAMPOS === */
 .full-width {
-  width: 100%;
-  box-sizing: border-box;
-  }
+  width: 100%;                   /* Campo ocupa 100% da largura do container pai */
+  box-sizing: border-box;        /* Inclui padding e borda dentro da largura */
+  
+}
 
 .half-width {
-  width: 48%;                           /* Quase metade, considerando gap */
-  box-sizing: border-box;
-  min-width: 280px;                     /* Evita ficar muito pequeno */
+  width: 48%;                   /* Aproximadamente metade da largura para posicionar dois campos lado a lado considerando o gap */
+  box-sizing: border-box;       /* Padding e border dentro da largura */
+  min-width: 280px;             /* Limita a largura mínima para manter legibilidade */
 }
 
 /* === ESTILO DE BORDAS PRETAS ESCURAS E ARREDONDADAS NOS CAMPOS MAT-FORM-FIELD (APPEARANCE OUTLINE) === */
 .mat-form-field-appearance-outline .mat-form-field-outline {
-  border-color: #444 !important;       /* Preto cinza escuro para borda visível */
-  border-width: 2px !important;
-  border-radius: 12px !important;
-  transition: border-color 0.3s ease;
+  border-color: black !important;  /* Força a borda preta */
+  border-width: 2px !important;    /* Espessura da borda */
+  border-radius: 8px !important;   /* Bordas arredondadas, se quiser */
+  
 }
 
 /* Borda preta forte quando o campo estiver focado */
 .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline,
 .mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
-  border-color: #000000 !important;    /* Preto puro */
-  border-width: 2.5px !important;
+  border-color: black !important;  /* Força a borda preta */
+  border-width: 2px !important;    /* Espessura da borda */
+  border-radius: 8px !important;   /* Bordas arredondadas, se quiser */
 }
 
 /* Sombra leve no foco para destacar o campo */
 .mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-flex {
-  box-shadow: 0 0 6px #00000033;       /* Sombra preta translúcida */
-  border-radius: 12px;
+  border-color: black !important;  /* Força a borda preta */
+  border-width: 2px !important;    /* Espessura da borda */
+  border-radius: 8px !important;   /* Bordas arredondadas, se quiser */
 }
 
 /* === CONTAINER DOS BOTÕES === */
 .button-container {
-  display: flex;
-  justify-content: flex-end;            /* Alinha à direita */
-  gap: 16px;                            /* Espaço entre botões */
-  margin-top: 24px;
+  display: flex;                    /* Usa flexbox para os botões */
+  justify-content: flex-end;        /* Alinha os botões à direita */
+  gap: 16px;                      /* Espaçamento entre os botões */
+  margin-top: 24px;               /* Espaço acima do container dos botões */
 }
 
 /* === BOTÕES PADRÃO === */
 button {
-  background-color: #b0bec5;
-  padding: 12px 28px;
-  border-radius: 45px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #b0bec5;       /* Cor de fundo cinza claro padrão */
+  padding: 12px 28px;              /* Espaçamento interno vertical e horizontal */
+  border-radius: 45px;             /* Bordas arredondadas para estilo "pill" */
+  border: none;                   /* Sem borda */
+  cursor: pointer;                /* Cursor de mão para indicar clicável */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave para hover */
 }
 
 /* Botão Salvar */
 button[color="primary"] {
-  background-color: #388e3c;
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(56, 142, 60, 0.4);
+  background-color: #388e3c;        /* Verde escuro para ação positiva */
+  color: #ffffff;                   /* Texto branco */
+  box-shadow: 0 4px 12px rgba(56, 142, 60, 0.4); /* Sombra verde translúcida */
 }
 
 button[color="primary"]:hover {
-  background-color: #2e7d32;
-  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.6);
+  background-color: #2e7d32;        /* Verde mais escuro no hover */
+  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.6); /* Sombra mais intensa no hover */
 }
 
 /* Botão Cancelar */
 button[color="warn"] {
-  background-color: #c73e3e;
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.4);
+  background-color: #c73e3e;        /* Vermelho forte para ação de alerta */
+  color: #ffffff;                   /* Texto branco */
+  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.4); /* Sombra vermelha translúcida */
 }
 
 button[color="warn"]:hover {
-  background-color: #f80000;
-  box-shadow: 0 6px 16px rgba(183, 28, 28, 0.6);
+  background-color: #f80000;        /* Vermelho intenso no hover */
+  box-shadow: 0 6px 16px rgba(183, 28, 28, 0.6); /* Sombra mais intensa no hover */
 }
 
 /* === TABELA abaixo do formulário === */
 .tabela-container {
-  max-width: 900px;                      /* Mesmo tamanho do card */
-  width: 100%;
-  margin-top: 40px;                      /* Espaço abaixo do card */
-  padding: 0 16px;
-  box-sizing: border-box;
+  max-width: 900px;                  /* Limita a largura da tabela para alinhamento com o card */
+  width: 100%;                      /* Ocupa toda largura disponível */
+  margin-top: 40px;                 /* Espaço acima para separar da área do formulário */
+  padding: 0 16px;                  /* Padding horizontal */
+  box-sizing: border-box;           /* Padding dentro da largura */
 }
 
 /* === RESPONSIVO para telas pequenas === */
 @media (max-width: 640px) {
   .half-width {
-    width: 100% !important;
-    min-width: unset;
+    width: 100% !important;         /* Campos que eram metade da largura ocupam 100% na tela pequena */
+    min-width: unset;               /* Remove largura mínima */
   }
 
   .product-card {
-    margin: 20px 12px;
-    padding: 24px 16px;
+    margin: 20px 12px;              /* Margem menor em telas pequenas para encaixe */
+    padding: 24px 16px;             /* Padding reduzido para melhor ajuste */
   }
 
   .button-container {
-    flex-direction: column;              /* Empilha botões */
-    align-items: stretch;
-    justify-content: center;
+    flex-direction: column;         /* Empilha os botões verticalmente */
+    align-items: stretch;           /* Botões ocupam toda largura do container */
+    justify-content: center;        /* Centraliza verticalmente */
   }
 
   button {
-    width: 100%;                         /* Botão ocupa toda largura */
+    width: 100%;                   /* Botões ocupam largura total na vertical */
   }
-}
+}   
+

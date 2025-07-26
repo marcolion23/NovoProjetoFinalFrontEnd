@@ -89,11 +89,11 @@ const routes: Routes = [
   { path: 'fornecedores/delete/:fornId', component: FornecedorDeleteComponent },
 
   // Rotas Clientes
-  { path: 'clientes', component: ClienteCrudComponent },
-  { path: 'clientes/create', component: ClienteCreateComponent },
-  { path: 'clientes/read/:cliId', component: ClienteReadComponent },
-  { path: 'clientes/update/:cliId', component: ClienteUpdateComponent },
-  { path: 'clientes/delete/:cliId', component: ClienteDeleteComponent },
+  { path: 'cliente', component: ClienteCrudComponent },
+  { path: 'cliente/create', component: ClienteCreateComponent },
+  { path: 'cliente/read/:cliId', component: ClienteReadComponent },
+  { path: 'cliente/update/:cliId', component: ClienteUpdateComponent },
+  { path: 'cliente/delete/:cliId', component: ClienteDeleteComponent },
 
   // Rotas Pagamentos
   { path: 'fpagamentos', component: FormaPagamentoCrudComponent },

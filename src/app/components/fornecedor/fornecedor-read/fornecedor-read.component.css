@@ -1,229 +1,88 @@
-/* Card principal do relatório */
-.relatorio-card {
-  max-width: 1200px;
-  margin: 100px auto 40px;
-  padding: 25px 30px;
-  background: #0f172a; /* tom escuro do sistema */
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  color: #e0e0e0; /* cor clara para texto */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Título centralizado */
-.relatorio-title {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-/* Container dos filtros e botões */
-.filtros-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-/* Campo de busca */
-.filtro-input {
-  flex: 1;
-  min-width: 220px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #334155;
-  background: #1e293b;
-  color: #e0e0e0;
-}
-
-/* Botões de filtros */
-.buttons-filtros {
-  display: flex;
-  gap: 10px;
-}
-
-/* Estilo geral dos botões */
-button {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s;
-}
-
-/* Botões coloridos */
-.btn-verde {
-  background: #4caf50;
-  color: white;
-}
-.btn-verde:hover { background: #449d48; }
-
-.btn-azul {
-  background: #3b82f6;
-  color: white;
-}
-.btn-azul:hover { background: #2563eb; }
-
-.btn-cinza {
-  background: #64748b;
-  color: white;
-}
-.btn-cinza:hover { background: #4b5563; }
-
-/* Container para tornar tabela responsiva */
-.tabela-container {
+/* Reutiliza o estilo gamer-table do produto */
+.table-container {
   overflow-x: auto;
+  width: 82%;
+  margin: 0 auto;
+  background-color: #0D3B66;
+  padding: 18px;
+  margin-top: 150px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(48, 22, 199, 0.3);
 }
 
-/* Tabela moderna */
-.tabela-fornecedor {
-  width: 100%;
+table.gamer-table {
+  width: 95%;
+  margin: 0 auto;
+  border: 1px solid #0af8c1;
   border-collapse: collapse;
-  background: #1e293b;
+  font-family: 'Segoe UI', sans-serif;
+  color: #e0e0e0;
+  background-color: rgba(44, 62, 80, 0.2);
   border-radius: 8px;
   overflow: hidden;
 }
 
-/* Cabeçalho da tabela */
-.tabela-fornecedor thead {
-  background: #334155;
-}
-
-.tabela-fornecedor th, .tabela-fornecedor td {
-  padding: 12px 16px;
-  text-align: left;
-}
-
-/* Linhas alternadas */
-.tabela-fornecedor tbody tr:nth-child(even) {
-  background: #273549;
-}
-
-/* Status colorido */
-.status {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.85rem;
-}
-
-.status.ativo {
-  background: #22c55e;
-  color: #fff;
-}
-
-.status.inativo {
-  background: #f87171;
-  color: #fff;
-}
-
-/* Ajusta texto que quebra */
-.tabela-fornecedor td {
-  word-wrap: break-word;
-  max-width: 180px;
-}
-
-
-.fornecedores-tabela-container {
-  max-width: 1600px;
-  padding: 120px 20px 20px; /* padding-top aumentado */
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0 auto; /* centraliza horizontalmente */
-}
-
-
-
-/* Título da tabela */
-.fornecedores-titulo {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #ffffff;
-  text-align: center;
-}
-
-/* Rolagem horizontal se necessário */
-.tabela-scroll {
-  overflow-x: auto;
-}
-
-/* Tabela principal */
-.fornecedores-tabela {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background-color: #0D3B66;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-}
-
-/* Cabeçalho da tabela */
-.fornecedores-tabela thead {
-  background-color: #1e293b;
-}
-
-/* Células do cabeçalho */
-.fornecedores-tabela th {
-  padding: 16px 12px;
-  text-align: left;
-  color: #ffffff;
-  font-size: 1.1rem;
+table.gamer-table th {
+  background-color: #ffffff;
+  color: #2C3E50;
   font-weight: 600;
-  border-bottom: 2px solid #991B1B; /* Linha inferior vermelha */
+  padding: 14px;
+  text-align: left;
+  border-bottom: 2px solid #0af8c1;
+  border: 1px solid #0af8c1;
+  position: relative;
+  font-size: 1.2rem;
 }
 
-/* Células do corpo */
-.fornecedores-tabela td {
-  padding: 14px 12px;
-  color: #e0e0e0;
+table.gamer-table th::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: #0af8c1;
+  box-shadow: 0 0 8px #0af8c1;
+}
+
+table.gamer-table td {
+  padding: 14px;
+  box-shadow: 0 0 0 1px #0af8c1;
+  background-color: #ffffff;
   font-size: 1rem;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-/* Linhas alternadas com cor sutil */
-.fornecedores-tabela tbody tr:nth-child(odd) {
-  background-color: rgba(255,255,255,0.04);
+table.gamer-table tr:hover {
+  background-color: rgba(42, 61, 80, 0.6);
+  transition: background-color 0.2s ease-in-out;
 }
 
-/* Hover nas linhas */
-.fornecedores-tabela tbody tr:hover {
-  background-color: rgba(255,255,255,0.08);
-  transition: background-color 0.2s;
-}
-
-/* ============ BOTÕES DE AÇÃO NA TABELA ============ */
+/* Botões de ação iguais aos do produto */
 .btn-acao {
-  display: inline-flex;                           /* Ícone e texto alinhados */
+  display: inline-flex;
   align-items: center;
-  padding: 6px 10px;
-  margin-right: 6px;
+  padding: 10px 10px;
+  margin-right: 15px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #ffffff;
   transition: background-color 0.3s, transform 0.2s;
 }
 
-/* Ícone do botão */
 .btn-acao .material-icons {
   font-size: 18px;
   margin-right: 4px;
 }
 
-/* Botão editar - azul */
 .btn-acao.editar {
   background-color: #2563eb;
 }
 
-/* Botão remover - vermelho */
 .btn-acao.remover {
-  background-color: #dc2626;
+  background-color: #ff0000;
 }
 
-/* Hover nos botões de ação */
 .btn-acao:hover {
   transform: scale(1.05);
 }

@@ -1,165 +1,94 @@
-/* CONTAINER PRINCIPAL */
-.container-movimentar {
-  max-width: 600px;                          /* Largura máxima */
-  margin: 100px auto;                        /* Centraliza na tela */
-  background-color: #0D3B66;                 /* Azul escuro combinando */
-  border-radius: 20px;                       /* Bordas arredondadas */
-  padding: 40px;                             /* Espaço interno */
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);    /* Sombra */
-  font-family: 'Segoe UI', sans-serif;
+/* Estilo base da tabela de estoque (igual ao de produtos) */
+.table-container {
+    overflow-x: auto;
+    width: 82%;
+    margin: 0 auto;
+    background-color: #0D3B66;
+    padding: 18px;
+    margin-top: 150px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(48, 22, 199, 0.3);
 }
 
-/* Título */
-.titulo-movimentar {
-  color: #ffffff;
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 30px;
+/* Tabela no estilo gamer */
+table.gamer-table {
+    width: 95%;
+    margin: 0 auto;
+    border: 1px solid #0af8c1;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', sans-serif;
+    color: #e0e0e0;
+    background-color: rgba(44, 62, 80, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-/* FORMULÁRIO */
-.form-movimentar {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;                                 /* Espaço entre campos */
+/* Cabeçalho das colunas */
+table.gamer-table th {
+    background-color: #ffffff;
+    color: #2C3E50;
+    font-weight: 600;
+    padding: 14px;
+    text-align: left;
+    border-bottom: 2px solid #0af8c1;
+    border: 1px solid #0af8c1;
+    font-size: 1.2rem;
+    position: relative;
 }
 
-/* Cada campo */
-.campo-form label {
-  color: #ffffff;
-  font-weight: 500;
-  margin-bottom: 6px;
-  display: block;
+table.gamer-table th::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: #0af8c1;
+    box-shadow: 0 0 8px #0af8c1;
 }
 
-/* Input e select */
-.campo-form input,
-.campo-form select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  font-size: 1rem;
-  background-color: #1e293b;                 /* Fundo mais escuro */
-  color: #ffffff;
+/* Células comuns */
+table.gamer-table td {
+    padding: 14px;
+    box-shadow: 0 0 0 1px #0af8c1;
+    background-color: #ffffff;
+    font-size: 1rem;
 }
 
-/* Botão confirmar */
-.btn-movimentar-confirmar {
-  padding: 14px;
-  background-color: #14532D;                 /* Verde escuro */
-  color: #ffffff;
-  font-weight: bold;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+/* Hover nas linhas */
+table.gamer-table tr:hover {
+    background-color: rgba(42, 61, 80, 0.6);
+    transition: background-color 0.2s ease-in-out;
 }
 
-/* Hover botão */
-.btn-movimentar-confirmar:hover {
-  background-color: #166534;                 /* Verde levemente mais claro */
-  transform: translateY(-3px);
-}
-/* ============ CONTAINER DA TABELA DE ESTOQUE ============ */
-.estoque-tabela-container {
-  max-width: 1200px;                                 /* Largura máxima */
-  margin: 40px auto;                                 /* Centraliza na tela */
-  padding: 0 20px;                                   /* Espaço lateral */
-  font-family: 'Segoe UI', sans-serif;                /* Fonte moderna */
-}
-
-/* Título acima da tabela */
-.estoque-titulo {
-  font-size: 2rem;                                   /* Tamanho grande */
-  margin-bottom: 20px;                               /* Espaço abaixo */
-  color: #ffffff;                                    /* Branco */
-  text-align: center;                                /* Centraliza */
-}
-
-/* Container para rolagem horizontal (responsivo) */
-.tabela-scroll {
-  overflow-x: auto;                                  /* Rolagem horizontal se precisar */
-}
-
-/* Estilo principal da tabela */
-.estoque-tabela {
-  width: 100%;                                       /* Ocupa toda largura */
-  border-collapse: separate;                          /* Permite bordas arredondadas */
-  border-spacing: 0;                                 /* Remove espaços internos */
-  background-color: #0D3B66;                         /* Azul escuro igual painel */
-  border-radius: 12px;                               /* Bordas arredondadas */
-  overflow: hidden;                                  /* Esconde bordas fora */
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);            /* Sombra elegante */
-}
-
-/* Cabeçalho da tabela */
-.estoque-tabela thead {
-  background-color: #000000;                          /* Tom mais escuro */
-}
-
-/* Células do cabeçalho */
-.estoque-tabela th {
-  padding: 20px 12px;                                /* Espaço interno */
-  text-align: left;                                  /* Alinha à esquerda */
-  color: #ffffff;                                    /* Branco */
-  font-size: 1.2rem;                                 /* Tamanho médio */
-  font-weight: 480;                                  /* Negrito */
-  border-bottom: 2px solid #991B1B;                  /* Linha inferior vermelha */
-}
-
-/* Células do corpo */
-.estoque-tabela td {
-  padding: 14px 12px;                                /* Espaço interno */
-  color: #ffffff;                                    /* Cinza claro */
-  font-size: 1rem;                                   /* Tamanho normal */
-  border-bottom: 1px solid rgba(255,255,255,0.1);     /* Linha sutil de divisão */
-}
-
-/* Zebra effect: linhas alternadas com tom levemente mais claro */
-.estoque-tabela tbody tr:nth-child(odd) {
-  background-color: rgba(255,255,255,0.04);          /* Leve destaque */
-}
-
-/* Hover nas linhas: destaque suave */
-.estoque-tabela tbody tr:hover {
-  background-color: rgba(255,255,255,0.08);          /* Tom mais claro ao passar o mouse */
-  transition: background-color 0.2s;                 /* Suaviza mudança */
-}
-
-/* ============ BOTÕES DE AÇÃO (Editar e Remover) ============ */
+/* Botões de ação */
 .btn-acao {
-  display: inline-flex;                              /* Ícone e texto na mesma linha */
-  align-items: center;                               /* Centraliza verticalmente */
-  padding: 6px 10px;                                 /* Espaço interno */
-  margin-right: 6px;                                 /* Espaço entre botões */
-  border: none;                                      /* Remove borda */
-  border-radius: 6px;                                /* Bordas arredondadas */
-  cursor: pointer;                                   /* Mãozinha ao passar o mouse */
-  font-weight: 500;                                  /* Negrito médio */
-  font-size: 0.9rem;                                 /* Tamanho pequeno */
-  color: #ffffff;                                    /* Branco */
-  transition: background-color 0.3s, transform 0.2s; /* Suaviza hover */
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 10px;
+    margin-right: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #ffffff;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-/* Ícone dentro do botão */
 .btn-acao .material-icons {
-  font-size: 18px;                                   /* Tamanho pequeno do ícone */
-  margin-right: 4px;                                 /* Espaço entre ícone e texto */
+    font-size: 18px;
+    margin-right: 4px;
 }
 
-/* Botão Editar em azul */
 .btn-acao.editar {
-  background-color: #2563eb;                         /* Azul vibrante */
+    background-color: #2563eb;
 }
 
-/* Botão Remover em vermelho */
 .btn-acao.remover {
-  background-color: #ff0000;                          /* Vermelho vibrante */
+    background-color: #ff0000;
 }
 
-/* Hover: botão cresce levemente */
 .btn-acao:hover {
-  transform: scale(1.05);                            /* Aumenta suavemente */
+    transform: scale(1.05);
 }
