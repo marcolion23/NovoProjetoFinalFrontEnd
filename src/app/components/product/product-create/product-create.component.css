@@ -12,7 +12,7 @@
 
 /* === CARD do formulário === */
 .product-card {
-  max-width: 900px;                     /* Largura máxima */
+  max-width: 1100px;                     /* Largura máxima */
   width: 100%;
   margin-bottom: 40px;                  /* Espaço até a tabela */
   padding: 32px 24px;                   /* Espaçamento interno */
@@ -28,13 +28,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efeito ao passar o mouse */
-.product-card:hover {
-  transform: translateY(-8px);
-  box-shadow:
-    0 0 0 2px rgba(34, 211, 238, 0.3),
-    0 16px 30px rgba(0, 0, 0, 0.35);
-}
+
 
 /* === FORMULÁRIO: layout flexível com espaçamento === */
 .product-form {
@@ -49,12 +43,33 @@
 .full-width {
   width: 100%;
   box-sizing: border-box;
-}
+  }
 
 .half-width {
   width: 48%;                           /* Quase metade, considerando gap */
   box-sizing: border-box;
   min-width: 280px;                     /* Evita ficar muito pequeno */
+}
+
+/* === ESTILO DE BORDAS PRETAS ESCURAS E ARREDONDADAS NOS CAMPOS MAT-FORM-FIELD (APPEARANCE OUTLINE) === */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-color: #444 !important;       /* Preto cinza escuro para borda visível */
+  border-width: 2px !important;
+  border-radius: 12px !important;
+  transition: border-color 0.3s ease;
+}
+
+/* Borda preta forte quando o campo estiver focado */
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline,
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
+  border-color: #000000 !important;    /* Preto puro */
+  border-width: 2.5px !important;
+}
+
+/* Sombra leve no foco para destacar o campo */
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-flex {
+  box-shadow: 0 0 6px #00000033;       /* Sombra preta translúcida */
+  border-radius: 12px;
 }
 
 /* === CONTAINER DOS BOTÕES === */
@@ -67,7 +82,8 @@
 
 /* === BOTÕES PADRÃO === */
 button {
-background-color: #b0bec5;   padding: 12px 28px;
+  background-color: #b0bec5;
+  padding: 12px 28px;
   border-radius: 45px;
   border: none;
   cursor: pointer;

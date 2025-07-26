@@ -165,5 +165,31 @@ formatarDescricao(): void {
   this.product.proDescricao =
     texto.charAt(0).toUpperCase() + texto.slice(1);
 }
+ selectedMarca: string = '';
+  mostrarInputOutraMarca = false;
+  marcaPersonalizada: string = '';
 
+  onMarcaChange(valor: string) {
+    if (valor === 'outra') {
+      this.mostrarInputOutraMarca = true;
+      this.marcaPersonalizada = '';
+    } else {
+      this.mostrarInputOutraMarca = false;
+      this.marcaPersonalizada = '';
+    }
   }
+formatarMarcaPersonalizada(): void {
+  if (!this.marcaPersonalizada) return;
+
+  const texto = this.marcaPersonalizada.trim();
+  this.marcaPersonalizada = texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+limparZeroInicial() {
+  if (this.product.proEstoque === 0) {
+    this.product.proEstoque = null; // ou undefined para limpar o campo
+  }
+}
+
+}
+
+  
