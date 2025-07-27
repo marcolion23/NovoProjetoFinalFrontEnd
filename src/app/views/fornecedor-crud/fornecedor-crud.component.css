@@ -99,6 +99,27 @@
   font-size: 25px;  /* mantém o número em tamanho confortável */
 }
 
+.panel-info2 {
+  background-color: #14532D;
+  border-radius: 24px;
+  padding: 40px 30px;
+  text-align: center;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+.panel-info2 h2 {
+  font-size: 40px;  /* aumenta o tamanho do título */
+  margin-bottom: 15px;
+}
+
+.panel-info2 p {
+  font-size: 25px;  /* mantém o número em tamanho confortável */
+}
 
 /* Título do painel */
 .panel-info h2 {

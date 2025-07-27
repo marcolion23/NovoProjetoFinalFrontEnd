@@ -1,14 +1,12 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule } from '@angular/material/card';
 
-
-// Angular Material
-import { MatTooltipModule } from '@angular/material/tooltip';
+// Angular Material Modules
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 // Forms
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,7 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // HTTP
 import { HttpClientModule } from '@angular/common/http';
 
-// Localização (Português Brasil)
+// Localization (Portuguese Brazil)
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 registerLocaleData(localePt);
@@ -36,13 +35,16 @@ registerLocaleData(localePt);
 // Routing
 import { AppRoutingModule } from './app-routing.module';
 
-// Componentes Base
+// Import do TextMaskModule para máscaras
+import { TextMaskModule } from 'angular2-text-mask';
+
+// Components Base
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/template/header/header.component';
 import { FooterComponent } from './components/template/footer/footer.component';
 import { NavComponent } from './components/template/nav/nav.component';
 
-// Diretivas
+// Directives
 import { RedDirective } from './directives/red.directive';
 
 // Views (CRUDs principais)
@@ -52,7 +54,7 @@ import { FormaPagamentoCrudComponent } from './views/forma-pagamento-crud/forma-
 import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.component';
 import { EstoqueCrudComponent } from './views/estoque-crud/estoque-crud.component';
 import { FornecedorCrudComponent } from './views/fornecedor-crud/fornecedor-crud.component';
-import { RelatoriosCrudComponent } from './views/relatorios-crud/relatorios-crud.component'; // <-- Padrão novo
+import { RelatoriosCrudComponent } from './views/relatorios-crud/relatorios-crud.component';
 
 // Produtos
 import { ProductCreateComponent } from './components/product/product-create/product-create.component';
@@ -153,7 +155,6 @@ import { PerfilDeleteComponent } from './components/perfil/perfil-delete/perfil-
     RelatorioUpdateComponent,
     RelatorioDeleteComponent,
 
-
     AgendamentoCrudComponent,
     AgendamentosComponent,
     AgendamentoCreateComponent,
@@ -166,10 +167,11 @@ import { PerfilDeleteComponent } from './components/perfil/perfil-delete/perfil-
 
     // Diretivas
     RedDirective,
-      PerfilCreateComponent,
-      PerfilReadComponent,
-      PerfilUpdateComponent,
-      PerfilDeleteComponent,
+
+    PerfilCreateComponent,
+    PerfilReadComponent,
+    PerfilUpdateComponent,
+    PerfilDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -193,15 +195,17 @@ import { PerfilDeleteComponent } from './components/perfil/perfil-delete/perfil-
     MatDatepickerModule,
     MatNativeDateModule,
     MatChipsModule,
-    MatCardModule,
     MatTooltipModule,
-    MatTableModule,
+
     // Forms
     FormsModule,
     ReactiveFormsModule,
 
     // HTTP
     HttpClientModule,
+
+    // Text Mask Module
+    TextMaskModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' }
