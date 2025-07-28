@@ -1,110 +1,88 @@
+.table-container {
+  overflow-x: auto;
+  width: 82%;
+  margin: 0 auto;
+  background-color: #0D3B66;
+  padding: 18px;
+  margin-top: 150px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(48, 22, 199, 0.3);
+}
 
-/* ============ TABELA DE PAGAMENTOS ============ */
-.pagamentos-tabela-container {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
-    font-family: 'Segoe UI', sans-serif;
-  }
-  
-  .pagamentos-titulo {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #ffffff;
-    text-align: center;
-  }
-  
-  .tabela-scroll {
-    overflow-x: auto;
-  }
-  
-  .pagamentos-tabela {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    background: linear-gradient(135deg, #0D3B66, #092447);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-  }
-  
-  .pagamentos-tabela thead {
-    background-color: #000000;
-  }
-  
-  .pagamentos-tabela th {
-    padding: 20px 12px;
-    text-align: left;
-    color: #ffffff;
-    font-size: 1.2rem;
-    font-weight: 500;
-    border-bottom: 2px solid #16a34a;
-  }
-  
-  .pagamentos-tabela td {
-    padding: 14px 12px;
-    color: #e2e8f0;
-    font-size: 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-  
-  .pagamentos-tabela tbody tr:nth-child(odd) {
-    background-color: rgba(255,255,255,0.05);
-  }
-  
-  .pagamentos-tabela tbody tr:hover {
-    background-color: rgba(255,255,255,0.12);
-    transition: background-color 0.2s;
-  }
-  
-  /* ============ STATUS (Pago/Pendente) ============ */
-  .status-badge {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-  }
-  
-  .status-pago {
-    background-color: #16a34a;
-    color: #fff;
-  }
-  
-  .status-pendente {
-    background-color: #b91c1c;
-    color: #fff;
-  }
-  
-  /* ============ BOTÕES DE AÇÃO ============ */
-  .btn-acao {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 10px;
-    margin-right: 6px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: #ffffff;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  .btn-acao .material-icons {
-    font-size: 18px;
-    margin-right: 4px;
-  }
-  
-  .btn-acao.editar {
-    background-color: #2563eb;
-  }
-  
-  .btn-acao.remover {
-    background-color: #dc2626;
-  }
-  
-  .btn-acao:hover {
-    transform: scale(1.05);
-  }
-  
+table.gamer-table {
+  width: 95%;
+  margin: 0 auto;
+  border: 1px solid #0af8c1;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', sans-serif;
+  color: #e0e0e0;
+  background-color: rgba(44, 62, 80, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table.gamer-table th {
+  background-color: #ffffff;
+  color: #2C3E50;
+  font-weight: 600;
+  padding: 14px;
+  text-align: left;
+  border-bottom: 2px solid #0af8c1;
+  border: 1px solid #0af8c1;
+  position: relative;
+  font-size: 1.2rem;
+}
+
+table.gamer-table th::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: #0af8c1;
+  box-shadow: 0 0 8px #0af8c1;
+}
+
+table.gamer-table td {
+  padding: 14px;
+  box-shadow: 0 0 0 1px #0af8c1;
+  background-color: #ffffff;
+  font-size: 1rem;
+  color: #2C3E50;
+}
+
+table.gamer-table tr:hover {
+  background-color: rgba(42, 61, 80, 0.6);
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Botões de ação */
+.btn-acao {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 10px;
+  margin-right: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.0rem;
+  color: #ffffff;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-acao .material-icons {
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+.btn-acao.editar {
+  background-color: #2563eb;
+}
+
+.btn-acao.remover {
+  background-color: #ff0000;
+}
+
+.btn-acao:hover {
+  transform: scale(1.05);
+}

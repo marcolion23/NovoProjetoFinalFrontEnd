@@ -20,6 +20,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'; // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // Forms
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -196,6 +197,7 @@ import { PerfilDeleteComponent } from './components/perfil/perfil-delete/perfil-
     MatNativeDateModule,
     MatChipsModule,
     MatTooltipModule,
+    MatAutocompleteModule, // <== ADICIONADO AQUI
 
     // Forms
     FormsModule,

@@ -5,13 +5,15 @@
    [routerLink]="'/fpagamentos/create/'">
     <i class="material-icons">add</i> Adicionar Pagamento
   </button>
+
+  <button class="expanded-btn btn-gerenciamentos-pagamento" [routerLink]="'/fpagamentos/update/:fpgId'">
+    <i class="material-icons">bar_chart</i> Gerenciamento de Pagamentos
+  </button>
+
   <button class="expanded-btn btn-relatorios-pagamento" [routerLink]="'/pagamentos/relatorios'">
     <i class="material-icons">bar_chart</i> Relatórios
   </button>
 
-  <button class="expanded-btn btn-gerenciamento-pagamento" [routerLink]="'/fpagamentos/update/:fpgId'">
-    <i class="material-icons">bar_chart</i> Gerenciamento de Pagamentos
-  </button>
 </div>
 
 <!-- ============ DASHBOARD DE RESUMO ============ -->

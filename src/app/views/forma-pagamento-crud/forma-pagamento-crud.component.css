@@ -31,11 +31,14 @@
 }
 
 .btn-add-pagamento {
-  background: linear-gradient(135deg, #16a34a, #14532d); /* Verde gamer */
+  background-color: #0D3B66;
 }
 
 .btn-relatorios-pagamento {
   background: linear-gradient(135deg, #b91c1c, #7f1d1d); /* Vermelho gamer */
+}
+.btn-gerenciamentos-pagamento {
+  background-color: #14532d;
 }
 
 /* ============ DASHBOARD DE RESUMO ============ */

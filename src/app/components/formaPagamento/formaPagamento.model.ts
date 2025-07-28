@@ -1,11 +1,12 @@
 export interface FormaPagamento {
-  fpgId?: number;           // ID do pagamento (opcional para criação)
-  fpgDescricao: string;     // Descrição
-  clienteId?: number;       // ID do cliente associado
-  tipo?: string;            // Tipo: Pix, Cartão, Dinheiro...
-  valor?: number;           // Valor do pagamento
-  data?: Date;              // Data do pagamento
-  parcelas?: number;        // Parcelas se houver
-  status?: string;          // Pago, Pendente, Cancelado...
-  observacao?: string;      // Campo opcional para observações
+  fpgId?: number;
+  fpgDescricao: string;
+  clienteId?: number;    // Id do cliente para relacionar com cadastro
+  clienteNome?: string;  // Opcional: nome do cliente para exibição (se desejar)
+  tipo?: string;
+  valor?: number;
+  data?: Date;
+  parcelas?: number;
+  status?: string;
+  observacao?: string;
 }
