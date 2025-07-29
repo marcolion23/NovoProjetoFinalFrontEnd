@@ -48,19 +48,9 @@ import { AgendamentoDeleteComponent } from './components/agendamentos/agendament
 // Relatórios CRUD
 import { RelatoriosCrudComponent } from './views/relatorios-crud/relatorios-crud.component';
 import { RelatorioCreateComponent } from './components/relatorios/relatorio-create/relatorio-create.component';
-import { RelatorioReadComponent } from './components/relatorios/relatorio-read/relatorio-read.component';
 import { RelatorioUpdateComponent } from './components/relatorios/relatorio-update/relatorio-update.component';
 import { RelatorioDeleteComponent } from './components/relatorios/relatorio-delete/relatorio-delete.component';
 
-// Perfil
-import { PerfilCrudComponent } from './views/perfil-crud/perfil-crud.component';
-import { PerfilCreateComponent } from './components/perfil/perfil-create/perfil-create.component';
-import { PerfilReadComponent } from './components/perfil/perfil-read/perfil-read.component';
-import { PerfilUpdateComponent } from './components/perfil/perfil-update/perfil-update.component';
-import { PerfilDeleteComponent } from './components/perfil/perfil-delete/perfil-delete.component';
-
-// Ajustes
-import { AjustesComponent } from './components/ajustes/ajustes.component';
 
 // Rotas definidas
 const routes: Routes = [
@@ -114,15 +104,7 @@ const routes: Routes = [
   { path: 'relatorios/update/:relId', component: RelatorioUpdateComponent },
   { path: 'relatorios/delete/:relId', component: RelatorioDeleteComponent },
 
-  // Rotas Perfil CRUD
-  { path: 'perfil', component: PerfilCrudComponent },
-  { path: 'perfil/create', component: PerfilCreateComponent },
-  { path: 'perfil/read', component: PerfilReadComponent },
-  { path: 'perfil/update/:id', component: PerfilUpdateComponent },
-  { path: 'perfil/delete/:id', component: PerfilDeleteComponent },
 
-  // Rotas Ajustes
-  { path: 'ajustes', component: AjustesComponent },
 
   // Rota curinga - redireciona para home caso não encontre rota
   { path: '**', redirectTo: '', pathMatch: 'full' }

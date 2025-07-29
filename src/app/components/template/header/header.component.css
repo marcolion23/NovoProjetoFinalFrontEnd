@@ -156,24 +156,7 @@
 .header-content {
     position: relative; /* Necessário para o .right-icons absolute funcionar */
 }
-/* ===== TOOLTIP PERSONALIZADO - MINHA CONTA ===== */
-.icon .custom-tooltip {
-    position: absolute;                          /* Permite posicionamento flutuante */
-    bottom: -35px;                               /* Posiciona abaixo do ícone */
-    left: 50%;                                   /* Centraliza horizontalmente */
-    transform: translateX(-50%);                 /* Corrige a centralização */
-    background-color: #000000;                   /* Fundo preto */
-    color: #ffffff;                              /* Texto branco */
-    padding: 6px 10px;                           /* Espaçamento interno */
-    border-radius: 25px;                          /* Cantos arredondados */
-    font-size: 0.75rem;                          /* Tamanho da fonte */
-    white-space: nowrap;                         /* Impede quebra de linha */
-    opacity: 0;                                   /* Invisível por padrão */
-    visibility: hidden;                          /* Oculto por padrão */
-    transition: opacity 0.5s ease;               /* Transição suave */
-    pointer-events: none;                        /* Não interfere no hover */
-    z-index: 1002;                                /* Fica acima do cabeçalho */
-}
+
 
 .icon:hover .custom-tooltip {
     opacity: 1;                                   /* Torna visível ao passar o mouse */

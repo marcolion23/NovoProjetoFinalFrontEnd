@@ -95,19 +95,12 @@ import { RelatorioDeleteComponent } from './components/relatorios/relatorio-dele
 
 // Agendamentos
 import { AgendamentosComponent } from './components/agendamentos/agendamentos.component';
+import { AgendamentoCrudComponent } from './views/agendamentos-crud/agendamentos-crud.component';
 import { AgendamentoCreateComponent } from './components/agendamentos/agendamento-create/agendamento-create.component';
 import { AgendamentoReadComponent } from './components/agendamentos/agendamento-read/agendamento-read.component';
 import { AgendamentoUpdateComponent } from './components/agendamentos/agendamento-update/agendamento-update.component';
 import { AgendamentoDeleteComponent } from './components/agendamentos/agendamento-delete/agendamento-delete.component';
 
-// Outros
-import { AjustesComponent } from './components/ajustes/ajustes.component';
-import { PerfilComponent } from './components/perfil/perfil.component';
-import { AgendamentoCrudComponent } from './views/agendamentos-crud/agendamentos-crud.component';
-import { PerfilCreateComponent } from './components/perfil/perfil-create/perfil-create.component';
-import { PerfilReadComponent } from './components/perfil/perfil-read/perfil-read.component';
-import { PerfilUpdateComponent } from './components/perfil/perfil-update/perfil-update.component';
-import { PerfilDeleteComponent } from './components/perfil/perfil-delete/perfil-delete.component';
 
 @NgModule({
   declarations: [
@@ -163,16 +156,10 @@ import { PerfilDeleteComponent } from './components/perfil/perfil-delete/perfil-
     AgendamentoUpdateComponent,
     AgendamentoDeleteComponent,
 
-    AjustesComponent,
-    PerfilComponent,
-
     // Diretivas
     RedDirective,
 
-    PerfilCreateComponent,
-    PerfilReadComponent,
-    PerfilUpdateComponent,
-    PerfilDeleteComponent,
+  
   ],
   imports: [
     BrowserModule,

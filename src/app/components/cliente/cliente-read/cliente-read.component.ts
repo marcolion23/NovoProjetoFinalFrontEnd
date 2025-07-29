@@ -31,7 +31,9 @@ this.clientes = [
     cliTelefone: '(11) 91234-5678',
     cliStatus: 'Ativo',
     cliAtivo: true,
-    cliDataCadastro: '2024-01-01'
+    cliDataCadastro: '2024-01-01',
+    cliSexo: 'Masculino'  // <-- adicione aqui também!
+
   },
   {
     cliId: 2,
@@ -41,7 +43,9 @@ this.clientes = [
     cliTelefone: '(21) 99876-5432',
     cliStatus: 'Ativo',
     cliAtivo: false,
-    cliDataCadastro: '2024-05-15'
+    cliDataCadastro: '2024-05-15',
+    cliSexo: 'Feminino'  // <-- adicione aqui também!
+
   }
 ];
 

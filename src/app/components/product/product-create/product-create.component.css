@@ -153,5 +153,10 @@ button[color="warn"]:hover {
   button {
     width: 100%;                   /* Botões ocupam largura total na vertical */
   }
+  .icon-label {
+    vertical-align: middle;
+    margin-right: 6px;
+    font-size: 20px;
+  }
 }   
 

@@ -31,22 +31,31 @@
       </mat-form-field>
 
       <!-- Código de Barras: só números, máximo 13 dígitos -->
-      <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Código de Barras</mat-label>
-        <input
-          matInput
-          placeholder="Ex: 7891234567890"
-          [(ngModel)]="product.proCodigoBarras"
-          name="proCodigoBarras"
-          required
-          #proCodigoBarrasInput="ngModel"
-          maxlength="13"
-          (keypress)="apenasNumeros($event)"
-        >
-        <mat-error *ngIf="proCodigoBarrasInput.invalid && (proCodigoBarrasInput.dirty || proCodigoBarrasInput.touched)">
-          O código de barras é obrigatório.
-        </mat-error>
-      </mat-form-field>
+<mat-form-field appearance="outline" class="half-width" required>
+  <mat-label>Código de Barras</mat-label>
+  <input
+    matInput
+    placeholder="Ex: 7891234567890"
+    [(ngModel)]="product.proCodigoBarras"
+    name="proCodigoBarras"
+    required
+    #proCodigoBarrasInput="ngModel"
+    maxlength="13"
+    (keypress)="apenasNumeros($event)"
+  >
+
+  <!-- Mensagem informativa quando atinge 13 dígitos -->
+  <mat-hint *ngIf="product.proCodigoBarras?.length === 13" style="color: orange;">
+    Limite de 13 dígitos atingido
+  </mat-hint>
+
+  <!-- Mensagem de erro se o campo estiver vazio e tocado -->
+  <mat-error *ngIf="proCodigoBarrasInput.errors?.['required'] && (proCodigoBarrasInput.dirty || proCodigoBarrasInput.touched)">
+    O código de barras é obrigatório.
+  </mat-error>
+</mat-form-field>
+
+
 
       <!-- Descrição -->
       <mat-form-field appearance="outline" class="full-width" required>
@@ -259,19 +268,17 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Estoque Atual -->
       <mat-form-field appearance="outline" class="half-width" required>
         <mat-label>Estoque Atual</mat-label>
         <input
           matInput
-          type="number"
+          type="text"              
           placeholder="Ex: 100"
           [(ngModel)]="product.proEstoque"
           name="proEstoque"
-          min="0"
           required
           #proEstoqueInput="ngModel"
-          maxlength="5"
+          maxlength="5"             
           (keypress)="apenasNumeros($event)"
           (focus)="limparZeroInicial()"
         >
@@ -279,6 +286,7 @@
           O estoque é obrigatório e deve ser maior ou igual a zero.
         </mat-error>
       </mat-form-field>
+      
 
       <!-- Data de Cadastro -->
       <mat-form-field appearance="outline" class="half-width" required>

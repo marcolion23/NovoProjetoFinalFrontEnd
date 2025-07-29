@@ -14,4 +14,6 @@ export interface Cliente {
   cliAtivo?: boolean;
   cliStatus?: string;
   cliDataCadastro?: string;
+  cliSexo: string;  // novo campo para sexo
+
 }
