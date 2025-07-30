@@ -1,7 +1,7 @@
 /* ===== Menu lateral - Sidenav ===== */
 .sidenav {
     background-color: #0D3B66;              /* Define a cor de fundo azul escuro */
-    width: 300px;                           /* Largura padrão do menu lateral */
+    width: 325px;                           /* Largura padrão do menu lateral */
     color: #ffffff;                         /* Cor do texto em branco */
     padding: 21px 0px;                      /* Espaço interno: 21px em cima e embaixo, 0 nas laterais */
     box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15); /* Sombra à direita do menu para dar profundidade */
@@ -20,7 +20,7 @@
 .sidenav a {
     display: flex;                        /* Usa flexbox para alinhar ícone e texto */
     align-items: center;                  /* Alinha verticalmente no centro */
-    padding: 32px 0px;                    /* Espaçamento vertical grande e sem espaçamento horizontal */
+    padding: 45px 6px;                    /* Espaçamento vertical grande e sem espaçamento horizontal */
     text-decoration: none;                /* Remove sublinhado dos links */
     color: inherit;                      /* Herda a cor do texto definida no .sidenav */
     font-weight: 500;                    /* Peso da fonte um pouco mais forte que normal */
@@ -51,7 +51,7 @@
 
 /* Modo fechado (compacto) do menu lateral */
 .sidenav.closed {
-    width: 60px;                         /* Largura reduzida */
+    width: 75px;                         /* Largura reduzida */
     overflow-x: hidden;                 /* Esconde o que ultrapassar a largura horizontal */
     transition: width 0.3s ease;        /* Transição suave ao mudar a largura */
 }
@@ -71,7 +71,7 @@
 
 /* Quando o menu fechado recebe hover */
 .sidenav.closed:hover {
-    width: 240px;                      /* Expande para o modo aberto */
+    width: 350px;                      /* Expande para o modo aberto */
 }
 
 /* Ao passar o mouse com menu fechado, mostra os textos novamente */

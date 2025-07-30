@@ -16,21 +16,23 @@ export class FormaPagamentoCreateComponent implements OnInit {
     tipo: '',
     valor: undefined,
     data: undefined,
-    parcelas: 1,
+    parcelas: undefined, // undefined inicialmente
     status: '',
     observacao: ''
-  }
+  };
 
   valorFormatado: string = '';
 
-  maxDate: Date = new Date(); // Para limitar data futura no datepicker
+  maxDate: Date = new Date();
 
-  // Exemplo fixo de clientes (substitua pelo serviço real)
   clientes = [
     { id: 1, nome: 'Cliente A' },
     { id: 2, nome: 'Cliente B' },
     { id: 3, nome: 'Cliente C' }
   ];
+
+  clientesFiltrados = [...this.clientes];
+  clienteFiltro: string = '';
 
   constructor(
     private formaPagamentoService: FormaPagamentoService,
@@ -38,12 +40,51 @@ export class FormaPagamentoCreateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Carregue clientes via serviço se quiser
+    // Carregar clientes via serviço se necessário
+  }
+
+  filtrarClientes() {
+    const filtro = this.clienteFiltro.toLowerCase();
+    this.clientesFiltrados = this.clientes.filter(c =>
+      c.nome.toLowerCase().includes(filtro)
+    );
+  }
+
+  onClienteSelectOpened(opened: boolean) {
+    if (opened) {
+      this.clienteFiltro = '';
+      this.clientesFiltrados = [...this.clientes];
+    }
+  }
+
+  compareClientes(c1: any, c2: any): boolean {
+    return c1 === c2;
+  }
+
+  onTipoPagamentoChange(tipo: string) {
+    this.formaPagamento.tipo = tipo?.trim();
+
+    if (this.formaPagamento.tipo === 'Cartão de Crédito') {
+      // Só inicializa parcelas se for crédito e valor inválido
+      if (this.formaPagamento.parcelas === undefined || this.formaPagamento.parcelas < 0) {
+        this.formaPagamento.parcelas = 1;
+      }
+    } else {
+      // Remove parcelas para qualquer outro tipo, inclusive débito
+      this.formaPagamento.parcelas = undefined;
+    }
+  }
+
+  bloquearTeclasInvalidas(event: KeyboardEvent) {
+    // Bloquear hífen e sinais de menos para o campo parcelas
+    if (event.key === '-' || event.key === '+' || event.key === 'e' || event.key === ',' || event.key === '.') {
+      event.preventDefault();
+    }
   }
 
   createFormaPagamento(): void {
     this.formaPagamentoService.create(this.formaPagamento).subscribe(() => {
-      this.formaPagamentoService.showMessage('Produto criado!');
+      this.formaPagamentoService.showMessage('Pagamento criado!');
       this.router.navigate(['/fpagamentos']);
     });
   }
@@ -59,7 +100,7 @@ export class FormaPagamentoCreateComponent implements OnInit {
       tipo: '',
       valor: undefined,
       data: undefined,
-      parcelas: 1,
+      parcelas: undefined,
       status: '',
       observacao: ''
     };
@@ -70,7 +111,6 @@ export class FormaPagamentoCreateComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     let valor = input.value;
 
-    // Remove tudo que não for número
     valor = valor.replace(/\D/g, '');
     let valorNumerico = parseInt(valor, 10);
 
@@ -80,10 +120,8 @@ export class FormaPagamentoCreateComponent implements OnInit {
       return;
     }
 
-    // Divide por 100 para considerar os centavos
     valorNumerico = valorNumerico / 100;
 
-    // Formata para moeda BRL
     this.valorFormatado = valorNumerico.toLocaleString('pt-BR', {
       style: 'currency',
       currency: 'BRL',
