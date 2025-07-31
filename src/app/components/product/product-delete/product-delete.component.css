@@ -1,34 +1,97 @@
-/* Container que centraliza o card na tela */
+/* Container principal da tela de exclusão */
 .delete-container {
-  display: flex; /* Flex para centralizar */
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  height: calc(100vh - 100px); /* Altura da tela menos o header fixo */
-  background: linear-gradient(145deg, #1b2838, #0f171e); /* Fundo gamer */
-  padding: 20px; /* Espaço interno */
+  background-color: #0D3B66;         /* Cor de fundo azul escuro (padrão gamer do sistema) */
+  color: #ffffff;                    /* Cor padrão do texto: branco */
+  padding: 2rem;                     /* Espaçamento interno em todos os lados */
+  border-radius: 16px;               /* Cantos arredondados */
+  border: 2px solid #0D3B66;         /* Borda neon azul-claro */
+  max-width: 700px;                  /* Largura máxima da caixa */
+  margin: 2rem auto;                 /* Margem externa: 2rem em cima e embaixo, centralizado na horizontal */
+  box-shadow: 0 0 20px #0D3B66;      /* Efeito de brilho ao redor da caixa (neon) */
+  margin-top: 150px;                 /* Espaço extra no topo para afastar da navbar ou topo da tela */
 }
 
-/* Card principal */
-.delete-card {
-  background-color: #2C3E50; /* Fundo escuro gamer */
-  color: #e0e0e0; /* Texto claro */
-  padding: 24px; /* Espaçamento interno */
-  border-radius: 12px; /* Cantos arredondados */
-  box-shadow: 0 0 15px rgba(10, 248, 193, 0.3); /* Glow neon */
-  max-width: 400px; /* Largura máxima */
-  width: 100%; /* Responsivo */
-  text-align: center; /* Centraliza texto */
+/* Título centralizado da tela */
+.delete-title {
+  text-align: center;               /* Alinhamento central */
+  margin-bottom: 2rem;              /* Espaço abaixo do título */
+  font-size: 24px;                  /* Tamanho da fonte do título */
+  color: #ff0000;                   /* Cor neon azul-claro para destacar o título */
 }
 
-/* Container dos botões */
-.delete-buttons {
-  margin-top: 20px; /* Espaço acima dos botões */
-  display: flex; /* Flex para alinhar */
-  justify-content: space-around; /* Espaço entre os botões */
+/* Cartão contendo as informações do produto */
+.product-card {
+  display: flex;                    /* Layout flexível */
+  flex-direction: column;          /* Direção vertical dos elementos internos */
+  gap: 0.8rem;                      /* Espaço entre cada linha de informação */
+  padding: 1.5rem;                  /* Espaço interno */
+  background-color: #102e4a;        /* Cor de fundo um pouco mais clara que o container */
+  border-radius: 12px;             /* Cantos arredondados menores */
+  border: 1px solid #0D3B66;        /* Borda neon azul-claro */
 }
 
-/* Botões: adiciona leve efeito ao hover */
-.delete-buttons button:hover {
-  transform: scale(1.05); /* Aumenta um pouco */
-  transition: transform 0.2s ease; /* Suaviza */
+/* Estilo base das informações do produto */
+.product-info {
+  font-size: 16px;                 /* Tamanho da fonte */
+  line-height: 1.4;                /* Espaçamento entre linhas */
+}
+
+/* Cor verde para status Ativo */
+.ativo {
+  color: #4caf50;                  /* Verde vibrante */
+  font-weight: bold;              /* Negrito */
+}
+.inativo {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.button-container {
+  display: flex;              /* Ativa flexbox para o container */
+  justify-content: center;    /* Centraliza os botões horizontalmente */
+  gap: 20px;                  /* Espaçamento entre os botões */
+  margin-top: 20px;           /* Espaço acima dos botões */
+}
+
+.button-container button {
+  width: 150px;               /* Largura fixa */
+  height: 55px;
+  font-size: 1.1rem;
+  padding: 10px 24px;
+  border-radius: 45px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Botão primário */
+button[color="primary"] {
+  background-color: #ff0000;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(56, 142, 60, 0.4);
+}
+
+/* Botão de aviso */
+button[color="warn"] {
+  background-color: #0044ff;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.4);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Responsivo */
+@media (max-width: 640px) {
+  .button-container {
+    flex-direction: column;
+    align-items: center; /* Centraliza no eixo cruzado */
+  }
+
+  .button-container button {
+    width: 100%;  /* Botões ocupam toda a largura no mobile */
+    max-width: 300px; /* Máximo para não ficar gigante */
+  }
 }

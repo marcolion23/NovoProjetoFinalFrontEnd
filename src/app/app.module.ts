@@ -55,7 +55,6 @@ import { FormaPagamentoCrudComponent } from './views/forma-pagamento-crud/forma-
 import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.component';
 import { EstoqueCrudComponent } from './views/estoque-crud/estoque-crud.component';
 import { FornecedorCrudComponent } from './views/fornecedor-crud/fornecedor-crud.component';
-import { RelatoriosCrudComponent } from './views/relatorios-crud/relatorios-crud.component';
 
 // Produtos
 import { ProductCreateComponent } from './components/product/product-create/product-create.component';
@@ -87,19 +86,6 @@ import { FornecedorReadComponent } from './components/fornecedor/fornecedor-read
 import { FornecedorUpdateComponent } from './components/fornecedor/fornecedor-update/fornecedor-update.component';
 import { FornecedorDeleteComponent } from './components/fornecedor/fornecedor-delete/fornecedor-delete.component';
 
-// Relatórios
-import { RelatorioCreateComponent } from './components/relatorios/relatorio-create/relatorio-create.component';
-import { RelatorioReadComponent } from './components/relatorios/relatorio-read/relatorio-read.component';
-import { RelatorioUpdateComponent } from './components/relatorios/relatorio-update/relatorio-update.component';
-import { RelatorioDeleteComponent } from './components/relatorios/relatorio-delete/relatorio-delete.component';
-
-// Agendamentos
-import { AgendamentosComponent } from './components/agendamentos/agendamentos.component';
-import { AgendamentoCrudComponent } from './views/agendamentos-crud/agendamentos-crud.component';
-import { AgendamentoCreateComponent } from './components/agendamentos/agendamento-create/agendamento-create.component';
-import { AgendamentoReadComponent } from './components/agendamentos/agendamento-read/agendamento-read.component';
-import { AgendamentoUpdateComponent } from './components/agendamentos/agendamento-update/agendamento-update.component';
-import { AgendamentoDeleteComponent } from './components/agendamentos/agendamento-delete/agendamento-delete.component';
 
 
 @NgModule({
@@ -116,7 +102,6 @@ import { AgendamentoDeleteComponent } from './components/agendamentos/agendament
     ClienteCrudComponent,
     EstoqueCrudComponent,
     FornecedorCrudComponent,
-    RelatoriosCrudComponent,
 
     // Componentes CRUD
     ProductCreateComponent,
@@ -144,17 +129,6 @@ import { AgendamentoDeleteComponent } from './components/agendamentos/agendament
     FornecedorUpdateComponent,
     FornecedorDeleteComponent,
 
-    RelatorioCreateComponent,
-    RelatorioReadComponent,
-    RelatorioUpdateComponent,
-    RelatorioDeleteComponent,
-
-    AgendamentoCrudComponent,
-    AgendamentosComponent,
-    AgendamentoCreateComponent,
-    AgendamentoReadComponent,
-    AgendamentoUpdateComponent,
-    AgendamentoDeleteComponent,
 
     // Diretivas
     RedDirective,

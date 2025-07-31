@@ -1,128 +1,136 @@
 /* ===== CARD PRINCIPAL DE ACESSO RÁPIDO (fixo no rodapé) ===== */
 .quick-access-card {
-  position: fixed;
-  bottom: 150px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50%;
-  background-color: #0D3B66;
-  padding: 35px;                            /* Padronizado com stats-card */
-  color: #ffffff;
-  font-family: 'Roboto', sans-serif;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  border-radius: 16px;
-  overflow: auto;
-  margin-top: 150px;                        /* Alinhamento visual */
+  position: fixed;                          /* Fixa o card na tela */
+  bottom: 100px;                             /* Espaço acima do footer */
+  left: 50%;                                /* Centraliza horizontalmente */
+  transform: translateX(-50%);              /* Ajuste para centro exato */
+  width: 50%;                               /* Largura do card */
+  background-color: #0D3B66;                /* Fundo escuro gamer */
+  padding: 50px;                            /* Espaço interno */
+  color: #ffffff;                           /* Cor do texto */
+  font-family: 'Roboto', sans-serif;        /* Fonte moderna */
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Sombra discreta acima */
+  z-index: 1000;                            /* Sobrepõe outros elementos */
+  border-radius: 16px;                      /* Bordas arredondadas */
+  overflow: auto;                           /* Evita vazamento de conteúdo */
 }
 
 /* ===== TÍTULO DO CARD DE ACESSO RÁPIDO COM ÍCONE AO LADO ===== */
 .quick-access-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;                        /* Padronizado com stats-title */
-  font-weight: 550;
-  color: #21CBF3;
-  margin-bottom: 28px;
-  gap: 10px;
+  display: flex;                            /* Ícone e texto lado a lado */
+  align-items: center;                      /* Alinha verticalmente */
+  justify-content: center;                   /* Centraliza horizontalmente */
+  font-size: 1.8rem;                        /* Tamanho do texto */
+  font-weight: 620;                         /* Negrito */
+  color: #21CBF3;                           /* Azul neon gamer */
+  margin-bottom: 28px;                      /* Espaço abaixo do título */
+  gap: 10px;                                /* Espaço entre ícone e texto */
 }
 
 /* ===== ÍCONE DO TÍTULO ===== */
 .title-icon {
-  font-size: 28px;
-  color: #21CBF3;
+  font-size: 28px;                          /* Tamanho do ícone */
+  color: #21CBF3;                           /* Azul neon */
 }
 
 /* ===== CONTAINER DOS BOTÕES ===== */
 .quick-access-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px 50px;
+  display: flex;                            /* Layout flexível */
+  flex-wrap: wrap;                          /* Permite quebra em telas menores */
+  justify-content: center;                  /* Centraliza os botões */
+  gap: 25px 50px;                           /* Espaço vertical e horizontal */
 }
 
 /* ===== ESTILO BASE DOS BOTÕES ===== */
 .quick-access-buttons button {
-  width: 375px;
-  height: 85px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 0 20px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1.3rem;                        /* Padronizado com stat-value */
-  text-transform: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-  white-space: nowrap;
+  width: 250px;                             /* Largura fixa */
+  height: 70px;                             /* Altura fixa */
+  display: flex;                            /* Layout flex */
+  align-items: center;                      /* Alinha verticalmente */
+  justify-content: center;                  /* Centraliza horizontalmente */
+  gap: 10px;                                /* Espaço entre ícone e texto */
+  padding: 0 16px;                          /* Espaço interno horizontal */
+  border-radius: 12px;                      /* Bordas arredondadas */
+  font-weight: 500;                         /* Peso da fonte */
+  text-transform: none;                      /* Mantém texto normal */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease; /* Animações suaves */
+  white-space: nowrap;                       /* Impede quebra de linha */
+  font-size: 1.4rem;                        /* Adicionado posteriormente */
 }
 
 /* ===== ÍCONES DENTRO DOS BOTÕES ===== */
 .quick-access-buttons button mat-icon {
-  color: inherit;
-  flex-shrink: 0;
-  width: 35px;
-  height: 24px;
+  color: inherit;                           /* Herdar cor do botão */
+  flex-shrink: 0;                           /* Impede encolhimento do ícone */
+  width: 35px;                             /* Largura fixa do ícone */
+  height: 24px;                            /* Altura fixa do ícone */
 }
 
-/* ===== EFEITO HOVER NO BOTÃO ===== */
+/* ===== EFEITO HOVER NO BOTÃO (levanta e adiciona sombra) ===== */
 .quick-access-buttons button:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-  transform: translateY(-4px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.08); /* Fundo levemente mais claro */
+  transform: translateY(-4px);                  /* Sobe levemente */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);        /* Sombra suave */
+  cursor: pointer;                             /* Indica interatividade */
 }
 
 /* ===== EFEITO ACTIVE (ao clicar) ===== */
 .quick-access-buttons button:active {
-  transform: scale(0.97);
-  background-color: rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  transform: scale(0.97);                        /* Encolhe ligeiramente */
+  background-color: rgba(255, 255, 255, 0.12);   /* Fundo um pouco mais claro */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);/* Sombra interna */
 }
 
-/* ===== CARD DE ESTATÍSTICAS ===== */
+
+
+
+
+
+
+
 .stats-card {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50%;
-  background-color: #0D3B66;
-  padding: 35px;
-  color: #ffffff;
-  font-family: 'Roboto', sans-serif;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
+  position: fixed;                          /* Fixa o card na tela */
+  left: 50%;                                /* Centraliza horizontalmente */
+  transform: translateX(-50%);              /* Ajuste para centro exato */
+  width: 50%;                               /* Largura do card */
+  background-color: #0D3B66;                /* Fundo escuro gamer */
+  padding: 35px;                            /* Espaço interno */
+  color: #ffffff;                           /* Cor do texto */
+  font-family: 'Roboto', sans-serif;        /* Fonte moderna */
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Sombra discreta acima */
+  border-radius: 16px;                      /* Bordas arredondadas */
   overflow: auto;
-  margin-top: 150px;
-  margin-bottom: 100px; /* Evita colar no rodapé */
+  margin-top: 100px;
 }
 
-/* ===== TÍTULO DO CARD DE ESTATÍSTICAS ===== */
 .stats-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 1.8rem;
-  font-weight: 550;
-  margin-bottom: 28px;
+  display: flex;                            /* Ícone e texto lado a lado */
+  align-items: center;                      /* Alinha verticalmente */
+  justify-content: center;                   /* Centraliza horizontalmente */
+  font-size: 1.8rem;                        /* Tamanho do texto */
+  font-weight: 620;                         /* Negrito */
+  color: #21CBF3;                           /* Azul neon gamer */
+  margin-bottom: 28px;                      /* Espaço abaixo do título */
+  gap: 10px;                                /* Espaço entre ícone e texto */
+}
+
+.title-icon {
+  font-size: 28px;
   color: #21CBF3;
 }
 
 .stats-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 25px 30px;
+  gap: 25px 30px;                /* Espaçamento igual aos botões */
   justify-content: center;
 }
 
 .stat-item {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1); /* Fundo semitransparente para contraste */
   border-radius: 12px;
   padding: 16px 20px;
-  flex: 1 1 280px;
+  flex: 1 1 200px;              /* Flex responsivo, largura mínima */
   display: flex;
   align-items: center;
   gap: 15px;
@@ -138,7 +146,7 @@
 
 .stat-icon {
   font-size: 30px;
-  color: #21CBF3;
+  color: #21CBF3;               /* Azul neon igual ao título */
   flex-shrink: 0;
 }
 
@@ -161,34 +169,21 @@
   opacity: 0.8;
 }
 
-/* Ícones personalizados por categoria */
-.stat-icon.inventory { color: #3b82f6; }
-.stat-icon.clients   { color: #ef4444; }
-.stat-icon.revenue   { color: #10b981; }
-.stat-icon.orders    { color: #f59e0b; }
-.stat-icon.suppliers { color: #6366f1; }
-.stat-icon.employees { color: #8b5cf6; }
+/* Ícones personalizados por categoria com cor neon variada */
+.stat-icon.inventory { color: #3b82f6; }  /* Azul vibrante */
+.stat-icon.clients { color: #ef4444; }    /* Vermelho neon */
+.stat-icon.revenue { color: #10b981; }    /* Verde neon */
+.stat-icon.orders { color: #f59e0b; }     /* Amarelo neon */
+.stat-icon.suppliers { color: #6366f1; }  /* Roxo neon */
+.stat-icon.employees { color: #8b5cf6; }  /* Roxo mais claro */
 
-/* ===== Responsividade ===== */
+/* Responsividade */
 @media (max-width: 900px) {
   .stats-container {
     justify-content: center;
   }
-
   .stat-item {
     flex: 1 1 45%;
-  }
-
-  .quick-access-card,
-  .stats-card {
-    width: 90%;
-    padding: 25px;
-  }
-
-  .quick-access-buttons button {
-    width: 100%;
-    height: 75px;
-    font-size: 1.1rem;
   }
 }
 

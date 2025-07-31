@@ -63,10 +63,10 @@
   <td mat-cell *matCellDef="let row">
     <div class="btn-actions-container">
     <button class="btn-acao editar">
-              <i class="material-icons">edit</i> Editar
+              <i [routerLink]="'/products/update/:proId'" class="material-icons"> edit </i>  Editar 
             </button>
             <button class="btn-acao remover">
-              <i class="material-icons">delete</i> Remover
+              <i [routerLink]="'/products/delete/:proId'" class="material-icons">delete</i> Remover
             </button>
     </div>
   </td>

@@ -1,24 +1,28 @@
-<mat-card>
-  <mat-card-title>Excluir Produto</mat-card-title>
+<div class="delete-container">
+  <h2 class="delete-title">🗑️ Confirmar Exclusão do Produto</h2>
 
-  <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Nome</mat-label>
-    <input matInput [value]="product?.proNome" disabled>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Preço de custo (R$)</mat-label>
-    <input matInput [value]="product?.proPrecoCusto | currency:'BRL':'symbol':'1.2-2'" disabled>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Preço de venda (R$)</mat-label>
-    <input matInput [value]="product?.proPrecoVenda | currency:'BRL':'symbol':'1.2-2'" disabled>
-  </mat-form-field>
+  <!-- Card com informações do produto -->
+  <div class="product-card">
+    <div class="product-info"><strong>Nome:</strong> {{ produto.proNome }}</div>
+    <div class="product-info"><strong>Código de Barras:</strong> {{ produto.proCodigoBarras }}</div>
+    <div class="product-info"><strong>Descrição:</strong> {{ produto.proDescricao }}</div>
+    <div class="product-info"><strong>Categoria:</strong> {{ produto.proCategoria }}</div>
+    <div class="product-info"><strong>Marca:</strong> {{ produto.proMarca }}</div>
+    <div class="product-info"><strong>Preço de Custo:</strong> R$ {{ produto.proPrecoCusto | number:'1.2-2' }}</div>
+    <div class="product-info"><strong>Preço de Venda:</strong> R$ {{ produto.proPrecoVenda | number:'1.2-2' }}</div>
+    <div class="product-info"><strong>Estoque:</strong> {{ produto.proEstoque }}</div>
+    <div class="product-info"><strong>Status:</strong> 
+      <span [ngClass]="produto.proAtivo ? 'ativo' : 'inativo'">
+        {{ produto.proAtivo ? 'Ativo' : 'Inativo' }}
+      </span>
+    </div>
+  </div>
 
   <!-- Botões -->
-  <div class="button-group">
-    <button mat-raised-button color="warn" (click)="deleteProduct()">Excluir</button>
-    <button mat-raised-button (click)="cancel()">Cancelar</button>
-  </div>
-</mat-card>
+     <!-- Botões -->
+     <div class="button-container">
+      <button mat-raised-button color="primary" (click)="excluir()">Excluir</button>
+      <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+    </div>
+    
+</div>

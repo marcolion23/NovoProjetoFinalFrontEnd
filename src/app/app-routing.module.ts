@@ -38,19 +38,6 @@ import { FormaPagamentoCreateComponent } from './components/formaPagamento/forma
 import { FormaPagamentoUpdateComponent } from './components/formaPagamento/forma-pagamento-update/forma-pagamento-update.component';
 import { FormaPagamentoDeleteComponent } from './components/formaPagamento/forma-pagamento-delete/forma-pagamento-delete.component';
 
-// Agendamentos
-import { AgendamentoCrudComponent } from './views/agendamentos-crud/agendamentos-crud.component';
-import { AgendamentoCreateComponent } from './components/agendamentos/agendamento-create/agendamento-create.component';
-import { AgendamentoReadComponent } from './components/agendamentos/agendamento-read/agendamento-read.component';
-import { AgendamentoUpdateComponent } from './components/agendamentos/agendamento-update/agendamento-update.component';
-import { AgendamentoDeleteComponent } from './components/agendamentos/agendamento-delete/agendamento-delete.component';
-
-// Relatórios CRUD
-import { RelatoriosCrudComponent } from './views/relatorios-crud/relatorios-crud.component';
-import { RelatorioCreateComponent } from './components/relatorios/relatorio-create/relatorio-create.component';
-import { RelatorioUpdateComponent } from './components/relatorios/relatorio-update/relatorio-update.component';
-import { RelatorioDeleteComponent } from './components/relatorios/relatorio-delete/relatorio-delete.component';
-
 
 // Rotas definidas
 const routes: Routes = [
@@ -91,18 +78,6 @@ const routes: Routes = [
   { path: 'fpagamentos/update/:fpgId', component: FormaPagamentoUpdateComponent },
   { path: 'fpagamentos/delete/:fpgId', component: FormaPagamentoDeleteComponent },
 
-  // Rotas Agendamentos
-  { path: 'agendamentos', component: AgendamentoCrudComponent },
-  { path: 'agendamentos/create', component: AgendamentoCreateComponent },
-  { path: 'agendamentos/read', component: AgendamentoReadComponent },
-  { path: 'agendamentos/update/:agId', component: AgendamentoUpdateComponent },
-  { path: 'agendamentos/delete/:agId', component: AgendamentoDeleteComponent },
-
-  // Rotas Relatórios CRUD
-  { path: 'relatorios', component: RelatoriosCrudComponent },
-  { path: 'relatorios/create', component: RelatorioCreateComponent },
-  { path: 'relatorios/update/:relId', component: RelatorioUpdateComponent },
-  { path: 'relatorios/delete/:relId', component: RelatorioDeleteComponent },
 
 
 

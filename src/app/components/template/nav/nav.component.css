@@ -20,7 +20,7 @@
 .sidenav a {
     display: flex;                        /* Usa flexbox para alinhar ícone e texto */
     align-items: center;                  /* Alinha verticalmente no centro */
-    padding: 45px 6px;                    /* Espaçamento vertical grande e sem espaçamento horizontal */
+    padding: 39px 8px;                    /* Espaçamento vertical grande e sem espaçamento horizontal */
     text-decoration: none;                /* Remove sublinhado dos links */
     color: inherit;                      /* Herda a cor do texto definida no .sidenav */
     font-weight: 500;                    /* Peso da fonte um pouco mais forte que normal */

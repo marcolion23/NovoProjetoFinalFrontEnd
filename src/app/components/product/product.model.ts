@@ -1,16 +1,18 @@
 export interface Product {
   proId?: number;
   proNome: string;
-  proPrecoCusto: number;
-  proPrecoVenda: number;
+  proCodigoBarras: string;
+  proDescricao: string;
   proCategoria: string;
   proMarca: string;
-  proCodigoBarras: string;
+  proPrecoCusto: number;
+  proPrecoVenda: number;
   proEstoque: number;
   proAtivo: boolean;
-  proStatus?: string;
-  dataCadastro?: Date;
-  proEstoqueMinimo?: number;
-  proDescricao?: string;
-  proImagemUrl?: string;
+  dataCadastro?: Date | string;
+
+  // Campos extras para edição e formatação
+  proMarcaPersonalizada?: string;        // marca personalizada quando escolhe "outra"
+  proPrecoCustoFormatado?: string;       // para formatar preço na UI
+  proPrecoVendaFormatado?: string;       // para formatar preço na UI
 }
