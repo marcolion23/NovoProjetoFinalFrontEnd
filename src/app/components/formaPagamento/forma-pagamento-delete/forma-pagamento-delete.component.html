@@ -1,18 +1,29 @@
-<mat-card>
-    <mat-card-title>Excluir Forma de Pagamento</mat-card-title>
+<div class="delete-container">
+  <h2 class="delete-title">🗑️ Confirmar Exclusão da Forma de Pagamento</h2>
 
-    <form>
-        <mat-form-field>
-            <input matInput placeholder="Descrição" [value]="formaPagamento.fpgDescricao" name="fpgDescricao" disabled>
-        </mat-form-field>        
-    </form>
+  <div class="product-card">
+    <!-- Como não há "nome", vou usar a descrição -->
+    <div class="product-info"><strong>Descrição:</strong> {{ item.fpgDescricao }}</div>
 
-    <button mat-raised-button (click)="deleteFormaPagamento()" color="warn">
-        Excluir
-    </button>
-    
-    <button mat-raised-button (click)="cancel()">
-        Cancelar
-    </button>
+    <div class="product-info" *ngIf="item.tipo"><strong>Tipo:</strong> {{ item.tipo }}</div>
 
-</mat-card>
+    <div class="product-info" *ngIf="item.data"><strong>Última Utilização:</strong> {{ item.data | date:'dd/MM/yyyy' }}</div>
+
+    <div class="product-info" *ngIf="item.parcelas !== undefined">
+      <strong>Parcelado:</strong> {{ item.parcelas && item.parcelas > 1 ? 'Sim' : 'Não' }}
+    </div>
+
+    <div class="product-info" *ngIf="item.observacao"><strong>Observações:</strong> {{ item.observacao }}</div>
+
+    <div class="product-info"><strong>Status:</strong>
+      <span [ngClass]="item.status === 'ativo' ? 'ativo' : 'inativo'">
+        {{ item.status === 'ativo' ? 'Ativo' : 'Inativo' }}
+      </span>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="excluir()">Excluir</button>
+    <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+  </div>
+</div>

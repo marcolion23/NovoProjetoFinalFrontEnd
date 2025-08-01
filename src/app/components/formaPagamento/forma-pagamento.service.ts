@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormaPagamento } from './formaPagamento.model';
-import { Observable } from 'rxjs';
+import { FormaPagamento } from './forma-pagamento.model';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormaPagamentoService {
 
-  // URL base do backend para forma de pagamentos
   baseUrl = "http://localhost:8080/fpagamentos";
 
   constructor(
@@ -17,7 +17,6 @@ export class FormaPagamentoService {
     private http: HttpClient
   ) { }
 
-  // Exibe mensagem rápida no topo direito da tela
   showMessage(msg: string): void {
     this.snackBar.open(msg, 'X', {
       duration: 3000,
@@ -26,34 +25,59 @@ export class FormaPagamentoService {
     });
   }
 
-  // Cria uma nova forma de pagamento (POST)
   create(formaPagamento: FormaPagamento): Observable<FormaPagamento> {
-    return this.http.post<FormaPagamento>(this.baseUrl, formaPagamento);
+    return this.http.post<FormaPagamento>(this.baseUrl, formaPagamento).pipe(
+      catchError(err => {
+        this.showMessage('Erro ao criar forma de pagamento.');
+        console.error(err);
+        return throwError(() => err);
+      })
+    );
   }
 
-  // Lê todas as formas de pagamento (GET)
   read(): Observable<FormaPagamento[]> {
-    return this.http.get<FormaPagamento[]>(this.baseUrl);
+    return this.http.get<FormaPagamento[]>(this.baseUrl).pipe(
+      catchError(err => {
+        this.showMessage('Erro ao carregar formas de pagamento.');
+        console.error(err);
+        return of([]); // retorna array vazio para evitar erro na UI
+      })
+    );
   }
 
-  // Lê uma forma de pagamento pelo ID (GET)
   readById(fpgId: number): Observable<FormaPagamento> {
     const url = `${this.baseUrl}/${fpgId}`;
-    return this.http.get<FormaPagamento>(url);
+    return this.http.get<FormaPagamento>(url).pipe(
+      catchError(err => {
+        this.showMessage('Erro ao carregar forma de pagamento.');
+        console.error(err);
+        return throwError(() => err);
+      })
+    );
   }
 
-  // Atualiza uma forma de pagamento pelo ID (PUT)
   update(formaPagamento: FormaPagamento): Observable<FormaPagamento> {
     if (!formaPagamento.fpgId) {
-      throw new Error('FormaPagamento ID is required for update.');
+      return throwError(() => new Error('FormaPagamento ID is required for update.'));
     }
     const url = `${this.baseUrl}/${formaPagamento.fpgId}`;
-    return this.http.put<FormaPagamento>(url, formaPagamento);
+    return this.http.put<FormaPagamento>(url, formaPagamento).pipe(
+      catchError(err => {
+        this.showMessage('Erro ao atualizar forma de pagamento.');
+        console.error(err);
+        return throwError(() => err);
+      })
+    );
   }
 
-  // Remove uma forma de pagamento pelo ID (DELETE)
   delete(fpgId: number): Observable<void> {
     const url = `${this.baseUrl}/${fpgId}`;
-    return this.http.delete<void>(url);
+    return this.http.delete<void>(url).pipe(
+      catchError(err => {
+        this.showMessage('Erro ao excluir forma de pagamento.');
+        console.error(err);
+        return throwError(() => err);
+      })
+    );
   }
 }

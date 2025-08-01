@@ -159,6 +159,7 @@ import { FornecedorDeleteComponent } from './components/fornecedor/fornecedor-de
     MatChipsModule,
     MatTooltipModule,
     MatAutocompleteModule, // <== ADICIONADO AQUI
+    MatTableModule,
 
     // Forms
     FormsModule,

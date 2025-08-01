@@ -1,88 +1,146 @@
-.table-container {
-  overflow-x: auto;
-  width: 82%;
-  margin: 0 auto;
-  background-color: #0D3B66;
-  padding: 18px;
-  margin-top: 150px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(48, 22, 199, 0.3);
+/* === CARD do formulário === */
+.client-card {
+  max-width: 1150px;
+  width: 100%;
+  margin: 40px auto 40px auto;
+  padding: 32px 24px;
+  border-radius: 24px;
+  background: #ffffff;
+  color: #000000;
+  box-shadow:
+    0 0 0 6px rgb(5, 32, 180),
+    0 10px 25px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 200px;
 }
 
-table.gamer-table {
-  width: 95%;
-  margin: 0 auto;
-  border: 1px solid #0af8c1;
-  border-collapse: collapse;
-  font-family: 'Segoe UI', sans-serif;
-  color: #e0e0e0;
-  background-color: rgba(44, 62, 80, 0.2);
-  border-radius: 8px;
-  overflow: hidden;
+.client-card mat-card-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #1a1a1a;
 }
 
-table.gamer-table th {
-  background-color: #ffffff;
-  color: #2C3E50;
-  font-weight: 600;
-  padding: 14px;
-  text-align: left;
-  border-bottom: 2px solid #0af8c1;
-  border: 1px solid #0af8c1;
-  position: relative;
-  font-size: 1.2rem;
+/* === FORMULÁRIO: layout flexível com espaçamento === */
+.client-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 30px;
+  padding: 0 5px;
+  box-sizing: border-box;
 }
 
-table.gamer-table th::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 2px;
-  background: #0af8c1;
-  box-shadow: 0 0 8px #0af8c1;
+/* === CAMPOS === */
+.full-width {
+  width: 100%;
+  box-sizing: border-box;
 }
 
-table.gamer-table td {
-  padding: 14px;
-  box-shadow: 0 0 0 1px #0af8c1;
-  background-color: #ffffff;
-  font-size: 1rem;
-  color: #2C3E50;
+.half-width {
+  width: 48%;
+  box-sizing: border-box;
+  min-width: 280px;
 }
 
-table.gamer-table tr:hover {
-  background-color: rgba(42, 61, 80, 0.6);
-  transition: background-color 0.2s ease-in-out;
+/* === Estilo das bordas dos campos mat-form-field (outline) === */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-color: black !important;
+  border-width: 2px !important;
+  border-radius: 8px !important;
 }
 
-/* Botões de ação */
-.btn-acao {
-  display: inline-flex;
-  align-items: center;
-  padding: 10px 10px;
-  margin-right: 15px;
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline,
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
+  border-color: black !important;
+  border-width: 2px !important;
+  border-radius: 8px !important;
+}
+
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-flex {
+  border-color: black !important;
+  border-width: 2px !important;
+  border-radius: 8px !important;
+}
+
+/* === CONTAINER DOS BOTÕES === */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* === BOTÕES PADRÃO === */
+button {
+  background-color: #b0bec5;
+  padding: 12px 28px;
+  border-radius: 45px;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 1.0rem;
-  color: #ffffff;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1rem;
+  min-width: 120px;
+  box-sizing: border-box;
 }
 
-.btn-acao .material-icons {
-  font-size: 18px;
-  margin-right: 4px;
+/* Botão Salvar */
+button[color="primary"] {
+  background-color: #388e3c;        /* Verde escuro para ação positiva */
+  color: #ffffff;                   /* Texto branco */
+  box-shadow: 0 4px 12px rgba(56, 142, 60, 0.4); /* Sombra verde translúcida */
 }
 
-.btn-acao.editar {
-  background-color: #2563eb;
+button[color="primary"]:hover {
+  background-color: #2e7d32;        /* Verde mais escuro no hover */
+  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.6); /* Sombra mais intensa no hover */
 }
 
-.btn-acao.remover {
-  background-color: #ff0000;
+/* Botão Cancelar */
+button[color="warn"] {
+  background-color: #c73e3e;        /* Vermelho forte para ação de alerta */
+  color: #ffffff;                   /* Texto branco */
+  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.4); /* Sombra vermelha translúcida */
 }
 
-.btn-acao:hover {
-  transform: scale(1.05);
+button[color="warn"]:hover {
+  background-color: #f80000;        /* Vermelho intenso no hover */
+  box-shadow: 0 6px 16px rgba(183, 28, 28, 0.6); /* Sombra mais intensa no hover */
+}
+
+/* Botão padrão sem cor */
+button[type="button"] {
+  background-color: #607d8b;
+  color: white;
+  box-shadow: 0 4px 12px rgba(96, 125, 139, 0.4);
+}
+
+button[type="button"]:hover {
+  background-color: #455a64;
+  box-shadow: 0 6px 16px rgba(69, 90, 100, 0.6);
+}
+
+/* === RESPONSIVO para telas pequenas === */
+@media (max-width: 640px) {
+  .half-width {
+    width: 100% !important;
+    min-width: unset;
+  }
+
+  .client-card {
+    margin: 20px 12px;
+    padding: 24px 16px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  button {
+    width: 100%;
+    min-width: unset;
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormaPagamento } from '../formaPagamento.model';
+import { FormaPagamento } from '../forma-pagamento.model';
 import { FormaPagamentoService } from '../forma-pagamento.service';
 import { Router } from '@angular/router';
 

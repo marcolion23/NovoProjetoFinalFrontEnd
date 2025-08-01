@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormaPagamento } from '../formaPagamento.model';
+import { Router } from '@angular/router';
+import { FormaPagamento } from '../forma-pagamento.model';
 import { FormaPagamentoService } from '../forma-pagamento.service';
 
 @Component({
@@ -9,16 +10,53 @@ import { FormaPagamentoService } from '../forma-pagamento.service';
 })
 export class FormaPagamentoReadComponent implements OnInit {
 
-  fpagamentos!: FormaPagamento[]
-   displayedColumns = ['fpgId', 'fpgDescricao', 'action']
- 
-   constructor(private formaPagamentoService: FormaPagamentoService) { }
- 
-   ngOnInit(): void {
-     this.formaPagamentoService.read().subscribe(fpagamentos => {
-       this.fpagamentos = fpagamentos
-       console.log(fpagamentos)  
-     })
-   }
+  displayedColumns: string[] = [
+    'fpgId',
+    'clienteNome',
+    'valor',
+    'data',
+    'fpgDescricao',
+    'status',
+    'acoes'
+  ];
 
+fpagamentos: FormaPagamento[] = [];
+
+  constructor(
+    private formaPagamentoService: FormaPagamentoService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.loadPagamentos();
+  }
+
+  loadPagamentos(): void {
+    this.formaPagamentoService.read().subscribe({
+      next: (dados) => {
+        this.fpagamentos = dados;
+      },
+      error: () => {
+this.formaPagamentoService.showMessage('Erro ao carregar pagamentos!');
+      }
+    });
+  }
+
+  editarPagamento(id: number): void {
+    this.router.navigate(['/fpagamentos/update', id]);
+  }
+
+  removerPagamento(id: number): void {
+    if (confirm('Tem certeza que deseja remover essa forma de pagamento?')) {
+      this.formaPagamentoService.delete(id).subscribe({
+        next: () => {
+          this.formaPagamentoService.showMessage('Removido com sucesso!');
+          this.loadPagamentos(); // Atualiza lista após exclusão
+        },
+        error: () => {
+this.formaPagamentoService.showMessage('Erro ao remover pagamento!');
+        }
+      });
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormaPagamento } from '../formaPagamento.model';
-import { FormaPagamentoService } from '../forma-pagamento.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormaPagamentoService } from '../forma-pagamento.service';
+import { FormaPagamento } from '../forma-pagamento.model';
 
 @Component({
   selector: 'app-forma-pagamento-delete',
@@ -9,36 +9,37 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./forma-pagamento-delete.component.css']
 })
 export class FormaPagamentoDeleteComponent implements OnInit {
-
-  formaPagamento!: FormaPagamento;
+  item: FormaPagamento = {} as FormaPagamento;
 
   constructor(
-    private formaPagamentoService: FormaPagamentoService, 
-    private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private formaPagamentoService: FormaPagamentoService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    const proIdStr = this.route.snapshot.paramMap.get('fpgId');
-    if (proIdStr) {
-      const proId = Number(proIdStr);
-      this.formaPagamentoService.readById(proId).subscribe(formaPagamento => {
-        this.formaPagamento = formaPagamento;
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.formaPagamentoService.readById(+id).subscribe({
+        next: (res: FormaPagamento) => this.item = res,
+        error: (err: any) => {
+          console.error('Erro ao carregar forma de pagamento:', err);
+          this.router.navigate(['/forma-pagamento']);
+        }
       });
     }
   }
 
-  deleteFormaPagamento(): void {
-    if (this.formaPagamento.fpgId) {
-      this.formaPagamentoService.delete(this.formaPagamento.fpgId).subscribe(() => {
-        this.formaPagamentoService.showMessage('Forma de pagamento excluída com sucesso!');
-        this.router.navigate(['/fpagamentos']);
+  excluir(): void {
+    if (this.item.fpgId) {
+      this.formaPagamentoService.delete(this.item.fpgId).subscribe({
+        next: () => this.router.navigate(['/forma-pagamento']),
+        error: (err: any) => console.error('Erro ao excluir forma de pagamento:', err)
       });
     }
   }
 
-  cancel(): void {
-    this.router.navigate(['/fpagamentos']);
+  cancelar(): void {
+    this.router.navigate(['/forma-pagamento']);
   }
-
 }

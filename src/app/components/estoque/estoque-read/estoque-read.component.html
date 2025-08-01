@@ -1,76 +1,89 @@
-<!-- Card principal do relatório -->
-<mat-card class="estoque-card">
-  <!-- Título -->
-  <mat-card-title>Relatório de Estoque</mat-card-title>
+<!-- Container principal com sombra, fundo gradiente e cantos arredondados -->
+<div class="table-container mat-elevation-z8">
+  <table mat-table [dataSource]="estoque" class="gamer-table">
 
-  <!-- Filtros -->
-  <div class="filtros-container">
-    <mat-form-field appearance="outline" class="filtro-item">
-      <mat-label>Categoria</mat-label>
-      <mat-select>
-        <mat-option value="">Todas</mat-option>
-        <mat-option value="hardware">Hardware</mat-option>
-        <mat-option value="perifericos">Periféricos</mat-option>
-        <mat-option value="jogos">Jogos</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <!-- ID -->
+    <ng-container matColumnDef="proId">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let row">{{ row.proId }}</td>
+    </ng-container>
 
-    <mat-form-field appearance="outline" class="filtro-item">
-      <mat-label>Status</mat-label>
-      <mat-select>
-        <mat-option value="">Todos</mat-option>
-        <mat-option value="disponivel">Disponível</mat-option>
-        <mat-option value="esgotado">Esgotado</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <!-- Produto (Nome) -->
+    <ng-container matColumnDef="proNome">
+      <th mat-header-cell *matHeaderCellDef> Produto </th>
+      <td mat-cell *matCellDef="let row">{{ row.proNome }}</td>
+    </ng-container>
 
-    <button class="filtrar-btn">Filtrar</button>
-  </div>
+    <!-- Código de Barras -->
+    <ng-container matColumnDef="proCodigoBarras">
+      <th mat-header-cell *matHeaderCellDef> Código de Barras </th>
+      <td mat-cell *matCellDef="let row">{{ row.proCodigoBarras }}</td>
+    </ng-container>
 
-  <!-- Tabela de estoque -->
-  <div class="tabela-container">
-    <table class="tabela-estoque">
-      <thead>
-        <tr>
-          <th>Produto</th>
-          <th>Categoria</th>
-          <th>Quantidade</th>
-          <th>Preço Unitário</th>
-          <th>Estoque Mínimo</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Mouse Gamer XYZ</td>
-          <td>Periféricos</td>
-          <td>25</td>
-          <td>R$ 199,90</td>
-          <td>5</td>
-          <td><span class="status disponivel">Disponível</span></td>
-        </tr>
-        <tr>
-          <td>Placa de Vídeo ABC</td>
-          <td>Hardware</td>
-          <td>2</td>
-          <td>R$ 2.599,00</td>
-          <td>3</td>
-          <td><span class="status esgotado">Esgotado</span></td>
-        </tr>
-        <!-- + produtos -->
-      </tbody>
-    </table>
-  </div>
+    <!-- Descrição -->
+    <ng-container matColumnDef="proDescricao">
+      <th mat-header-cell *matHeaderCellDef> Descrição </th>
+      <td mat-cell *matCellDef="let row">{{ row.proDescricao }}</td>
+    </ng-container>
 
-  <!-- Totalizadores -->
-  <div class="totalizadores">
-    <div class="total-card">
-      <span class="total-label">Total de Produtos:</span>
-      <span class="total-valor">27</span>
-    </div>
-    <div class="total-card">
-      <span class="total-label">Valor Total do Estoque:</span>
-      <span class="total-valor">R$ 15.000,00</span>
-    </div>
-  </div>
-</mat-card>
+    <!-- Categoria -->
+    <ng-container matColumnDef="proCategoria">
+      <th mat-header-cell *matHeaderCellDef> Categoria </th>
+      <td mat-cell *matCellDef="let row">{{ row.proCategoria }}</td>
+    </ng-container>
+
+    <!-- Marca -->
+    <ng-container matColumnDef="proMarca">
+      <th mat-header-cell *matHeaderCellDef> Marca </th>
+      <td mat-cell *matCellDef="let row">{{ row.proMarca }}</td>
+    </ng-container>
+
+    <!-- Preço de Custo -->
+    <ng-container matColumnDef="proPrecoCusto">
+      <th mat-header-cell *matHeaderCellDef> Preço Custo </th>
+      <td mat-cell *matCellDef="let row">{{ row.proPrecoCusto | currency:'BRL' }}</td>
+    </ng-container>
+
+    <!-- Preço de Venda -->
+    <ng-container matColumnDef="proPrecoVenda">
+      <th mat-header-cell *matHeaderCellDef> Preço Venda </th>
+      <td mat-cell *matCellDef="let row">{{ row.proPrecoVenda | currency:'BRL' }}</td>
+    </ng-container>
+
+    <!-- Estoque -->
+    <ng-container matColumnDef="proEstoque">
+      <th mat-header-cell *matHeaderCellDef> Estoque </th>
+      <td mat-cell *matCellDef="let row">{{ row.proEstoque }}</td>
+    </ng-container>
+
+    <!-- Data Cadastro -->
+    <ng-container matColumnDef="dataCadastro">
+      <th mat-header-cell *matHeaderCellDef> Data Cadastro </th>
+      <td mat-cell *matCellDef="let row">{{ row.dataCadastro | date:'shortDate' }}</td>
+    </ng-container>
+
+    <!-- Ativo -->
+    <ng-container matColumnDef="proAtivo">
+      <th mat-header-cell *matHeaderCellDef> Ativo </th>
+      <td mat-cell *matCellDef="let row">{{ row.proAtivo ? 'Sim' : 'Não' }}</td>
+    </ng-container>
+
+    <!-- Ações -->
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let row">
+        <div class="btn-actions-container">
+          <button class="btn-acao editar">
+            <i  [routerLink]="'/estoque/update/:estoqueId'" class=" material-icons">edit</i>  Editar
+          </button>
+          <button class="btn-acao remover">
+            <i [routerLink]="'/estoque/delete/:estoqueId'" class="material-icons">delete</i> Remover
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsEstoque"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsEstoque;"></tr>
+  </table>
+</div>
