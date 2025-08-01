@@ -37,6 +37,7 @@ import { FormaPagamentoCrudComponent } from './views/forma-pagamento-crud/forma-
 import { FormaPagamentoCreateComponent } from './components/formaPagamento/forma-pagamento-create/forma-pagamento-create.component';
 import { FormaPagamentoUpdateComponent } from './components/formaPagamento/forma-pagamento-update/forma-pagamento-update.component';
 import { FormaPagamentoDeleteComponent } from './components/formaPagamento/forma-pagamento-delete/forma-pagamento-delete.component';
+import { FormaPagamentoReadComponent } from './components/formaPagamento/forma-pagamento-read/forma-pagamento-read.component';
 
 
 // Rotas definidas
@@ -77,6 +78,7 @@ const routes: Routes = [
   { path: 'fpagamentos/create', component: FormaPagamentoCreateComponent },
   { path: 'fpagamentos/update/:fpgId', component: FormaPagamentoUpdateComponent },
   { path: 'fpagamentos/delete/:fpgId', component: FormaPagamentoDeleteComponent },
+  { path: 'fpagamentos/read/:fpgId', component: FormaPagamentoReadComponent },
 
 
 

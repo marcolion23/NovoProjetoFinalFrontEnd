@@ -1,38 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente } from '../cliente.model';
-import { ClienteService } from '../cliente.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ClienteService } from '../cliente.service';
+import { Cliente } from '../cliente.model';
 
 @Component({
   selector: 'app-cliente-delete',
   templateUrl: './cliente-delete.component.html',
-  styleUrls: ['./cliente-delete.component.css']
+  styleUrls: ['./cliente-delete.component.css'],
 })
 export class ClienteDeleteComponent implements OnInit {
-
-  cliente!: Cliente;
+  cliente: Cliente = {} as Cliente;
 
   constructor(
-    private clienteService: ClienteService, 
-    private router: Router,
-    private route: ActivatedRoute) { }
+    private clienteService: ClienteService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    const cliId = this.route.snapshot.paramMap.get('cliId');
-    this.clienteService.readById(cliId!).subscribe(cliente =>{
-      this.cliente = cliente
-    })
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.clienteService.readById(+id).subscribe((res) => {
+        this.cliente = res;
+      });
+    }
   }
 
-  deleteCliente(): void {
-    this.clienteService.delete(this.cliente.cliId!).subscribe(() =>{
-    this.clienteService.showMessage('Cliente excluido com sucesso!')  
-    this.router.navigate(['/clientes'])
-    })
+  excluir(): void {
+    if (this.cliente.cliId) {
+      this.clienteService.delete(this.cliente.cliId).subscribe(() => {
+        this.router.navigate(['/clientes']);
+      });
+    }
   }
 
-  cancel(): void{
-    this.router.navigate(['/clientes'])
+  cancel(): void {
+    this.router.navigate(['/clientes']);
   }
-
 }

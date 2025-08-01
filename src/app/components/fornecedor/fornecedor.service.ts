@@ -36,4 +36,12 @@ export class FornecedorService {
   deleteFornecedor(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+  readById(id: number) {
+    return this.http.get<Fornecedor>(`${this.baseUrl}/${id}`);
+  }
+  
+  delete(id: number) {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+  
 }

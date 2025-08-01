@@ -4,7 +4,6 @@ export interface Estoque {
   proId: number;
   proNome: string;
   proCodigoBarras: string;
-  proDescricao: string;
   proCategoria: string;
   proMarca: string;
   proPrecoCusto: number;
@@ -29,7 +28,6 @@ displayedColumnsEstoque = [
   'proId',
   'proNome',
   'proCodigoBarras',
-  'proDescricao',
   'proCategoria',
   'proMarca',
   'proPrecoCusto',
@@ -49,7 +47,6 @@ displayedColumnsEstoque = [
     proId: 1,
     proNome: 'Mouse Gamer RGB',
     proCodigoBarras: '1234567890123',
-    proDescricao: 'Mouse com RGB e alta precisão',
     proCategoria: 'acessorios',
     proMarca: 'razer',
     proPrecoCusto: 100.00,
@@ -62,7 +59,6 @@ displayedColumnsEstoque = [
     proId: 2,
     proNome: 'Teclado Mecânico Pro',
     proCodigoBarras: '2345678901234',
-    proDescricao: 'Teclado mecânico com switches azuis',
     proCategoria: 'teclado',
     proMarca: 'hyperx',
     proPrecoCusto: 250.00,
@@ -75,7 +71,6 @@ displayedColumnsEstoque = [
     proId: 3,
     proNome: 'Monitor 144Hz 24"',
     proCodigoBarras: '3456789012345',
-    proDescricao: 'Monitor gamer 24 polegadas, 144Hz',
     proCategoria: 'monitor',
     proMarca: 'dell',
     proPrecoCusto: 900.00,

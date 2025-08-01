@@ -1,26 +1,30 @@
-<mat-card>
-    <mat-card-title>Excluir Cliente</mat-card-title>
-    <form>
-        <mat-form-field>
-            <input matInput placeholder="Nome" [value]="cliente.cliNome" name="cliNome" disabled>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Cpf" [value]="cliente.cliCpf" name="cliCpf" disabled>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="E-mail" [value]="cliente.cliEmail" name="cliEmail" disabled>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Telefone" [value]="cliente.cliTelefone" name="cliTelefone" disabled>
-        </mat-form-field>
-    </form>
-
-    <button mat-raised-button (click)="deleteCliente()" color="warn">
-        Excluir
-    </button>
-    
-    <button mat-raised-button (click)="cancel()">
-        Cancelar
-    </button>
-
-</mat-card>
+<div class="delete-container">
+    <h2 class="delete-title">🗑️ Confirmar Exclusão do Cliente</h2>
+  
+    <!-- Card com informações do cliente -->
+    <div class="product-card">
+      <div class="product-info"><strong>Nome:</strong> {{ cliente.cliNome }}</div>
+      <div class="product-info"><strong>CPF:</strong> {{ cliente.cliCpf }}</div>
+      <div class="product-info"><strong>Data de Nascimento:</strong> {{ cliente.cliDataNascimento | date:'shortDate' }}</div>
+      <div class="product-info"><strong>Telefone:</strong> {{ cliente.cliTelefone }}</div>
+      <div class="product-info"><strong>Email:</strong> {{ cliente.cliEmail }}</div>
+      <div class="product-info"><strong>Rua:</strong> {{ cliente.cliRua }}</div>
+      <div class="product-info"><strong>Número:</strong> {{ cliente.cliNumero }}</div>
+      <div class="product-info"><strong>Bairro:</strong> {{ cliente.cliBairro }}</div>
+      <div class="product-info"><strong>Cidade:</strong> {{ cliente.cliCidade }}</div>
+      <div class="product-info"><strong>Estado:</strong> {{ cliente.cliEstado }}</div>
+      <div class="product-info"><strong>CEP:</strong> {{ cliente.cliCep }}</div>
+      <div class="product-info"><strong>Status:</strong>
+        <span [ngClass]="cliente.cliAtivo ? 'ativo' : 'inativo'">
+          {{ cliente.cliAtivo ? 'Ativo' : 'Inativo' }}
+        </span>
+      </div>
+    </div>
+  
+    <!-- Botões -->
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="excluir()">Excluir</button>
+      <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+    </div>
+  </div>
+  

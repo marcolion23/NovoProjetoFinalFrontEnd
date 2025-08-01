@@ -1,1 +1,31 @@
-<p>fornecedor-delete works!</p>
+<div class="delete-container">
+    <h2 class="delete-title">🗑️ Confirmar Exclusão do Fornecedor</h2>
+  
+    <!-- Card com informações do fornecedor -->
+    <div class="product-card">
+      <div class="product-info"><strong>Nome:</strong> {{ fornecedor.nome }}</div>
+      <div class="product-info"><strong>CNPJ:</strong> {{ fornecedor.cnpj }}</div>
+      <div class="product-info"><strong>Inscrição Estadual:</strong> {{ fornecedor.inscricaoEstadual }}</div>
+      <div class="product-info"><strong>Telefone:</strong> {{ fornecedor.telefone }}</div>
+      <div class="product-info"><strong>Email:</strong> {{ fornecedor.email }}</div>
+      <div class="product-info"><strong>Contato Principal:</strong> {{ fornecedor.contatoPrincipal }}</div>
+      <div class="product-info"><strong>Telefone Contato:</strong> {{ fornecedor.telefoneContato }}</div>
+      <div class="product-info"><strong>Endereço:</strong> {{ fornecedor.rua }}, {{ fornecedor.numero }}, {{ fornecedor.bairro }}</div>
+      <div class="product-info"><strong>Cidade:</strong> {{ fornecedor.cidade }}</div>
+      <div class="product-info"><strong>Estado:</strong> {{ fornecedor.estado }}</div>
+      <div class="product-info"><strong>CEP:</strong> {{ fornecedor.cep }}</div>
+      <div class="product-info"><strong>Status:</strong> 
+        <span [ngClass]="fornecedor.status ? 'ativo' : 'inativo'">
+          {{ fornecedor.status ? 'Ativo' : 'Inativo' }}
+        </span>
+      </div>
+      <div class="product-info"><strong>Observações:</strong> {{ fornecedor.observacoes }}</div>
+    </div>
+  
+    <!-- Botões -->
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="excluir()">Excluir</button>
+      <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+    </div>
+  </div>
+  
