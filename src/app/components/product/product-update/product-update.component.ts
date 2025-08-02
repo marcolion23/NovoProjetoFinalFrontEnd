@@ -10,6 +10,12 @@ import { ProductService } from '../product.service';
 })
 export class ProductUpdateComponent implements OnInit {
 
+ proPrecoCustoFormatado?: string;
+  proPrecoVendaFormatado?: string;
+
+
+
+
   product: Product = {
     proId: 0,
     proNome: '',
@@ -21,19 +27,29 @@ export class ProductUpdateComponent implements OnInit {
     proPrecoVenda: 0,
     proEstoque: 0,
     proAtivo: true,
-    dataCadastro: new Date()
+    dataCadastro: new Date(),
+    proMarcaPersonalizada: ''
   };
 
-  // Para manipular a data separadamente no HTML (se quiser)
   dataCadastro: Date = new Date();
 
   mostrarInputOutraMarca = false;
   marcaPersonalizada: string = '';
-  maxDate: Date = new Date(); // Define a data máxima como a data atual
+  maxDate: Date = new Date();
+
+  categorias: string[] = [
+    'teclado', 'mouse', 'monitor', 'headset', 'mousepad', 'cadeira', 'console',
+    'controle', 'notebook', 'placa-video', 'cpu', 'ram', 'fonte', 'gabinete',
+    'cooler', 'jogos', 'giftcards', 'servicos', 'acessorios'
+  ];
+
+  marcas: string[] = [
+    'Razer', 'Logitech', 'Redragon', 'Corsair', 'HyperX', 'outra'
+  ];
 
   constructor(
-    private productService: ProductService, 
-    private router: Router, 
+    private productService: ProductService,
+    private router: Router,
     private route: ActivatedRoute
   ) {}
 
@@ -42,11 +58,9 @@ export class ProductUpdateComponent implements OnInit {
     if (proId) {
       this.productService.readById(proId).subscribe((product: Product) => {
         this.product = product;
-        // Inicializa a data no campo separado (caso esteja separado)
         this.dataCadastro = new Date(product.dataCadastro || new Date());
-        // Se a marca for "outra", mostrar input para marca personalizada
         this.mostrarInputOutraMarca = (product.proMarca === 'outra');
-        if(this.mostrarInputOutraMarca) {
+        if (this.mostrarInputOutraMarca) {
           this.marcaPersonalizada = product.proMarcaPersonalizada || '';
         }
       });
@@ -54,10 +68,8 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   salvar(): void {
-    // Atualizar a data no product antes de salvar
     this.product.dataCadastro = this.dataCadastro;
 
-    // Se a marca personalizada estiver preenchida, salvar no objeto
     if (this.mostrarInputOutraMarca && this.marcaPersonalizada.trim() !== '') {
       this.product.proMarcaPersonalizada = this.marcaPersonalizada.trim();
       this.product.proMarca = 'outra';
@@ -74,7 +86,6 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   limpar(): void {
-    // Reseta o formulário
     this.product = {
       proId: 0,
       proNome: '',
@@ -86,7 +97,8 @@ export class ProductUpdateComponent implements OnInit {
       proPrecoVenda: 0,
       proEstoque: 0,
       proAtivo: true,
-      dataCadastro: new Date()
+      dataCadastro: new Date(),
+      proMarcaPersonalizada: ''
     };
     this.dataCadastro = new Date();
     this.mostrarInputOutraMarca = false;
@@ -100,7 +112,6 @@ export class ProductUpdateComponent implements OnInit {
     }
   }
 
-  // Implementações de ajuda para formatar e validar (você pode ter em outro lugar)
   apenasLetras(event: KeyboardEvent): void {
     const pattern = /[a-zA-ZÀ-ÿ\s]/;
     const inputChar = String.fromCharCode(event.charCode);
@@ -119,19 +130,29 @@ export class ProductUpdateComponent implements OnInit {
 
   formatarNome(): void {
     if (this.product.proNome) {
-      this.product.proNome = this.product.proNome.trimStart();
+      this.product.proNome = this.product.proNome
+        .toLowerCase()
+        .replace(/(^|\s)\S/g, (l) => l.toUpperCase())
+        .trimStart();
     }
   }
 
-  formatarDescricao(): void {
-    if (this.product.proDescricao) {
-      this.product.proDescricao = this.product.proDescricao.trimStart();
-    }
+formatarDescricao(): void {
+  if (this.product.proDescricao) {
+    this.product.proDescricao = this.product.proDescricao
+      .toLowerCase()
+      .replace(/(^|\s)\S/g, (l) => l.toUpperCase())
+      .trimStart();
   }
+}
+
 
   formatarMarcaPersonalizada(): void {
     if (this.marcaPersonalizada) {
-      this.marcaPersonalizada = this.marcaPersonalizada.trimStart();
+      this.marcaPersonalizada = this.marcaPersonalizada
+        .toLowerCase()
+        .replace(/(^|\s)\S/g, (l) => l.toUpperCase())
+        .trimStart();
     }
   }
 
@@ -141,14 +162,10 @@ export class ProductUpdateComponent implements OnInit {
     }
   }
 
-  onPrecoInput(event: any, campo: 'proPrecoCusto' | 'proPrecoVenda'): void {
-    // Exemplo de formatação simples, você pode melhorar
-    const valor = event.replace(/[^0-9,]/g, '').replace(',', '.');
-    this.product[campo] = parseFloat(valor) || 0;
-  }
+ 
 
   getNomeCategoria(categoriaKey: string): string {
-    const categorias: {[key: string]: string} = {
+    const categorias: { [key: string]: string } = {
       teclado: 'Teclado',
       mouse: 'Mouse',
       monitor: 'Monitor',
@@ -171,4 +188,49 @@ export class ProductUpdateComponent implements OnInit {
     };
     return categorias[categoriaKey] || '';
   }
+
+  
+onPrecoInput(valorDigitado: string, campo: 'proPrecoCusto' | 'proPrecoVenda'): void {
+  // Remove tudo que não for número
+  let numeros = valorDigitado.replace(/\D/g, '');
+
+  // Se vazio, zera o campo e formato
+  if (!numeros) {
+    this.product[campo] = 0;
+    this.product[`${campo}Formatado`] = '';
+    return;
+  }
+
+  // Limpa zeros à esquerda (mas mantendo ao menos 1 dígito)
+  numeros = numeros.replace(/^0+/, '') || '0';
+
+  // Ajusta para pelo menos 3 dígitos para facilitar a formatação (ex: 1 -> 001)
+  numeros = numeros.padStart(3, '0');
+
+  // Divide em inteiro e decimal (2 últimos dígitos)
+  const inteiro = numeros.slice(0, -2);
+  const decimal = numeros.slice(-2);
+
+  // Formata inteiro com pontos a cada 3 dígitos
+  const inteiroFormatado = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+  // Monta a string formatada final com R$, pontos e vírgula
+  const valorFormatado = `R$ ${inteiroFormatado},${decimal}`;
+
+  // Atualiza no model o número em float, usando ponto decimal
+  this.product[campo] = parseFloat(`${inteiro}.${decimal}`);
+
+  // Atualiza string formatada que aparece no input
+  this.product[`${campo}Formatado`] = valorFormatado;
+}
+
+
+  formatarMoeda(valor: number): string {
+  if (valor == null || isNaN(valor)) return '';
+  return valor
+    .toFixed(2)                 // duas casas decimais
+    .replace('.', ',')          // ponto decimal vira vírgula
+    .replace(/\B(?=(\d{3})+(?!\d))/g, '.');  // pontos como separador de milhar
+}
+
 }

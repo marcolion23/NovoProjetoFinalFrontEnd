@@ -37,4 +37,7 @@ export class ProductDeleteComponent implements OnInit {
   cancel(): void {
     this.router.navigate(['/produtos']);
   }
+
+
+  
 }

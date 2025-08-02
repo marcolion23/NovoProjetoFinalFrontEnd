@@ -1,19 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-// Interface detalhada para o estoque (produto)
-interface Estoque {
-  proId: number;
-  proNome: string;
-  proCodigoBarras: string;
-  proDescricao: string;
-  proCategoria: string;
-  proMarca: string;
-  proPrecoCusto: number;
-  proPrecoVenda: number;
-  proEstoque: number;
-  dataCadastro: Date;
-  proAtivo: boolean;
-}
+import { ActivatedRoute, Router } from '@angular/router';
+import { EstoqueService } from '../estoque.service';
+import { EstoqueModel } from '../estoque.model';
 
 @Component({
   selector: 'app-estoque-update',
@@ -22,7 +10,7 @@ interface Estoque {
 })
 export class EstoqueUpdateComponent implements OnInit {
 
-  product: Estoque = {
+  product: EstoqueModel = {
     proId: 0,
     proNome: '',
     proCodigoBarras: '',
@@ -32,38 +20,82 @@ export class EstoqueUpdateComponent implements OnInit {
     proPrecoCusto: 0,
     proPrecoVenda: 0,
     proEstoque: 0,
+    proAtivo: true,
     dataCadastro: new Date(),
-    proAtivo: true
+    proMarcaPersonalizada: ''
   };
 
-  mostrarInputOutraMarca = false;
   marcaPersonalizada: string = '';
-
-  proPrecoCustoFormatado: string = '';
-  proPrecoVendaFormatado: string = '';
-
+  mostrarInputOutraMarca: boolean = false;
   maxDate: Date = new Date();
+  dataCadastro: Date = new Date();
 
-  constructor() { }
+  categorias: string[] = [
+    'teclado', 'mouse', 'monitor', 'headset', 'mousepad', 'cadeira', 'console',
+    'controle', 'notebook', 'placa-video', 'cpu', 'ram', 'fonte', 'gabinete',
+    'cooler', 'jogos', 'giftcards', 'servicos', 'acessorios'
+  ];
+
+  marcas: string[] = [
+    'Razer', 'Logitech', 'Redragon', 'Corsair', 'HyperX', 'outra'
+  ];
+
+  constructor(
+    private estoqueService: EstoqueService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    // Simula carregar produto para edição
-    this.product = {
-      proId: 1,
-      proNome: 'Mouse Gamer RGB',
-      proCodigoBarras: '1234567890123',
-      proDescricao: 'Mouse com RGB e alta precisão',
-      proCategoria: 'acessorios',
-      proMarca: 'razer',
-      proPrecoCusto: 100.00,
-      proPrecoVenda: 159.90,
-      proEstoque: 25,
-      dataCadastro: new Date('2025-07-10'),
-      proAtivo: true
-    };
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.estoqueService.getEstoqueById(Number(id)).subscribe((res: EstoqueModel) => {
+        this.product = res;
+        this.dataCadastro = new Date(res.dataCadastro || new Date());
+        this.mostrarInputOutraMarca = (this.product.proMarca === 'outra');
+        if (this.mostrarInputOutraMarca) {
+          this.marcaPersonalizada = this.product.proMarcaPersonalizada || '';
+        }
+      });
+    }
+  }
 
-    this.proPrecoCustoFormatado = this.formatarPreco(this.product.proPrecoCusto);
-    this.proPrecoVendaFormatado = this.formatarPreco(this.product.proPrecoVenda);
+  salvar(): void {
+    this.product.dataCadastro = this.dataCadastro;
+
+    if (this.mostrarInputOutraMarca && this.marcaPersonalizada.trim() !== '') {
+      this.product.proMarcaPersonalizada = this.marcaPersonalizada.trim();
+      this.product.proMarca = 'outra';
+    }
+
+    this.estoqueService.updateEstoque(this.product.proId, this.product).subscribe(() => {
+      // Aqui pode mostrar mensagem se tiver service de alertas
+      this.router.navigate(['/estoque']);
+    });
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/estoque']);
+  }
+
+  limpar(): void {
+    this.product = {
+      proId: 0,
+      proNome: '',
+      proCodigoBarras: '',
+      proDescricao: '',
+      proCategoria: '',
+      proMarca: '',
+      proPrecoCusto: 0,
+      proPrecoVenda: 0,
+      proEstoque: 0,
+      proAtivo: true,
+      dataCadastro: new Date(),
+      proMarcaPersonalizada: ''
+    };
+    this.dataCadastro = new Date();
+    this.mostrarInputOutraMarca = false;
+    this.marcaPersonalizada = '';
   }
 
   onMarcaChange(marca: string): void {
@@ -73,73 +105,57 @@ export class EstoqueUpdateComponent implements OnInit {
     }
   }
 
-  formatarNome(): void {
-    if (this.product.proNome) {
-      this.product.proNome = this.product.proNome.charAt(0).toUpperCase() + this.product.proNome.slice(1);
-    }
-  }
-
-  formatarDescricao(): void {
-    if (this.product.proDescricao) {
-      this.product.proDescricao = this.product.proDescricao.charAt(0).toUpperCase() + this.product.proDescricao.slice(1);
-    }
-  }
-
-  formatarMarcaPersonalizada(): void {
-    if (this.marcaPersonalizada) {
-      this.marcaPersonalizada = this.marcaPersonalizada.charAt(0).toUpperCase() + this.marcaPersonalizada.slice(1);
-    }
-  }
-
   apenasLetras(event: KeyboardEvent): void {
-    const regex = /^[a-zA-ZÀ-ÿ\s]*$/;
-    if (!regex.test(event.key)) {
+    const pattern = /[a-zA-ZÀ-ÿ\s]/;
+    const inputChar = event.key;
+    if (!pattern.test(inputChar)) {
       event.preventDefault();
     }
   }
 
   apenasNumeros(event: KeyboardEvent): void {
-    const regex = /^[0-9]*$/;
-    if (!regex.test(event.key)) {
+    const pattern = /[0-9]/;
+    const inputChar = event.key;
+    if (!pattern.test(inputChar)) {
       event.preventDefault();
     }
   }
 
-  formatarPreco(valor: number): string {
-    return valor.toFixed(2).replace('.', ',');
+  formatarNome(): void {
+    if (this.product.proNome) {
+      this.product.proNome = this.product.proNome
+        .toLowerCase()
+        .replace(/(^|\s)\S/g, (l) => l.toUpperCase())
+        .trimStart();
+    }
   }
 
-  onPrecoInput(event: string, campo: 'proPrecoCusto' | 'proPrecoVenda'): void {
-    let valor = event.replace(/[^\d.,]/g, '');
-    valor = valor.replace(',', '.');
-    const numero = parseFloat(valor);
+  formatarDescricao(): void {
+    if (this.product.proDescricao) {
+      this.product.proDescricao = this.product.proDescricao
+        .toLowerCase()
+        .replace(/(^|\s)\S/g, (l) => l.toUpperCase())
+        .trimStart();
+    }
+  }
 
-    if (!isNaN(numero)) {
-      this.product[campo] = numero;
-      const valorFormatado = this.formatarPreco(numero);
-      if (campo === 'proPrecoCusto') {
-        this.proPrecoCustoFormatado = valorFormatado;
-      } else {
-        this.proPrecoVendaFormatado = valorFormatado;
-      }
-    } else {
-      this.product[campo] = 0;
-      if (campo === 'proPrecoCusto') {
-        this.proPrecoCustoFormatado = '';
-      } else {
-        this.proPrecoVendaFormatado = '';
-      }
+  formatarMarcaPersonalizada(): void {
+    if (this.marcaPersonalizada) {
+      this.marcaPersonalizada = this.marcaPersonalizada
+        .toLowerCase()
+        .replace(/(^|\s)\S/g, (l) => l.toUpperCase())
+        .trimStart();
     }
   }
 
   limparZeroInicial(): void {
     if (this.product.proEstoque) {
-      this.product.proEstoque = Number(this.product.proEstoque.toString().replace(/^0+/, '')) || 0;
+      this.product.proEstoque = Number(String(this.product.proEstoque).replace(/^0+/, '')) || 0;
     }
   }
 
-  getNomeCategoria(categoria: string): string {
-    const categorias: { [key: string]: string } = {
+  getNomeCategoria(categoriaKey: string): string {
+    const mapCategorias: { [key: string]: string } = {
       teclado: 'Teclado',
       mouse: 'Mouse',
       monitor: 'Monitor',
@@ -158,39 +174,42 @@ export class EstoqueUpdateComponent implements OnInit {
       jogos: 'Jogos',
       giftcards: 'Gift Cards',
       servicos: 'Serviços Técnicos',
-      acessorios: 'Acessórios',
+      acessorios: 'Acessórios'
     };
-    return categorias[categoria] || categoria;
+    return mapCategorias[categoriaKey] || '';
   }
 
-  salvar(): void {
-    // Aqui envia para backend (exemplo console)
-    console.log('Produto salvo:', this.product);
-    alert('Produto salvo com sucesso!');
+  onPrecoInput(valorDigitado: string, campo: 'proPrecoCusto' | 'proPrecoVenda'): void {
+    let numeros = valorDigitado.replace(/\D/g, '');
+
+    if (!numeros) {
+      this.product[campo] = 0;
+      this.product[`${campo}Formatado`] = '';
+      return;
+    }
+
+    numeros = numeros.replace(/^0+/, '') || '0';
+    numeros = numeros.padStart(3, '0');
+
+    const inteiro = numeros.slice(0, -2);
+    const decimal = numeros.slice(-2);
+
+    const inteiroFormatado = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+    const valorFormatado = `R$ ${inteiroFormatado},${decimal}`;
+
+    this.product[campo] = parseFloat(`${inteiro}.${decimal}`);
+
+    this.product[`${campo}Formatado`] = valorFormatado;
   }
 
-  cancel(): void {
-    this.limpar();
-    console.log('Edição cancelada');
-  }
+  // Getters para valores formatados (exibidos em template)
+get proPrecoCustoFormatado(): string {
+  return 'R$ ' + this.product.proPrecoCusto.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+}
 
-  limpar(): void {
-    this.product = {
-      proId: 0,
-      proNome: '',
-      proCodigoBarras: '',
-      proDescricao: '',
-      proCategoria: '',
-      proMarca: '',
-      proPrecoCusto: 0,
-      proPrecoVenda: 0,
-      proEstoque: 0,
-      dataCadastro: new Date(),
-      proAtivo: true
-    };
-    this.mostrarInputOutraMarca = false;
-    this.marcaPersonalizada = '';
-    this.proPrecoCustoFormatado = '';
-    this.proPrecoVendaFormatado = '';
-  }
+get proPrecoVendaFormatado(): string {
+  return 'R$ ' + this.product.proPrecoVenda.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+}
+
 }

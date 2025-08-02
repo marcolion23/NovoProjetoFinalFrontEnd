@@ -1,318 +1,334 @@
+<!-- CONTAINER GERAL que empurra todo o conteúdo abaixo do header fixo -->
 <div class="container-geral">
 
-  <mat-card class="product-card">
-    <mat-card-title class="titulo-formulario">
-      ATUALIZE SEU PRODUTO
-    </mat-card-title>
+    <!-- CARD do formulário com sombra e arredondamento -->
+    <mat-card class="product-card">
+      
+      <mat-card-title class="titulo-formulario">
+        ATUALIZE SEU PRODUTO
+      </mat-card-title>
+  
+      <!-- Formulário flexível -->
+      <form class="product-form">
+  
+        <!-- Se quiser mostrar o ID para referência, pode habilitar este campo (opcional) -->
+        <!--
+        <mat-form-field appearance="outline" class="half-width" disabled>
+          <mat-label>ID do Produto</mat-label>
+          <input matInput [value]="product.proId" disabled>
+        </mat-form-field>
+        -->
+  
+        <mat-form-field appearance="outline" class="half-width" required>
+          <mat-label>Nome do Produto</mat-label>
+          <input
+            matInput
+            [(ngModel)]="product.proNome"
+            name="proNome"
+            required
+            #proNomeInput="ngModel"
+            (keypress)="apenasLetras($event)"
+            (input)="formatarNome()"
+            maxlength="40"
+          >
+          <mat-error *ngIf="proNomeInput.invalid && (proNomeInput.dirty || proNomeInput.touched)">
+            O nome do produto é obrigatório.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Código de Barras -->
+        <mat-form-field appearance="outline" class="half-width" required>
+          <mat-label>Código de Barras</mat-label>
+          <input
+            matInput
+            [(ngModel)]="product.proCodigoBarras"
+            name="proCodigoBarras"
+            required
+            #proCodigoBarrasInput="ngModel"
+            maxlength="13"
+            (keypress)="apenasNumeros($event)"
+          >
+          <mat-hint *ngIf="product.proCodigoBarras?.length === 13" style="color: orange;">
+            Limite de 13 dígitos atingido
+          </mat-hint>
+          <mat-error *ngIf="proCodigoBarrasInput.errors?.['required'] && (proCodigoBarrasInput.dirty || proCodigoBarrasInput.touched)">
+            O código de barras é obrigatório.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Descrição -->
+        <mat-form-field appearance="outline" class="full-width" required>
+          <mat-label>Descrição</mat-label>
+          <textarea
+            matInput
+            rows="4"
+            [(ngModel)]="product.proDescricao"
+            name="proDescricao"
+            required
+            #proDescricaoInput="ngModel"
+            (input)="formatarDescricao()"
+            maxlength="80"
+          ></textarea>
+          <mat-error *ngIf="proDescricaoInput.invalid && (proDescricaoInput.dirty || proDescricaoInput.touched)">
+            A descrição é obrigatória.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Categoria -->
+        <mat-form-field appearance="outline" class="half-width" required>
+          <mat-label>Categoria</mat-label>
+          <mat-select [(ngModel)]="product.proCategoria" name="proCategoria" required #proCategoriaInput="ngModel">
+            <mat-select-trigger>
+              {{ getNomeCategoria(product.proCategoria) }}
+            </mat-select-trigger>
+            <!-- opções iguais ao create -->
+            <mat-option value="teclado">
+              <mat-icon style="margin-right: 8px;">keyboard</mat-icon>
+              Teclado
+            </mat-option>
+            <mat-option value="mouse">
+              <mat-icon style="margin-right: 8px;">mouse</mat-icon>
+              Mouse
+            </mat-option>
+            <mat-option value="monitor">
+              <mat-icon style="margin-right: 8px;">tv</mat-icon>
+              Monitor
+            </mat-option>
+            <mat-option value="headset">
+              <mat-icon style="margin-right: 8px;">headset</mat-icon>
+              Headset
+            </mat-option>
+            <mat-option value="mousepad">
+              <img src="assets/img/mousepad.png" width="20" style="margin-right: 8px;" />
+              MousePad
+            </mat-option>
+            <mat-option value="cadeira">
+              <img src="assets/img/cadeira-gamer.png" width="20" style="margin-right: 8px;" />
+              Cadeira Gamer
+            </mat-option>
+            <mat-option value="console">
+              <img src="assets/img/console-de-videogame.png" width="20" style="margin-right: 8px;" />
+              Console
+            </mat-option>
+            <mat-option value="controle">
+              <img src="assets/img/controle-de-video-game.png" width="20" style="margin-right: 8px;" />
+              Controle
+            </mat-option>
+            <mat-option value="notebook">
+              <mat-icon style="margin-right: 8px;">laptop</mat-icon>
+              Notebook Gamer
+            </mat-option>
+            <mat-option value="placa-video">
+              <img src="assets/img/placavideo.png" width="20" style="margin-right: 8px;" />
+              Placa de Vídeo
+            </mat-option>
+            <mat-option value="cpu">
+              <img src="assets/img/processador.png" width="20" style="margin-right: 8px;" />
+              Processador (CPU)
+            </mat-option>
+            <mat-option value="ram">
+              <img src="assets/img/ram.png" width="20" style="margin-right: 8px;" />
+              Memória RAM
+            </mat-option>
+            <mat-option value="fonte">
+              <img src="assets/img/fontenerg.png" width="20" style="margin-right: 8px;" />
+              Fonte
+            </mat-option>
+            <mat-option value="gabinete">
+              <img src="assets/img/gabicomp.png" width="20" style="margin-right: 8px;" />
+              Gabinete
+            </mat-option>
+            <mat-option value="cooler">
+              <img src="assets/img/cooler.png" width="20" style="margin-right: 8px;" />
+              Cooler / WaterCooler
+            </mat-option>
+            <mat-option value="jogos">
+              <mat-icon style="margin-right: 8px;">sports_esports</mat-icon>
+              Jogos
+            </mat-option>
+            <mat-option value="giftcards">
+              <img src="assets/img/giftcard.png" width="20" style="margin-right: 8px;" />
+              Gift Cards
+            </mat-option>
+            <mat-option value="servicos">
+              <mat-icon style="margin-right: 7px;">build</mat-icon>
+              Serviços Técnicos
+            </mat-option>
+            <mat-option value="acessorios">
+              <img src="assets/img/outra.png" width="20" style="margin-right: 8px;" />
+              Acessórios
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="proCategoriaInput.invalid && (proCategoriaInput.dirty || proCategoriaInput.touched)">
+            A categoria é obrigatória.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Marca -->
+        <mat-form-field appearance="outline" class="half-width" required>
+          <mat-label>Marca</mat-label>
+          <mat-select [(ngModel)]="product.proMarca" name="proMarca" (selectionChange)="onMarcaChange($event.value)" required #proMarcaInput="ngModel">
+            <!-- opções iguais ao create -->
+            <mat-option value="dell">
+              <img src="assets/img/Dell.png" alt="Dell" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
+              Dell
+            </mat-option>
+            <mat-option value="hyperx">
+              <img src="assets/img/hyperx.png" alt="HyperX" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
+              HyperX
+            </mat-option>
+            <mat-option value="lianli">
+              <img src="assets/img/LianLi.png" alt="Lian Li" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
+              Lian Li
+            </mat-option>
+            <mat-option value="logitech">
+              <img src="assets/img/LogiTech.png" alt="Logitech" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
+              Logitech
+            </mat-option>
+            <mat-option value="nzxt">
+              <img src="assets/img/NZXT.png" alt="NZXT" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
+              NZXT
+            </mat-option>
+            <mat-option value="reddragon">
+              <img src="assets/img/redragons.png" alt="Red Dragons" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
+              Red Dragons
+            </mat-option>
+            <mat-option value="razer">
+              <img src="assets/img/razer.png" alt="Razer" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
+              Razer
+            </mat-option>
+            <mat-option value="steelseries">
+              <img src="assets/img/steelseries.png" alt="SteelSeries" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
+              SteelSeries
+            </mat-option>
+            <mat-option value="outra">
+              <img src="assets/img/outra.png" alt="OutraMarca" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
+              Outra Marca
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="proMarcaInput.invalid && (proMarcaInput.dirty || proMarcaInput.touched)">
+            A marca é obrigatória.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Input para outra marca -->
+        <mat-form-field *ngIf="mostrarInputOutraMarca" appearance="outline" class="full-width" required>
+          <mat-label>Digite a marca</mat-label>
+          <input
+            matInput
+            [(ngModel)]="marcaPersonalizada"
+            name="marcaPersonalizada"
+            required
+            #marcaPersonalizadaInput="ngModel"
+            (input)="formatarMarcaPersonalizada()"
+            maxlength="15"
+          />
+          <mat-error *ngIf="marcaPersonalizadaInput.invalid && (marcaPersonalizadaInput.dirty || marcaPersonalizadaInput.touched)">
+            A marca personalizada é obrigatória.
+          </mat-error>
+        </mat-form-field>
+  
+      
+    <!-- Preço de Custo -->
+<mat-form-field appearance="outline" class="half-width" required>
+  <mat-label>Preço de Custo (R$)</mat-label>
+  <input
+    matInput
+    type="text"
+    [ngModel]="proPrecoCustoFormatado"
+    (ngModelChange)="onPrecoInput($event, 'proPrecoCusto')"
+    name="proPrecoCusto"
+    required
+    #proPrecoCustoInput="ngModel"
+    (keypress)="apenasNumeros($event)"
+  />
+  <mat-error *ngIf="proPrecoCustoInput.invalid && (proPrecoCustoInput.dirty || proPrecoCustoInput.touched)">
+    O preço de custo é obrigatório.
+  </mat-error>
+</mat-form-field>
 
-    <form class="product-form">
+<!-- Preço de Venda -->
+<mat-form-field appearance="outline" class="half-width" required>
+  <mat-label>Preço de Venda (R$)</mat-label>
+  <input
+    matInput
+    type="text"
+    [ngModel]="proPrecoVendaFormatado"
+    (ngModelChange)="onPrecoInput($event, 'proPrecoVenda')"
+    name="proPrecoVenda"
+    required
+    #proPrecoVendaInput="ngModel"
+    (keypress)="apenasNumeros($event)"
+  />
+  <mat-error *ngIf="proPrecoVendaInput.invalid && (proPrecoVendaInput.dirty || proPrecoVendaInput.touched)">
+    O preço de venda é obrigatório.
+  </mat-error>
+</mat-form-field>
 
-      <!-- Nome do Produto -->
-      <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Nome do Produto</mat-label>
-        <input
-          matInput
-          [(ngModel)]="product.proNome"
-          name="proNome"
-          required
-          #proNomeInput="ngModel"
-          (keypress)="apenasLetras($event)"
-          (input)="formatarNome()"
-          maxlength="40"
-        >
-        <mat-error *ngIf="proNomeInput.invalid && (proNomeInput.dirty || proNomeInput.touched)">
-          O nome do produto é obrigatório.
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Código de Barras -->
-      <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Código de Barras</mat-label>
-        <input
-          matInput
-          [(ngModel)]="product.proCodigoBarras"
-          name="proCodigoBarras"
-          required
-          #proCodigoBarrasInput="ngModel"
-          maxlength="13"
-          (keypress)="apenasNumeros($event)"
-        >
-        <mat-hint *ngIf="product.proCodigoBarras?.length === 13" style="color: orange;">
-          Limite de 13 dígitos atingido
-        </mat-hint>
-        <mat-error *ngIf="proCodigoBarrasInput.errors?.['required'] && (proCodigoBarrasInput.dirty || proCodigoBarrasInput.touched)">
-          O código de barras é obrigatório.
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Descrição -->
-      <mat-form-field appearance="outline" class="full-width" required>
-        <mat-label>Descrição</mat-label>
-        <textarea
-          matInput
-          rows="4"
-          [(ngModel)]="product.proDescricao"
-          name="proDescricao"
-          required
-          #proDescricaoInput="ngModel"
-          (input)="formatarDescricao()"
-          maxlength="80"
-        ></textarea>
-        <mat-error *ngIf="proDescricaoInput.invalid && (proDescricaoInput.dirty || proDescricaoInput.touched)">
-          A descrição é obrigatória.
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Categoria -->
-      <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Categoria</mat-label>
-        <mat-select [(ngModel)]="product.proCategoria" name="proCategoria" required #proCategoriaInput="ngModel">
-          <mat-select-trigger>
-            {{ getNomeCategoria(product.proCategoria) }}
-          </mat-select-trigger>
-          <mat-option value="teclado">
-            <mat-icon style="margin-right: 8px;">keyboard</mat-icon>
-            Teclado
-          </mat-option>
-          <mat-option value="mouse">
-            <mat-icon style="margin-right: 8px;">mouse</mat-icon>
-            Mouse
-          </mat-option>
-          <mat-option value="monitor">
-            <mat-icon style="margin-right: 8px;">tv</mat-icon>
-            Monitor
-          </mat-option>
-          <mat-option value="headset">
-            <mat-icon style="margin-right: 8px;">headset</mat-icon>
-            Headset
-          </mat-option>
-          <mat-option value="mousepad">
-            <img src="assets/img/mousepad.png" width="20" style="margin-right: 8px;" />
-            MousePad
-          </mat-option>
-          <mat-option value="cadeira">
-            <img src="assets/img/cadeira-gamer.png" width="20" style="margin-right: 8px;" />
-            Cadeira Gamer
-          </mat-option>
-          <mat-option value="console">
-            <img src="assets/img/console-de-videogame.png" width="20" style="margin-right: 8px;" />
-            Console
-          </mat-option>
-          <mat-option value="controle">
-            <img src="assets/img/controle-de-video-game.png" width="20" style="margin-right: 8px;" />
-            Controle
-          </mat-option>
-          <mat-option value="notebook">
-            <mat-icon style="margin-right: 8px;">laptop</mat-icon>
-            Notebook Gamer
-          </mat-option>
-          <mat-option value="placa-video">
-            <img src="assets/img/placavideo.png" width="20" style="margin-right: 8px;" />
-            Placa de Vídeo
-          </mat-option>
-          <mat-option value="cpu">
-            <img src="assets/img/processador.png" width="20" style="margin-right: 8px;" />
-            Processador (CPU)
-          </mat-option>
-          <mat-option value="ram">
-            <img src="assets/img/ram.png" width="20" style="margin-right: 8px;" />
-            Memória RAM
-          </mat-option>
-          <mat-option value="fonte">
-            <img src="assets/img/fontenerg.png" width="20" style="margin-right: 8px;" />
-            Fonte
-          </mat-option>
-          <mat-option value="gabinete">
-            <img src="assets/img/gabicomp.png" width="20" style="margin-right: 8px;" />
-            Gabinete
-          </mat-option>
-          <mat-option value="cooler">
-            <img src="assets/img/cooler.png" width="20" style="margin-right: 8px;" />
-            Cooler / WaterCooler
-          </mat-option>
-          <mat-option value="jogos">
-            <mat-icon style="margin-right: 8px;">sports_esports</mat-icon>
-            Jogos
-          </mat-option>
-          <mat-option value="giftcards">
-            <img src="assets/img/giftcard.png" width="20" style="margin-right: 8px;" />
-            Gift Cards
-          </mat-option>
-          <mat-option value="servicos">
-            <mat-icon style="margin-right: 7px;">build</mat-icon>
-            Serviços Técnicos
-          </mat-option>
-          <mat-option value="acessorios">
-            <img src="assets/img/outra.png" width="20" style="margin-right: 8px;" />
-            Acessórios
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="proCategoriaInput.invalid && (proCategoriaInput.dirty || proCategoriaInput.touched)">
-          A categoria é obrigatória.
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Marca -->
-      <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Marca</mat-label>
-        <mat-select [(ngModel)]="product.proMarca" name="proMarca" (selectionChange)="onMarcaChange($event.value)" required #proMarcaInput="ngModel">
-          <mat-option value="dell">
-            <img src="assets/img/Dell.png" alt="Dell" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
-            Dell
-          </mat-option>
-          <mat-option value="hyperx">
-            <img src="assets/img/hyperx.png" alt="HyperX" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
-            HyperX
-          </mat-option>
-          <mat-option value="lianli">
-            <img src="assets/img/LianLi.png" alt="Lian Li" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
-            Lian Li
-          </mat-option>
-          <mat-option value="logitech">
-            <img src="assets/img/LogiTech.png" alt="Logitech" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
-            Logitech
-          </mat-option>
-          <mat-option value="nzxt">
-            <img src="assets/img/NZXT.png" alt="NZXT" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
-            NZXT
-          </mat-option>
-          <mat-option value="reddragon">
-            <img src="assets/img/redragons.png" alt="Red Dragons" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
-            Red Dragons
-          </mat-option>
-          <mat-option value="razer">
-            <img src="assets/img/razer.png" alt="Razer" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
-            Razer
-          </mat-option>
-          <mat-option value="steelseries">
-            <img src="assets/img/steelseries.png" alt="SteelSeries" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
-            SteelSeries
-          </mat-option>
-          <mat-option value="outra">
-            <img src="assets/img/outra.png" alt="OutraMarca" width="28" height="30" style="vertical-align: middle; margin-right: 8px;">
-            Outra Marca
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="proMarcaInput.invalid && (proMarcaInput.dirty || proMarcaInput.touched)">
-          A marca é obrigatória.
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Input para outra marca -->
-      <mat-form-field *ngIf="mostrarInputOutraMarca" appearance="outline" class="full-width" required>
-        <mat-label>Digite a marca</mat-label>
-        <input
-          matInput
-          [(ngModel)]="marcaPersonalizada"
-          name="marcaPersonalizada"
-          required
-          #marcaPersonalizadaInput="ngModel"
-          (input)="formatarMarcaPersonalizada()"
-          maxlength="15"
-        />
-        <mat-error *ngIf="marcaPersonalizadaInput.invalid && (marcaPersonalizadaInput.dirty || marcaPersonalizadaInput.touched)">
-          A marca personalizada é obrigatória.
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Preço de Custo -->
-      <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Preço de Custo (R$)</mat-label>
-        <input
-          matInput
-          type="text"
-          [ngModel]="proPrecoCustoFormatado"
-          (ngModelChange)="onPrecoInput($event, 'proPrecoCusto')"
-          name="proPrecoCusto"
-          required
-          #proPrecoCustoInput="ngModel"
-          (keypress)="apenasNumeros($event)"
-        >
-        <mat-error *ngIf="proPrecoCustoInput.invalid && (proPrecoCustoInput.dirty || proPrecoCustoInput.touched)">
-          O preço de custo é obrigatório.
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Preço de Venda -->
-      <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Preço de Venda (R$)</mat-label>
-        <input
-          matInput
-          type="text"
-          [ngModel]="proPrecoVendaFormatado"
-          (ngModelChange)="onPrecoInput($event, 'proPrecoVenda')"
-          name="proPrecoVenda"
-          required
-          #proPrecoVendaInput="ngModel"
-          (keypress)="apenasNumeros($event)"
-        >
-        <mat-error *ngIf="proPrecoVendaInput.invalid && (proPrecoVendaInput.dirty || proPrecoVendaInput.touched)">
-          O preço de venda é obrigatório.
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Estoque Atual -->
-      <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Estoque Atual</mat-label>
-        <input
-          matInput
-          type="text"
-          [(ngModel)]="product.proEstoque"
-          name="proEstoque"
-          required
-          #proEstoqueInput="ngModel"
-          maxlength="5"
-          (keypress)="apenasNumeros($event)"
-          (focus)="limparZeroInicial()"
-        >
-        <mat-error *ngIf="proEstoqueInput.invalid && (proEstoqueInput.dirty || proEstoqueInput.touched)">
-          O estoque é obrigatório e deve ser maior ou igual a zero.
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Data de Cadastro -->
-      <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Data de Cadastro</mat-label>
-        <input 
-          matInput 
-          [matDatepicker]="picker" 
-          name="dataCadastro" 
-          [max]="maxDate" 
-          [(ngModel)]="product.dataCadastro"
-          required
-          #dataCadastroInput="ngModel"
-        >
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="dataCadastroInput.invalid && (dataCadastroInput.dirty || dataCadastroInput.touched)">
-          A data de cadastro é obrigatória.
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Status -->
-      <mat-form-field appearance="outline" class="full-width" required>
-        <mat-label>Status</mat-label>
-        <mat-select [(ngModel)]="product.proAtivo" name="proAtivo" required #proAtivoInput="ngModel">
-          <mat-option [value]="true">Ativo</mat-option>
-          <mat-option [value]="false">Inativo</mat-option>
-        </mat-select>
-        <mat-error *ngIf="proAtivoInput.invalid && (proAtivoInput.dirty || proAtivoInput.touched)">
-          O status é obrigatório.
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Botões -->
-      <div class="button-container">
-        <button mat-raised-button color="primary" (click)="salvar()">Salvar</button>
-        <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
-        <button mat-raised-button color="accent" (click)="limpar()">Limpar</button>
-      </div>
-
-    </form>
-  </mat-card>
-
-  <div class="tabela-container">
-    <!-- Aqui entra sua tabela, se quiser -->
+  
+        <mat-form-field appearance="outline" class="half-width" required>
+          <mat-label>Estoque Atual</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="product.proEstoque"
+            name="proEstoque"
+            required
+            #proEstoqueInput="ngModel"
+            maxlength="5"
+            (keypress)="apenasNumeros($event)"
+            (focus)="limparZeroInicial()"
+          >
+          <mat-error *ngIf="proEstoqueInput.invalid && (proEstoqueInput.dirty || proEstoqueInput.touched)">
+            O estoque é obrigatório e deve ser maior ou igual a zero.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Data de Cadastro -->
+        <mat-form-field appearance="outline" class="half-width" required>
+          <mat-label>Data de Cadastro</mat-label>
+          <input 
+            matInput 
+            [matDatepicker]="picker" 
+            name="dataCadastro" 
+            [max]="maxDate" 
+            [(ngModel)]="dataCadastro"
+            required
+            #dataCadastroInput="ngModel"
+          >
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="dataCadastroInput.invalid && (dataCadastroInput.dirty || dataCadastroInput.touched)">
+            A data de cadastro é obrigatória.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Status -->
+        <mat-form-field appearance="outline" class="full-width" required>
+          <mat-label>Status</mat-label>
+          <mat-select [(ngModel)]="product.proAtivo" name="proAtivo" required #proAtivoInput="ngModel">
+            <mat-option [value]="true">Ativo</mat-option>
+            <mat-option [value]="false">Inativo</mat-option>
+          </mat-select>
+          <mat-error *ngIf="proAtivoInput.invalid && (proAtivoInput.dirty || proAtivoInput.touched)">
+            O status é obrigatório.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Botões -->
+        <div class="button-container">
+          <button mat-raised-button color="primary" (click)="salvar()">Salvar</button>
+<button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+          <button mat-raised-button color="blue" (click)="limpar()">Limpar</button>
+        </div>
+        
+      </form>
+    </mat-card>
+  
+    <!-- TABELA abaixo do formulário -->
+    <div class="tabela-container">
+      <!-- Aqui entra sua tabela -->
+    </div>
+  
   </div>
-
-</div>
+  

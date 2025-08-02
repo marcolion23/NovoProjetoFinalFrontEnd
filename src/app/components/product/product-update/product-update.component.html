@@ -228,41 +228,43 @@
           </mat-error>
         </mat-form-field>
   
-        <!-- Preço de Custo -->
-        <mat-form-field appearance="outline" class="half-width" required>
-          <mat-label>Preço de Custo (R$)</mat-label>
-          <input
-            matInput
-            type="text"
-            [ngModel]="product.proPrecoCustoFormatado"
-            (ngModelChange)="onPrecoInput($event, 'proPrecoCusto')"
-            name="proPrecoCusto"
-            required
-            #proPrecoCustoInput="ngModel"
-            (keypress)="apenasNumeros($event)"
-          >
-          <mat-error *ngIf="proPrecoCustoInput.invalid && (proPrecoCustoInput.dirty || proPrecoCustoInput.touched)">
-            O preço de custo é obrigatório.
-          </mat-error>
-        </mat-form-field>
-  
-        <!-- Preço de Venda -->
-        <mat-form-field appearance="outline" class="half-width" required>
-          <mat-label>Preço de Venda (R$)</mat-label>
-          <input
-            matInput
-            type="text"
-            [ngModel]="product.proPrecoVendaFormatado"
-            (ngModelChange)="onPrecoInput($event, 'proPrecoVenda')"
-            name="proPrecoVenda"
-            required
-            #proPrecoVendaInput="ngModel"
-            (keypress)="apenasNumeros($event)"
-          >
-          <mat-error *ngIf="proPrecoVendaInput.invalid && (proPrecoVendaInput.dirty || proPrecoVendaInput.touched)">
-            O preço de venda é obrigatório.
-          </mat-error>
-        </mat-form-field>
+      
+      <!-- Preço de Custo -->
+<mat-form-field appearance="outline" class="half-width" required>
+  <mat-label>Preço de Custo (R$)</mat-label>
+  <input
+    matInput
+    type="text"
+    [ngModel]="product.proPrecoCustoFormatado"
+    (ngModelChange)="onPrecoInput($event, 'proPrecoCusto')"
+    name="proPrecoCusto"
+    required
+    #proPrecoCustoInput="ngModel"
+    (keypress)="apenasNumeros($event)"
+  />
+  <mat-error *ngIf="proPrecoCustoInput.invalid && (proPrecoCustoInput.dirty || proPrecoCustoInput.touched)">
+    O preço de custo é obrigatório.
+  </mat-error>
+</mat-form-field>
+
+<!-- Preço de Venda -->
+<mat-form-field appearance="outline" class="half-width" required>
+  <mat-label>Preço de Venda (R$)</mat-label>
+  <input
+    matInput
+    type="text"
+    [ngModel]="product.proPrecoVendaFormatado"
+    (ngModelChange)="onPrecoInput($event, 'proPrecoVenda')"
+    name="proPrecoVenda"
+    required
+    #proPrecoVendaInput="ngModel"
+    (keypress)="apenasNumeros($event)"
+  />
+  <mat-error *ngIf="proPrecoVendaInput.invalid && (proPrecoVendaInput.dirty || proPrecoVendaInput.touched)">
+    O preço de venda é obrigatório.
+  </mat-error>
+</mat-form-field>
+
   
         <mat-form-field appearance="outline" class="half-width" required>
           <mat-label>Estoque Atual</mat-label>

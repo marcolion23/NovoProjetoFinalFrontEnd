@@ -8,6 +8,9 @@ export interface EstoqueModel {
   proPrecoCusto: number;
   proPrecoVenda: number;
   proEstoque: number;
-  dataCadastro: string; // note que aqui é string (provavelmente ISO date)
   proAtivo: boolean;
+  dataCadastro: Date;
+  proMarcaPersonalizada?: string; // opcional
+  proPrecoCustoFormatado?: string; // opcional para exibição no template
+  proPrecoVendaFormatado?: string; // opcional para exibição no template
 }

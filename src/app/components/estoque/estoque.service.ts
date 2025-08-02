@@ -52,4 +52,5 @@ export class EstoqueService {
       return throwError(() => new Error('Produto não encontrado para exclusão'));
     }
   }
+  
 }
