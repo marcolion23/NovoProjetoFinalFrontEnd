@@ -12,7 +12,7 @@
   font-family: 'Roboto', sans-serif; /* Define a fonte Roboto para o texto */
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil acima do rodapé para destacar */
   z-index: 1000;                  /* Garante que o rodapé fique sobre outros elementos */
-  padding: 45px;                  /* Sobrescreve o padding anterior para 45px em todos os lados */
+  padding: 41px;                  /* Sobrescreve o padding anterior para 45px em todos os lados */
 }
 
 .footer > span {

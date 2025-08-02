@@ -1,139 +1,129 @@
 /* ===== CARD PRINCIPAL DE ACESSO RÁPIDO (fixo no rodapé) ===== */
 .quick-access-card {
-  position: fixed;                          /* Fixa o card na tela */
-  bottom: 100px;                             /* Espaço acima do footer */
-  left: 50%;                                /* Centraliza horizontalmente */
-  transform: translateX(-50%);              /* Ajuste para centro exato */
-  width: 50%;                               /* Largura do card */
-  background-color: #0D3B66;                /* Fundo escuro gamer */
-  padding: 50px;                            /* Espaço interno */
-  color: #ffffff;                           /* Cor do texto */
-  font-family: 'Roboto', sans-serif;        /* Fonte moderna */
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Sombra discreta acima */
-  z-index: 1000;                            /* Sobrepõe outros elementos */
-  border-radius: 16px;                      /* Bordas arredondadas */
-  overflow: auto;                           /* Evita vazamento de conteúdo */
+  position: fixed;
+  bottom: 230px;                             /* Mais perto da base */
+  left: 80%;
+  transform: translateX(-50%);
+  width: 30%;                               /* Largura menor para notebooks */
+  background-color: #0D3B66;
+  padding: 20px;                            /* Reduzido para economizar espaço */
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 16px;
+  overflow: auto;
 }
 
 /* ===== TÍTULO DO CARD DE ACESSO RÁPIDO COM ÍCONE AO LADO ===== */
 .quick-access-title {
-  display: flex;                            /* Ícone e texto lado a lado */
-  align-items: center;                      /* Alinha verticalmente */
-  justify-content: center;                   /* Centraliza horizontalmente */
-  font-size: 1.8rem;                        /* Tamanho do texto */
-  font-weight: 620;                         /* Negrito */
-  color: #21CBF3;                           /* Azul neon gamer */
-  margin-bottom: 28px;                      /* Espaço abaixo do título */
-  gap: 10px;                                /* Espaço entre ícone e texto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;                        /* Levemente reduzido */
+  font-weight: 620;
+  color: #21CBF3;
+  margin-bottom: 24px;
+  gap: 10px;
 }
 
-/* ===== ÍCONE DO TÍTULO ===== */
 .title-icon {
-  font-size: 28px;                          /* Tamanho do ícone */
-  color: #21CBF3;                           /* Azul neon */
+  font-size: 24px;
+  color: #21CBF3;
 }
 
 /* ===== CONTAINER DOS BOTÕES ===== */
 .quick-access-buttons {
-  display: flex;                            /* Layout flexível */
-  flex-wrap: wrap;                          /* Permite quebra em telas menores */
-  justify-content: center;                  /* Centraliza os botões */
-  gap: 25px 50px;                           /* Espaço vertical e horizontal */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px 30px;
 }
 
 /* ===== ESTILO BASE DOS BOTÕES ===== */
 .quick-access-buttons button {
-  width: 250px;                             /* Largura fixa */
-  height: 70px;                             /* Altura fixa */
-  display: flex;                            /* Layout flex */
-  align-items: center;                      /* Alinha verticalmente */
-  justify-content: center;                  /* Centraliza horizontalmente */
-  gap: 10px;                                /* Espaço entre ícone e texto */
-  padding: 0 16px;                          /* Espaço interno horizontal */
-  border-radius: 12px;                      /* Bordas arredondadas */
-  font-weight: 500;                         /* Peso da fonte */
-  text-transform: none;                      /* Mantém texto normal */
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease; /* Animações suaves */
-  white-space: nowrap;                       /* Impede quebra de linha */
-  font-size: 1.4rem;                        /* Adicionado posteriormente */
+  width: 200px;                             /* Menor para economizar espaço */
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font-weight: 500;
+  text-transform: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  white-space: nowrap;
+  font-size: 1.2rem;
 }
 
-/* ===== ÍCONES DENTRO DOS BOTÕES ===== */
 .quick-access-buttons button mat-icon {
-  color: inherit;                           /* Herdar cor do botão */
-  flex-shrink: 0;                           /* Impede encolhimento do ícone */
-  width: 35px;                             /* Largura fixa do ícone */
-  height: 24px;                            /* Altura fixa do ícone */
+  color: inherit;
+  flex-shrink: 0;
+  width: 28px;
+  height: 20px;
 }
 
-/* ===== EFEITO HOVER NO BOTÃO (levanta e adiciona sombra) ===== */
 .quick-access-buttons button:hover {
-  background-color: rgba(255, 255, 255, 0.08); /* Fundo levemente mais claro */
-  transform: translateY(-4px);                  /* Sobe levemente */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);        /* Sombra suave */
-  cursor: pointer;                             /* Indica interatividade */
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
 }
 
-/* ===== EFEITO ACTIVE (ao clicar) ===== */
 .quick-access-buttons button:active {
-  transform: scale(0.97);                        /* Encolhe ligeiramente */
-  background-color: rgba(255, 255, 255, 0.12);   /* Fundo um pouco mais claro */
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);/* Sombra interna */
+  transform: scale(0.97);
+  background-color: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-
-
-
-
-
-
-
+/* ===== CARD DE ESTATÍSTICAS ===== */
 .stats-card {
-  position: fixed;                          /* Fixa o card na tela */
-  left: 50%;                                /* Centraliza horizontalmente */
-  transform: translateX(-50%);              /* Ajuste para centro exato */
-  width: 50%;                               /* Largura do card */
-  background-color: #0D3B66;                /* Fundo escuro gamer */
-  padding: 35px;                            /* Espaço interno */
-  color: #ffffff;                           /* Cor do texto */
-  font-family: 'Roboto', sans-serif;        /* Fonte moderna */
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Sombra discreta acima */
-  border-radius: 16px;                      /* Bordas arredondadas */
+  position: fixed;
+  top: 180px;                                /* Agora fixado no topo */
+  right: 15%;
+  transform: translateX(-50%);
+  width: 40%;
+  background-color: #0D3B66;
+  padding: 30px;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
   overflow: auto;
-  margin-top: 100px;
 }
 
 .stats-title {
-  display: flex;                            /* Ícone e texto lado a lado */
-  align-items: center;                      /* Alinha verticalmente */
-  justify-content: center;                   /* Centraliza horizontalmente */
-  font-size: 1.8rem;                        /* Tamanho do texto */
-  font-weight: 620;                         /* Negrito */
-  color: #21CBF3;                           /* Azul neon gamer */
-  margin-bottom: 28px;                      /* Espaço abaixo do título */
-  gap: 10px;                                /* Espaço entre ícone e texto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 620;
+  color: #21CBF3;
+  margin-bottom: 24px;
+  gap: 10px;
 }
 
 .title-icon {
-  font-size: 28px;
+  font-size: 24px;
   color: #21CBF3;
 }
 
 .stats-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 25px 30px;                /* Espaçamento igual aos botões */
+  gap: 20px 30px;
   justify-content: center;
 }
 
 .stat-item {
-  background-color: rgba(255, 255, 255, 0.1); /* Fundo semitransparente para contraste */
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  padding: 16px 20px;
-  flex: 1 1 200px;              /* Flex responsivo, largura mínima */
+  padding: 14px 18px;
+  flex: 1 1 180px;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -145,8 +135,8 @@
 }
 
 .stat-icon {
-  font-size: 30px;
-  color: #21CBF3;               /* Azul neon igual ao título */
+  font-size: 26px;
+  color: #21CBF3;
   flex-shrink: 0;
 }
 
@@ -158,36 +148,47 @@
 }
 
 .stat-value {
-  font-size: 1.7rem;
+  font-size: 1.4rem;
   font-weight: 700;
   line-height: 1.2;
 }
 
 .stat-label {
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin-top: 4px;
   opacity: 0.8;
 }
 
-/* Ícones personalizados por categoria com cor neon variada */
-.stat-icon.inventory { color: #3b82f6; }  /* Azul vibrante */
-.stat-icon.clients { color: #ef4444; }    /* Vermelho neon */
-.stat-icon.revenue { color: #10b981; }    /* Verde neon */
-.stat-icon.orders { color: #f59e0b; }     /* Amarelo neon */
-.stat-icon.suppliers { color: #6366f1; }  /* Roxo neon */
-.stat-icon.employees { color: #8b5cf6; }  /* Roxo mais claro */
+/* Ícones personalizados */
+.stat-icon.inventory { color: #3b82f6; }
+.stat-icon.clients { color: #ef4444; }
+.stat-icon.revenue { color: #10b981; }
+.stat-icon.orders { color: #f59e0b; }
+.stat-icon.suppliers { color: #6366f1; }
+.stat-icon.employees { color: #8b5cf6; }
 
-/* Responsividade */
-@media (max-width: 900px) {
-  .stats-container {
-    justify-content: center;
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .quick-access-card,
+  .stats-card {
+    width: 90%;
   }
+
+  .quick-access-buttons button {
+    width: 160px;
+    font-size: 1rem;
+  }
+
   .stat-item {
     flex: 1 1 45%;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+  .quick-access-buttons button {
+    width: 100%;
+  }
+
   .stat-item {
     flex: 1 1 100%;
   }

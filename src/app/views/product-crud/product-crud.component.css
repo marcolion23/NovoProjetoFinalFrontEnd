@@ -3,9 +3,9 @@
   display: flex;                    /* Usa Flexbox para alinhar os botões */
   justify-content: center;         /* Centraliza os botões horizontalmente */
   flex-wrap: wrap;                 /* Permite que os botões quebrem linha em telas pequenas */
-  gap: 32px;                       /* Espaço entre os botões */
+  gap: 30px;                       /* Espaço entre os botões */
   margin-bottom: 24px;            /* Espaço abaixo do container */
-  margin: 130px auto 40px;        /* Centraliza e evita sobreposição com header (90px do header + 40px de espaço) */
+  margin: 110px auto 40px;        /* Centraliza e evita sobreposição com header (90px do header + 40px de espaço) */
   align-items: center;            /* Centraliza verticalmente */
 }
 
@@ -53,7 +53,7 @@
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
   /* Cria colunas flexíveis a partir de 320px */
   gap: 30px;                       /* Espaço entre os painéis */
-  padding: 30px 50px;              /* Espaço interno */
+  padding: 10px 50px;              /* Espaço interno */
   box-sizing: border-box;          /* Inclui o padding na largura */
   
 }

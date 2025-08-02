@@ -88,24 +88,18 @@
         Criar Fornecedor
       </button>
 
-      <!-- Botão Criar Relatório -->
-      <button mat-raised-button color="primary" [routerLink]="'/relatorios'">
-        <mat-icon>assessment</mat-icon>
-        Criar Relatório
-      </button>
-
-
-      <!-- Botão Criar Agendamento -->
-      <button mat-raised-button color="primary" [routerLink]="'/agendamentos/create'">
-        <mat-icon>event</mat-icon>
-        Criar Agendamento
-      </button>
-
       <!-- Botão Criar Cliente -->
       <button mat-raised-button [routerLink]="'/cliente/create'">
         <mat-icon>person</mat-icon>
         Criar Cliente
       </button>
+
+        <!-- Botão Adicionar Pagamento -->
+      <button mat-raised-button [routerLink]="'/fpagamentos/create'">
+        <mat-icon>payment</mat-icon>
+        Criar Pagamento
+      </button>
+
     </div>
   </mat-card-content>
 </mat-card>
