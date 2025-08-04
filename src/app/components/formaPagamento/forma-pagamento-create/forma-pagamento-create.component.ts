@@ -16,9 +16,12 @@ export class FormaPagamentoCreateComponent implements OnInit {
     tipo: '',
     valor: undefined,
     data: undefined,
-    parcelas: undefined, // undefined inicialmente
+    parcelas: undefined,
     status: '',
-    observacao: ''
+    observacao: '',
+    parcelado: 'nao',
+    aplicarTaxas: 'nao',
+    porcentagemTaxa: undefined,
   };
 
   valorFormatado: string = '';
@@ -65,24 +68,41 @@ export class FormaPagamentoCreateComponent implements OnInit {
     this.formaPagamento.tipo = tipo?.trim();
 
     if (this.formaPagamento.tipo === 'Cartão de Crédito') {
-      // Só inicializa parcelas se for crédito e valor inválido
-      if (this.formaPagamento.parcelas === undefined || this.formaPagamento.parcelas < 0) {
+      if (this.formaPagamento.parcelas === undefined || this.formaPagamento.parcelas < 1) {
         this.formaPagamento.parcelas = 1;
       }
+      // Resetar parcelado e aplicarTaxas para valores padrão
+      if (!this.formaPagamento.parcelado) {
+        this.formaPagamento.parcelado = 'nao';
+      }
+      if (!this.formaPagamento.aplicarTaxas) {
+        this.formaPagamento.aplicarTaxas = 'nao';
+      }
     } else {
-      // Remove parcelas para qualquer outro tipo, inclusive débito
       this.formaPagamento.parcelas = undefined;
+      this.formaPagamento.parcelado = 'nao';
+      this.formaPagamento.aplicarTaxas = 'nao';
+      this.formaPagamento.porcentagemTaxa = undefined;
     }
   }
 
   bloquearTeclasInvalidas(event: KeyboardEvent) {
-    // Bloquear hífen e sinais de menos para o campo parcelas
     if (event.key === '-' || event.key === '+' || event.key === 'e' || event.key === ',' || event.key === '.') {
       event.preventDefault();
     }
   }
 
   createFormaPagamento(): void {
+    // Se quiser converter parcelado e aplicarTaxas para booleanos:
+    /*
+    const payload = {
+      ...this.formaPagamento,
+      parcelado: this.formaPagamento.parcelado === 'sim',
+      aplicarTaxas: this.formaPagamento.aplicarTaxas === 'sim'
+    };
+    this.formaPagamentoService.create(payload).subscribe(() => { ... });
+    */
+
     this.formaPagamentoService.create(this.formaPagamento).subscribe(() => {
       this.formaPagamentoService.showMessage('Pagamento criado!');
       this.router.navigate(['/fpagamentos']);
@@ -102,7 +122,10 @@ export class FormaPagamentoCreateComponent implements OnInit {
       data: undefined,
       parcelas: undefined,
       status: '',
-      observacao: ''
+      observacao: '',
+      parcelado: 'nao',
+      aplicarTaxas: 'nao',
+      porcentagemTaxa: undefined
     };
     this.valorFormatado = '';
   }

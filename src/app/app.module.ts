@@ -1,6 +1,8 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 // Angular Material Modules
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -177,7 +179,9 @@ import { VendaCrudComponent } from './views/venda-crud/venda-crud.component';
     MatTooltipModule,
     MatAutocompleteModule, // <== ADICIONADO AQUI
     MatTableModule,
-
+ MatAutocompleteModule,
+  MatRadioModule,  // <== aqui, para mat-radio-button funcionar
+  MatTableModule,
     // Forms
     FormsModule,
     ReactiveFormsModule,

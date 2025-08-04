@@ -41,7 +41,6 @@ export class VendaCreateComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // Simular clientes - depois troque pelo backend
     this.clientes = [
       { id: 1, nome: 'João Silva' },
       { id: 2, nome: 'Maria Oliveira' },
@@ -51,12 +50,10 @@ export class VendaCreateComponent implements OnInit {
     this.clientesFiltrados = this.clientes;
   }
 
-  // Compara cliente para seleção
   compareClientes(c1: Cliente, c2: Cliente): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 
-  // Filtra clientes pelo filtro do input
   filtrarClientes(): void {
     const filtro = this.clienteFiltro.toLowerCase().trim();
     if (!filtro) {
@@ -68,7 +65,6 @@ export class VendaCreateComponent implements OnInit {
     }
   }
 
-  // Evento aberto do select para limpar filtro
   onClienteSelectOpened(opened: boolean): void {
     if (opened) {
       this.clienteFiltro = '';
@@ -76,15 +72,14 @@ export class VendaCreateComponent implements OnInit {
     }
   }
 
-  // Formata valor para moeda BRL simples
   onValorInput(event: any): void {
     let valor = event.target.value;
 
     // Remove tudo que não for número ou vírgula
     valor = valor.replace(/[^\d,]/g, '');
 
-    // Substitui vírgulas por ponto para parseFloat
-    let valorNumber = parseFloat(valor.replace(',', '.'));
+    // Troca vírgula por ponto para parseFloat funcionar
+    const valorNumber = parseFloat(valor.replace(',', '.'));
 
     if (isNaN(valorNumber)) {
       this.valorFormatado = '0,00';
@@ -94,7 +89,7 @@ export class VendaCreateComponent implements OnInit {
 
     this.venda.valorTotal = valorNumber;
 
-    // Formata para "0,00"
+    // Atualiza o valorFormatado para mostrar com 2 casas decimais e vírgula
     this.valorFormatado = valorNumber.toFixed(2).replace('.', ',');
   }
 
@@ -104,7 +99,6 @@ export class VendaCreateComponent implements OnInit {
       return;
     }
 
-    // Aqui você faria a chamada para salvar no backend
     console.log('Venda salva:', this.venda);
 
     alert('Venda salva com sucesso!');
@@ -113,9 +107,7 @@ export class VendaCreateComponent implements OnInit {
   }
 
   cancel(): void {
-    // Lógica para cancelar ou voltar para a listagem
     console.log('Cancelado');
-    // Exemplo: this.router.navigate(['/vendas']);
   }
 
   limpar(): void {
@@ -129,4 +121,5 @@ export class VendaCreateComponent implements OnInit {
     };
     this.valorFormatado = '0,00';
   }
+
 }

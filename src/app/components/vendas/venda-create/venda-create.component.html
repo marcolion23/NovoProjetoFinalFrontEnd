@@ -69,20 +69,19 @@
         <mat-error *ngIf="tipoPagamento.invalid && tipoPagamento.touched">Tipo de pagamento é obrigatório.</mat-error>
       </mat-form-field>
 
-  <!-- VALOR TOTAL -->
-<mat-form-field appearance="outline" class="half-width" required>
-  <mat-label>Valor Total</mat-label>
-  <input
-    matInput
-    type="text"
-    [(ngModel)]="valorTotal"           
-    (input)="onValorInput($event)"
-    name="valorTotal"
-    #valorTotal="ngModel"
-    required
-    placeholder="0,00" />
-  <mat-error *ngIf="valorTotal.invalid && valorTotal.touched">Valor é obrigatório.</mat-error>
-</mat-form-field>
+      <!-- VALOR -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Valor</mat-label>
+        <input
+          matInput
+          type="text"
+          [value]="valorFormatado"
+          (input)="onValorInput($event)"
+          name="valor"
+          required
+          placeholder="0,00"
+        >
+      </mat-form-field>
 
       <!-- STATUS DA VENDA -->
       <mat-form-field appearance="outline" class="half-width" required>
@@ -110,10 +109,10 @@
           placeholder="Anotações adicionais"></textarea>
       </mat-form-field>
 
-      <!-- BOTÕES -->
+        <!-- BOTÕES -->
       <div class="button-container">
-        <button mat-raised-button color="primary" type="submit" [disabled]="formVenda.invalid">Salvar</button>
-        <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="salvarVenda()">Salvar</button>
+        <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
         <button mat-raised-button color="blue" type="button" (click)="limpar()">Limpar</button>
       </div>
 
