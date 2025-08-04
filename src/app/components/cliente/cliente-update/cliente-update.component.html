@@ -1,12 +1,14 @@
-<!-- Card principal que envolve todo o formulário -->
-<mat-card class="client-card">
+<!-- CONTAINER GERAL que empurra todo o conteúdo abaixo do header fixo -->
+<div class="container-geral">
+  <!-- Card principal que envolve todo o formulário -->
+  <mat-card class="client-card">
 
     <!-- Título do formulário -->
     <mat-card-title class="titulo-formulario">Atualizar Cliente</mat-card-title>
-  
+
     <!-- Formulário Angular -->
-    <form class="client-form" #formCliente="ngForm" (ngSubmit)="atualizar()" autocomplete="off" novalidate>
-  
+    <form class="client-form" #formCliente="ngForm" (ngSubmit)="salvar()" autocomplete="off" novalidate>
+
       <!-- Nome Completo -->
       <mat-form-field appearance="outline" class="half-width" required>
         <mat-label>Nome Completo</mat-label>
@@ -25,7 +27,7 @@
           Apenas letras e espaços são permitidos.
         </mat-error>
       </mat-form-field>
-  
+
       <!-- Sexo -->
       <mat-form-field appearance="outline" class="half-width" required>
         <mat-label>Sexo</mat-label>
@@ -37,7 +39,23 @@
           O campo sexo é obrigatório.
         </mat-error>
       </mat-form-field>
-  
+
+      <!-- Email -->
+      <mat-form-field appearance="outline" class="half-width spaced-field" required>
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          [(ngModel)]="cliente.cliEmail"
+          name="cliEmail"
+          #cliEmail="ngModel"
+          required
+          email
+          autocomplete="off"
+        />
+        <mat-error *ngIf="cliEmail.invalid && cliEmail.touched">Email inválido.</mat-error>
+      </mat-form-field>
+
       <!-- CPF -->
       <mat-form-field appearance="outline" class="half-width" required>
         <mat-label>CPF</mat-label>
@@ -56,7 +74,7 @@
           CPF obrigatório e deve estar no formato correto.
         </mat-error>
       </mat-form-field>
-  
+
       <!-- Data de Nascimento -->
       <mat-form-field appearance="outline" class="half-width" required>
         <mat-label>Data de Nascimento</mat-label>
@@ -77,7 +95,7 @@
           Data inválida ou maior que a data atual.
         </mat-error>
       </mat-form-field>
-  
+
       <!-- Telefone -->
       <mat-form-field appearance="outline" class="half-width" required>
         <mat-label>Telefone</mat-label>
@@ -96,25 +114,7 @@
           Telefone obrigatório.
         </mat-error>
       </mat-form-field>
-  
-      <!-- Email -->
-      <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Email</mat-label>
-        <input
-          matInput
-          type="email"
-          name="cliEmail"
-          [(ngModel)]="cliente.cliEmail"
-          #cliEmail="ngModel"
-          required
-          email
-          autocomplete="off"
-        />
-        <mat-error *ngIf="cliEmail.invalid && cliEmail.touched">
-          Email inválido.
-        </mat-error>
-      </mat-form-field>
-  
+
       <!-- CEP -->
       <mat-form-field appearance="outline" class="half-width" required>
         <mat-label>CEP</mat-label>
@@ -134,85 +134,128 @@
           CEP inválido ou não encontrado.
         </mat-error>
       </mat-form-field>
-  
-      <!-- País (fixo Brasil) -->
-      <mat-form-field appearance="outline" class="half-width" *ngIf="mostrarEndereco">
-        <mat-label>País</mat-label>
-        <input matInput value="Brasil" disabled autocomplete="off" />
-      </mat-form-field>
-  
-      <!-- Estado -->
-      <mat-form-field appearance="outline" class="half-width" *ngIf="mostrarEndereco" required>
-        <mat-label>Estado</mat-label>
-        <input
-          matInput
-          name="estado"
-          [(ngModel)]="endereco.uf"
-          #estado="ngModel"
-          required
-          autocomplete="off"
-        />
-        <mat-error *ngIf="estado.invalid && estado.touched">
-          Estado é obrigatório.
-        </mat-error>
-      </mat-form-field>
-  
-      <!-- Cidade -->
-      <mat-form-field appearance="outline" class="half-width" *ngIf="mostrarEndereco" required>
-        <mat-label>Cidade</mat-label>
-        <input
-          matInput
-          name="cidade"
-          [(ngModel)]="endereco.localidade"
-          #cidade="ngModel"
-          required
-          autocomplete="off"
-        />
-        <mat-error *ngIf="cidade.invalid && cidade.touched">
-          Cidade é obrigatória.
-        </mat-error>
-      </mat-form-field>
-  
-      <!-- Rua / Logradouro -->
-      <mat-form-field appearance="outline" class="full-width" *ngIf="mostrarEndereco" required>
-        <mat-label>Rua / Logradouro</mat-label>
-        <input
-          matInput
-          name="logradouro"
-          [(ngModel)]="endereco.logradouro"
-          #logradouro="ngModel"
-          required
-          autocomplete="off"
-        />
-        <mat-error *ngIf="logradouro.invalid && logradouro.touched">
-          Rua é obrigatória.
-        </mat-error>
-      </mat-form-field>
-  
-      <!-- Número -->
-      <mat-form-field appearance="outline" class="half-width" *ngIf="mostrarEndereco" required>
-        <mat-label>Número</mat-label>
-        <input
-          matInput
-          name="numeroResidencia"
-          [(ngModel)]="numeroResidencia"
-          #numeroResidenciaInput="ngModel"
-          required
-          maxlength="10"
-          (keypress)="apenasNumeros($event)"
-          autocomplete="off"
-        />
-        <mat-error *ngIf="numeroResidenciaInput.invalid && numeroResidenciaInput.touched">
-          Número obrigatório.
-        </mat-error>
-      </mat-form-field>
-  
-      <!-- Botões -->
-      <div class="button-container">
-        <button mat-raised-button color="primary" type="submit" [disabled]="formCliente.invalid">Atualizar</button>
-        <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancelar</button>
+
+      <!-- Botão para ativar preenchimento manual do endereço -->
+      <div class="manual-address-button-container spaced-field" *ngIf="!mostrarEnderecoManual && (!cep || cep.trim() === '')">
+        <button mat-stroked-button color="warn" (click)="ativarEnderecoManual()">
+          Não sei o CEP
+        </button>
       </div>
-  
+
+      <!-- Campos endereço automático -->
+      <div *ngIf="!mostrarEnderecoManual && cliente.rua && cliente.bairro && cliente.cidade && cliente.estado" class="linha-campos">
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" disabled>
+          <mat-label>Estado</mat-label>
+          <input matInput [value]="cliente.estado" disabled />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" disabled>
+          <mat-label>Cidade</mat-label>
+          <input matInput [value]="cliente.cidade" disabled />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" disabled>
+          <mat-label>Bairro</mat-label>
+          <input matInput [value]="cliente.bairro" disabled />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" disabled>
+          <mat-label>Rua</mat-label>
+          <input matInput [value]="cliente.rua" disabled />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" required>
+          <mat-label>Número</mat-label>
+          <input matInput type="number" min="0" [(ngModel)]="cliente.numero" name="numero" #numero="ngModel" required />
+          <mat-error *ngIf="numero.invalid && numero.touched">
+            Número obrigatório e não pode ser negativo
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <!-- Campos endereço manual -->
+      <div *ngIf="mostrarEnderecoManual" class="manual-address-fields">
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" required>
+          <mat-label>Estado</mat-label>
+          <mat-select [(ngModel)]="cliente.estado" name="estado" #estado="ngModel" required (selectionChange)="onEstadoChange($event.value)">
+            <mat-option *ngFor="let estado of estadosECidades" [value]="estado.nome">{{ estado.nome }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="estado.invalid && estado.touched">Estado é obrigatório</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" required>
+          <mat-label>Cidade</mat-label>
+          <mat-select [(ngModel)]="cliente.cidade" name="cidade" #cidade="ngModel" required (selectionChange)="onCidadeSelecionada($event.value)">
+            <mat-option *ngFor="let cidade of cidadesFiltradas" [value]="cidade">{{ cidade }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="cidade.invalid && cidade.touched">Cidade é obrigatória</mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="mostrarCampoOutraCidade" appearance="outline" class="half-width spaced-field" required>
+          <mat-label>Outra Cidade</mat-label>
+          <input
+            matInput
+            [(ngModel)]="nomeOutraCidade"
+            name="nomeOutraCidade"
+            #nomeOutraCidadeRef="ngModel"
+            required
+            (ngModelChange)="nomeOutraCidade = capitalizeWords($event)"
+          />
+          <mat-error *ngIf="nomeOutraCidadeRef.invalid && nomeOutraCidadeRef.touched">Informe a cidade</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" required>
+          <mat-label>Rua</mat-label>
+          <input
+            matInput
+            [(ngModel)]="cliente.rua"
+            name="rua"
+            #rua="ngModel"
+            required
+            pattern="^[A-Za-zÀ-ÿ\s]+$"
+            (keydown)="bloquearNumeros($event)"
+            (ngModelChange)="capitalizeFirst($event, 'rua')"
+          />
+          <mat-error *ngIf="rua.invalid && rua.touched">Informe apenas letras e espaços</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" required>
+          <mat-label>Número</mat-label>
+          <input matInput type="number" min="0" [(ngModel)]="cliente.numero" name="numero" #numeroManual="ngModel" required />
+          <mat-error *ngIf="numeroManual.invalid && numeroManual.touched">Número obrigatório e não pode ser negativo</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field">
+          <mat-label>Bairro</mat-label>
+          <input
+            matInput
+            [(ngModel)]="cliente.bairro"
+            name="bairro"
+            #bairro="ngModel"
+            pattern="^[A-Za-zÀ-ÿ\s]+$"
+            (ngModelChange)="capitalizeFirst($event, 'bairro')"
+          />
+          <mat-error *ngIf="bairro.invalid && bairro.touched">Informe apenas letras e espaços</mat-error>
+        </mat-form-field>
+
+        <!-- Botão "Voltar ao CEP" só aparece aqui, no modo manual -->
+        <div class="manual-address-button-container spaced-field">
+          <button mat-stroked-button color="primary" (click)="desativarEnderecoManual()">Voltar ao CEP</button>
+        </div>
+      </div>
+
+      <!-- Botões -->
+     
+  <!-- Botões -->
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="salvar()">Salvar</button>
+    <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+    <button mat-raised-button color="blue" (click)="limpar()">Limpar</button>
+  </div>
+
     </form>
   </mat-card>
-  
+</div>

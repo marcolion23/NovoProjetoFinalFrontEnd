@@ -1,0 +1,88 @@
+/* ============ CONTAINER DOS BOTÕES ============ */
+.pagamentos-btns-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin: 115px auto 0px;
+  align-items: center;
+}
+
+/* ============ BOTÕES PADRÃO ============ */
+.expanded-btn {
+  width: 40%;
+  min-width: 280px;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 32px 0;
+  border: none;
+  border-radius: 28px;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 8px 24px rgba(0, 17, 255, 0.26);
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+}
+
+.expanded-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 17, 255, 0.4);
+}
+
+.btn-add-pagamento {
+  background-color: #0D3B66;
+}
+
+.btn-gerenciamentos-pagamento {
+  background-color: #14532d;
+}
+
+/* ============ DASHBOARD DE RESUMO DE VENDAS ============ */
+.dashboard-panels {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 30px 50px;
+  box-sizing: border-box;
+}
+
+.panel-info {
+  background: linear-gradient(135deg, #0D3B66, #092447);
+  border-radius: 24px;
+  padding: 40px 30px;
+  text-align: center;
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.panel-info:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+.canceladas-vendas {
+  background: linear-gradient(135deg, #991B1B, #7f1d1d);
+}
+
+.panel-info h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.panel-info p {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.material-icons {
+  font-size: 60px;
+  margin-bottom: 10px;
+}

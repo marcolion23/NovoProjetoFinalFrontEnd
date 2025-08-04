@@ -1,1 +1,123 @@
-<p>venda-create works!</p>
+<div class="container-geral">
+  <mat-card class="client-card">
+
+    <mat-card-title class="titulo-formulario">Cadastro de Venda</mat-card-title>
+
+    <form class="client-form" #formVenda="ngForm" (ngSubmit)="salvarVenda()" autocomplete="off" novalidate>
+
+      <!-- CLIENTE (select com filtro) -->
+      <mat-form-field appearance="outline" class="half-width" required>
+        <mat-label>Cliente</mat-label>
+        <mat-select
+          [(ngModel)]="venda.clienteId"
+          name="clienteId"
+          #clienteId="ngModel"
+          required
+          [compareWith]="compareClientes"
+          (openedChange)="onClienteSelectOpened($event)">
+          
+          <!-- Campo de busca dentro do dropdown -->
+          <mat-option>
+            <input
+              matInput
+              placeholder="Buscar cliente"
+              [(ngModel)]="clienteFiltro"
+              (keydown)="$event.stopPropagation()"
+              (input)="filtrarClientes()" />
+          </mat-option>
+
+          <!-- Opções filtradas -->
+          <mat-option *ngFor="let cliente of clientesFiltrados" [value]="cliente.id">
+            {{ cliente.nome }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="clienteId.invalid && clienteId.touched">Cliente é obrigatório.</mat-error>
+      </mat-form-field>
+
+      <!-- DATA DA VENDA -->
+      <mat-form-field appearance="outline" class="half-width" required>
+        <mat-label>Data da Venda</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          name="dataVenda"
+          [(ngModel)]="venda.dataVenda"
+          #dataVenda="ngModel"
+          [max]="maxDate"
+          required
+          autocomplete="off" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="dataVenda.invalid && dataVenda.touched">Data inválida ou maior que a atual.</mat-error>
+      </mat-form-field>
+
+      <!-- TIPO DE PAGAMENTO -->
+      <mat-form-field appearance="outline" class="half-width" required>
+        <mat-label>Tipo de Pagamento</mat-label>
+        <mat-select
+          [(ngModel)]="venda.tipoPagamento"
+          name="tipoPagamento"
+          #tipoPagamento="ngModel"
+          required>
+          <mat-option value="Dinheiro">Dinheiro</mat-option>
+          <mat-option value="Cartão de Crédito">Cartão de Crédito</mat-option>
+          <mat-option value="Cartão de Débito">Cartão de Débito</mat-option>
+          <mat-option value="Pix">Pix</mat-option>
+          <mat-option value="Boleto">Boleto</mat-option>
+          <mat-option value="Outro">Outro</mat-option>
+        </mat-select>
+        <mat-error *ngIf="tipoPagamento.invalid && tipoPagamento.touched">Tipo de pagamento é obrigatório.</mat-error>
+      </mat-form-field>
+
+  <!-- VALOR TOTAL -->
+<mat-form-field appearance="outline" class="half-width" required>
+  <mat-label>Valor Total</mat-label>
+  <input
+    matInput
+    type="text"
+    [(ngModel)]="valorTotal"           
+    (input)="onValorInput($event)"
+    name="valorTotal"
+    #valorTotal="ngModel"
+    required
+    placeholder="0,00" />
+  <mat-error *ngIf="valorTotal.invalid && valorTotal.touched">Valor é obrigatório.</mat-error>
+</mat-form-field>
+
+      <!-- STATUS DA VENDA -->
+      <mat-form-field appearance="outline" class="half-width" required>
+        <mat-label>Status</mat-label>
+        <mat-select
+          [(ngModel)]="venda.status"
+          name="status"
+          #status="ngModel"
+          required>
+          <mat-option value="Pendente">Pendente</mat-option>
+          <mat-option value="Concluída">Concluída</mat-option>
+          <mat-option value="Cancelada">Cancelada</mat-option>
+        </mat-select>
+        <mat-error *ngIf="status.invalid && status.touched">Status é obrigatório.</mat-error>
+      </mat-form-field>
+
+      <!-- OBSERVAÇÕES -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Observações</mat-label>
+        <textarea
+          matInput
+          rows="4"
+          [(ngModel)]="venda.observacao"
+          name="observacao"
+          placeholder="Anotações adicionais"></textarea>
+      </mat-form-field>
+
+      <!-- BOTÕES -->
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="formVenda.invalid">Salvar</button>
+        <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancelar</button>
+        <button mat-raised-button color="blue" type="button" (click)="limpar()">Limpar</button>
+      </div>
+
+    </form>
+
+  </mat-card>
+</div>

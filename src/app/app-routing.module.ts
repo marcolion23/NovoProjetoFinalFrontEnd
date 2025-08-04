@@ -92,9 +92,10 @@ const routes: Routes = [
 // Rotas Vendas
 { path: 'venda', component: VendaCrudComponent },
 { path: 'vendas/create', component: VendaCreateComponent },
+{ path: 'vendas/read', component: VendaReadComponent },         // Rota para listar todas as vendas
 { path: 'vendas/update/:vendaId', component: VendaUpdateComponent },
 { path: 'vendas/delete/:vendaId', component: VendaDeleteComponent },
-{ path: 'vendas/read/:vendaId', component: VendaReadComponent },
+
 
 
   // Rota curinga - redireciona para home caso não encontre rota

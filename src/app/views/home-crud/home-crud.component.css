@@ -80,7 +80,7 @@
 /* ===== CARD DE ESTATÍSTICAS ===== */
 .stats-card {
   position: fixed;
-  top: 180px;                                /* Agora fixado no topo */
+  top: 195px;                                /* Agora fixado no topo */
   right: 15%;
   transform: translateX(-50%);
   width: 40%;

@@ -145,11 +145,20 @@
     <mat-error *ngIf="nomeOutraCidadeRef.invalid && nomeOutraCidadeRef.touched">Informe a cidade</mat-error>
   </mat-form-field>
 
+   <mat-form-field appearance="outline" class="half-width spaced-field">
+    <mat-label>Bairro</mat-label>
+    <input matInput [(ngModel)]="fornecedor.bairro" name="bairro" #bairro="ngModel" pattern="^[A-Za-zÀ-ÿ\s]+$" (ngModelChange)="capitalizeFirst($event, 'bairro')" />
+    <mat-error *ngIf="bairro.invalid && bairro.touched">Informe apenas letras e espaços</mat-error>
+  </mat-form-field>
+
+  
   <mat-form-field appearance="outline" class="half-width spaced-field" required>
     <mat-label>Rua</mat-label>
     <input matInput [(ngModel)]="fornecedor.rua" name="rua" #rua="ngModel" required pattern="^[A-Za-zÀ-ÿ\s]+$" (keydown)="bloquearNumeros($event)" (ngModelChange)="capitalizeFirst($event, 'rua')" />
     <mat-error *ngIf="rua.invalid && rua.touched">Informe apenas letras e espaços</mat-error>
   </mat-form-field>
+
+   
 
   <mat-form-field appearance="outline" class="half-width spaced-field" required>
     <mat-label>Número</mat-label>
@@ -157,11 +166,7 @@
     <mat-error *ngIf="numeroManual.invalid && numeroManual.touched">Número obrigatório e não pode ser negativo</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="half-width spaced-field">
-    <mat-label>Bairro</mat-label>
-    <input matInput [(ngModel)]="fornecedor.bairro" name="bairro" #bairro="ngModel" pattern="^[A-Za-zÀ-ÿ\s]+$" (ngModelChange)="capitalizeFirst($event, 'bairro')" />
-    <mat-error *ngIf="bairro.invalid && bairro.touched">Informe apenas letras e espaços</mat-error>
-  </mat-form-field>
+
 
   <!-- Botão "Voltar ao CEP" só aparece aqui, no modo manual -->
   <div class="manual-address-button-container spaced-field">

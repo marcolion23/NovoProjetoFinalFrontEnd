@@ -1,1 +1,38 @@
-<p>venda-crud works!</p>
+<!-- ============ BOTÕES DE VENDAS ============ -->
+<div class="pagamentos-btns-container">
+
+<button class="expanded-btn btn-add-pagamento"
+ [routerLink]="'/vendas/create'">
+  Criar Venda
+</button>
+
+
+  <button class="expanded-btn btn-gerenciamentos-pagamento" [routerLink]="'/vendas/read/:vendaId'">
+    Gerenciar Vendas
+  </button>
+
+</div>
+
+<!-- ============ DASHBOARD DE RESUMO DE VENDAS ============ -->
+<div class="dashboard-panels">
+  <div class="panel-info">
+    <i class="material-icons">shopping_cart</i>
+    <h2>Total Vendas</h2>
+    <p>{{ totalVendas }}</p>
+  </div>
+
+
+  <div class="panel-info canceladas-vendas">
+    <i class="material-icons">cancel</i>
+    <h2>Vendas Canceladas</h2>
+    <p>{{ vendasCanceladas }}</p>
+  </div>
+
+  <div class="panel-info">
+    <i class="material-icons">update</i>
+    <h2>Última Atualização</h2>
+    <p>{{ ultimaAtualizacao }}</p>
+  </div>
+</div>
+
+

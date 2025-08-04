@@ -1,0 +1,97 @@
+/* Container principal com fundo gradiente gamer, sombra e bordas arredondadas */
+.table-container {
+    overflow-x: auto;
+    width: 82%;
+    margin: 0 auto;
+    background-color: #0D3B66;
+    padding: 18px;
+    margin-top: 150px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(48, 22, 199, 0.3);
+}
+
+/* Tabela principal com layout moderno e espaçado */
+table.gamer-table {
+    width: 95%;
+    margin: 0 auto;
+    border: 1px solid #0af8c1;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', sans-serif;
+    color: #e0e0e0;
+    background-color: rgba(44, 62, 80, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Cabeçalho das colunas com borda neon e destaque */
+table.gamer-table th {
+    background-color: #ffffff;
+    color: #2C3E50;
+    font-weight: 600;
+    padding: 14px;
+    text-align: left;
+    border-bottom: 2px solid #0af8c1;
+    border: 1px solid #0af8c1;
+    position: relative;
+    font-size: 1.2rem;
+}
+
+/* Efeito glow no cabeçalho */
+table.gamer-table th::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: #0af8c1;
+    box-shadow: 0 0 8px #0af8c1;
+}
+
+/* Células comuns da tabela */
+table.gamer-table td {
+    padding: 14px;
+    box-shadow: 0 0 0 1px #0af8c1;
+    background-color: #ffffff;
+    font-size: 1rem;
+}
+
+/* Efeito ao passar o mouse sobre as linhas */
+table.gamer-table tr:hover {
+    background-color: rgba(42, 61, 80, 0.6);
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* ============ BOTÕES DE AÇÃO (Editar e Remover) ============ */
+.btn-acao {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 10px;
+  margin-right: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.0rem;
+  color: #ffffff;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Ícones dentro dos botões */
+.btn-acao .material-icons {
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+/* Botão Editar com cor azul vibrante */
+.btn-acao.editar {
+  background-color: #2563eb;
+}
+
+/* Botão Remover com cor vermelha vibrante */
+.btn-acao.remover {
+  background-color: #ff0000;
+}
+
+/* Aumenta levemente ao passar o mouse */
+.btn-acao:hover {
+  transform: scale(1.05);
+}

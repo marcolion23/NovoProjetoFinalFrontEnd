@@ -35,14 +35,6 @@
       </div>
     </div>
 
-    <!-- Pedidos Pendentes -->
-    <div class="stat-item">
-      <mat-icon class="stat-icon orders">pending_actions</mat-icon>
-      <div class="stat-info">
-        <div class="stat-value">15</div>
-        <div class="stat-label">Pedidos Pendentes</div>
-      </div>
-    </div>
 
     <!-- Fornecedores Ativos -->
     <div class="stat-item">
@@ -53,14 +45,6 @@
       </div>
     </div>
 
-    <!-- Funcionários -->
-    <div class="stat-item">
-      <mat-icon class="stat-icon employees">badge</mat-icon>
-      <div class="stat-info">
-        <div class="stat-value">30</div>
-        <div class="stat-label">Funcionários</div>
-      </div>
-    </div>
   </div>
 </mat-card>
 
@@ -83,7 +67,7 @@
       </button>
 
       <!-- Botão Criar Fornecedor -->
-      <button mat-raised-button [routerLink]="'/fornecedores/create'">
+      <button mat-raised-button   color="primary" [routerLink]="'/fornecedores/create'">
         <mat-icon>local_shipping</mat-icon>
         Criar Fornecedor
       </button>
@@ -95,9 +79,15 @@
       </button>
 
         <!-- Botão Adicionar Pagamento -->
-      <button mat-raised-button color="primary" [routerLink]="'/fpagamentos/create'">
+      <button mat-raised-button [routerLink]="'/fpagamentos/create'">
         <mat-icon>payment</mat-icon>
         Criar Pagamento
+      </button>
+
+            <!-- Botão Criar Vendas -->
+      <button mat-raised-button color="primary" [routerLink]="'/vendas/create'">
+        <mat-icon>sell</mat-icon>
+        Criar Vendas
       </button>
 
     </div>

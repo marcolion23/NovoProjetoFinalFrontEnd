@@ -45,7 +45,7 @@
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let row">
         <div class="btn-actions-container">
-          <button class="btn-acao editar"[routerLink]="'/cliente/update/:cliId'">
+          <button class="btn-acao editar" [routerLink]="'/cliente/update/:cliId'">
             <i class="material-icons">edit</i> Editar
           </button>
           <button class="btn-acao remover" [routerLink]="'/cliente/delete/:cliId'">
