@@ -85,6 +85,12 @@ import { FornecedorCreateComponent } from './components/fornecedor/fornecedor-cr
 import { FornecedorReadComponent } from './components/fornecedor/fornecedor-read/fornecedor-read.component';
 import { FornecedorUpdateComponent } from './components/fornecedor/fornecedor-update/fornecedor-update.component';
 import { FornecedorDeleteComponent } from './components/fornecedor/fornecedor-delete/fornecedor-delete.component';
+import { VendaCreateComponent } from './components/vendas/venda-create/venda-create.component';
+import { VendaReadComponent } from './components/vendas/venda-read/venda-read.component';
+import { VendaUpdateComponent } from './components/vendas/venda-update/venda-update.component';
+import { VendaDeleteComponent } from './components/vendas/venda-delete/venda-delete.component';
+import { VendaCrudComponent } from './views/venda-crud/venda-crud.component';
+
 
 
 
@@ -129,9 +135,16 @@ import { FornecedorDeleteComponent } from './components/fornecedor/fornecedor-de
     FornecedorUpdateComponent,
     FornecedorDeleteComponent,
 
+    VendaCreateComponent,
+        VendaReadComponent,
+        VendaUpdateComponent,
+        VendaDeleteComponent,
+        VendaCrudComponent,
 
     // Diretivas
     RedDirective,
+        
+       
 
   
   ],

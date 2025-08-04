@@ -39,6 +39,15 @@ import { FormaPagamentoUpdateComponent } from './components/formaPagamento/forma
 import { FormaPagamentoDeleteComponent } from './components/formaPagamento/forma-pagamento-delete/forma-pagamento-delete.component';
 import { FormaPagamentoReadComponent } from './components/formaPagamento/forma-pagamento-read/forma-pagamento-read.component';
 
+// Vendas
+import { VendaCrudComponent } from './views/venda-crud/venda-crud.component';
+import { VendaCreateComponent } from './components/vendas/venda-create/venda-create.component';
+import { VendaUpdateComponent } from './components/vendas/venda-update/venda-update.component';
+import { VendaDeleteComponent } from './components/vendas/venda-delete/venda-delete.component';
+import { VendaReadComponent } from './components/vendas/venda-read/venda-read.component';
+
+
+
 
 // Rotas definidas
 const routes: Routes = [
@@ -80,7 +89,12 @@ const routes: Routes = [
   { path: 'fpagamentos/delete/:fpgId', component: FormaPagamentoDeleteComponent },
   { path: 'fpagamentos/read/:fpgId', component: FormaPagamentoReadComponent },
 
-
+// Rotas Vendas
+{ path: 'venda', component: VendaCrudComponent },
+{ path: 'vendas/create', component: VendaCreateComponent },
+{ path: 'vendas/update/:vendaId', component: VendaUpdateComponent },
+{ path: 'vendas/delete/:vendaId', component: VendaDeleteComponent },
+{ path: 'vendas/read/:vendaId', component: VendaReadComponent },
 
 
   // Rota curinga - redireciona para home caso não encontre rota
