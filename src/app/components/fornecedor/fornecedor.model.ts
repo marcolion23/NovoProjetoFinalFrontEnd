@@ -1,5 +1,5 @@
 export class Fornecedor {
-  id?: number;                // opcional para quando estiver criando ou buscando
+  id?: number;
   nome: string = '';
   cnpj: string = '';
   inscricaoEstadual: string = '';
@@ -15,7 +15,11 @@ export class Fornecedor {
   telefoneContato: string = '';
   observacoes: string = '';
   status: boolean = false;
+  Fordescricao?: string;  // <-- ADICIONE ESTA LINHA
+outraCidade?: string;
+  complemento?: string;
 
+  
   constructor(init?: Partial<Fornecedor>) {
     Object.assign(this, init);
   }

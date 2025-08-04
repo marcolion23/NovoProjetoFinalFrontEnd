@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http'; // Adicionado para requisição HTTP
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+ 
+
 
 interface Fornecedor {
   nome: string;
@@ -10,18 +14,21 @@ interface Fornecedor {
   contatoPrincipal: string;
   telefoneContato: string;
   rua: string;
-  numero: number;
+  numero: number | null;
   bairro: string;
   cep: string;
   cidade: string;
   estado: string;
   status: boolean;
   observacoes: string;
+
+
 }
 
 interface EstadoECidade {
   nome: string;
   cidades: string[];
+  
 }
 
 @Component({
@@ -30,6 +37,12 @@ interface EstadoECidade {
   styleUrls: ['./fornecedor-create.component.css']
 })
 export class FornecedorCreateComponent implements OnInit {
+
+  estadoFiltro: string = '';
+  estadosFiltrados: EstadoECidade[] = [];  // inicia vazio
+
+  cidadeFiltro: string = '';
+  cidadesFiltradas: string[] = [];
 
   fornecedor: Fornecedor = {
     nome: '',
@@ -40,23 +53,27 @@ export class FornecedorCreateComponent implements OnInit {
     contatoPrincipal: '',
     telefoneContato: '',
     rua: '',
-    numero: 0,
+    numero: null,
     bairro: '',
     cep: '',
     cidade: '',
     estado: '',
     status: true,
     observacoes: ''
+    
+    
   };
 
+emailDomainErro: boolean = false;
   nomeOutraCidade: string = '';
   mostrarCampoOutraCidade: boolean = false;
+  mostrarEnderecoManual: boolean = false;
 
   cnpjMask = [/\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '/', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
   telefoneMask = ['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   cepMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
 
-  estadosECidades: EstadoECidade[] = [
+    estadosECidades: EstadoECidade[] = [
     {
       "nome": "Acre",
       "cidades": [
@@ -612,12 +629,15 @@ export class FornecedorCreateComponent implements OnInit {
     }
   ];
 
-  cidadesFiltradas: string[] = [];
 
-  constructor(private router: Router) {}
+
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.cidadesFiltradas = [];
+    this.filtrarCidades();
+    this.estadosFiltrados = [...this.estadosECidades];
+
   }
 
   onEstadoChange(estadoSelecionado: string): void {
@@ -645,7 +665,35 @@ export class FornecedorCreateComponent implements OnInit {
       this.nomeOutraCidade = '';
     }
   }
+allowedDomains = [
+  'gmail.com',
+  'hotmail.com',
+  'yahoo.com',
+  'outlook.com',
+  'live.com',
+  'icloud.com',
+  'aol.com',
+  'msn.com',
+  'mail.com',
+  'bol.com.br',
+  'uol.com.br',
+  'terra.com.br',
+  'globo.com',
+  'yandex.com',
+  'protonmail.com'
+];
 
+emailDomainValidator(control: AbstractControl): ValidationErrors | null {
+  const email = control.value;
+  if (!email) return null;
+
+  const domain = email.substring(email.lastIndexOf('@') + 1).toLowerCase();
+  if (this.allowedDomains.includes(domain)) {
+    return null; // válido
+  } else {
+    return { domainNotAllowed: true }; // inválido
+  }
+}
   bloquearNumeros(event: KeyboardEvent): void {
     if (/\d/.test(event.key)) {
       event.preventDefault();
@@ -657,7 +705,7 @@ export class FornecedorCreateComponent implements OnInit {
       const capitalizado = value
         .toLowerCase()
         .replace(/\b\w/g, letra => letra.toUpperCase());
-  
+
       if (campo) {
         (this.fornecedor as any)[campo] = capitalizado;
       } else {
@@ -665,12 +713,102 @@ export class FornecedorCreateComponent implements OnInit {
       }
     }
   }
-  
+
+  desativarEnderecoManual(): void {
+    this.mostrarEnderecoManual = false;
+  }
+
+  ativarEnderecoManual(): void {
+    this.mostrarEnderecoManual = true;
+    this.fornecedor.cep = '';
+    this.fornecedor.estado = '';
+    this.fornecedor.cidade = '';
+    this.fornecedor.rua = '';
+    this.fornecedor.bairro = '';
+    this.fornecedor.numero = null;
+    this.mostrarCampoOutraCidade = false;
+    this.nomeOutraCidade = '';
+  }
+
+  usarCep(): void {
+    this.mostrarEnderecoManual = false;
+    this.fornecedor.estado = '';
+    this.fornecedor.cidade = '';
+    this.fornecedor.rua = '';
+    this.fornecedor.bairro = '';
+    this.fornecedor.numero = null;
+    this.mostrarCampoOutraCidade = false;
+    this.nomeOutraCidade = '';
+  }
+capitalizeFirstLetter(value: string): string {
+  if (!value) return value;
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+onObservacoesChange(value: string): void {
+  this.fornecedor.observacoes = this.capitalizeFirstLetter(value);
+}
+
+onEmailChange(email: string): void {
+  const domainPart = email.split('@')[1] || '';
+
+  if (domainPart.length === 0) {
+    this.emailDomainErro = false; // domínio vazio, sem erro
+    return;
+  }
+
+  // Verifica se algum domínio permitido começa com o que foi digitado (prefixo válido)
+  const algumPrefixoValido = this.allowedDomains.some(domain => domain.startsWith(domainPart));
+
+  // Verifica se o domínio digitado bate exatamente com algum domínio permitido
+  const dominioCompletoValido = this.allowedDomains.includes(domainPart);
+
+  if (dominioCompletoValido) {
+    this.emailDomainErro = false; // domínio completo válido, sem erro
+  } else if (!algumPrefixoValido) {
+    this.emailDomainErro = true;  // domínio inválido já detectado
+  } else {
+    this.emailDomainErro = false; // ainda digitando prefixo válido
+  }
+}
+  // === NOVO ===
+  // Método que escuta mudança no campo CEP e busca endereço
+  onCepChange(cep: string): void {
+    this.fornecedor.cep = cep;
+    const cepLimpo = cep.replace(/\D/g, '');
+    if (cepLimpo.length === 8) {
+      this.buscarEnderecoPorCep(cepLimpo);
+    }
+  }
+
+  // Faz a requisição no ViaCEP e atualiza o endereço
+  buscarEnderecoPorCep(cepLimpo: string): void {
+    this.http.get<any>(`https://viacep.com.br/ws/${cepLimpo}/json/`).subscribe({
+      next: (data) => {
+        if (!data.erro) {
+          this.fornecedor.estado = data.uf || '';
+          this.onEstadoChange(this.fornecedor.estado); // atualiza cidades filtradas
+          this.fornecedor.cidade = data.localidade || '';
+          this.fornecedor.bairro = data.bairro || '';
+          this.fornecedor.rua = data.logradouro || '';
+          this.mostrarEnderecoManual = false;
+          this.mostrarCampoOutraCidade = false;
+          this.nomeOutraCidade = '';
+        } else {
+          this.ativarEnderecoManual();
+        }
+      },
+      error: () => {
+        this.ativarEnderecoManual();
+      }
+    });
+  }
 
   salvar(): void {
     if (this.mostrarCampoOutraCidade && this.nomeOutraCidade.trim()) {
       this.fornecedor.cidade = this.nomeOutraCidade.trim();
     }
+    // Aqui você pode incluir lógica real para salvar no backend, etc.
     console.log('Fornecedor salvo:', this.fornecedor);
     this.router.navigate(['/fornecedores']);
   }
@@ -689,7 +827,7 @@ export class FornecedorCreateComponent implements OnInit {
       contatoPrincipal: '',
       telefoneContato: '',
       rua: '',
-      numero: 0,
+      numero: null,
       bairro: '',
       cep: '',
       cidade: '',
@@ -700,5 +838,48 @@ export class FornecedorCreateComponent implements OnInit {
     this.cidadesFiltradas = [];
     this.mostrarCampoOutraCidade = false;
     this.nomeOutraCidade = '';
+    this.mostrarEnderecoManual = false;
+  }
+  filtrarCidades(): void {
+  const estadoSelecionado = this.estadosECidades.find(e => e.nome === this.fornecedor.estado);
+  if (estadoSelecionado) {
+    this.cidadesFiltradas = estadoSelecionado.cidades.filter(cidade =>
+      cidade.toLowerCase().includes(this.cidadeFiltro.toLowerCase())
+    );
+  } else {
+    this.cidadesFiltradas = [];
   }
 }
+filtrarEstados() {
+  const filtro = this.estadoFiltro.toLowerCase();
+  this.estadosFiltrados = this.estadosECidades.filter(e => e.nome.toLowerCase().includes(filtro));
+}
+ // MÉTODOS DA CLASSE -- devem estar dentro das chaves da classe!
+  onEstadoOpen(opened: boolean) {
+    if (opened) {
+      this.estadoFiltro = '';
+      this.estadosFiltrados = [...this.estadosECidades];
+    }
+  }
+
+  onEstadoSelecionado() {
+    const estado = this.estadosECidades.find(e => e.nome === this.fornecedor.estado);
+    if (estado) {
+      this.cidadesFiltradas = [...estado.cidades];
+    } else {
+      this.cidadesFiltradas = [];
+    }
+    this.cidadeFiltro = '';
+    this.fornecedor.cidade = '';
+  }
+
+  onCidadeOpen(opened: boolean) {
+    if (opened) {
+      this.cidadeFiltro = '';
+      this.filtrarCidades();
+    }
+  }
+
+}
+
+

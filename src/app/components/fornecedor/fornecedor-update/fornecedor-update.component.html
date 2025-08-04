@@ -1,254 +1,196 @@
 <!-- CONTAINER GERAL -->
 <div class="container-geral">
 
-    <!-- CARD DO FORMULÁRIO -->
-    <mat-card class="product-card">
-      <mat-card-title class="titulo-formulario">ADICIONE SEU FORNECEDOR</mat-card-title>
-  
-      <form class="product-form" #formFornecedor="ngForm">
-  
-        <!-- ESTADO -->
-        <mat-form-field appearance="outline" class="half-width" required>
+  <!-- CARD DO FORMULÁRIO -->
+  <mat-card class="product-card">
+    <mat-card-title class="titulo-formulario">ATUALIZE SEU FORNECEDOR</mat-card-title>
+
+    <form class="product-form" #formFornecedor="ngForm">
+
+      <!-- NOME -->
+      <mat-form-field appearance="outline" class="half-width spaced-field" required>
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="fornecedor.nome" name="nome" #nome="ngModel" required
+          pattern="^[A-Za-zÀ-ÿ\s]+$" (ngModelChange)="capitalizeFirst($event, 'nome')" />
+        <mat-error *ngIf="nome.invalid && nome.touched">Apenas letras e espaços</mat-error>
+      </mat-form-field>
+
+      <!-- DESCRIÇÃO -->
+      <mat-form-field appearance="outline" class="full-width spaced-field">
+        <mat-label>Descrição / Observações</mat-label>
+        <textarea matInput rows="4" [(ngModel)]="fornecedor.observacoes" name="observacoes"></textarea>
+      </mat-form-field>
+
+      <!-- EMAIL -->
+      <mat-form-field appearance="outline" class="half-width spaced-field" required>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="fornecedor.email" name="email" #email="ngModel" required email />
+        <mat-error *ngIf="email.invalid && email.touched">Email inválido</mat-error>
+      </mat-form-field>
+
+      <!-- TELEFONE -->
+      <mat-form-field appearance="outline" class="half-width spaced-field" required>
+        <mat-label>Telefone</mat-label>
+        <input matInput [(ngModel)]="fornecedor.telefone" name="telefone" #telefone="ngModel" required
+          [textMask]="{mask: telefoneMask, guide: true}" />
+        <mat-error *ngIf="telefone.invalid && telefone.touched">Telefone obrigatório</mat-error>
+      </mat-form-field>
+
+      <!-- CONTATO PRINCIPAL -->
+      <mat-form-field appearance="outline" class="half-width spaced-field">
+        <mat-label>Contato Principal</mat-label>
+        <input matInput [(ngModel)]="fornecedor.contatoPrincipal" name="contatoPrincipal"
+          #contatoPrincipal="ngModel" pattern="^[A-Za-zÀ-ÿ\s]+$"
+          (ngModelChange)="capitalizeFirst($event, 'contatoPrincipal')" />
+        <mat-error *ngIf="contatoPrincipal.invalid && contatoPrincipal.touched">Apenas letras e espaços</mat-error>
+      </mat-form-field>
+
+      <!-- TELEFONE DO CONTATO -->
+      <mat-form-field appearance="outline" class="half-width spaced-field" required>
+        <mat-label>Telefone do Contato</mat-label>
+        <input matInput [(ngModel)]="fornecedor.telefoneContato" name="telefoneContato" #telefoneContato="ngModel"
+          required [textMask]="{mask: telefoneMask, guide: true}" />
+        <mat-error *ngIf="telefoneContato.invalid && telefoneContato.touched">Telefone obrigatório</mat-error>
+      </mat-form-field>
+
+      <!-- CNPJ -->
+      <mat-form-field appearance="outline" class="half-width spaced-field" required>
+        <mat-label>CNPJ</mat-label>
+        <input matInput [(ngModel)]="fornecedor.cnpj" name="cnpj" #cnpj="ngModel" required
+          [textMask]="{mask: cnpjMask, guide: true}" />
+        <mat-error *ngIf="cnpj.invalid && cnpj.touched">CNPJ inválido</mat-error>
+      </mat-form-field>
+
+      <!-- INSCRIÇÃO ESTADUAL -->
+      <mat-form-field appearance="outline" class="half-width spaced-field">
+        <mat-label>Inscrição Estadual</mat-label>
+        <input matInput [(ngModel)]="fornecedor.inscricaoEstadual" name="inscricaoEstadual" maxlength="14"
+          pattern="^[0-9]*$" />
+      </mat-form-field>
+
+      <!-- CEP -->
+      <mat-form-field appearance="outline" class="half-width spaced-field" required *ngIf="!mostrarEnderecoManual">
+        <mat-label>CEP</mat-label>
+        <input matInput
+          [(ngModel)]="fornecedor.cep"
+          name="cep"
+          #cep="ngModel"
+          required
+          [textMask]="{mask: cepMask, guide: true}"
+          (ngModelChange)="onCepChange($event)" />
+        <mat-error *ngIf="cep.invalid && cep.touched">CEP inválido</mat-error>
+      </mat-form-field>
+
+      <!-- Botão "Não sei o CEP" aparece só se NÃO estiver no modo manual E CEP está vazio -->
+      <div class="manual-address-button-container spaced-field" 
+           *ngIf="!mostrarEnderecoManual && (!fornecedor.cep || fornecedor.cep.trim() === '')">
+        <button mat-stroked-button color="warn" (click)="ativarEnderecoManual()">
+          Não sei o CEP
+        </button>
+      </div>
+
+      <!-- Campos endereço automático -->
+      <div *ngIf="!mostrarEnderecoManual && fornecedor.rua && fornecedor.bairro && fornecedor.cidade && fornecedor.estado" class="linha-campos">
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" disabled>
           <mat-label>Estado</mat-label>
-          <mat-select
-            [(ngModel)]="fornecedor.estado"
-            name="estado"
-            #estado="ngModel"
-            required
-            (selectionChange)="onEstadoChange($event.value)">
-            <mat-option *ngFor="let estado of estadosECidades" [value]="estado.nome">
-              {{ estado.nome }}
-            </mat-option>
+          <input matInput [value]="fornecedor.estado" disabled />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" disabled>
+          <mat-label>Cidade</mat-label>
+          <input matInput [value]="fornecedor.cidade" disabled />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" disabled>
+          <mat-label>Bairro</mat-label>
+          <input matInput [value]="fornecedor.bairro" disabled />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" disabled>
+          <mat-label>Rua</mat-label>
+          <input matInput [value]="fornecedor.rua" disabled />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" required>
+          <mat-label>Número</mat-label>
+          <input matInput type="number" min="0" [(ngModel)]="fornecedor.numero" name="numero" #numero="ngModel" required />
+          <mat-error *ngIf="numero.invalid && numero.touched">Número obrigatório e não pode ser negativo</mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <!-- Campos endereço manual -->
+      <div *ngIf="mostrarEnderecoManual" class="manual-address-fields">
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" required>
+          <mat-label>Estado</mat-label>
+          <mat-select [(ngModel)]="fornecedor.estado" name="estado" #estado="ngModel" required (selectionChange)="onEstadoChange($event.value)">
+            <mat-option *ngFor="let estado of estadosECidades" [value]="estado.nome">{{ estado.nome }}</mat-option>
           </mat-select>
           <mat-error *ngIf="estado.invalid && estado.touched">Estado é obrigatório</mat-error>
         </mat-form-field>
-  
-        <!-- CIDADE COM FILTRO -->
-        <mat-form-field appearance="outline" class="half-width" required>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" required>
           <mat-label>Cidade</mat-label>
-          <mat-select
-            [(ngModel)]="fornecedor.cidade"
-            name="cidade"
-            #cidade="ngModel"
-            required
-            panelClass="cidade-select-panel"
-            (selectionChange)="onCidadeSelecionada($event.value)">
-            <mat-option disabled>
-              <mat-form-field style="width: 100%; margin: 0;">
-                <input matInput placeholder="Buscar cidade" (input)="onBuscaCidadeInput($event)" />
-              </mat-form-field>
-            </mat-option>
+          <mat-select [(ngModel)]="fornecedor.cidade" name="cidade" #cidade="ngModel" required (selectionChange)="onCidadeSelecionada($event.value)">
             <mat-option *ngFor="let cidade of cidadesFiltradas" [value]="cidade">{{ cidade }}</mat-option>
           </mat-select>
           <mat-error *ngIf="cidade.invalid && cidade.touched">Cidade é obrigatória</mat-error>
         </mat-form-field>
-  
-  <!-- CAMPO EXTRA PARA OUTRA CIDADE -->
-  <mat-form-field
-    *ngIf="mostrarCampoOutraCidade"
-    appearance="outline"
-    class="half-width"
-    required>
-    <mat-label>Digite o nome da cidade</mat-label>
-    <input
-      matInput
-      [(ngModel)]="nomeOutraCidade"
-      name="nomeOutraCidade"
-      #nomeOutraCidadeInput="ngModel"
-      required
-      (keydown)="bloquearNumeros($event)"
-      (ngModelChange)="capitalizeFirst($event)"
-      />
-    <mat-error *ngIf="nomeOutraCidadeInput.invalid && nomeOutraCidadeInput.touched">
-      Cidade é obrigatória
-    </mat-error>
-  </mat-form-field>
-  
-        <!-- RUA -->
-        <mat-form-field appearance="outline" class="half-width" required>
+
+        <mat-form-field *ngIf="mostrarCampoOutraCidade" appearance="outline" class="half-width spaced-field" required>
+          <mat-label>Outra Cidade</mat-label>
+          <input matInput [(ngModel)]="nomeOutraCidade" name="nomeOutraCidade" #nomeOutraCidadeRef="ngModel" required (ngModelChange)="capitalizeFirst($event)" />
+          <mat-error *ngIf="nomeOutraCidadeRef.invalid && nomeOutraCidadeRef.touched">Informe a cidade</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" required>
           <mat-label>Rua</mat-label>
-          <input
-            matInput
-            [(ngModel)]="fornecedor.rua"
-            name="rua"
-            #rua="ngModel"
-            required
-            pattern="^[A-Za-zÀ-ÿ\s]+$"
-            (keydown)="bloquearNumeros($event)"
-            (ngModelChange)="capitalizeFirst($event, 'rua')" />
+          <input matInput [(ngModel)]="fornecedor.rua" name="rua" #rua="ngModel" required pattern="^[A-Za-zÀ-ÿ\s]+$" (keydown)="bloquearNumeros($event)" (ngModelChange)="capitalizeFirst($event, 'rua')" />
           <mat-error *ngIf="rua.invalid && rua.touched">Informe apenas letras e espaços</mat-error>
         </mat-form-field>
-  
-        <!-- NÚMERO -->
-        <mat-form-field appearance="outline" class="half-width" required>
+
+        <mat-form-field appearance="outline" class="half-width spaced-field" required>
           <mat-label>Número</mat-label>
-          <input
-            matInput
-            type="number"
-            min="0"
-            [(ngModel)]="fornecedor.numero"
-            name="numero"
-            #numero="ngModel"
-            required />
-          <mat-error *ngIf="numero.invalid && numero.touched">Número obrigatório e não pode ser negativo</mat-error>
+          <input matInput type="number" min="0" [(ngModel)]="fornecedor.numero" name="numero" #numeroManual="ngModel" required />
+          <mat-error *ngIf="numeroManual.invalid && numeroManual.touched">Número obrigatório e não pode ser negativo</mat-error>
         </mat-form-field>
-  
-        <!-- BAIRRO -->
-        <mat-form-field appearance="outline" class="half-width">
+
+        <mat-form-field appearance="outline" class="half-width spaced-field">
           <mat-label>Bairro</mat-label>
-          <input
-            matInput
-            [(ngModel)]="fornecedor.bairro"
-            name="bairro"
-            #bairro="ngModel"
-            pattern="^[A-Za-zÀ-ÿ\s]+$"
-            (ngModelChange)="capitalizeFirst($event, 'bairro')" />
+          <input matInput [(ngModel)]="fornecedor.bairro" name="bairro" #bairro="ngModel" pattern="^[A-Za-zÀ-ÿ\s]+$" (ngModelChange)="capitalizeFirst($event, 'bairro')" />
           <mat-error *ngIf="bairro.invalid && bairro.touched">Informe apenas letras e espaços</mat-error>
         </mat-form-field>
-  
-        <!-- CEP -->
-        <mat-form-field appearance="outline" class="half-width" required>
-          <mat-label>CEP</mat-label>
-          <input
-            matInput
-            [(ngModel)]="fornecedor.cep"
-            name="cep"
-            #cep="ngModel"
-            required
-            [textMask]="{mask: cepMask, guide: true}" />
-          <mat-error *ngIf="cep.invalid && cep.touched">CEP inválido</mat-error>
-        </mat-form-field>
-  
-        <!-- NOME -->
-        <mat-form-field appearance="outline" class="half-width" required>
-          <mat-label>Nome</mat-label>
-          <input
-            matInput
-            [(ngModel)]="fornecedor.nome"
-            name="nome"
-            #nome="ngModel"
-            required
-            pattern="^[A-Za-zÀ-ÿ\s]+$"
-            (ngModelChange)="capitalizeFirst($event, 'nome')" />
-          <mat-error *ngIf="nome.invalid && nome.touched">Apenas letras e espaços</mat-error>
-        </mat-form-field>
-  
-        <!-- CNPJ -->
-        <mat-form-field appearance="outline" class="half-width" required>
-          <mat-label>CNPJ</mat-label>
-          <input
-            matInput
-            [(ngModel)]="fornecedor.cnpj"
-            name="cnpj"
-            #cnpj="ngModel"
-            required
-            [textMask]="{mask: cnpjMask, guide: true}" />
-          <mat-error *ngIf="cnpj.invalid && cnpj.touched">CNPJ inválido</mat-error>
-        </mat-form-field>
-  
-        <!-- INSCRIÇÃO ESTADUAL -->
-        <mat-form-field appearance="outline" class="half-width">
-          <mat-label>Inscrição Estadual</mat-label>
-          <input
-            matInput
-            [(ngModel)]="fornecedor.inscricaoEstadual"
-            name="inscricaoEstadual"
-            maxlength="14"
-            pattern="^[0-9]*$" />
-        </mat-form-field>
-  
-        <!-- TELEFONE -->
-        <mat-form-field appearance="outline" class="half-width" required>
-          <mat-label>Telefone</mat-label>
-          <input
-            matInput
-            [(ngModel)]="fornecedor.telefone"
-            name="telefone"
-            #telefone="ngModel"
-            required
-            [textMask]="{mask: telefoneMask, guide: true}" />
-          <mat-error *ngIf="telefone.invalid && telefone.touched">Telefone obrigatório</mat-error>
-        </mat-form-field>
-  
-        <!-- EMAIL -->
-        <mat-form-field appearance="outline" class="half-width" required>
-          <mat-label>Email</mat-label>
-          <input
-            matInput
-            type="email"
-            [(ngModel)]="fornecedor.email"
-            name="email"
-            #email="ngModel"
-            required
-            email />
-          <mat-error *ngIf="email.invalid && email.touched">Email inválido</mat-error>
-        </mat-form-field>
-  
-        <!-- CONTATO PRINCIPAL -->
-        <mat-form-field appearance="outline" class="half-width">
-          <mat-label>Contato Principal</mat-label>
-          <input
-            matInput
-            [(ngModel)]="fornecedor.contatoPrincipal"
-            name="contatoPrincipal"
-            #contatoPrincipal="ngModel"
-            pattern="^[A-Za-zÀ-ÿ\s]+$"
-            (ngModelChange)="capitalizeFirst($event, 'contatoPrincipal')" />
-          <mat-error *ngIf="contatoPrincipal.invalid && contatoPrincipal.touched">Apenas letras e espaços</mat-error>
-        </mat-form-field>
-  
-        <!-- TELEFONE DO CONTATO -->
-        <mat-form-field appearance="outline" class="half-width" required>
-          <mat-label>Telefone do Contato</mat-label>
-          <input
-            matInput
-            [(ngModel)]="fornecedor.telefoneContato"
-            name="telefoneContato"
-            #telefoneContato="ngModel"
-            required
-            [textMask]="{mask: telefoneMask, guide: true}" />
-          <mat-error *ngIf="telefoneContato.invalid && telefoneContato.touched">Telefone obrigatório</mat-error>
-        </mat-form-field>
-  
-        <!-- OBSERVAÇÕES -->
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Observações</mat-label>
-          <textarea
-            matInput
-            rows="4"
-            [(ngModel)]="fornecedor.observacoes"
-            name="observacoes"></textarea>
-        </mat-form-field>
-  
-        <!-- STATUS -->
-        <mat-form-field appearance="outline" class="full-width" required>
-          <mat-label>Status</mat-label>
-          <mat-select
-            [(ngModel)]="fornecedor.status"
-            name="status"
-            #status="ngModel"
-            required>
-            <mat-option [value]="true">Ativo</mat-option>
-            <mat-option [value]="false">Inativo</mat-option>
-          </mat-select>
-          <mat-error *ngIf="status.invalid && status.touched">Status é obrigatório</mat-error>
-        </mat-form-field>
-  
-        <!-- Botões -->
-        <div class="button-container">
-          <button mat-raised-button color="primary" (click)="salvar()">Salvar</button>
-          <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
-          <button mat-raised-button color="blue" (click)="limpar()">Limpar</button>
+
+        <!-- Botão "Voltar ao CEP" só aparece aqui, no modo manual -->
+        <div class="manual-address-button-container spaced-field">
+          <button mat-stroked-button color="primary" (click)="desativarEnderecoManual()">Voltar ao CEP</button>
         </div>
-        
-  
-      </form>
-    </mat-card>
-  
-    <!-- TABELA abaixo (opcional) -->
-    <div class="tabela-container">
-      <!-- futura tabela de fornecedores -->
+      </div>
+
+      <!-- STATUS -->
+      <mat-form-field appearance="outline" class="full-width spaced-field" required>
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="fornecedor.status" name="status" #status="ngModel" required>
+          <mat-option [value]="true">Ativo</mat-option>
+          <mat-option [value]="false">Inativo</mat-option>
+        </mat-select>
+        <mat-error *ngIf="status.invalid && status.touched">Status é obrigatório</mat-error>
+      </mat-form-field>
+
+    </form>
+
+    <!-- Botões principais FORA do formulário -->
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="atualizar()">Atualizar</button>
+      <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+      <button mat-raised-button color="blue" (click)="limpar()">Limpar</button>
     </div>
-  
+  </mat-card>
+
+  <!-- TABELA -->
+  <div class="tabela-container">
+    <!-- tabela futura -->
   </div>
-  
+</div>

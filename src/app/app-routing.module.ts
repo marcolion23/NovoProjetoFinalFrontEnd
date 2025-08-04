@@ -63,7 +63,7 @@ const routes: Routes = [
   { path: 'fornecedores', component: FornecedorCrudComponent },
   { path: 'fornecedores/create', component: FornecedorCreateComponent },
   { path: 'fornecedores/read/:fornId', component: FornecedorReadComponent },
-  { path: 'fornecedores/update/:fornId', component: FornecedorUpdateComponent },
+{ path: 'fornecedores/update/:fornId', component: FornecedorUpdateComponent },
   { path: 'fornecedores/delete/:fornId', component: FornecedorDeleteComponent },
 
   // Rotas Clientes

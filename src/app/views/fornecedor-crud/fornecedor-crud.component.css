@@ -4,7 +4,7 @@
   justify-content: center;          /* Centraliza horizontalmente */
   flex-wrap: wrap;                  /* Permite quebrar linha em telas menores */
   gap: 32px;                        /* Espaço entre botões */
-  margin: 130px auto 40px;          /* Espaço no topo e rodapé */
+  margin: 115px auto 10px;          /* Espaço no topo e rodapé */
   align-items: center;              /* Centraliza verticalmente */
 }
 

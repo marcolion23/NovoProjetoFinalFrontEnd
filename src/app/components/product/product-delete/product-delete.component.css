@@ -1,77 +1,66 @@
-/* Container principal da tela de exclusão */
 .delete-container {
-  background-color: #0D3B66;         /* Cor de fundo azul escuro (padrão gamer do sistema) */
-  color: #ffffff;                    /* Cor padrão do texto: branco */
-  padding: 2rem;                     /* Espaçamento interno em todos os lados */
-  border-radius: 16px;               /* Cantos arredondados */
-  border: 2px solid #0D3B66;         /* Borda neon azul-claro */
-  max-width: 700px;                  /* Largura máxima da caixa */
-  margin: 2rem auto;                 /* Margem externa: 2rem em cima e embaixo, centralizado na horizontal */
-  box-shadow: 0 0 20px #0D3B66;      /* Efeito de brilho ao redor da caixa (neon) */
-  margin-top: 150px;                 /* Espaço extra no topo para afastar da navbar ou topo da tela */
+  background-color: #0D3B66;
+  color: #ffffff;
+  padding: 1rem 1.5rem;      /* menos padding */
+  border-radius: 16px;
+  border: 2px solid #0D3B66;
+  max-width: 700px;
+  margin: 95px auto 2rem auto;
+  box-shadow: 0 0 20px #0D3B66;
+  /* Removi max-height e overflow para evitar barra */
+  height: auto;             /* altura automática */
+  min-height: 200px;        /* altura mínima menor */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* centraliza conteúdo verticalmente */
 }
 
-/* Título centralizado da tela */
+/* Ajuste título */
 .delete-title {
-  text-align: center;               /* Alinhamento central */
-  margin-bottom: 2rem;              /* Espaço abaixo do título */
-  font-size: 24px;                  /* Tamanho da fonte do título */
-  color: #ff0000;                   /* Cor neon azul-claro para destacar o título */
-}
-
-/* Cartão contendo as informações do produto */
-.product-card {
-  display: flex;                    /* Layout flexível */
-  flex-direction: column;          /* Direção vertical dos elementos internos */
-  gap: 0.8rem;                      /* Espaço entre cada linha de informação */
-  padding: 1.5rem;                  /* Espaço interno */
-  background-color: #102e4a;        /* Cor de fundo um pouco mais clara que o container */
-  border-radius: 12px;             /* Cantos arredondados menores */
-  border: 1px solid #0D3B66;        /* Borda neon azul-claro */
-}
-
-/* Estilo base das informações do produto */
-.product-info {
-  font-size: 16px;                 /* Tamanho da fonte */
-  line-height: 1.4;                /* Espaçamento entre linhas */
-}
-
-/* Cor verde para status Ativo */
-.ativo {
-  color: #4caf50;                  /* Verde vibrante */
-  font-weight: bold;              /* Negrito */
-}
-.inativo {
+  text-align: center;
+  margin-bottom: 1.2rem;    /* menos espaço */
+  font-size: 20px;          /* fonte menor */
   color: #ff0000;
-  font-weight: bold;
 }
 
+/* Ajuste do cartão info */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;             /* menos espaçamento */
+  padding: 1rem;           /* menos padding */
+  background-color: #102e4a;
+  border-radius: 12px;
+  border: 1px solid #0D3B66;
+  font-size: 14px;          /* fonte menor */
+}
+
+/* Botões */
 .button-container {
-  display: flex;              /* Ativa flexbox para o container */
-  justify-content: center;    /* Centraliza os botões horizontalmente */
-  gap: 20px;                  /* Espaçamento entre os botões */
-  margin-top: 20px;           /* Espaço acima dos botões */
+  display: flex;
+  justify-content: center;
+  gap: 16px;               /* menos espaçamento */
+  margin-top: 16px;        /* menos margem */
 }
 
 .button-container button {
-  width: 150px;               /* Largura fixa */
-  height: 55px;
-  font-size: 1.1rem;
-  padding: 10px 24px;
+  width: 130px;            /* largura menor */
+  height: 45px;            /* altura menor */
+  font-size: 1rem;         /* fonte menor */
+  padding: 8px 16px;
   border-radius: 45px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-/* Botão primário */
+/* Ajuste cores dos botões se quiser, mantendo cores originais */
 button[color="primary"] {
   background-color: #ff0000;
   color: #fff;
   box-shadow: 0 4px 12px rgba(56, 142, 60, 0.4);
 }
 
-/* Botão de aviso */
 button[color="warn"] {
   background-color: #0044ff;
   color: #fff;
@@ -83,15 +72,15 @@ button:hover {
   transition: all 0.3s ease-in-out;
 }
 
-/* Responsivo */
+/* Responsivo para telas pequenas */
 @media (max-width: 640px) {
   .button-container {
     flex-direction: column;
-    align-items: center; /* Centraliza no eixo cruzado */
+    align-items: center;
   }
 
   .button-container button {
-    width: 100%;  /* Botões ocupam toda a largura no mobile */
-    max-width: 300px; /* Máximo para não ficar gigante */
+    width: 100%;
+    max-width: 250px;
   }
 }

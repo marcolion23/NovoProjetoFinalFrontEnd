@@ -1,9 +1,13 @@
+
+
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FornecedorService } from '../fornecedor.service'; // adapte o caminho
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http'; // Adicionado para requisição HTTP
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+ 
+
 
 interface Fornecedor {
-  id?: number;
   nome: string;
   cnpj: string;
   inscricaoEstadual: string;
@@ -12,27 +16,35 @@ interface Fornecedor {
   contatoPrincipal: string;
   telefoneContato: string;
   rua: string;
-  numero: number | null;  // ALTERADO aqui
+  numero: number | null;
   bairro: string;
   cep: string;
   cidade: string;
   estado: string;
   status: boolean;
   observacoes: string;
-}
 
+
+}
 
 interface EstadoECidade {
   nome: string;
   cidades: string[];
+  
 }
 
 @Component({
-  selector: 'app-fornecedor-update',
+  selector: 'app-fornecedor-create',
   templateUrl: './fornecedor-update.component.html',
   styleUrls: ['./fornecedor-update.component.css']
 })
 export class FornecedorUpdateComponent implements OnInit {
+
+  estadoFiltro: string = '';
+  estadosFiltrados: EstadoECidade[] = [];  // inicia vazio
+
+  cidadeFiltro: string = '';
+  cidadesFiltradas: string[] = [];
 
   fornecedor: Fornecedor = {
     nome: '',
@@ -43,24 +55,27 @@ export class FornecedorUpdateComponent implements OnInit {
     contatoPrincipal: '',
     telefoneContato: '',
     rua: '',
-    numero: 0,
+    numero: null,
     bairro: '',
     cep: '',
     cidade: '',
     estado: '',
     status: true,
     observacoes: ''
+    
+    
   };
 
+emailDomainErro: boolean = false;
   nomeOutraCidade: string = '';
   mostrarCampoOutraCidade: boolean = false;
+  mostrarEnderecoManual: boolean = false;
 
   cnpjMask = [/\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '/', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
   telefoneMask = ['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   cepMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
 
-  estadosECidades: EstadoECidade[] = 
-   [
+    estadosECidades: EstadoECidade[] = [
     {
       "nome": "Acre",
       "cidades": [
@@ -616,50 +631,23 @@ export class FornecedorUpdateComponent implements OnInit {
     }
   ];
 
-  cidadesFiltradas: string[] = [];
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private fornecedorService: FornecedorService
-  ) {}
+
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.fornecedorService.readById(+id).subscribe((fornecedor) => {
-        this.fornecedor = fornecedor;
+    this.cidadesFiltradas = [];
+    this.filtrarCidades();
+    this.estadosFiltrados = [...this.estadosECidades];
 
-        // Atualiza cidades filtradas com base no estado carregado
-        this.onEstadoChange(this.fornecedor.estado);
-
-        // Se cidade não estiver na lista, mostra campo "Outra cidade"
-        if (this.fornecedor.cidade) {
-          const estadoObj = this.estadosECidades.find(e => e.nome === this.fornecedor.estado);
-          if (estadoObj && !estadoObj.cidades.includes(this.fornecedor.cidade)) {
-            this.mostrarCampoOutraCidade = true;
-            this.nomeOutraCidade = this.fornecedor.cidade;
-            this.fornecedor.cidade = '';
-          }
-        }
-      });
-    } else {
-      // Se não tiver id na rota, pode redirecionar ou inicializar vazio
-      this.router.navigate(['/fornecedores']);
-    }
   }
 
   onEstadoChange(estadoSelecionado: string): void {
     const estado = this.estadosECidades.find(e => e.nome === estadoSelecionado);
     this.cidadesFiltradas = estado ? estado.cidades : [];
-    if (!this.cidadesFiltradas.includes(this.fornecedor.cidade)) {
-      this.mostrarCampoOutraCidade = true;
-      this.nomeOutraCidade = this.fornecedor.cidade || '';
-      this.fornecedor.cidade = '';
-    } else {
-      this.mostrarCampoOutraCidade = false;
-      this.nomeOutraCidade = '';
-    }
+    this.fornecedor.cidade = '';
+    this.mostrarCampoOutraCidade = false;
+    this.nomeOutraCidade = '';
   }
 
   onBuscaCidadeInput(event: Event): void {
@@ -679,7 +667,35 @@ export class FornecedorUpdateComponent implements OnInit {
       this.nomeOutraCidade = '';
     }
   }
+allowedDomains = [
+  'gmail.com',
+  'hotmail.com',
+  'yahoo.com',
+  'outlook.com',
+  'live.com',
+  'icloud.com',
+  'aol.com',
+  'msn.com',
+  'mail.com',
+  'bol.com.br',
+  'uol.com.br',
+  'terra.com.br',
+  'globo.com',
+  'yandex.com',
+  'protonmail.com'
+];
 
+emailDomainValidator(control: AbstractControl): ValidationErrors | null {
+  const email = control.value;
+  if (!email) return null;
+
+  const domain = email.substring(email.lastIndexOf('@') + 1).toLowerCase();
+  if (this.allowedDomains.includes(domain)) {
+    return null; // válido
+  } else {
+    return { domainNotAllowed: true }; // inválido
+  }
+}
   bloquearNumeros(event: KeyboardEvent): void {
     if (/\d/.test(event.key)) {
       event.preventDefault();
@@ -700,15 +716,103 @@ export class FornecedorUpdateComponent implements OnInit {
     }
   }
 
-  salvar(): void {
+  desativarEnderecoManual(): void {
+    this.mostrarEnderecoManual = false;
+  }
+
+  ativarEnderecoManual(): void {
+    this.mostrarEnderecoManual = true;
+    this.fornecedor.cep = '';
+    this.fornecedor.estado = '';
+    this.fornecedor.cidade = '';
+    this.fornecedor.rua = '';
+    this.fornecedor.bairro = '';
+    this.fornecedor.numero = null;
+    this.mostrarCampoOutraCidade = false;
+    this.nomeOutraCidade = '';
+  }
+
+  usarCep(): void {
+    this.mostrarEnderecoManual = false;
+    this.fornecedor.estado = '';
+    this.fornecedor.cidade = '';
+    this.fornecedor.rua = '';
+    this.fornecedor.bairro = '';
+    this.fornecedor.numero = null;
+    this.mostrarCampoOutraCidade = false;
+    this.nomeOutraCidade = '';
+  }
+capitalizeFirstLetter(value: string): string {
+  if (!value) return value;
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+onObservacoesChange(value: string): void {
+  this.fornecedor.observacoes = this.capitalizeFirstLetter(value);
+}
+
+onEmailChange(email: string): void {
+  const domainPart = email.split('@')[1] || '';
+
+  if (domainPart.length === 0) {
+    this.emailDomainErro = false; // domínio vazio, sem erro
+    return;
+  }
+
+  // Verifica se algum domínio permitido começa com o que foi digitado (prefixo válido)
+  const algumPrefixoValido = this.allowedDomains.some(domain => domain.startsWith(domainPart));
+
+  // Verifica se o domínio digitado bate exatamente com algum domínio permitido
+  const dominioCompletoValido = this.allowedDomains.includes(domainPart);
+
+  if (dominioCompletoValido) {
+    this.emailDomainErro = false; // domínio completo válido, sem erro
+  } else if (!algumPrefixoValido) {
+    this.emailDomainErro = true;  // domínio inválido já detectado
+  } else {
+    this.emailDomainErro = false; // ainda digitando prefixo válido
+  }
+}
+  // === NOVO ===
+  // Método que escuta mudança no campo CEP e busca endereço
+  onCepChange(cep: string): void {
+    this.fornecedor.cep = cep;
+    const cepLimpo = cep.replace(/\D/g, '');
+    if (cepLimpo.length === 8) {
+      this.buscarEnderecoPorCep(cepLimpo);
+    }
+  }
+
+  // Faz a requisição no ViaCEP e atualiza o endereço
+  buscarEnderecoPorCep(cepLimpo: string): void {
+    this.http.get<any>(`https://viacep.com.br/ws/${cepLimpo}/json/`).subscribe({
+      next: (data) => {
+        if (!data.erro) {
+          this.fornecedor.estado = data.uf || '';
+          this.onEstadoChange(this.fornecedor.estado); // atualiza cidades filtradas
+          this.fornecedor.cidade = data.localidade || '';
+          this.fornecedor.bairro = data.bairro || '';
+          this.fornecedor.rua = data.logradouro || '';
+          this.mostrarEnderecoManual = false;
+          this.mostrarCampoOutraCidade = false;
+          this.nomeOutraCidade = '';
+        } else {
+          this.ativarEnderecoManual();
+        }
+      },
+      error: () => {
+        this.ativarEnderecoManual();
+      }
+    });
+  }
+
+  atualizar(): void {
     if (this.mostrarCampoOutraCidade && this.nomeOutraCidade.trim()) {
       this.fornecedor.cidade = this.nomeOutraCidade.trim();
     }
-    if (this.fornecedor.id) {
-      this.fornecedorService.updateFornecedor(this.fornecedor.id, this.fornecedor).subscribe(() => {
-        this.router.navigate(['/fornecedores']);
-      });
-    }
+    // Aqui você pode incluir lógica real para salvar no backend, etc.
+    console.log('Fornecedor salvo:', this.fornecedor);
+    this.router.navigate(['/fornecedores']);
   }
 
   cancel(): void {
@@ -716,15 +820,68 @@ export class FornecedorUpdateComponent implements OnInit {
   }
 
   limpar(): void {
-    // Você pode decidir se no update quer limpar ou não, geralmente não limpa.
-    // Aqui, para resetar para os dados originais do fornecedor:
-    if (this.fornecedor.id) {
-      this.fornecedorService.readById(this.fornecedor.id).subscribe((fornecedor) => {
-        this.fornecedor = fornecedor;
-        this.onEstadoChange(this.fornecedor.estado);
-        this.mostrarCampoOutraCidade = false;
-        this.nomeOutraCidade = '';
-      });
-    }
+    this.fornecedor = {
+      nome: '',
+      cnpj: '',
+      inscricaoEstadual: '',
+      telefone: '',
+      email: '',
+      contatoPrincipal: '',
+      telefoneContato: '',
+      rua: '',
+      numero: null,
+      bairro: '',
+      cep: '',
+      cidade: '',
+      estado: '',
+      status: true,
+      observacoes: ''
+    };
+    this.cidadesFiltradas = [];
+    this.mostrarCampoOutraCidade = false;
+    this.nomeOutraCidade = '';
+    this.mostrarEnderecoManual = false;
+  }
+  filtrarCidades(): void {
+  const estadoSelecionado = this.estadosECidades.find(e => e.nome === this.fornecedor.estado);
+  if (estadoSelecionado) {
+    this.cidadesFiltradas = estadoSelecionado.cidades.filter(cidade =>
+      cidade.toLowerCase().includes(this.cidadeFiltro.toLowerCase())
+    );
+  } else {
+    this.cidadesFiltradas = [];
   }
 }
+filtrarEstados() {
+  const filtro = this.estadoFiltro.toLowerCase();
+  this.estadosFiltrados = this.estadosECidades.filter(e => e.nome.toLowerCase().includes(filtro));
+}
+ // MÉTODOS DA CLASSE -- devem estar dentro das chaves da classe!
+  onEstadoOpen(opened: boolean) {
+    if (opened) {
+      this.estadoFiltro = '';
+      this.estadosFiltrados = [...this.estadosECidades];
+    }
+  }
+
+  onEstadoSelecionado() {
+    const estado = this.estadosECidades.find(e => e.nome === this.fornecedor.estado);
+    if (estado) {
+      this.cidadesFiltradas = [...estado.cidades];
+    } else {
+      this.cidadesFiltradas = [];
+    }
+    this.cidadeFiltro = '';
+    this.fornecedor.cidade = '';
+  }
+
+  onCidadeOpen(opened: boolean) {
+    if (opened) {
+      this.cidadeFiltro = '';
+      this.filtrarCidades();
+    }
+  }
+
+}
+
+

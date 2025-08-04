@@ -14,6 +14,7 @@ export interface Cliente {
   cliAtivo?: boolean;
   cliStatus?: string;
   cliDataCadastro?: string;
-  cliSexo: string;  // novo campo para sexo
+  cliSexo: string;
 
+  [key: string]: any;  // ESSENCIAL para acesso dinâmico
 }
