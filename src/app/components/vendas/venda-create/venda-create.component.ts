@@ -5,11 +5,19 @@ interface Cliente {
   nome: string;
 }
 
+interface Produto {
+  id: number;
+  nome: string;
+  preco: number;
+}
+
 interface Venda {
+  id?: number | null;
   clienteId?: number | null;
   dataVenda?: Date | null;
   tipoPagamento?: string;
   valorTotal?: number;
+  valorTotalFormatado?: string;
   status?: string;
   observacao?: string;
 }
@@ -26,6 +34,7 @@ export class VendaCreateComponent implements OnInit {
     dataVenda: null,
     tipoPagamento: '',
     valorTotal: 0,
+    valorTotalFormatado: '0,00',
     status: '',
     observacao: ''
   };
@@ -33,14 +42,17 @@ export class VendaCreateComponent implements OnInit {
   clientes: Cliente[] = [];
   clientesFiltrados: Cliente[] = [];
   clienteFiltro: string = '';
-
   maxDate: Date = new Date();
 
-  valorFormatado: string = '0,00';
+  // Novas propriedades relacionadas ao erro do HTML:
+  produtos: Produto[] = [];
+  produtoSelecionado: Produto | null = null;
+  quantidadeProduto: number = 1;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
+    // Clientes mockados
     this.clientes = [
       { id: 1, nome: 'João Silva' },
       { id: 2, nome: 'Maria Oliveira' },
@@ -48,6 +60,13 @@ export class VendaCreateComponent implements OnInit {
       { id: 4, nome: 'Ana Pereira' }
     ];
     this.clientesFiltrados = this.clientes;
+
+    // Produtos mockados (simulando backend)
+    this.produtos = [
+      { id: 1, nome: 'Produto A', preco: 50 },
+      { id: 2, nome: 'Produto B', preco: 75.5 },
+      { id: 3, nome: 'Produto C', preco: 120.99 }
+    ];
   }
 
   compareClientes(c1: Cliente, c2: Cliente): boolean {
@@ -72,25 +91,70 @@ export class VendaCreateComponent implements OnInit {
     }
   }
 
-  onValorInput(event: any): void {
-    let valor = event.target.value;
+  atualizarValorTotal(): void {
+    if (this.produtoSelecionado && this.quantidadeProduto > 0) {
+      const valor = this.produtoSelecionado.preco * this.quantidadeProduto;
+      const inteiro = Math.floor(valor).toString();
+      const decimal = Math.round((valor % 1) * 100).toString().padStart(2, '0');
+      const inteiroFormatado = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      const valorFormatado = `R$ ${inteiroFormatado},${decimal}`;
 
-    // Remove tudo que não for número ou vírgula
-    valor = valor.replace(/[^\d,]/g, '');
-
-    // Troca vírgula por ponto para parseFloat funcionar
-    const valorNumber = parseFloat(valor.replace(',', '.'));
-
-    if (isNaN(valorNumber)) {
-      this.valorFormatado = '0,00';
+      this.venda.valorTotal = valor;
+      this.venda.valorTotalFormatado = valorFormatado;
+    } else {
       this.venda.valorTotal = 0;
+      this.venda.valorTotalFormatado = '0,00';
+    }
+  }
+
+  onValorInput(event: string, campo: keyof Venda): void {
+    let valor = event.replace(/\D/g, '');
+
+    if (valor.length === 0) {
+      this.venda.valorTotal = 0;
+      this.venda.valorTotalFormatado = '0,00';
       return;
     }
 
-    this.venda.valorTotal = valorNumber;
+    while (valor.length > 3 && valor.startsWith('0')) {
+      valor = valor.substring(1);
+    }
 
-    // Atualiza o valorFormatado para mostrar com 2 casas decimais e vírgula
-    this.valorFormatado = valorNumber.toFixed(2).replace('.', ',');
+    let inteiro = '';
+    let decimal = '';
+
+    if (valor.length === 1) {
+      inteiro = '0';
+      decimal = '0' + valor;
+    } else if (valor.length === 2) {
+      inteiro = '0';
+      decimal = valor;
+    } else {
+      inteiro = valor.slice(0, valor.length - 2);
+      decimal = valor.slice(valor.length - 2);
+    }
+
+    const inteiroFormatado = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    const valorFormatado = `R$ ${inteiroFormatado},${decimal}`;
+
+    this.venda.valorTotal = parseFloat(`${inteiro}.${decimal}`);
+    this.venda.valorTotalFormatado = valorFormatado;
+  }
+
+  apenasNumeros(event: KeyboardEvent): void {
+    const allowedChars = /[0-9]/;
+    const tecla = event.key;
+    if (!allowedChars.test(tecla)) {
+      event.preventDefault();
+    }
+  }
+
+  apenasLetras(event: KeyboardEvent): void {
+    const char = event.key;
+    const regex = /^[a-zA-ZÀ-ÿ\s]*$/;
+    if (!regex.test(char)) {
+      event.preventDefault();
+    }
   }
 
   salvarVenda(): void {
@@ -100,14 +164,12 @@ export class VendaCreateComponent implements OnInit {
     }
 
     console.log('Venda salva:', this.venda);
-
     alert('Venda salva com sucesso!');
-
     this.limpar();
   }
 
   cancel(): void {
-    console.log('Cancelado');
+    console.log('Operação cancelada.');
   }
 
   limpar(): void {
@@ -116,10 +178,12 @@ export class VendaCreateComponent implements OnInit {
       dataVenda: null,
       tipoPagamento: '',
       valorTotal: 0,
+      valorTotalFormatado: '0,00',
       status: '',
       observacao: ''
     };
-    this.valorFormatado = '0,00';
-  }
 
+    this.produtoSelecionado = null;
+    this.quantidadeProduto = 1;
+  }
 }

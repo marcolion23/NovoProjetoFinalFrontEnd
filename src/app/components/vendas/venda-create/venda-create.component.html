@@ -5,6 +5,12 @@
 
     <form class="client-form" #formVenda="ngForm" (ngSubmit)="salvarVenda()" autocomplete="off" novalidate>
 
+      <!-- ID da Venda (somente leitura) -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>ID da Venda</mat-label>
+        <input matInput [value]="venda.id ?? '—'" readonly disabled />
+      </mat-form-field>
+
       <!-- CLIENTE (select com filtro) -->
       <mat-form-field appearance="outline" class="half-width" required>
         <mat-label>Cliente</mat-label>
@@ -13,7 +19,6 @@
           name="clienteId"
           #clienteId="ngModel"
           required
-          [compareWith]="compareClientes"
           (openedChange)="onClienteSelectOpened($event)">
           
           <!-- Campo de busca dentro do dropdown -->
@@ -34,6 +39,57 @@
         <mat-error *ngIf="clienteId.invalid && clienteId.touched">Cliente é obrigatório.</mat-error>
       </mat-form-field>
 
+      <!-- TIPO DE PAGAMENTO -->
+      <mat-form-field appearance="outline" class="half-width" required>
+        <mat-label>Tipo de Pagamento</mat-label>
+        <mat-select
+          [(ngModel)]="venda.tipoPagamento"
+          name="tipoPagamento"
+          #tipoPagamento="ngModel"
+          required>
+          <mat-option value="Dinheiro">Dinheiro</mat-option>
+          <mat-option value="Cartão de Crédito">Cartão de Crédito</mat-option>
+          <mat-option value="Cartão de Débito">Cartão de Débito</mat-option>
+          <mat-option value="Pix">Pix</mat-option>
+          <mat-option value="Boleto">Boleto</mat-option>
+        </mat-select>
+        <mat-error *ngIf="tipoPagamento.invalid && tipoPagamento.touched">Tipo de pagamento é obrigatório.</mat-error>
+      </mat-form-field>
+
+      <!-- PRODUTO -->
+      <mat-form-field appearance="outline" class="half-width" required>
+        <mat-label>Produto</mat-label>
+        <mat-select
+          [(ngModel)]="produtoSelecionado"
+          name="produtoSelecionado"
+          #produtoSelecionadoModel="ngModel"
+          required
+          (selectionChange)="atualizarValorTotal()"
+        >
+          <mat-option *ngFor="let produto of produtos" [value]="produto">
+            {{ produto.nome }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="produtoSelecionadoModel.invalid && produtoSelecionadoModel.touched">Produto é obrigatório.</mat-error>
+      </mat-form-field>
+
+      <!-- QUANTIDADE DO PRODUTO -->
+      <mat-form-field appearance="outline" class="half-width" required>
+        <mat-label>Quantidade</mat-label>
+        <input
+          matInput
+          type="number"
+          min="1"
+          [(ngModel)]="quantidadeProduto"
+          name="quantidadeProduto"
+          #quantidadeProdutoModel="ngModel"
+          required
+          (ngModelChange)="atualizarValorTotal()"
+          autocomplete="off"
+        />
+        <mat-error *ngIf="quantidadeProdutoModel.invalid && quantidadeProdutoModel.touched">Quantidade é obrigatória e deve ser maior que zero.</mat-error>
+      </mat-form-field>
+
       <!-- DATA DA VENDA -->
       <mat-form-field appearance="outline" class="half-width" required>
         <mat-label>Data da Venda</mat-label>
@@ -51,36 +107,27 @@
         <mat-error *ngIf="dataVenda.invalid && dataVenda.touched">Data inválida ou maior que a atual.</mat-error>
       </mat-form-field>
 
-      <!-- TIPO DE PAGAMENTO -->
+      <!-- Valor Total (calculado automaticamente) -->
       <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Tipo de Pagamento</mat-label>
-        <mat-select
-          [(ngModel)]="venda.tipoPagamento"
-          name="tipoPagamento"
-          #tipoPagamento="ngModel"
-          required>
-          <mat-option value="Dinheiro">Dinheiro</mat-option>
-          <mat-option value="Cartão de Crédito">Cartão de Crédito</mat-option>
-          <mat-option value="Cartão de Débito">Cartão de Débito</mat-option>
-          <mat-option value="Pix">Pix</mat-option>
-          <mat-option value="Boleto">Boleto</mat-option>
-          <mat-option value="Outro">Outro</mat-option>
-        </mat-select>
-        <mat-error *ngIf="tipoPagamento.invalid && tipoPagamento.touched">Tipo de pagamento é obrigatório.</mat-error>
-      </mat-form-field>
-
-      <!-- VALOR -->
-      <mat-form-field appearance="outline" class="half-width">
-        <mat-label>Valor</mat-label>
+        <mat-label>Valor Total (R$)</mat-label>
         <input
           matInput
           type="text"
-          [value]="valorFormatado"
-          (input)="onValorInput($event)"
-          name="valor"
-          required
           placeholder="0,00"
+          [value]="venda.valorTotalFormatado"
+      
         >
+      </mat-form-field>
+
+      <!-- OBSERVAÇÕES -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Observações</mat-label>
+        <textarea
+          matInput
+          rows="4"
+          [(ngModel)]="venda.observacao"
+          name="observacao"
+          placeholder="Anotações adicionais"></textarea>
       </mat-form-field>
 
       <!-- STATUS DA VENDA -->
@@ -98,21 +145,10 @@
         <mat-error *ngIf="status.invalid && status.touched">Status é obrigatório.</mat-error>
       </mat-form-field>
 
-      <!-- OBSERVAÇÕES -->
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Observações</mat-label>
-        <textarea
-          matInput
-          rows="4"
-          [(ngModel)]="venda.observacao"
-          name="observacao"
-          placeholder="Anotações adicionais"></textarea>
-      </mat-form-field>
-
-        <!-- BOTÕES -->
+      <!-- BOTÕES -->
       <div class="button-container">
-        <button mat-raised-button color="primary" (click)="salvarVenda()">Salvar</button>
-        <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+        <button mat-raised-button color="primary" type="submit">Salvar</button>
+        <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancelar</button>
         <button mat-raised-button color="blue" type="button" (click)="limpar()">Limpar</button>
       </div>
 

@@ -146,31 +146,20 @@
       </ng-container>
 
 
- <!-- STATUS -->  
-<mat-form-field appearance="outline" class="full-width">
-  <mat-label>Status</mat-label>
-  <mat-select [(ngModel)]="formaPagamento.status" name="status" required>
-
-    <!-- Conteúdo exibido no select quando uma opção está selecionada -->
-    <mat-select-trigger>
-      <mat-icon *ngIf="formaPagamento.status === 'Pendente'" style="color: #d32f2f;">close</mat-icon>
-      <mat-icon *ngIf="formaPagamento.status === 'Pago'" style="color: #388e3c;">check_circle</mat-icon>
-      <mat-icon *ngIf="formaPagamento.status === 'Cancelado'" style="color: #b00020;">cancel</mat-icon>
-      &nbsp;{{ formaPagamento.status }}
-    </mat-select-trigger>
-
-    <!-- Opções do select -->
-    <mat-option value="Pendente">
-      <mat-icon style="color: #d32f2f;">close</mat-icon>&nbsp;Pendente
-    </mat-option>
-    <mat-option value="Pago">
-      <mat-icon style="color: #388e3c;">check_circle</mat-icon>&nbsp;Pago
-    </mat-option>
-    <mat-option value="Cancelado">
-      <mat-icon style="color: #b00020;">cancel</mat-icon>&nbsp;Cancelado
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<!-- STATUS DA VENDA -->
+      <mat-form-field appearance="outline" class="half-width" required>
+        <mat-label>Status</mat-label>
+        <mat-select
+          [(ngModel)]="formaPagamento.status"
+          name="status"
+          #status="ngModel"
+          required>
+          <mat-option value="Pendente">Pendente</mat-option>
+          <mat-option value="Concluída">Concluída</mat-option>
+          <mat-option value="Cancelada">Cancelada</mat-option>
+        </mat-select>
+        <mat-error *ngIf="status.invalid && status.touched">Status é obrigatório.</mat-error>
+      </mat-form-field>
 
 
 

@@ -5,9 +5,10 @@
     <!-- Como não há "nome", vou usar a descrição -->
     <div class="product-info"><strong>Descrição:</strong> {{ item.fpgDescricao }}</div>
 
-    <div class="product-info" *ngIf="item.tipo"><strong>Tipo:</strong> {{ item.tipo }}</div>
+  <div class="product-info">
+  <strong>Tipo de Pagamento:</strong> {{ item.tipo || 'Não informado' }}
+</div>
 
-    <div class="product-info" *ngIf="item.data"><strong>Última Utilização:</strong> {{ item.data | date:'dd/MM/yyyy' }}</div>
 
     <div class="product-info" *ngIf="item.parcelas !== undefined">
       <strong>Parcelado:</strong> {{ item.parcelas && item.parcelas > 1 ? 'Sim' : 'Não' }}

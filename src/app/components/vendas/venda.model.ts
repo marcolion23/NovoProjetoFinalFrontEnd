@@ -1,4 +1,5 @@
 export class Venda {
+    id?: number | null;  // <-- novo campo id opcional
   vendaId!: number;          // Identificador da venda (chave primária)
   clienteId!: number;        // Id do cliente (FK)
   clienteNome!: string;      // Nome do cliente (opcional para exibição)
