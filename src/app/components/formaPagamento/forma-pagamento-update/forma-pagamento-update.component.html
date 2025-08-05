@@ -1,113 +1,202 @@
-<mat-card class="client-card">
-  <mat-card-title>Atualizar Pagamento</mat-card-title>
+<div class="container-geral">
+  <mat-card class="client-card">
 
-  <form class="client-form">
+    <mat-card-title class="titulo-formulario">Atulizar Forma Pagamento</mat-card-title>
 
-    <!-- CLIENTE (select com filtro) -->
+    <form class="client-form" #formPagamento="ngForm">
+
     <mat-form-field appearance="outline" class="half-width">
-      <mat-label>Cliente</mat-label>
-      <mat-select
-        [(ngModel)]="formaPagamento.clienteId"
-        name="clienteId"
-        required
-        [compareWith]="compareClientes"
-        (openedChange)="onClienteSelectOpened($event)">
-        
-        <mat-option>
-          <input
-            matInput
-            placeholder="Buscar cliente"
-            [(ngModel)]="clienteFiltro"
-            (keydown)="$event.stopPropagation()"
-            (input)="filtrarClientes()" />
-        </mat-option>
+  <mat-label>Tipo</mat-label>
+  <mat-select [(ngModel)]="formaPagamento.tipo" name="tipo" required (selectionChange)="onTipoPagamentoChange($event.value)">
 
-        <mat-option *ngFor="let cliente of clientesFiltrados" [value]="cliente.cliId">
-          {{ cliente.cliNome }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <mat-select-trigger>
+      {{ formaPagamento.tipo }}
+    </mat-select-trigger>
 
-    <!-- TIPO DE PAGAMENTO -->
-    <mat-form-field appearance="outline" class="half-width">
-      <mat-label>Tipo</mat-label>
-      <mat-select [(ngModel)]="formaPagamento.tipo" name="tipo" required (selectionChange)="onTipoPagamentoChange($event.value)">
-        <mat-option value="Dinheiro">Dinheiro</mat-option>
-        <mat-option value="Cartão de Crédito">Cartão de Crédito</mat-option>
-        <mat-option value="Cartão de Débito">Cartão de Débito</mat-option>
-        <mat-option value="Pix">Pix</mat-option>
-        <mat-option value="Boleto">Boleto</mat-option>
-        <mat-option value="Outro">Outro</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <mat-option value="Dinheiro">
+      <mat-icon inline>attach_money</mat-icon> Dinheiro
+    </mat-option>
+    <mat-option value="Cartão de Crédito">
+      <mat-icon inline>credit_card</mat-icon> Cartão de Crédito
+    </mat-option>
+    <mat-option value="Cartão de Débito">
+      <mat-icon inline>payment</mat-icon> Cartão de Débito
+    </mat-option>
+    <mat-option value="Pix">
+      <mat-icon inline>qr_code</mat-icon> Pix
+    </mat-option>
+    <mat-option value="Boleto">
+      <mat-icon inline>receipt</mat-icon> Boleto
+    </mat-option>
+ 
+  </mat-select>
+</mat-form-field>
 
-    <!-- VALOR -->
-    <mat-form-field appearance="outline" class="half-width">
-      <mat-label>Valor</mat-label>
-      <input
-        matInput
-        type="text"
-        [value]="valorFormatado"
-        (input)="onValorInput($event)"
-        name="valor"
-        required
-        placeholder="0,00"
-      >
-    </mat-form-field>
 
-    <!-- DATA DO PAGAMENTO -->
-    <mat-form-field appearance="outline" class="half-width">
-      <mat-label>Data do Pagamento</mat-label>
-      <input matInput
-             [matDatepicker]="picker"
-             [(ngModel)]="formaPagamento.data"
-             name="data"
-             [max]="maxDate"
-             required>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+      <!-- APARECE SOMENTE PARA CARTÃO DE CRÉDITO -->
+      <ng-container *ngIf="formaPagamento.tipo === 'Cartão de Crédito'">
 
-    <!-- PARCELAS -->
-    <mat-form-field
-      appearance="outline"
-      class="half-width"
-      *ngIf="formaPagamento.tipo === 'Cartão de Crédito'">
-      <mat-label>Parcelas</mat-label>
-      <input
-        matInput
-        type="number"
-        [(ngModel)]="formaPagamento.parcelas"
-        name="parcelas"
-        placeholder="1"
-        min="0"
-        max="36"
-        (keydown)="bloquearTeclasInvalidas($event)"
-      >
-    </mat-form-field>
+        <!-- PARCELADO? -->
+        <div class="full-width radio-section">
+          <label class="subtitle">Parcelado?</label>
+          <div class="radio-button-group">
+            <button type="button" color="primary"
+                    class="sim-btn"
+                    [class.selected]="formaPagamento.parcelado === 'sim'"
+                    (click)="formaPagamento.parcelado = 'sim'">Sim</button>
 
-    <!-- STATUS -->
-    <mat-form-field appearance="outline" class="half-width">
-      <mat-label>Status</mat-label>
-      <mat-select [(ngModel)]="formaPagamento.status" name="status" required>
-        <mat-option value="Pendente">Pendente</mat-option>
-        <mat-option value="Pago">Pago</mat-option>
-        <mat-option value="Cancelado">Cancelado</mat-option>
-      </mat-select>
-    </mat-form-field>
+            <button type="button"
+                    class="nao-btn"  color="warn"
+                    [class.selected]="formaPagamento.parcelado === 'nao'"
+                    (click)="formaPagamento.parcelado = 'nao'">Não</button>
+          </div>
+          <!-- Mensagem quando não parcelado - só aparece se clicar em "Não" -->
+          <p *ngIf="formaPagamento.parcelado === 'nao'" class="mensagem-alerta">
+            Não será aplicado parcelamento.
+          </p>
+        </div>
 
-    <!-- OBSERVAÇÕES -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Observações</mat-label>
-      <textarea matInput rows="4" [(ngModel)]="formaPagamento.observacao" name="observacao" placeholder="Anotações adicionais"></textarea>
-    </mat-form-field>
 
-    <!-- BOTÕES -->
-    <div class="button-container">
-      <button mat-raised-button color="primary" (click)="updateFormaPagamento()" type="button">Salvar</button>
-      <button mat-raised-button color="warn" (click)="cancel()" type="button">Cancelar</button>
-      <button mat-raised-button type="button" (click)="limpar()">Limpar</button>
-    </div>
+<mat-form-field appearance="outline" class="half-width" *ngIf="formaPagamento.parcelado === 'sim'">
+  <mat-label>Parcelas</mat-label>
+  <input
+    matInput
+    type="number"
+    [(ngModel)]="formaPagamento.parcelas"
+    name="parcelas"
+    placeholder="1"
+    min="1"
+    max="24"
+    maxlength="2"
+    required
+    #parcelasModel="ngModel"
+    (keydown)="bloquearTeclasInvalidas($event)"
+  >
+  <mat-error *ngIf="parcelasModel.invalid && (parcelasModel.dirty || parcelasModel.touched)">
+    <span *ngIf="parcelasModel.errors?.['required']">O campo parcelas é obrigatório.</span>
+    <span *ngIf="parcelasModel.errors?.['min']">O número mínimo de parcelas é 1.</span>
+    <span *ngIf="parcelasModel.errors?.['max']">O número máximo de parcelas é 24.</span>
+  </mat-error>
+</mat-form-field>
 
-  </form>
-</mat-card>
+
+
+
+
+
+
+
+
+
+
+        <!-- APLICAR TAXAS? -->
+        <div class="full-width radio-section">
+          <label class="subtitle">Aplicar taxas?</label>
+          <div class="radio-button-group">
+            <button type="button"  color="primary"
+                    class="sim-btn"
+                    [class.selected]="formaPagamento.aplicarTaxas === 'sim'"
+                    (click)="formaPagamento.aplicarTaxas = 'sim'">Sim</button>
+
+            <button type="button"  color="warn"
+                    class="nao-btn"
+                    [class.selected]="formaPagamento.aplicarTaxas === 'nao'"
+                    (click)="formaPagamento.aplicarTaxas = 'nao'">Não</button>
+          </div>
+          <!-- Mensagem quando não aplicar taxas - só aparece se clicar em "Não" -->
+          <p *ngIf="formaPagamento.aplicarTaxas === 'nao'" class="mensagem-alerta">
+            Não será aplicada nenhuma taxa.
+          </p>
+        </div>
+
+<!-- Porcentagem da taxa -->
+<mat-form-field appearance="outline" class="half-width" *ngIf="formaPagamento.aplicarTaxas === 'sim'" required>
+  <mat-label>Porcentagem da Taxa</mat-label>
+  <input
+    matInput
+    type="text"
+    maxlength="4"
+    [(ngModel)]="porcentagemText"
+    name="porcentagemTaxa"
+    placeholder="Ex: 95%"
+    (input)="onPorcentagemInput($event)"
+    required
+  />
+  <!-- Campo obrigatório -->
+  <mat-error *ngIf="!porcentagemText || porcentagemText.trim() === ''">
+    Campo obrigatório (não pode estar vazio).
+  </mat-error>
+
+  <mat-hint *ngIf="exibirErroPorcentagem" style="color: red;">
+    A porcentagem não pode ultrapassar 100%.
+  </mat-hint>
+
+  <mat-hint *ngIf="exibirErroZero" style="color: red;">
+  Não pode ser 0%.
+</mat-hint>
+
+
+
+</mat-form-field>
+
+
+
+
+
+      </ng-container>
+
+
+ <!-- STATUS -->  
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label>Status</mat-label>
+  <mat-select [(ngModel)]="formaPagamento.status" name="status" required>
+
+    <!-- Conteúdo exibido no select quando uma opção está selecionada -->
+    <mat-select-trigger>
+      <mat-icon *ngIf="formaPagamento.status === 'Pendente'" style="color: #d32f2f;">close</mat-icon>
+      <mat-icon *ngIf="formaPagamento.status === 'Pago'" style="color: #388e3c;">check_circle</mat-icon>
+      <mat-icon *ngIf="formaPagamento.status === 'Cancelado'" style="color: #b00020;">cancel</mat-icon>
+      &nbsp;{{ formaPagamento.status }}
+    </mat-select-trigger>
+
+    <!-- Opções do select -->
+    <mat-option value="Pendente">
+      <mat-icon style="color: #d32f2f;">close</mat-icon>&nbsp;Pendente
+    </mat-option>
+    <mat-option value="Pago">
+      <mat-icon style="color: #388e3c;">check_circle</mat-icon>&nbsp;Pago
+    </mat-option>
+    <mat-option value="Cancelado">
+      <mat-icon style="color: #b00020;">cancel</mat-icon>&nbsp;Cancelado
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+
+      <!-- OBSERVAÇÕES -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Observações</mat-label>
+        <textarea matInput rows="4" [(ngModel)]="formaPagamento.observacao" name="observacao" placeholder="Anotações adicionais"></textarea>
+      </mat-form-field>
+
+ <!-- Botões -->
+<div class="button-container">
+  <button mat-raised-button color="primary" (click)="atualizarPagamento()">
+    Atualizar
+  </button>
+  <button mat-raised-button color="warn" (click)="cancelarEdicao()">
+    Cancelar
+  </button>
+  <button mat-raised-button color="blue" (click)="limparFormulario()">
+    Limpar
+  </button>
+</div>
+
+
+    </form>
+
+  </mat-card>
+</div>
+
+

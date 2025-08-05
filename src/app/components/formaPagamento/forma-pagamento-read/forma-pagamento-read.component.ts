@@ -11,16 +11,13 @@ import { FormaPagamentoService } from '../forma-pagamento.service';
 export class FormaPagamentoReadComponent implements OnInit {
 
   displayedColumns: string[] = [
-    'fpgId',
-    'clienteNome',
-    'valor',
-    'data',
+    'clienteId',
     'fpgDescricao',
     'status',
     'acoes'
   ];
 
-fpagamentos: FormaPagamento[] = [];
+  fpagamentos: FormaPagamento[] = [];
 
   constructor(
     private formaPagamentoService: FormaPagamentoService,
@@ -28,7 +25,36 @@ fpagamentos: FormaPagamento[] = [];
   ) {}
 
   ngOnInit(): void {
-    this.loadPagamentos();
+    // Para testar com dados mockados:
+    this.mockPagamentos();
+
+    // Para usar dados reais da API, comente a linha acima e descomente abaixo:
+    // this.loadPagamentos();
+  }
+
+  // Dados mockados respeitando seu modelo
+  mockPagamentos(): void {
+    this.fpagamentos = [
+      {
+        clienteId: 101,
+        fpgDescricao: 'Cartão de Crédito',
+        tipo: 'Cartão',
+        status: 'Pago'
+      },
+      {
+
+        clienteId: 102,
+        fpgDescricao: 'Boleto Bancário',
+        tipo: 'Boleto',
+        status: 'Pendente'
+      },
+      {
+        clienteId: 103,
+        fpgDescricao: 'PIX',
+        tipo: 'PIX',
+        status: 'Pago'
+      }
+    ];
   }
 
   loadPagamentos(): void {
@@ -37,7 +63,7 @@ fpagamentos: FormaPagamento[] = [];
         this.fpagamentos = dados;
       },
       error: () => {
-this.formaPagamentoService.showMessage('Erro ao carregar pagamentos!');
+        this.formaPagamentoService.showMessage('Erro ao carregar pagamentos!');
       }
     });
   }
@@ -51,12 +77,23 @@ this.formaPagamentoService.showMessage('Erro ao carregar pagamentos!');
       this.formaPagamentoService.delete(id).subscribe({
         next: () => {
           this.formaPagamentoService.showMessage('Removido com sucesso!');
-          this.loadPagamentos(); // Atualiza lista após exclusão
+          this.loadPagamentos();
         },
         error: () => {
-this.formaPagamentoService.showMessage('Erro ao remover pagamento!');
+          this.formaPagamentoService.showMessage('Erro ao remover pagamento!');
         }
       });
     }
   }
+
+  // Método auxiliar para mostrar nome do cliente pelo clienteId (mock)
+getNomeCliente(clienteId?: number): string {
+  const clientesMock: { [key: string]: string } = {
+    '101': 'João Silva',
+    '102': 'Maria Souza',
+    '103': 'Carlos Pereira'
+  };
+  return clienteId ? clientesMock[clienteId.toString()] || 'Cliente Desconhecido' : '-';
+}
+
 }

@@ -182,4 +182,53 @@ button[color="blue"]:hover {
     width: 100%;
     min-width: auto;
   }
+  .button-group {
+  display: flex;
+  gap: 40px;
+  margin-top: 8px;
+}
+
+.sim-btn {
+  background-color: #388e3c !important; /* Verde */
+  color: white !important;
+  padding: 10px 20px;
+  font-size: 16px;
+  gap: 25px;
+}
+
+.nao-btn {
+  background-color: #d32f2f !important; /* Vermelho */
+  color: white !important;
+  padding: 10px 20px;
+  font-size: 16px;
+  gap: 20px;
+}
+.subtitle {
+    text-align: center;
+  width: 100%;
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #1a1a1a;
+
+}
+  .mensagem-alerta {
+    color: #d32f2f;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    font-style: italic;
+  }
+  .radio-button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .sim-btn.selected, .nao-btn.selected {
+    font-weight: bold;
+    box-shadow: 0 0 6px #0af8c1;
+  }
+  mat-error {
+  margin-top: 10px; /* Ajusta o espaçamento para baixo */
+  font-size: 2rem; /* Pode ajustar o tamanho da fonte */
+}
+
 }
