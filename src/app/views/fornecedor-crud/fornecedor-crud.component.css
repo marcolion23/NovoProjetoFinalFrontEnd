@@ -76,6 +76,8 @@
   flex-direction: column;
   justify-content: center;
   font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #0D3B66, #050A1F);
+
 }
 .panel-info-inativo {
   background-color: #991B1B;

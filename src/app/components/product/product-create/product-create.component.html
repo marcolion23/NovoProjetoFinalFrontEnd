@@ -58,7 +58,7 @@
 
 
       <!-- Descrição -->
-      <mat-form-field appearance="outline" class="full-width" required>
+      <mat-form-field appearance="outline" class="full-width" >
         <mat-label>Descrição</mat-label>
         <textarea
           matInput
@@ -66,14 +66,11 @@
           rows="4"
           [(ngModel)]="product.proDescricao"
           name="proDescricao"
-          required
+      
           #proDescricaoInput="ngModel"
           (input)="formatarDescricao()"
           maxlength="80"
         ></textarea>
-        <mat-error *ngIf="proDescricaoInput.invalid && (proDescricaoInput.dirty || proDescricaoInput.touched)">
-          A descrição é obrigatória.
-        </mat-error>
       </mat-form-field>           
 
       <!-- Categoria -->

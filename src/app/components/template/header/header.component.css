@@ -1,90 +1,248 @@
-/* ===== HEADER GERAL ===== */
+/* ===== HEADER PRINCIPAL ===== */
 .header {
-  display: flex;                          /* Flexbox para alinhar conteúdo */
-  justify-content: center;               /* Centraliza horizontalmente */
-  align-items: center;                   /* Centraliza verticalmente */
-  background: linear-gradient(to left, #0D3B66, #050A1F); /* Degradê invertido */
-  padding: 0 12px;                        /* Espaçamento horizontal */
-  height: 90px;                           /* Altura do header */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);/* Sombra sutil abaixo do header */
-  color: #ecf0f1;                         /* Cor clara do texto */
-  font-family: 'Roboto', sans-serif;     /* Fonte moderna */
-  position: fixed;                       /* Fixa no topo */
-  top: 0;
-  left: 0;
-  width: 100%;                           /* Largura total */
-  z-index: 1001;                         /* Fica acima dos demais elementos */
-}
+  display: flex; /* Ativa flexbox no header */
+  justify-content: center; /* Centraliza horizontalmente os itens filhos */
+  align-items: center; /* Centraliza verticalmente os itens filhos */
 
+  /* Degradê correto: escuro nas laterais, mais suave no centro */
+  background: linear-gradient(
+    to right, /* Direção do gradiente da esquerda para a direita */
+    #0D3B66 0%,     /* Cor lateral esquerda escura */
+    #050A1F 20%,    /* Escurece antes do centro */
+    #112E4F 50%,    /* Centro suave */
+    #050A1F 80%,    /* Escurece antes da lateral direita */
+    #0D3B66 100%    /* Cor lateral direita escura */
+  );
+
+  padding: 0 12px; /* Espaçamento interno horizontal */
+  height: 90px; /* Altura do header */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil abaixo do header */
+  color: #ecf0f1; /* Cor do texto */
+  font-family: 'Roboto', sans-serif; /* Fonte usada no header */
+  position: fixed; /* Fixa o header no topo da página */
+  top: 0; /* Posiciona no topo */
+  left: 0; /* Posiciona à esquerda */
+  width: 100%; /* Largura total da tela */
+  z-index: 1001; /* Fica acima da maioria dos elementos */
+}
 
 /* ===== CONTEÚDO INTERNO DO HEADER ===== */
 .header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  position: relative;
+  display: flex; /* Ativa flexbox */
+  justify-content: space-between; /* Distribui os itens com espaço entre eles */
+  align-items: center; /* Centraliza verticalmente */
+  width: 100%; /* Largura total */
+  position: relative; /* Para posicionamento absoluto interno */
 }
 
 /* ===== HAMBÚRGUER ===== */
 .hamburger {
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  z-index: 1002;
+  display: inline-flex; /* Flexbox inline para centralizar barras */
+  flex-direction: column; /* Organiza barras verticalmente */
+  justify-content: center; /* Centraliza verticalmente */
+  align-items: center; /* Centraliza horizontalmente */
+  width: 40px; /* Largura do botão */
+  height: 40px; /* Altura do botão */
+  background: transparent; /* Fundo transparente */
+  border: none; /* Remove borda padrão */
+  cursor: pointer; /* Cursor de mão ao passar o mouse */
+  transition: transform 0.3s ease; /* Transição suave para rotação */
+  z-index: 1002; /* Fica acima do header */
 }
 
+/* Estado aberto do hambúrguer */
 .hamburger.open {
-  transform: rotate(90deg);
+  transform: rotate(90deg); /* Rotaciona 90 graus quando aberto */
 }
 
+/* Barras do hambúrguer */
 .bar {
-  width: 32px;
-  height: 3px;
-  background-color: #ffffff;
-  margin: 4px 0;
-  border-radius: 2px;
-  transition: background-color 0.3s ease;
+  width: 32px; /* Largura da barra */
+  height: 3px; /* Altura da barra */
+  background-color: #ffffff; /* Cor branca */
+  margin: 4px 0; /* Espaço entre barras */
+  border-radius: 2px; /* Bordas arredondadas */
+  transition: background-color 0.3s ease; /* Transição suave de cor */
 }
 
+/* Hover do hambúrguer */
 .hamburger:hover .bar {
-  background-color: #2979FF;
+  background-color: #2979FF; /* Muda a cor da barra ao passar o mouse */
 }
 
 /* ===== ESPAÇO LATERAL ESQUERDO ===== */
 .left-spacer {
-  width: 120px;
+  width: 120px; /* Espaço reservado à esquerda do header */
 }
 
 /* ===== LOGO CENTRALIZADA NO HEADER ===== */
 .logo-container {
-  /* Posiciona o container de forma absoluta dentro do header */
-  position: absolute;
-  left: 50%;              /* centraliza horizontalmente */
-  transform: translateX(-50%); /* corrige o deslocamento para centralização perfeita */
-  display: flex;           /* permite centralização flexível se precisar de mais elementos */
-  flex-direction: column;  /* mantém a direção vertical, útil se adicionar algo futuramente */
-  align-items: center;     /* centraliza horizontalmente os filhos */
-  text-align: center;      /* centraliza o conteúdo de texto, caso seja usado */
+  position: absolute; /* Posição absoluta dentro do header */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translateX(-50%); /* Ajusta deslocamento para centralização exata */
+  display: flex; /* Flexbox para alinhamento interno */
+  flex-direction: column; /* Organiza itens verticalmente */
+  align-items: center; /* Centraliza horizontalmente */
+  text-align: center; /* Centraliza o texto */
 }
 
 /* ===== IMAGEM DA LOGO ===== */
 .logo-img {
-  width: 98px;       /* ajusta o tamanho da logo */
-  height: auto;      /* mantém proporção da imagem */
-  /* margin-bottom: 2px; removido, pois não há texto abaixo */
+  width: 98px; /* Largura da logo */
+  height: auto; /* Mantém proporção da logo */
+  /* margin-bottom: 2px; removido pois não há texto abaixo da imagem */
+}
+
+/* ===== BOTÃO DE ACESSO RÁPIDO ===== */
+.quick-access-btn {
+  
+  color: inherit;
+  display: inline-flex; /* Flexbox para centralizar conteúdo */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  width: 80px; /* Largura do botão */
+  height: 80px; /* Altura do botão */
+  background: transparent; /* Fundo transparente */
+  border: none; /* Sem borda */
+  border-radius: 8px; /* Cantos arredondados */
+  cursor: pointer; /* Cursor de mão */
+  transition: background 0.3s ease, transform 0.3s ease; /* Transição suave */
+  position: relative; /* Para elementos internos posicionados */
+  z-index: 1002; /* Acima de outros elementos */
+}
+.quick-access-btn mat-icon {
+  font-size: 30px; /* aumenta o tamanho do ícone */
+  color: #ffffff;  /* deixa branco, se quiser */
+}
+.quick-access-btn mat-icon:hover {
+  color: #21CBF3; /* Azul neon ao passar o mouse */
+  transition: all 0.3s ease; /* Transição suave */
+}
+
+/* Título do painel */
+.quick-access-title {
+  display: flex; /* Flexbox para centralização */
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+  font-size: 1.6rem; /* Tamanho da fonte */
+  font-weight: 620; /* Peso da fonte */
+  color: #21CBF3; /* Cor do título */
+  margin-bottom: 24px; /* Espaço inferior */
+  gap: 10px; /* Espaço entre ícone e texto */
+}
+
+/* ===== PAINEL LATERAL DIREITO ===== */
+.quick-access-panel {
+  background: linear-gradient(to bottom, #0D3B66, #050A1F); /* Degradê azul escuro vertical */
+  position: fixed; /* Painel fixo na tela */
+  top: 90px; /* Abaixo do header */
+  right: -300px; /* Inicialmente escondido fora da tela */
+  width: 260px; /* Largura do painel */
+  height: calc(100vh - 90px); /* Altura total da tela menos o header */
+  background-color: #112E4F; /* Cor de fundo */
+  box-shadow: -2px 0 10px rgba(0,0,0,0.3); /* Sombra à esquerda */
+  padding: 20px; /* Espaçamento interno */
+  transition: right 0.3s ease-in-out; /* Animação suave ao abrir/fechar */
+  z-index: 1000; /* Abaixo do header */
+}
+
+/* Container dos botões dentro do painel */
+.quick-access-buttons {
+  display: flex; /* Flexbox para organizar botões */
+  flex-direction: column; /* Organiza em coluna */
+  gap: 12px; /* Espaço vertical entre botões */
+}
+
+/* ===== ESTILO DOS BOTÕES DENTRO DO PAINEL ===== */
+.quick-access-buttons button {
+  display: flex; /* Flexbox para ícone e texto */
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: flex-start; /* Alinha conteúdo à esquerda */
+  gap: 25px; /* Espaço entre ícone e texto */
+  font-weight: bold; /* Texto em negrito */
+  background: linear-gradient(to bottom, #0D3B66, #112E4F); /* Degradê azul */
+  color: #fff; /* Cor do texto */
+  border-radius: 15px; /* Cantos arredondados */
+  padding: 12px 16px; /* Espaçamento interno do botão */
+  transition: all 0.3s ease; /* Transição suave */
+  box-shadow: 0 0 8px rgba(10, 248, 193, 0.2); /* Sombra leve */
+  cursor: pointer; /* Cursor de mão */
+}
+
+/* Hover apenas em botões individuais */
+.quick-access-buttons button:hover {
+  background: linear-gradient(145deg, #112e4f, #0d3b66); /* Mudança de cor no hover */
+  transform: translateY(-2px) scale(1.02); /* Leve elevação e escala */
+}
+
+/* Active apenas em botões individuais */
+.quick-access-buttons button:active {
+  transform: scale(0.96); /* Encolhe ao clicar */
+  box-shadow: 0 0 8px #0af8c1 inset; /* Sombra interna */
+}
+
+/* Quando o painel estiver aberto via JS/Classe */
+.quick-access-panel.open {
+  right: 0; /* Painel totalmente visível */
+}
+
+/* Container dos botões dentro do painel (repetido) */
+.quick-access-buttons {
+  display: flex; /* Flexbox */
+  flex-direction: column; /* Coluna */
+  gap: 12px; /* Espaço vertical */
+}
+
+/* Estilo dos botões dentro do painel (repetido) */
+.quick-access-buttons button {
+  display: flex; /* Flexbox horizontal */
+  align-items: center; /* Centraliza vertical */
+  gap: 8px; /* Espaço entre ícone e texto */
+  justify-content: flex-start; /* Alinha à esquerda */
+  font-weight: bold; /* Texto em negrito */
+}
+
+/* Tooltip customizado para botão de acesso rápido */
+.quick-access-btn .custom-tooltip {
+  position: absolute; /* Posiciona fora do fluxo normal */
+  bottom: 120%; /* Fica acima do botão */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translateX(-50%); /* Ajusta centralização */
+  background-color: #000000; /* Fundo preto */
+  color: #ffffff; /* Texto branco */
+  padding: 6px 10px; /* Espaçamento interno */
+  border-radius: 4px; /* Bordas arredondadas */
+  font-size: 0.80rem; /* Tamanho da fonte */
+  white-space: nowrap; /* Não quebra em várias linhas */
+  opacity: 0; /* Inicialmente invisível */
+  visibility: hidden; /* Oculto por padrão */
+  transition: opacity 0.3s ease; /* Transição suave de aparecimento */
+  pointer-events: none; /* Não interfere com mouse */
+  z-index: 1002; /* Acima de outros elementos */
+  font-weight: 450; /* Semi-negrito */
+}
+
+/* Mostrar tooltip ao passar o mouse */
+.quick-access-btn:hover .custom-tooltip {
+  opacity: 1; /* Torna visível */
+  visibility: visible; /* Ativa visibilidade */
+}
+
+/* Ao passar o mouse no wrapper, mostra o painel */
+.quick-access-wrapper:hover .quick-access-panel {
+  right: 60px; /* Painel aparece ao lado do botão */
+}
+
+/* Container pai do botão + painel */
+.quick-access-wrapper {
+  position: fixed; /* Fixa na tela */
+  top: 90px; /* Abaixo do header */
+  right: 0; /* Alinha à direita */
+  z-index: 1001; /* Acima da maioria dos elementos */
 }
 
 /* ===== REMOVIDO: ESTILO PARA TEXTO ===== */
 /* Não precisamos de .logo-text, pois a imagem já possui o texto incorporado */
-
 
 /* ===== (REMOVIDO) SEARCH BOX ===== */
 /* Nenhuma regra para .search-box é mais necessária */

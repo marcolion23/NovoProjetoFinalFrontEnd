@@ -15,10 +15,96 @@
       </button>
     </div>
 
-    <!-- CENTRO: LOGO + Texto abaixo -->
+    <!-- CENTRO: LOGO -->
     <div class="logo-container">
       <img src="assets/img/GAMEON.png" alt="Logo" class="logo-img" />
     </div>
 
+    <!-- LADO DIREITO: Botão de Acesso Rápido -->
+    <button class="quick-access-btn" (click)="toggleQuickAccess()">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
   </div>
 </header>
+
+<!-- Painel de Acesso Rápido (FORA do header) -->
+<!-- Painel de Acesso Rápido -->
+<div class="quick-access-panel" [class.open]="quickAccessOpen">
+  <h3 class="quick-access-title">Acesso Rápido</h3>
+  <div class="quick-access-buttons">
+    <button mat-raised-button color="primary" [routerLink]="'/products/create'" (click)="closeQuickAccess()">
+      <mat-icon>inventory_2</mat-icon>
+      Criar Produto
+    </button>
+
+    <button mat-raised-button color="primary" [routerLink]="'/fornecedores/create'" (click)="closeQuickAccess()">
+      <mat-icon>local_shipping</mat-icon>
+      Criar Fornecedor
+    </button>
+
+    <button mat-raised-button color="primary" [routerLink]="'/cliente/create'" (click)="closeQuickAccess()">
+      <mat-icon>person</mat-icon>
+      Criar Cliente
+    </button>
+
+    <button mat-raised-button color="primary" [routerLink]="'/fpagamentos/create'" (click)="closeQuickAccess()">
+      <mat-icon>payment</mat-icon>
+      Criar Pagamento
+    </button>
+
+    <button mat-raised-button color="primary" [routerLink]="'/vendas/create'" (click)="closeQuickAccess()">
+      <mat-icon>sell</mat-icon>
+      Criar Vendas
+    </button>
+  </div>
+</div>
+
+<script>
+  // Seleciona elementos
+  const quickAccessPanel = document.querySelector('.quick-access-panel');
+  const quickAccessWrapper = document.querySelector('.quick-access-wrapper');
+  const quickAccessButtons = document.querySelectorAll('.quick-access-buttons button');
+
+  let autoCloseTimeout;
+
+  // Função para abrir o painel
+  function openPanel() {
+    quickAccessPanel.classList.add('open');
+    startAutoCloseTimer(); // inicia temporizador
+  }
+
+  // Função para fechar o painel
+  function closePanel() {
+    quickAccessPanel.classList.remove('open');
+    clearTimeout(autoCloseTimeout); // limpa qualquer temporizador ativo
+  }
+
+  // Função que inicia o temporizador de fechamento automático
+  function startAutoCloseTimer() {
+    clearTimeout(autoCloseTimeout); // limpa timer anterior
+    autoCloseTimeout = setTimeout(() => {
+      closePanel();
+    }, 5000); // fecha após 5 segundos
+  }
+
+  // Abre painel ao passar mouse no wrapper
+  quickAccessWrapper.addEventListener('mouseenter', openPanel);
+
+  // Reinicia timer quando o mouse entra no painel
+  quickAccessPanel.addEventListener('mouseenter', startAutoCloseTimer);
+
+  // Reinicia timer quando o mouse entra no botão
+  quickAccessButtons.forEach(btn => {
+    btn.addEventListener('mouseenter', startAutoCloseTimer);
+    
+    // Fecha imediatamente ao clicar no botão
+    btn.addEventListener('click', closePanel);
+  });
+
+  // Reinicia timer ao sair do painel ou wrapper
+  quickAccessWrapper.addEventListener('mouseleave', startAutoCloseTimer);
+  quickAccessPanel.addEventListener('mouseleave', startAutoCloseTimer);
+</script>
+
+   

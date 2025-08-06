@@ -7,6 +7,7 @@
   margin-bottom: 24px;            /* Espaço abaixo do container */
   margin: 110px auto 40px;        /* Centraliza e evita sobreposição com header (90px do header + 40px de espaço) */
   align-items: center;            /* Centraliza verticalmente */
+  
 }
 
 /* ============ CONTAINER GERENCIAMENTO DE PRODUTOS ============ */
@@ -78,6 +79,8 @@
   justify-content: center;        /* Centraliza verticalmente */
   font-family: 'Segoe UI', sans-serif; /* Fonte moderna */
   transition: transform 0.3s ease; /* Transição suave em hover */
+    background: linear-gradient(to right, #0D3B66, #050A1F);
+
 }
 .panel-info2 {
   background-color: #991B1B;              /* Cor de fundo do painel */

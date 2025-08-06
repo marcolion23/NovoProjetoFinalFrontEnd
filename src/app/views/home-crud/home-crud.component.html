@@ -1,95 +1,59 @@
+<div class="home-container">
+  <!-- Card de boas-vindas -->
+  <mat-card class="welcome-card">
+    <div class="welcome-title">
+      <img src="assets/img/logogamesemnome.png" width="70" alt="Logo" class="logo-img" />
+      <span>Bem-vindo ao Sistema GameON</span>
+    </div>
+    <div class="welcome-text">
+Transforme a gestão do seu negócio! Controle produtos, clientes, 
+fornecedores e vendas de forma ágil e inteligente, simplifique processos
+ e decida rápido!  </div>
+  </mat-card>
 
-<mat-card class="stats-card mat-elevation-z12">
-  <!-- Título com ícone -->
-  <div class="stats-title">
-    <mat-icon class="title-icon">bar_chart</mat-icon>
-    <span>Estatísticas Rápidas</span>
-  </div>
+  <!-- Card de estatísticas -->
+  <mat-card class="stats-card">
+    <div class="stats-title">
+      <mat-icon class="title-icon">bar_chart</mat-icon>
+      Estatísticas Rápidas
+    </div>
+    <div class="stats-container">
+      <div class="stat-item">
+        <mat-icon class="stat-icon inventory">inventory_2</mat-icon>
+        <div class="stat-info">
+          <div class="stat-value">1.240</div>
+          <div class="stat-label">Produtos em Estoque</div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <mat-icon class="stat-icon clients">groups</mat-icon>
+        <div class="stat-info">
+          <div class="stat-value">980</div>
+          <div class="stat-label">Clientes Cadastrados</div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <mat-icon class="stat-icon revenue">attach_money</mat-icon>
+        <div class="stat-info">
+          <div class="stat-value">R$ 58.450,00</div>
+          <div class="stat-label">Faturamento do Mês</div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <mat-icon class="stat-icon suppliers">local_shipping</mat-icon>
+        <div class="stat-info">
+          <div class="stat-value">24</div>
+          <div class="stat-label">Fornecedores Ativos</div>
+        </div>
+      </div>
 
-  <!-- Container das estatísticas -->
-  <div class="stats-container">
-    <!-- Produto em Estoque -->
-    <div class="stat-item">
-      <mat-icon class="stat-icon inventory">inventory_2</mat-icon>
-      <div class="stat-info">
-        <div class="stat-value">1.240</div>
-        <div class="stat-label">Produtos em Estoque</div>
+      <div class="stat-item">
+        <mat-icon class="stat-icon sell">sell</mat-icon>
+        <div class="stat-info">
+          <div class="stat-value">24</div>
+          <div class="stat-label">Vendas Concluidas</div>
+        </div>
       </div>
     </div>
-
-    <!-- Clientes Cadastrados -->
-    <div class="stat-item">
-      <mat-icon class="stat-icon clients">groups</mat-icon>
-      <div class="stat-info">
-        <div class="stat-value">980</div>
-        <div class="stat-label">Clientes Cadastrados</div>
-      </div>
-    </div>
-
-    <!-- Faturamento do Mês -->
-    <div class="stat-item">
-      <mat-icon class="stat-icon revenue">attach_money</mat-icon>
-      <div class="stat-info">
-        <div class="stat-value">R$ 58.450,00</div>
-        <div class="stat-label">Faturamento do Mês</div>
-      </div>
-    </div>
-
-
-    <!-- Fornecedores Ativos -->
-    <div class="stat-item">
-      <mat-icon class="stat-icon suppliers">local_shipping</mat-icon>
-      <div class="stat-info">
-        <div class="stat-value">24</div>
-        <div class="stat-label">Fornecedores Ativos</div>
-      </div>
-    </div>
-
-  </div>
-</mat-card>
-
-<!-- ===== CARD DE ACESSO RÁPIDO FIXO NO RODAPÉ (ACIMA DO FOOTER) ===== -->
-<mat-card class="quick-access-card mat-elevation-z12">
-  
-  <!-- Título "Acesso Rápido" com ícone -->
-  <div class="quick-access-title">
-    <mat-icon class="title-icon">bolt</mat-icon>
-    <span>Acesso Rápido</span>
-  </div>
-  
-  <!-- Container dos botões -->
-  <mat-card-content>
-    <div class="quick-access-buttons">
-      <!-- Botão Criar Produto -->
-      <button mat-raised-button color="primary" [routerLink]="'/products/create'">
-        <mat-icon>inventory_2</mat-icon>
-        Criar Produto
-      </button>
-
-      <!-- Botão Criar Fornecedor -->
-      <button mat-raised-button   color="primary" [routerLink]="'/fornecedores/create'">
-        <mat-icon>local_shipping</mat-icon>
-        Criar Fornecedor
-      </button>
-
-      <!-- Botão Criar Cliente -->
-      <button mat-raised-button  [routerLink]="'/cliente/create'">
-        <mat-icon>person</mat-icon>
-        Criar Cliente
-      </button>
-
-        <!-- Botão Adicionar Pagamento -->
-      <button mat-raised-button [routerLink]="'/fpagamentos/create'">
-        <mat-icon>payment</mat-icon>
-        Criar Pagamento
-      </button>
-
-            <!-- Botão Criar Vendas -->
-      <button mat-raised-button color="primary" [routerLink]="'/vendas/create'">
-        <mat-icon>sell</mat-icon>
-        Criar Vendas
-      </button>
-
-    </div>
-  </mat-card-content>
-</mat-card>
+  </mat-card>
+</div>

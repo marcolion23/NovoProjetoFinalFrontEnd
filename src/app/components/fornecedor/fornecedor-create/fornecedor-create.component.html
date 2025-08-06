@@ -15,12 +15,6 @@
         <mat-error *ngIf="nome.invalid && nome.touched">Apenas letras e espaços</mat-error>
       </mat-form-field>
 
-      <!-- DESCRIÇÃO -->
-      <mat-form-field appearance="outline" class="full-width spaced-field">
-        <mat-label>Descrição / Observações</mat-label>
-        <textarea matInput rows="4" [(ngModel)]="fornecedor.observacoes" name="observacoes"></textarea>
-      </mat-form-field>
-
       <!-- EMAIL -->
       <mat-form-field appearance="outline" class="half-width spaced-field" required>
         <mat-label>Email</mat-label>

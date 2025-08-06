@@ -54,6 +54,7 @@
   gap: 30px;                                        /* Espaço entre painéis */
   padding: 30px 50px;                               /* Espaço interno */
   box-sizing: border-box;                           /* Inclui padding na largura */
+  
 }
 
 /* Animação painel */
@@ -79,6 +80,7 @@
   justify-content: center;
   font-family: 'Segoe UI', sans-serif;
   color: #ffffff;
+  
 }
 
 /* Painel clientes inativos com vermelho */

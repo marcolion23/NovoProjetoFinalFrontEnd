@@ -3,17 +3,25 @@
   position: fixed;                    /* Fixa o rodapé na parte inferior da tela */
   bottom: 0;                          /* Encosta no fundo */
   width: 100%;                        /* Largura total */
-  /* ==== Degradê linear do azul escuro ao preto ==== */
-  background: linear-gradient(to right, #0D3B66, #050A1F); 
+
+  /* Degradê: escuro nas laterais e centro mais suave */
+  background: linear-gradient(
+    to right,
+    #0D3B66 0%,      /* lateral esquerda escura */
+    #050A1F 20%,     /* escurece antes do centro */
+    #112E4F 50%,     /* centro mais suave */
+    #050A1F 80%,     /* escurece antes da lateral direita */
+    #0D3B66 100%     /* lateral direita escura */
+  );
+
   display: flex;                      /* Flexbox */
-  justify-content: flex-end;         /* Itens à direita */
-  align-items: center;               /* Alinhamento vertical */
-  padding: 12px 24px;                /* Espaçamento interno */
-  color: #ecf0f1;                    /* Cor do texto */
-  font-family: 'Roboto', sans-serif;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Sombra acima */
-  z-index: 1000;                     /* Fica sobre os outros */
-  padding: 41px;                     /* Padding geral sobrescrevendo o anterior */
+  justify-content: flex-end;          /* Itens alinhados à direita */
+  align-items: center;                /* Alinhamento vertical */
+  padding: 41px;                 /* Espaçamento interno corrigido */
+  color: #ecf0f1;                     /* Cor clara do texto */
+  font-family: 'Roboto', sans-serif;  /* Fonte moderna */
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Sombra acima do footer */
+  z-index: 1000;                      /* Fica sobre outros elementos */
 }
 
 
