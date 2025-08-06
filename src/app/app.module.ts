@@ -55,7 +55,6 @@ import { HomeComponent } from './views/home-crud/home-crud.component';
 import { ProductCrudComponent } from './views/product-crud/product-crud.component';
 import { FormaPagamentoCrudComponent } from './views/forma-pagamento-crud/forma-pagamento-crud.component';
 import { ClienteCrudComponent } from './views/cliente-crud/cliente-crud.component';
-import { EstoqueCrudComponent } from './views/estoque-crud/estoque-crud.component';
 import { FornecedorCrudComponent } from './views/fornecedor-crud/fornecedor-crud.component';
 
 // Produtos
@@ -76,11 +75,6 @@ import { ClienteReadComponent } from './components/cliente/cliente-read/cliente-
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { ClienteDeleteComponent } from './components/cliente/cliente-delete/cliente-delete.component';
 
-// Estoque
-import { EstoqueCreateComponent } from './components/estoque/estoque-create/estoque-create.component';
-import { EstoqueReadComponent } from './components/estoque/estoque-read/estoque-read.component';
-import { EstoqueUpdateComponent } from './components/estoque/estoque-update/estoque-update.component';
-import { EstoqueDeleteComponent } from './components/estoque/estoque-delete/estoque-delete.component';
 
 // Fornecedores
 import { FornecedorCreateComponent } from './components/fornecedor/fornecedor-create/fornecedor-create.component';
@@ -112,7 +106,6 @@ import { VendaCrudComponent } from './views/venda-crud/venda-crud.component';
     ProductCrudComponent,
     FormaPagamentoCrudComponent,
     ClienteCrudComponent,
-    EstoqueCrudComponent,
     FornecedorCrudComponent,
 
     // Componentes CRUD
@@ -131,10 +124,6 @@ import { VendaCrudComponent } from './views/venda-crud/venda-crud.component';
     ClienteUpdateComponent,
     ClienteDeleteComponent,
 
-    EstoqueCreateComponent,
-    EstoqueReadComponent,
-    EstoqueUpdateComponent,
-    EstoqueDeleteComponent,
 
     FornecedorCreateComponent,
     FornecedorReadComponent,

@@ -13,6 +13,8 @@
   z-index: 1000;
   border-radius: 16px;
   overflow: auto;
+    background: linear-gradient(to right, #0D3B66, #050A1F); /* Degradê invertido */
+
 }
 
 /* ===== TÍTULO DO CARD DE ACESSO RÁPIDO COM ÍCONE AO LADO ===== */
@@ -91,6 +93,8 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   overflow: auto;
+    background: linear-gradient(to left, #0D3B66, #050A1F); /* Degradê invertido */
+
 }
 
 .stats-title {

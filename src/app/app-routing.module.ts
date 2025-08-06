@@ -11,12 +11,6 @@ import { ProductReadComponent } from './components/product/product-read/product-
 import { ProductUpdateComponent } from './components/product/product-update/product-update.component';
 import { ProductDeleteComponent } from './components/product/product-delete/product-delete.component';
 
-// Estoque
-import { EstoqueCrudComponent } from './views/estoque-crud/estoque-crud.component';
-import { EstoqueCreateComponent } from './components/estoque/estoque-create/estoque-create.component';
-import { EstoqueReadComponent } from './components/estoque/estoque-read/estoque-read.component';
-import { EstoqueUpdateComponent } from './components/estoque/estoque-update/estoque-update.component';
-import { EstoqueDeleteComponent } from './components/estoque/estoque-delete/estoque-delete.component';
 
 // Fornecedores
 import { FornecedorCrudComponent } from './views/fornecedor-crud/fornecedor-crud.component';
@@ -60,13 +54,6 @@ const routes: Routes = [
   { path: 'products/read/:proId', component: ProductReadComponent },
   { path: 'products/update/:proId', component: ProductUpdateComponent },
   { path: 'products/delete/:proId', component: ProductDeleteComponent },
-
-  // Rotas Estoque
-  { path: 'estoque', component: EstoqueCrudComponent },
-  { path: 'estoque/create', component: EstoqueCreateComponent },
-  { path: 'estoque/read/:estoqueId', component: EstoqueReadComponent },
-  { path: 'estoque/update/:estoqueId', component: EstoqueUpdateComponent },
-  { path: 'estoque/delete/:estoqueId', component: EstoqueDeleteComponent },
 
   // Rotas Fornecedores
   { path: 'fornecedores', component: FornecedorCrudComponent },
