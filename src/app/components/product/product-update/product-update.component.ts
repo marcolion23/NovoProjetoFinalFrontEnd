@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../product.model';
 import { ProductService } from '../product.service';
+import { FornecedorService } from '../../fornecedor/fornecedor.service'; // add
+import { Fornecedor } from '../../fornecedor/fornecedor.model'; // add
 
 @Component({
   selector: 'app-product-update',
@@ -10,11 +12,14 @@ import { ProductService } from '../product.service';
 })
 export class ProductUpdateComponent implements OnInit {
 
- proPrecoCustoFormatado?: string;
-  proPrecoVendaFormatado?: string;
+  maxDate: Date = new Date();
+  dataCadastro: Date | null = null;
 
+  fornecedores: Fornecedor[] = []; // add
 
-
+  selectedMarca: string = '';
+  mostrarInputOutraMarca = false;
+  marcaPersonalizada: string = '';
 
   product: Product = {
     proId: 0,
@@ -25,30 +30,18 @@ export class ProductUpdateComponent implements OnInit {
     proMarca: '',
     proPrecoCusto: 0,
     proPrecoVenda: 0,
-    proEstoque: 0,
-    proAtivo: true,
-    dataCadastro: new Date(),
-    proMarcaPersonalizada: ''
+    proQuantidadeEstoque: 0,
+    proAtivo: '',
+    forId: 0, // add
+    proDataCadastro: '',
+    proMarcaPersonalizada: '',
+    proPrecoCustoFormatado: '',
+    proPrecoVendaFormatado: ''
   };
-
-  dataCadastro: Date = new Date();
-
-  mostrarInputOutraMarca = false;
-  marcaPersonalizada: string = '';
-  maxDate: Date = new Date();
-
-  categorias: string[] = [
-    'teclado', 'mouse', 'monitor', 'headset', 'mousepad', 'cadeira', 'console',
-    'controle', 'notebook', 'placa-video', 'cpu', 'ram', 'fonte', 'gabinete',
-    'cooler', 'jogos', 'giftcards', 'servicos', 'acessorios'
-  ];
-
-  marcas: string[] = [
-    'Razer', 'Logitech', 'Redragon', 'Corsair', 'HyperX', 'outra'
-  ];
 
   constructor(
     private productService: ProductService,
+    private fornecedorService: FornecedorService, // add
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -58,26 +51,32 @@ export class ProductUpdateComponent implements OnInit {
     if (proId) {
       this.productService.readById(proId).subscribe((product: Product) => {
         this.product = product;
-        this.dataCadastro = new Date(product.dataCadastro || new Date());
+        this.dataCadastro = new Date(product.proDataCadastro || new Date());
         this.mostrarInputOutraMarca = (product.proMarca === 'outra');
         if (this.mostrarInputOutraMarca) {
           this.marcaPersonalizada = product.proMarcaPersonalizada || '';
         }
       });
     }
+
+    this.fornecedorService.readFornecedor().subscribe((fornecedores: Fornecedor[]) => {
+      this.fornecedores = fornecedores;
+    });
   }
 
   salvar(): void {
-    this.product.dataCadastro = this.dataCadastro;
+    this.product.proDataCadastro = this.dataCadastro ? this.dataCadastro.toISOString() : '';
 
     if (this.mostrarInputOutraMarca && this.marcaPersonalizada.trim() !== '') {
-      this.product.proMarcaPersonalizada = this.marcaPersonalizada.trim();
       this.product.proMarca = 'outra';
+      this.product.proMarcaPersonalizada = this.marcaPersonalizada.trim();
     }
 
     this.productService.update(this.product).subscribe(() => {
       this.productService.showMessage('Produto atualizado com sucesso!');
       this.router.navigate(['/products']);
+    }, error => {
+      console.error('Erro ao atualizar produto:', error);
     });
   }
 
@@ -95,76 +94,20 @@ export class ProductUpdateComponent implements OnInit {
       proMarca: '',
       proPrecoCusto: 0,
       proPrecoVenda: 0,
-      proEstoque: 0,
-      proAtivo: true,
-      dataCadastro: new Date(),
-      proMarcaPersonalizada: ''
+      proQuantidadeEstoque: 0,
+      proAtivo: '',
+      forId: 0,
+      proDataCadastro: '',
+      proMarcaPersonalizada: '',
+      proPrecoCustoFormatado: '',
+      proPrecoVendaFormatado: ''
     };
-    this.dataCadastro = new Date();
+    this.dataCadastro = null;
     this.mostrarInputOutraMarca = false;
     this.marcaPersonalizada = '';
   }
 
-  onMarcaChange(marca: string): void {
-    this.mostrarInputOutraMarca = (marca === 'outra');
-    if (!this.mostrarInputOutraMarca) {
-      this.marcaPersonalizada = '';
-    }
-  }
-
-  apenasLetras(event: KeyboardEvent): void {
-    const pattern = /[a-zA-ZÀ-ÿ\s]/;
-    const inputChar = String.fromCharCode(event.charCode);
-    if (!pattern.test(inputChar)) {
-      event.preventDefault();
-    }
-  }
-
-  apenasNumeros(event: KeyboardEvent): void {
-    const pattern = /[0-9]/;
-    const inputChar = String.fromCharCode(event.charCode);
-    if (!pattern.test(inputChar)) {
-      event.preventDefault();
-    }
-  }
-
-  formatarNome(): void {
-    if (this.product.proNome) {
-      this.product.proNome = this.product.proNome
-        .toLowerCase()
-        .replace(/(^|\s)\S/g, (l) => l.toUpperCase())
-        .trimStart();
-    }
-  }
-
-formatarDescricao(): void {
-  if (this.product.proDescricao) {
-    this.product.proDescricao = this.product.proDescricao
-      .toLowerCase()
-      .replace(/(^|\s)\S/g, (l) => l.toUpperCase())
-      .trimStart();
-  }
-}
-
-
-  formatarMarcaPersonalizada(): void {
-    if (this.marcaPersonalizada) {
-      this.marcaPersonalizada = this.marcaPersonalizada
-        .toLowerCase()
-        .replace(/(^|\s)\S/g, (l) => l.toUpperCase())
-        .trimStart();
-    }
-  }
-
-  limparZeroInicial(): void {
-    if (this.product.proEstoque) {
-      this.product.proEstoque = Number(String(this.product.proEstoque).replace(/^0+/, '')) || 0;
-    }
-  }
-
- 
-
-  getNomeCategoria(categoriaKey: string): string {
+  getNomeCategoria(valor: string): string {
     const categorias: { [key: string]: string } = {
       teclado: 'Teclado',
       mouse: 'Mouse',
@@ -186,51 +129,99 @@ formatarDescricao(): void {
       servicos: 'Serviços Técnicos',
       acessorios: 'Acessórios'
     };
-    return categorias[categoriaKey] || '';
+    return categorias[valor] || '';
   }
 
-  
-onPrecoInput(valorDigitado: string, campo: 'proPrecoCusto' | 'proPrecoVenda'): void {
-  // Remove tudo que não for número
-  let numeros = valorDigitado.replace(/\D/g, '');
+  onPrecoInput(valorDigitado: string, campo: 'proPrecoCusto' | 'proPrecoVenda'): void {
+    let valor = valorDigitado.replace(/\D/g, '');
 
-  // Se vazio, zera o campo e formato
-  if (!numeros) {
-    this.product[campo] = 0;
-    this.product[`${campo}Formatado`] = '';
-    return;
+    if (!valor) {
+      this.product[campo] = 0;
+      this.product[`${campo}Formatado`] = '';
+      return;
+    }
+
+    while (valor.length > 3 && valor.startsWith('0')) {
+      valor = valor.substring(1);
+    }
+
+    let inteiro = '';
+    let decimal = '';
+
+    if (valor.length === 1) {
+      inteiro = '0';
+      decimal = '0' + valor;
+    } else if (valor.length === 2) {
+      inteiro = '0';
+      decimal = valor;
+    } else {
+      inteiro = valor.slice(0, -2);
+      decimal = valor.slice(-2);
+    }
+
+    const inteiroFormatado = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    const valorFormatado = `R$ ${inteiroFormatado},${decimal}`;
+
+    this.product[campo] = parseFloat(`${inteiro}.${decimal}`);
+    this.product[`${campo}Formatado`] = valorFormatado;
   }
 
-  // Limpa zeros à esquerda (mas mantendo ao menos 1 dígito)
-  numeros = numeros.replace(/^0+/, '') || '0';
+  apenasLetras(event: KeyboardEvent): void {
+    const char = event.key;
+    const regex = /^[a-zA-ZÀ-ÿ\s]*$/;
+    if (!regex.test(char)) {
+      event.preventDefault();
+    }
+  }
 
-  // Ajusta para pelo menos 3 dígitos para facilitar a formatação (ex: 1 -> 001)
-  numeros = numeros.padStart(3, '0');
+  apenasNumeros(event: KeyboardEvent): void {
+    const char = event.key;
+    const regex = /^[0-9]$/;
+    const input = event.target as HTMLInputElement;
 
-  // Divide em inteiro e decimal (2 últimos dígitos)
-  const inteiro = numeros.slice(0, -2);
-  const decimal = numeros.slice(-2);
+    if (!regex.test(char) || (input.value.length >= 13 && !this.isAllowedKey(event))) {
+      event.preventDefault();
+    }
+  }
 
-  // Formata inteiro com pontos a cada 3 dígitos
-  const inteiroFormatado = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  isAllowedKey(event: KeyboardEvent): boolean {
+    const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+    return allowedKeys.includes(event.key);
+  }
 
-  // Monta a string formatada final com R$, pontos e vírgula
-  const valorFormatado = `R$ ${inteiroFormatado},${decimal}`;
+  formatarNome(): void {
+    if (!this.product.proNome) return;
+    const palavras = this.product.proNome.split(' ');
+    this.product.proNome = palavras
+      .map((p: string) => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase())
+      .join(' ');
+  }
 
-  // Atualiza no model o número em float, usando ponto decimal
-  this.product[campo] = parseFloat(`${inteiro}.${decimal}`);
+  formatarDescricao(): void {
+    if (!this.product.proDescricao) return;
+    const texto = this.product.proDescricao.trim();
+    this.product.proDescricao = texto.charAt(0).toUpperCase() + texto.slice(1);
+  }
 
-  // Atualiza string formatada que aparece no input
-  this.product[`${campo}Formatado`] = valorFormatado;
-}
+  formatarMarcaPersonalizada(): void {
+    if (!this.marcaPersonalizada) return;
+    const texto = this.marcaPersonalizada.trim();
+    this.marcaPersonalizada = texto.charAt(0).toUpperCase() + texto.slice(1);
+  }
 
+  onMarcaChange(valor: string) {
+    if (valor === 'outra') {
+      this.mostrarInputOutraMarca = true;
+      this.marcaPersonalizada = '';
+    } else {
+      this.mostrarInputOutraMarca = false;
+      this.marcaPersonalizada = '';
+    }
+  }
 
-  formatarMoeda(valor: number): string {
-  if (valor == null || isNaN(valor)) return '';
-  return valor
-    .toFixed(2)                 // duas casas decimais
-    .replace('.', ',')          // ponto decimal vira vírgula
-    .replace(/\B(?=(\d{3})+(?!\d))/g, '.');  // pontos como separador de milhar
-}
-
+  limparZeroInicial() {
+    if (this.product.proQuantidadeEstoque === 0) {
+      this.product.proQuantidadeEstoque = null;
+    }
+  }
 }

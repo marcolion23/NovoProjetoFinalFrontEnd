@@ -3,15 +3,15 @@
 
   <!-- CARD do formulário com sombra e arredondamento -->
   <mat-card class="product-card">
-    
+   
     <mat-card-title class="titulo-formulario">
   ADICIONE SEU PRODUTO
 </mat-card-title>
 
-    
+   
     <!-- Formulário flexível -->
     <form class="product-form">
-      
+     
       <mat-form-field appearance="outline" class="half-width" required>
         <mat-label>Nome do Produto</mat-label>
         <input
@@ -66,12 +66,12 @@
           rows="4"
           [(ngModel)]="product.proDescricao"
           name="proDescricao"
-      
+     
           #proDescricaoInput="ngModel"
           (input)="formatarDescricao()"
           maxlength="80"
         ></textarea>
-      </mat-form-field>           
+      </mat-form-field>          
 
       <!-- Categoria -->
       <mat-form-field appearance="outline" class="half-width" required>
@@ -271,29 +271,29 @@
           matInput
           type="text"              
           placeholder="Ex: 100"
-          [(ngModel)]="product.proEstoque"
-          name="proEstoque"
+          [(ngModel)]="product.proQuantidadeEstoque"
+          name="proQuantidadeEstoque"
           required
-          #proEstoqueInput="ngModel"
-          maxlength="5"             
+          #proQuantidadeEstoqueInput="ngModel"
+          maxlength="5"            
           (keypress)="apenasNumeros($event)"
           (focus)="limparZeroInicial()"
         >
-        <mat-error *ngIf="proEstoqueInput.invalid && (proEstoqueInput.dirty || proEstoqueInput.touched)">
+        <mat-error *ngIf="proQuantidadeEstoqueInput.invalid && (proQuantidadeEstoqueInput.dirty || proQuantidadeEstoqueInput.touched)">
           O estoque é obrigatório e deve ser maior ou igual a zero.
         </mat-error>
       </mat-form-field>
-      
+     
 
       <!-- Data de Cadastro -->
       <mat-form-field appearance="outline" class="half-width" required>
         <mat-label>Data de Cadastro</mat-label>
-        <input 
-          matInput 
-          [matDatepicker]="picker" 
-          placeholder="DD/MM/AAAA" 
-          name="dataCadastro" 
-          [max]="maxDate" 
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="DD/MM/AAAA"
+          name="dataCadastro"
+          [max]="maxDate"
           [(ngModel)]="dataCadastro"
           required
           #dataCadastroInput="ngModel"
@@ -323,7 +323,7 @@
         <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
         <button mat-raised-button color="blue" (click)="limpar()">Limpar</button>
       </div>
-      
+     
     </form>
   </mat-card>
 

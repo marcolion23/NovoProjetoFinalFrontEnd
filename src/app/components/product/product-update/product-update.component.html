@@ -3,14 +3,14 @@
 
     <!-- CARD do formulário com sombra e arredondamento -->
     <mat-card class="product-card">
-      
+     
       <mat-card-title class="titulo-formulario">
         ATUALIZE SEU PRODUTO
       </mat-card-title>
-  
+ 
       <!-- Formulário flexível -->
       <form class="product-form">
-  
+ 
         <!-- Se quiser mostrar o ID para referência, pode habilitar este campo (opcional) -->
         <!--
         <mat-form-field appearance="outline" class="half-width" disabled>
@@ -18,7 +18,7 @@
           <input matInput [value]="product.proId" disabled>
         </mat-form-field>
         -->
-  
+ 
         <mat-form-field appearance="outline" class="half-width" required>
           <mat-label>Nome do Produto</mat-label>
           <input
@@ -35,7 +35,7 @@
             O nome do produto é obrigatório.
           </mat-error>
         </mat-form-field>
-  
+ 
         <!-- Código de Barras -->
         <mat-form-field appearance="outline" class="half-width" required>
           <mat-label>Código de Barras</mat-label>
@@ -55,7 +55,7 @@
             O código de barras é obrigatório.
           </mat-error>
         </mat-form-field>
-  
+ 
         <!-- Descrição -->
         <mat-form-field appearance="outline" class="full-width" required>
           <mat-label>Descrição</mat-label>
@@ -73,7 +73,7 @@
             A descrição é obrigatória.
           </mat-error>
         </mat-form-field>
-  
+ 
         <!-- Categoria -->
         <mat-form-field appearance="outline" class="half-width" required>
           <mat-label>Categoria</mat-label>
@@ -163,7 +163,7 @@
             A categoria é obrigatória.
           </mat-error>
         </mat-form-field>
-  
+ 
         <!-- Marca -->
         <mat-form-field appearance="outline" class="half-width" required>
           <mat-label>Marca</mat-label>
@@ -210,7 +210,7 @@
             A marca é obrigatória.
           </mat-error>
         </mat-form-field>
-  
+ 
         <!-- Input para outra marca -->
         <mat-form-field *ngIf="mostrarInputOutraMarca" appearance="outline" class="full-width" required>
           <mat-label>Digite a marca</mat-label>
@@ -227,8 +227,8 @@
             A marca personalizada é obrigatória.
           </mat-error>
         </mat-form-field>
-  
-      
+ 
+     
       <!-- Preço de Custo -->
 <mat-form-field appearance="outline" class="half-width" required>
   <mat-label>Preço de Custo (R$)</mat-label>
@@ -265,33 +265,33 @@
   </mat-error>
 </mat-form-field>
 
-  
+ 
         <mat-form-field appearance="outline" class="half-width" required>
           <mat-label>Estoque Atual</mat-label>
           <input
             matInput
             type="text"
-            [(ngModel)]="product.proEstoque"
-            name="proEstoque"
+            [(ngModel)]="product.proQuantidadeEstoque"
+            name="proQuantidadeEstoque"
             required
-            #proEstoqueInput="ngModel"
+            #proQuantidadeEstoqueInput="ngModel"
             maxlength="5"
             (keypress)="apenasNumeros($event)"
             (focus)="limparZeroInicial()"
           >
-          <mat-error *ngIf="proEstoqueInput.invalid && (proEstoqueInput.dirty || proEstoqueInput.touched)">
+          <mat-error *ngIf="proQuantidadeEstoqueInput.invalid && (proQuantidadeEstoqueInput.dirty || proQuantidadeEstoqueInput.touched)">
             O estoque é obrigatório e deve ser maior ou igual a zero.
           </mat-error>
         </mat-form-field>
-  
+ 
         <!-- Data de Cadastro -->
         <mat-form-field appearance="outline" class="half-width" required>
           <mat-label>Data de Cadastro</mat-label>
-          <input 
-            matInput 
-            [matDatepicker]="picker" 
-            name="dataCadastro" 
-            [max]="maxDate" 
+          <input
+            matInput
+            [matDatepicker]="picker"
+            name="dataCadastro"
+            [max]="maxDate"
             [(ngModel)]="dataCadastro"
             required
             #dataCadastroInput="ngModel"
@@ -302,7 +302,7 @@
             A data de cadastro é obrigatória.
           </mat-error>
         </mat-form-field>
-  
+ 
         <!-- Status -->
         <mat-form-field appearance="outline" class="full-width" required>
           <mat-label>Status</mat-label>
@@ -314,21 +314,20 @@
             O status é obrigatório.
           </mat-error>
         </mat-form-field>
-  
+ 
         <!-- Botões -->
         <div class="button-container">
           <button mat-raised-button color="primary" (click)="salvar()">Atualizar</button>
           <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
           <button mat-raised-button color="blue" (click)="limpar()">Limpar</button>
         </div>
-        
+       
       </form>
     </mat-card>
-  
+ 
     <!-- TABELA abaixo do formulário -->
     <div class="tabela-container">
       <!-- Aqui entra sua tabela -->
     </div>
-  
+ 
   </div>
-  

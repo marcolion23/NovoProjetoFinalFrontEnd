@@ -1,47 +1,80 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Observable } from "rxjs";
 import { Fornecedor } from './fornecedor.model';
-import { Observable } from 'rxjs';
+import { Endereco } from "../endereco/endereco.model";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' // Define o serviço como singleton no root module
 })
 export class FornecedorService {
 
-  private baseUrl = 'http://localhost:3000/fornecedores';  // Ajuste a URL do seu backend
+  private fornecedorBaseUrl = "http://localhost:8080/fornecedores";
+  private contatoBaseUrl = "http://localhost:9090/contatos";
+  private enderecoBaseUrl = "http://localhost:9090/enderecos";
 
-  constructor(private http: HttpClient) { }
+  constructor(private snackBar: MatSnackBar, private http: HttpClient) {}
 
-  // Listar todos os fornecedores
-  getFornecedores(): Observable<Fornecedor[]> {
-    return this.http.get<Fornecedor[]>(this.baseUrl);
+  // Exibe uma mensagem de notificação
+  showMessage(msg: string): void {
+    this.snackBar.open(msg, 'X', {
+      duration: 3000, // Duração da mensagem em milissegundos
+      horizontalPosition: "right", // Posição horizontal
+      verticalPosition: "top" // Posição vertical
+    });
   }
 
-  // Buscar fornecedor por ID
-  getFornecedorById(id: number): Observable<Fornecedor> {
-    return this.http.get<Fornecedor>(`${this.baseUrl}/${id}`);
-  }
-
-  // Criar novo fornecedor
+  //Fornecedor
+  // Cria um novo fornecedor
   createFornecedor(fornecedor: Fornecedor): Observable<Fornecedor> {
-    return this.http.post<Fornecedor>(this.baseUrl, fornecedor);
+    return this.http.post<Fornecedor>(this.fornecedorBaseUrl, fornecedor);
   }
 
-  // Atualizar fornecedor existente
-  updateFornecedor(id: number, fornecedor: Fornecedor): Observable<Fornecedor> {
-    return this.http.put<Fornecedor>(`${this.baseUrl}/${id}`, fornecedor);
+  // Obtém a lista de fornecedores
+  readFornecedor(): Observable<Fornecedor[]> {
+    return this.http.get<Fornecedor[]>(this.fornecedorBaseUrl);
   }
 
-  // Deletar fornecedor
-  deleteFornecedor(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  // Obtém um fornecedor pelo ID
+  readFornecedorById(id: string): Observable<Fornecedor> {
+    const url = `${this.fornecedorBaseUrl}/${id}`;
+    return this.http.get<Fornecedor>(url);
   }
-  readById(id: number) {
-    return this.http.get<Fornecedor>(`${this.baseUrl}/${id}`);
+
+  // Atualiza um fornecedor existente
+  updateFornecedor(fornecedor: Fornecedor): Observable<Fornecedor> {
+    const url = `${this.fornecedorBaseUrl}/${fornecedor.forId}`;
+    return this.http.put<Fornecedor>(url, fornecedor);
   }
-  
-  delete(id: number) {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+
+  // Exclui um fornecedor pelo ID
+  deleteFornecedor(id: number): Observable<Fornecedor> {
+    const url = `${this.fornecedorBaseUrl}/${id}`;
+    return this.http.delete<Fornecedor>(url);
   }
-  
+
+  //Endereco
+  createEndereco(endereco: Endereco): Observable<Endereco> {
+    return this.http.post<Endereco>(this.enderecoBaseUrl, endereco);
+  }
+
+  readEnderecos(): Observable<Endereco[]> {
+    return this.http.get<Endereco[]>(this.enderecoBaseUrl);
+  }
+
+  readEnderecoById(id: string): Observable<Endereco> {
+    const url = `${this.enderecoBaseUrl}/${id}`;
+    return this.http.get<Endereco>(url);
+  }
+
+  updateEndereco(endereco: Endereco): Observable<Endereco> {
+    const url = `${this.enderecoBaseUrl}/${endereco.endId}`;
+    return this.http.put<Endereco>(url, endereco);
+  }
+
+  deleteEndereco(id: number): Observable<Endereco> {
+    const url = `${this.enderecoBaseUrl}/${id}`;
+    return this.http.delete<Endereco>(url);
+  }
 }

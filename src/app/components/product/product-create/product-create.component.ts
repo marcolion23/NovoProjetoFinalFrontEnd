@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../product.model'; //add
 import { ProductService } from '../product.service';
 import { Router } from '@angular/router';
+import { FornecedorService } from '../../fornecedor/fornecedor.service'; //add
+import { Fornecedor } from '../../fornecedor/fornecedor.model'; //add
 
 @Component({
   selector: 'app-product-create',
@@ -11,25 +14,35 @@ export class ProductCreateComponent implements OnInit {
   maxDate: Date = new Date();
   dataCadastro: Date | null = null;
 
-  product: any = {
+  product: Product = {
     proNome: '',
+    proDescricao: '',
     proPrecoCusto: 0,
     proPrecoVenda: 0,
+    proQuantidadeEstoque: 0,
+    proCategoria: '',
+    proCodigoBarras: '',
+    proMarca: '',
     proPrecoCustoFormatado: '',
     proPrecoVendaFormatado: '',
-    proCategoria: '',
-    proMarca: '',
-    proCodigoBarras: '',
-    proEstoque: 0,
-    proAtivo: true
+    proAtivo: '',
+    forId: 0, //add
+    proDataCadastro: '' //add
   };
+
+  fornecedores: Fornecedor[] = []; //add
 
   constructor(
     private productService: ProductService,
+    private fornecedorService: FornecedorService, //add
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fornecedorService.readFornecedor().subscribe((fornecedores: Fornecedor[]) => {
+      this.fornecedores = fornecedores;
+    });
+  }
 
   salvar(): void {
     this.productService.create(this.product).subscribe(() => {
@@ -70,15 +83,18 @@ getNomeCategoria(valor: string): string {
   limpar(): void {
     this.product = {
       proNome: '',
+      proDescricao: '',
       proPrecoCusto: 0,
       proPrecoVenda: 0,
+      proQuantidadeEstoque: 0,
+      proCategoria: '',
+      proCodigoBarras: '',
+      proMarca: '',
       proPrecoCustoFormatado: '',
       proPrecoVendaFormatado: '',
-      proCategoria: '',
-      proMarca: '',
-      proCodigoBarras: '',
-      proEstoque: 0,
-      proAtivo: true
+      proAtivo: '',
+      forId: 0, //add
+      proDataCadastro: '' //add
     };
     this.dataCadastro = null; // limpa também a data de cadastro
   }
@@ -185,11 +201,8 @@ formatarMarcaPersonalizada(): void {
   this.marcaPersonalizada = texto.charAt(0).toUpperCase() + texto.slice(1);
 }
 limparZeroInicial() {
-  if (this.product.proEstoque === 0) {
-    this.product.proEstoque = null; // ou undefined para limpar o campo
+  if (this.product.proQuantidadeEstoque === 0) {
+    this.product.proQuantidadeEstoque = null; // ou undefined para limpar o campo
   }
 }
-
 }
-
-  

@@ -1,5 +1,5 @@
 export class Fornecedor {
-  id?: number;
+  forId?: number;
   nome: string = '';
   cnpj: string = '';
   inscricaoEstadual: string = '';

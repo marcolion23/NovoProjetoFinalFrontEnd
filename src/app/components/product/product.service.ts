@@ -52,5 +52,4 @@ export class ProductService {
     const url = `${this.baseUrl}/${proId}`;
     return this.http.delete<void>(url);
   }
-
 }

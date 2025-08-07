@@ -10,7 +10,7 @@
     <div class="product-info"><strong>Marca:</strong> {{ produto.proMarca }}</div>
     <div class="product-info"><strong>Preço de Custo:</strong> R$ {{ produto.proPrecoCusto | number:'1.2-2' }}</div>
     <div class="product-info"><strong>Preço de Venda:</strong> R$ {{ produto.proPrecoVenda | number:'1.2-2' }}</div>
-    <div class="product-info"><strong>Estoque:</strong> {{ produto.proEstoque }}</div>
+    <div class="product-info"><strong>Estoque:</strong> {{ produto.proQuantidadeEstoque }}</div>
     <div class="product-info"><strong>Status:</strong> 
       <span [ngClass]="produto.proAtivo ? 'ativo' : 'inativo'">
         {{ produto.proAtivo ? 'Ativo' : 'Inativo' }}
