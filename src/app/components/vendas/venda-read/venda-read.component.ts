@@ -5,10 +5,8 @@ interface Venda {
   clienteNome: string;
   produtoNome: string;
   quantidade: number;
-  valorUnitario: number;
   valorTotal: number;
   dataVenda: Date;
-  statusVenda: string;
 }
 
 @Component({
@@ -24,10 +22,8 @@ export class VendaReadComponent implements OnInit {
     'clienteNome',
     'produtoNome',
     'quantidade',
-    'valorUnitario',
     'valorTotal',
     'dataVenda',
-    'statusVenda',
     'action'
   ];
 
@@ -44,30 +40,24 @@ export class VendaReadComponent implements OnInit {
         clienteNome: 'João Silva',
         produtoNome: 'Teclado Gamer RGB',
         quantidade: 2,
-        valorUnitario: 150.00,
         valorTotal: 300.00,
         dataVenda: new Date(2025, 7, 1), // Agosto (mês começa em 0)
-        statusVenda: 'Concluída'
       },
       {
         vendaId: 2,
         clienteNome: 'Maria Souza',
         produtoNome: 'Mouse Sem Fio',
         quantidade: 1,
-        valorUnitario: 120.50,
         valorTotal: 120.50,
         dataVenda: new Date(2025, 7, 3),
-        statusVenda: 'Pendente'
       },
       {
         vendaId: 3,
         clienteNome: 'Carlos Pereira',
         produtoNome: 'Headset Gamer',
         quantidade: 1,
-        valorUnitario: 250.75,
         valorTotal: 250.75,
         dataVenda: new Date(2025, 7, 5),
-        statusVenda: 'Cancelada'
       }
     ];
   }

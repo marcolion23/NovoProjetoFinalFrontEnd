@@ -18,8 +18,7 @@ interface Venda {
   tipoPagamento?: string;
   valorTotal?: number;
   valorTotalFormatado?: string;
-  status?: string;
-  observacao?: string;
+
 }
 
 @Component({
@@ -35,8 +34,7 @@ export class VendaCreateComponent implements OnInit {
     tipoPagamento: '',
     valorTotal: 0,
     valorTotalFormatado: '0,00',
-    status: '',
-    observacao: ''
+    
   };
 
   clientes: Cliente[] = [];
@@ -107,39 +105,41 @@ export class VendaCreateComponent implements OnInit {
     }
   }
 
-  onValorInput(event: string, campo: keyof Venda): void {
-    let valor = event.replace(/\D/g, '');
+ onPrecoInput(valorDigitado: string, campo: 'valorTotal'): void {
+  let valor = valorDigitado.replace(/\D/g, ''); // Remove tudo que não for número
 
-    if (valor.length === 0) {
-      this.venda.valorTotal = 0;
-      this.venda.valorTotalFormatado = '0,00';
-      return;
-    }
-
-    while (valor.length > 3 && valor.startsWith('0')) {
-      valor = valor.substring(1);
-    }
-
-    let inteiro = '';
-    let decimal = '';
-
-    if (valor.length === 1) {
-      inteiro = '0';
-      decimal = '0' + valor;
-    } else if (valor.length === 2) {
-      inteiro = '0';
-      decimal = valor;
-    } else {
-      inteiro = valor.slice(0, valor.length - 2);
-      decimal = valor.slice(valor.length - 2);
-    }
-
-    const inteiroFormatado = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    const valorFormatado = `R$ ${inteiroFormatado},${decimal}`;
-
-    this.venda.valorTotal = parseFloat(`${inteiro}.${decimal}`);
-    this.venda.valorTotalFormatado = valorFormatado;
+  if (valor.length === 0) {
+    this.venda[campo] = 0;
+    this.venda[`${campo}Formatado`] = '';
+    return;
   }
+
+  // Remove zeros à esquerda, mantendo pelo menos 3 dígitos
+  while (valor.length > 3 && valor.startsWith('0')) {
+    valor = valor.substring(1);
+  }
+
+  let inteiro = '';
+  let decimal = '';
+
+  if (valor.length === 1) {
+    inteiro = '0';
+    decimal = '0' + valor;
+  } else if (valor.length === 2) {
+    inteiro = '0';
+    decimal = valor;
+  } else {
+    inteiro = valor.slice(0, valor.length - 2);
+    decimal = valor.slice(valor.length - 2);
+  }
+
+  const inteiroFormatado = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Insere pontos como separadores de milhar
+  const valorFormatado = `R$ ${inteiroFormatado},${decimal}`; // Formato final: R$ 1.234,56
+
+  this.venda[campo] = parseFloat(`${inteiro}.${decimal}`); // Armazena o número real (ex: 1234.56)
+  this.venda[`${campo}Formatado`] = valorFormatado; // Armazena o texto formatado (ex: R$ 1.234,56)
+}
+
 
   apenasNumeros(event: KeyboardEvent): void {
     const allowedChars = /[0-9]/;
@@ -158,7 +158,7 @@ export class VendaCreateComponent implements OnInit {
   }
 
   salvarVenda(): void {
-    if (!this.venda.clienteId || !this.venda.dataVenda || !this.venda.tipoPagamento || !this.venda.status) {
+    if (!this.venda.clienteId || !this.venda.dataVenda || !this.venda.tipoPagamento ) {
       alert('Por favor, preencha todos os campos obrigatórios.');
       return;
     }
@@ -179,8 +179,7 @@ export class VendaCreateComponent implements OnInit {
       tipoPagamento: '',
       valorTotal: 0,
       valorTotalFormatado: '0,00',
-      status: '',
-      observacao: ''
+   
     };
 
     this.produtoSelecionado = null;

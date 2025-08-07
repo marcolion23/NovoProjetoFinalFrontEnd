@@ -1,1 +1,21 @@
-<p>venda-delete works!</p>
+<div class="delete-container">
+  <h2 class="delete-title">🗑️ Confirmar Exclusão da Venda</h2>
+
+  <!-- Card com informações da venda -->
+  <div class="product-card">
+    <div class="product-info"><strong>ID:</strong> {{ venda.id }}</div>
+    <div class="product-info"><strong>Cliente:</strong> {{ venda.clienteNome }}</div>
+    <div class="product-info"><strong>Produto:</strong> {{ venda.produtoNome }}</div>
+    <div class="product-info"><strong>Quantidade:</strong> {{ venda.quantidade }}</div>
+    <div class="product-info"><strong>Tipo de Pagamento:</strong> {{ venda.tipoPagamento }}</div>
+    <div class="product-info"><strong>Data da Venda:</strong> {{ venda.dataVenda | date: 'dd/MM/yyyy' }}</div>
+    <div class="product-info"><strong>Valor Total:</strong> R$ {{ venda.valorTotal | number:'1.2-2' }}</div>
+  </div>
+
+  <!-- Botões -->
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="excluirVenda()">Excluir</button>
+<button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+
+  </div>
+</div>

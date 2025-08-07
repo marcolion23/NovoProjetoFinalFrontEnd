@@ -107,17 +107,25 @@
         <mat-error *ngIf="dataVenda.invalid && dataVenda.touched">Data inválida ou maior que a atual.</mat-error>
       </mat-form-field>
 
-      <!-- Valor Total (calculado automaticamente) -->
-      <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Valor Total (R$)</mat-label>
-        <input
-          matInput
-          type="text"
-          placeholder="0,00"
-          [value]="venda.valorTotalFormatado"
-      
-        >
-      </mat-form-field>
+     <!-- Valor Total da Venda -->
+<mat-form-field appearance="outline" class="half-width" required>
+  <mat-label>Valor da Venda (R$)</mat-label>
+  <input
+    matInput
+    type="text"
+    placeholder="0,00"
+    [ngModel]="venda.valorTotalFormatado"
+    (ngModelChange)="onPrecoInput($event, 'valorTotal')"
+    name="valorTotal"
+    required
+    #valorTotalInput="ngModel"
+    (keypress)="apenasNumeros($event)"
+  >
+  <mat-error *ngIf="valorTotalInput.invalid && (valorTotalInput.dirty || valorTotalInput.touched)">
+    O valor da venda é obrigatório.
+  </mat-error>
+</mat-form-field>
+
   
 
       <!-- BOTÕES -->
