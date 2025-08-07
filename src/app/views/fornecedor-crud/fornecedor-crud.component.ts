@@ -19,4 +19,5 @@ export class FornecedorCrudComponent {
     this.fornecedoresAtivos = 20;
     this.fornecedoresInativos = 5;
   }
+  
 }

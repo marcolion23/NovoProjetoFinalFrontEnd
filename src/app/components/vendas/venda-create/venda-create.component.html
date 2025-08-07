@@ -118,32 +118,7 @@
       
         >
       </mat-form-field>
-
-      <!-- OBSERVAÇÕES -->
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Observações</mat-label>
-        <textarea
-          matInput
-          rows="4"
-          [(ngModel)]="venda.observacao"
-          name="observacao"
-          placeholder="Anotações adicionais"></textarea>
-      </mat-form-field>
-
-      <!-- STATUS DA VENDA -->
-      <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Status</mat-label>
-        <mat-select
-          [(ngModel)]="venda.status"
-          name="status"
-          #status="ngModel"
-          required>
-          <mat-option value="Pendente">Pendente</mat-option>
-          <mat-option value="Concluída">Concluída</mat-option>
-          <mat-option value="Cancelada">Cancelada</mat-option>
-        </mat-select>
-        <mat-error *ngIf="status.invalid && status.touched">Status é obrigatório.</mat-error>
-      </mat-form-field>
+  
 
       <!-- BOTÕES -->
       <div class="button-container">

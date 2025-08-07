@@ -80,7 +80,8 @@
   justify-content: center;
   font-family: 'Segoe UI', sans-serif;
   color: #ffffff;
-  
+      background: linear-gradient(to right, #0D3B66, #050A1F);
+
 }
 
 /* Painel clientes inativos com vermelho */

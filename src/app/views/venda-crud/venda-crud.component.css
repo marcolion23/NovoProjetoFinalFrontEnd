@@ -61,6 +61,8 @@
   font-family: 'Segoe UI', sans-serif;
   color: #ffffff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: linear-gradient(to right, #0D3B66, #050A1F);
+
 }
 
 .panel-info:hover {
@@ -78,6 +80,42 @@
 }
 
 .panel-info p {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.material-icons {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+
+.panel-info2 {
+background-color: #14532d; 
+ border-radius: 24px;
+  padding: 40px 30px;
+  text-align: center;
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.panel-info:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+.panel-info2 h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.panel-info2 p {
   font-size: 26px;
   font-weight: bold;
 }

@@ -1,110 +1,138 @@
 .home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  display: flex; /* Ativa o Flexbox para organizar os filhos */
+  flex-direction: column; /* Os elementos filhos serão empilhados em coluna */
+  align-items: center; /* Centraliza os elementos filhos horizontalmente */
+  padding: 20px; /* Espaçamento interno geral do container */
 }
 
 /* ===== CARD DE BOAS-VINDAS ===== */
 .welcome-card {
-  margin-top: 120px;
-  left: -100px;
-  width: 55%;
-  background: linear-gradient(to right, #0D3B66, #050A1F);
-  color: #fff;
-  padding: 25px;
-  text-align: center;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  margin-bottom: 20px; /* espaçamento para o card de estatísticas */
+  margin-top: 120px; /* Espaçamento do topo para descer o card */
+  left: -100px; /* Move o card levemente para a esquerda */
+  width: 50%; /* Define largura do card como 55% do contêiner pai */
+  background: linear-gradient(to right, #0D3B66, #050A1F); /* Degradê azul escuro da esquerda para direita */
+  color: #fff; /* Cor do texto branca */
+  padding: 65px; /* Espaçamento interno ao redor do conteúdo */
+  text-align: center; /* Centraliza todo o texto do card */
+  border-radius: 12px; /* Bordas arredondadas */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Sombra externa leve */
+  margin-bottom: 20px; /* Espaço inferior para separar do próximo card */
 }
 
 .welcome-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.6rem;
-  font-weight: 620;
-  color: #21CBF3;
-  margin-bottom: 24px;
-  gap: 10px;
+  display: flex;               /* Usa Flexbox */
+  flex-direction: column;      /* Coloca os elementos em coluna (um abaixo do outro) */
+  align-items: center;         /* Centraliza horizontalmente */
+  justify-content: center;     /* Alinha verticalmente */
+  font-size: 1.6rem;           /* Tamanho da fonte */
+  font-weight: 620;            /* Peso intermediário */
+  color: #21CBF3;              /* Azul neon */
+  margin-bottom: 24px;         /* Espaço inferior */
+  gap: 10px;                   /* Espaço entre ícone e texto */
 }
 
 
 .welcome-text {
-  font-size: 1.2rem;
-  font-weight: 500;
-  opacity: 1.0;
+  font-size: 1.2rem;         /* Tamanho da fonte */
+  font-weight: 500;          /* Peso médio */
+  opacity: 1.0;              /* Visível */
+  max-width: 600px;          /* Limita a largura do texto */
+  margin: 0 auto;            /* Centraliza horizontalmente */
+  line-height: 1.6;          /* Espaçamento entre linhas para melhor leitura */
+  word-break: break-word;    /* Evita que palavras muito longas estourem o layout */
+  text-align: center;        /* (opcional) Centraliza o texto */
 }
+
 
 /* ===== CARD DE ESTATÍSTICAS ===== */
 .stats-card {
-  left: -95px;
-  width: 55%;
-  background: linear-gradient(to left, #0D3B66, #050A1F);
-  padding: 30px;
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
-  border-radius: 16px;
-  overflow: auto;
+  left: -95px; /* Move o card levemente para a esquerda */
+  width: 55%; /* Define largura do card como 55% do contêiner */
+  background: linear-gradient(to left, #0D3B66, #050A1F); /* Degradê azul escuro da direita para esquerda */
+  padding: 30px; /* Espaçamento interno */
+  color: #fff; /* Cor do texto branca */
+  font-family: 'Roboto', sans-serif; /* Fonte moderna e legível */
+  border-radius: 16px; /* Bordas mais arredondadas */
+  overflow: auto; /* Adiciona rolagem se necessário */
 }
 
 .stats-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.6rem;
-  font-weight: 620;
-  color: #21CBF3;
-  margin-bottom: 24px;
-  gap: 10px;
+  display: flex; /* Flex para alinhar ícone + texto */
+  align-items: center; /* Alinha verticalmente */
+  justify-content: center; /* Centraliza o título */
+  font-size: 1.6rem; /* Tamanho da fonte do título */
+  font-weight: 620; /* Peso intermediário */
+  color: #21CBF3; /* Azul neon chamativo */
+  margin-bottom: 24px; /* Espaço inferior abaixo do título */
+  gap: 10px; /* Espaço entre elementos */
 }
 
 .stats-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px 30px;
-  justify-content: center;
+  display: flex; /* Usa flexbox para dispor as estatísticas */
+  flex-wrap: wrap; /* Permite que quebrem linha quando necessário */
+  gap: 20px 30px; /* Espaçamento entre os cards: vertical 20px, horizontal 30px */
+  justify-content: center; /* Centraliza os itens */
 }
 
 .stat-item {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 14px 18px;
-  flex: 1 1 180px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: rgba(255, 255, 255, 0.1); /* Fundo branco com transparência */
+  border-radius: 12px; /* Bordas arredondadas para visual moderno */
+  padding: 14px 18px; /* Espaçamento interno */
+  flex: 1 1 180px; /* Ocupa pelo menos 180px, cresce e encolhe conforme necessário */
+  display: flex; /* Layout flexível para ícone + texto */
+  align-items: center; /* Alinha verticalmente os elementos internos */
+  gap: 12px; /* Espaço entre ícone e texto */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12); /* Sombra leve ao redor do card */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave no hover */
 }
 
 .stat-item:hover {
-  background-color: rgba(255, 255, 255, 0.18);
-  transform: translateY(-3px);
+  background-color: rgba(255, 255, 255, 0.18); /* Fundo mais claro ao passar o mouse */
+  transform: translateY(-3px); /* Leve elevação ao passar o mouse */
 }
 
-.stat-icon { font-size: 26px; color: #21CBF3; flex-shrink: 0; }
-.stat-info { display: flex; flex-direction: column; justify-content: center; color: #fff; }
-.stat-value { font-size: 1.4rem; font-weight: 700; line-height: 1.2; }
-.stat-label { font-size: 0.9rem; margin-top: 4px; opacity: 0.8; }
+.stat-icon {
+  font-size: 26px; /* Tamanho do ícone */
+  color: #21CBF3; /* Cor azul neon padrão */
+  flex-shrink: 0; /* Impede o encolhimento do ícone */
+}
 
-/* Ícones coloridos */
-.stat-icon.sell {color:#10b981}
-.stat-icon.inventory { color: #3b82f6; }
-.stat-icon.clients { color: #ef4444; }
-.stat-icon.revenue { color: #10b981; }
-.stat-icon.orders { color: #f59e0b; }
-.stat-icon.suppliers { color: #6366f1; }
-.stat-icon.employees { color: #8b5cf6; }
+.stat-info {
+  display: flex; /* Flex para empilhar os textos verticalmente */
+  flex-direction: column; /* Um abaixo do outro */
+  justify-content: center; /* Centraliza verticalmente */
+  color: #fff; /* Cor branca do texto */
+}
 
-/* ===== RESPONSIVIDADE ===== */
+.stat-value {
+  font-size: 1.4rem; /* Tamanho do número principal (valor) */
+  font-weight: 700; /* Negrito para destaque */
+  line-height: 1.2; /* Altura da linha ajustada */
+}
+
+.stat-label {
+  font-size: 0.9rem; /* Texto pequeno para o rótulo */
+  margin-top: 4px; /* Espaço entre o valor e o rótulo */
+  opacity: 0.8; /* Levemente mais transparente */
+}
+
+/* ===== CORES PERSONALIZADAS POR ÍCONE ===== */
+.stat-icon.sell { color: #10b981 } /* Verde para ícone de vendas */
+.stat-icon.inventory { color: #3b82f6; } /* Azul para estoque */
+.stat-icon.clients { color: #ef4444; } /* Vermelho para clientes */
+.stat-icon.revenue { color: #10b981; } /* Verde para receita */
+.stat-icon.orders { color: #f59e0b; } /* Amarelo para pedidos */
+.stat-icon.suppliers { color: #6366f1; } /* Roxo claro para fornecedores */
+.stat-icon.employees { color: #8b5cf6; } /* Roxo escuro para funcionários */
+
+/* ===== RESPONSIVIDADE PARA TELAS MÉDIAS ===== */
 @media (max-width: 1024px) {
-  .welcome-card { width: 90%; }
-  .stats-card { width: 90%; }
-  .stat-item { flex: 1 1 45%; }
+  .welcome-card { width: 90%; } /* Card ocupa 90% da largura da tela */
+  .stats-card { width: 90%; } /* Idem para card de estatísticas */
+  .stat-item { flex: 1 1 45%; } /* Dois cards por linha (45% cada) */
 }
 
+/* ===== RESPONSIVIDADE PARA TELAS PEQUENAS ===== */
 @media (max-width: 600px) {
-  .stat-item { flex: 1 1 100%; }
+  .stat-item { flex: 1 1 100%; } /* Cada card ocupa linha inteira */
 }

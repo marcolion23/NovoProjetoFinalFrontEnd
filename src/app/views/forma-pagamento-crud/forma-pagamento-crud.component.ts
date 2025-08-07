@@ -31,7 +31,6 @@ export class FormaPagamentoCrudComponent implements OnInit {
 
   atualizarResumo(): void {
     this.totalPagamentos = this.listaPagamentos.length;
-    this.pagamentosAtrasados = this.listaPagamentos.filter(p => !p.status).length;
     this.ultimaAtualizacao = new Date().toLocaleString('pt-BR');
   }
 
