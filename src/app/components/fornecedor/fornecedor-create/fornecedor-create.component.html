@@ -8,8 +8,8 @@
     <form class="product-form" #formFornecedor="ngForm">
 
       <!-- NOME -->
-      <mat-form-field appearance="outline" class="half-width spaced-field" required>
-        <mat-label>Nome</mat-label>
+      <mat-form-field appearance="outline" class="full-width spaced-field" required>
+        <mat-label>Nome do Fornecedor</mat-label>
         <input matInput [(ngModel)]="fornecedor.nome" name="nome" #nome="ngModel" required
           pattern="^[A-Za-zÀ-ÿ\s]+$" (ngModelChange)="capitalizeFirst($event, 'nome')" />
         <mat-error *ngIf="nome.invalid && nome.touched">Apenas letras e espaços</mat-error>
@@ -55,12 +55,6 @@
         <mat-error *ngIf="cnpj.invalid && cnpj.touched">CNPJ inválido</mat-error>
       </mat-form-field>
 
-      <!-- INSCRIÇÃO ESTADUAL -->
-      <mat-form-field appearance="outline" class="half-width spaced-field">
-        <mat-label>Inscrição Estadual</mat-label>
-        <input matInput [(ngModel)]="fornecedor.inscricaoEstadual" name="inscricaoEstadual" maxlength="14"
-          pattern="^[0-9]*$" />
-      </mat-form-field>
 
     <!-- CEP -->
 <mat-form-field appearance="outline" class="half-width spaced-field" required *ngIf="!mostrarEnderecoManual">
@@ -79,7 +73,7 @@
 <div class="manual-address-button-container spaced-field" 
      *ngIf="!mostrarEnderecoManual && (!fornecedor.cep || fornecedor.cep.trim() === '')">
   <button mat-stroked-button color="warn" (click)="ativarEnderecoManual()">
-    Não sei o CEP
+    NAO SEI MEU CEP
   </button>
 </div>
 
@@ -164,7 +158,7 @@
 
   <!-- Botão "Voltar ao CEP" só aparece aqui, no modo manual -->
   <div class="manual-address-button-container spaced-field">
-    <button mat-stroked-button color="primary" (click)="desativarEnderecoManual()">Voltar ao CEP</button>
+    <button mat-stroked-button color="primary" (click)="desativarEnderecoManual()">VOLTAR AO CEP</button>
   </div>
 </div>
       <!-- STATUS -->

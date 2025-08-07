@@ -10,7 +10,7 @@ export interface Cliente {
   cliBairro?: string;
   cliCidade?: string;
   cliEstado?: string;
-  cliCep?: string;
+  cliCep?: string;        // <---- Adicione esta linha
   cliAtivo?: boolean;
   cliStatus?: string;
   cliDataCadastro?: string;

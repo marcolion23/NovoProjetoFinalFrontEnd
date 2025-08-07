@@ -5,7 +5,7 @@
 <mat-card class="client-card">
 
   <!-- Título do formulário -->
-  <mat-card-title class="titulo-formulario">Cadastro de Cliente</mat-card-title>
+  <mat-card-title class="titulo-formulario">CADASTRO DE CLIENTE</mat-card-title>
 
   <!-- Formulário Angular -->
   <form class="client-form" #formCliente="ngForm" (ngSubmit)="salvar()" autocomplete="off" novalidate>
@@ -108,50 +108,34 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Email -->
-    <mat-form-field appearance="outline" class="half-width" required>
-      <mat-label>Email</mat-label>
-      <input
-        matInput
-        type="email"
-        name="cliEmail"
-        [(ngModel)]="cliente.cliEmail"
-        #cliEmail="ngModel"
-        required
-        email
-        autocomplete="off"
-      />
-      <mat-error *ngIf="cliEmail.invalid && cliEmail.touched">
-        Email inválido.
-      </mat-error>
-    </mat-form-field>
+   
 
-    <!-- CEP -->
-    <mat-form-field appearance="outline" class="half-width" required>
-      <mat-label>CEP</mat-label>
-      <input
-        matInput
-        name="cep"
-        [(ngModel)]="cep"
-        #cepInput="ngModel"
-        maxlength="9"
-        placeholder="00000-000"
-        (input)="onCepInput()"
-        (keypress)="apenasNumerosComMascaraCep($event)"
-        required
-        autocomplete="off"
-      />
-      <mat-error *ngIf="cepInvalido">
-        CEP inválido ou não encontrado.
-      </mat-error>
-    </mat-form-field>
+<!-- CEP + Botão "Não sei o CEP" -->
+<div *ngIf="!mostrarEnderecoManual">
+  <!-- CEP -->
+  <mat-form-field appearance="outline" class="half-width" required>
+    <mat-label>CEP</mat-label>
+    <input
+      matInput
+      name="cep"
+      [(ngModel)]="cep"
+      #cepInput="ngModel"
+      maxlength="9"
+      placeholder="00000-000"
+      (input)="onCepInput()"
+      (keypress)="apenasNumerosComMascaraCep($event)"
+      required
+      autocomplete="off"
+    />
+    <mat-error *ngIf="cepInvalido">CEP inválido ou não encontrado.</mat-error>
+  </mat-form-field>
 
-  <div class="manual-address-button-container spaced-field" 
-     *ngIf="!mostrarEnderecoManual && (!cep || cep.trim() === '')">
-  <button mat-stroked-button color="warn" (click)="ativarEnderecoManual()">
-    Não sei o CEP
-  </button>
-</div>  
+  <!-- Botão "Não sei o CEP" -->
+  <div class="manual-address-button-container spaced-field" *ngIf="!cep || cep.trim() === ''">
+    <button mat-stroked-button color="warn" (click)="ativarEnderecoManual()">NÃO SEI MEU CEP</button>
+  </div>
+</div>
+
 
 
 
@@ -206,20 +190,34 @@
   </mat-form-field>
 
  
-  <mat-form-field *ngIf="mostrarCampoOutraCidade" appearance="outline" class="half-width spaced-field" required>
-    <mat-label>Outra Cidade</mat-label>
-<input
-  matInput
-  [(ngModel)]="nomeOutraCidade"
-  name="nomeOutraCidade"
-  #nomeOutraCidadeRef="ngModel"
-  required
-  (ngModelChange)="nomeOutraCidade = capitalizeWords($event)"
-/>
+<!-- Campo "Outra Cidade" - aparece só quando necessário -->
+<mat-form-field *ngIf="mostrarCampoOutraCidade" appearance="outline" class="half-width spaced-field" required>
+  <mat-label>Outra Cidade</mat-label>
+  <input
+    matInput
+    [(ngModel)]="nomeOutraCidade"
+    name="nomeOutraCidade"
+    #nomeOutraCidadeRef="ngModel"
+    required
+    (ngModelChange)="nomeOutraCidade = capitalizeWords($event)"
+  />
+  <mat-error *ngIf="nomeOutraCidadeRef.invalid && nomeOutraCidadeRef.touched">Informe a cidade</mat-error>
+</mat-form-field>
 
+<!-- Campo "Bairro" - aparece sempre no modo manual -->
+<mat-form-field appearance="outline" class="half-width spaced-field">
+  <mat-label>Bairro</mat-label>
+  <input
+    matInput
+    [(ngModel)]="cliente.bairro"
+    name="bairro"
+    #bairro="ngModel"
+    pattern="^[A-Za-zÀ-ÿ\s]+$"
+    (ngModelChange)="capitalizeFirst($event, 'bairro')"
+  />
+  <mat-error *ngIf="bairro.invalid && bairro.touched">Informe apenas letras e espaços</mat-error>
+</mat-form-field>
 
-    <mat-error *ngIf="nomeOutraCidadeRef.invalid && nomeOutraCidadeRef.touched">Informe a cidade</mat-error>
-  </mat-form-field>
 
   <mat-form-field appearance="outline" class="half-width spaced-field" required>
     <mat-label>Rua</mat-label>
@@ -233,15 +231,10 @@
     <mat-error *ngIf="numeroManual.invalid && numeroManual.touched">Número obrigatório e não pode ser negativo</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="half-width spaced-field">
-    <mat-label>Bairro</mat-label>
-    <input matInput [(ngModel)]="cliente.bairro" name="bairro" #bairro="ngModel" pattern="^[A-Za-zÀ-ÿ\s]+$" (ngModelChange)="capitalizeFirst($event, 'bairro')" />
-    <mat-error *ngIf="bairro.invalid && bairro.touched">Informe apenas letras e espaços</mat-error>
-  </mat-form-field>
 
   <!-- Botão "Voltar ao CEP" só aparece aqui, no modo manual -->
   <div class="manual-address-button-container spaced-field">
-    <button mat-stroked-button color="primary" (click)="desativarEnderecoManual()">Voltar ao CEP</button>
+    <button mat-stroked-button color="primary" (click)="desativarEnderecoManual()">VOLTAR AO CEP</button>
   </div>
 </div>
 

@@ -159,7 +159,6 @@
   align-items: center; /* Centraliza verticalmente */
   justify-content: flex-start; /* Alinha conteúdo à esquerda */
   gap: 25px; /* Espaço entre ícone e texto */
-  font-weight: bold; /* Texto em negrito */
   background: linear-gradient(to bottom, #0D3B66, #112E4F); /* Degradê azul */
   color: #fff; /* Cor do texto */
   border-radius: 15px; /* Cantos arredondados */
