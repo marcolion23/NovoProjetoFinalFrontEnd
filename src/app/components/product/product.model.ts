@@ -8,7 +8,6 @@ export interface Product {
   proCategoria: string;
   proCodigoBarras: string;
   proMarca: string;
-  proAtivo: string;
   proDataCadastro: string;
   forId: number;
 

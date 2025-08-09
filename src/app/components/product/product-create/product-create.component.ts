@@ -25,7 +25,6 @@ export class ProductCreateComponent implements OnInit {
     proMarca: '',
     proPrecoCustoFormatado: '',
     proPrecoVendaFormatado: '',
-    proAtivo: '',
     forId: 0, //add
     proDataCadastro: '' //add
   };
@@ -92,7 +91,6 @@ getNomeCategoria(valor: string): string {
       proMarca: '',
       proPrecoCustoFormatado: '',
       proPrecoVendaFormatado: '',
-      proAtivo: '',
       forId: 0, //add
       proDataCadastro: '' //add
     };

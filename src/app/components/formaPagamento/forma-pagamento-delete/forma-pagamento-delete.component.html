@@ -2,24 +2,30 @@
   <h2 class="delete-title">🗑️ Confirmar Exclusão da Forma de Pagamento</h2>
 
   <div class="product-card">
-    <!-- Como não há "nome", vou usar a descrição -->
-    <div class="product-info"><strong>Descrição:</strong> {{ item.fpgDescricao }}</div>
-
-  <div class="product-info">
-  <strong>Tipo de Pagamento:</strong> {{ item.tipo || 'Não informado' }}
-</div>
-
-
-    <div class="product-info" *ngIf="item.parcelas !== undefined">
-      <strong>Parcelado:</strong> {{ item.parcelas && item.parcelas > 1 ? 'Sim' : 'Não' }}
+    <!-- Descrição -->
+    <div class="product-info">
+      <strong>Descrição:</strong> {{ item.fpgDescricao || 'Não informado' }}
     </div>
 
-    <div class="product-info" *ngIf="item.observacao"><strong>Observações:</strong> {{ item.observacao }}</div>
+    <!-- Tipo de Pagamento -->
+    <div class="product-info">
+      <strong>Tipo de Pagamento:</strong> {{ item.fpgTipo || 'Não informado' }}
+    </div>
 
-    <div class="product-info"><strong>Status:</strong>
-      <span [ngClass]="item.status === 'ativo' ? 'ativo' : 'inativo'">
-        {{ item.status === 'ativo' ? 'Ativo' : 'Inativo' }}
-      </span>
+    <!-- Parcelamento -->
+    <div class="product-info" *ngIf="item.fpgNumMaxParcelas">
+      <strong>Parcelado:</strong>
+      {{ item.fpgNumMaxParcelas === 'sim' ? 'Sim' : 'Não' }}
+    </div>
+
+    <!-- Número de Parcelas -->
+    <div class="product-info" *ngIf="item.fpgPermiteParcelamento && item.fpgNumMaxParcelas === 'sim'">
+      <strong>Número de Parcelas:</strong> {{ item.fpgPermiteParcelamento }}
+    </div>
+
+    <!-- Taxa Adicional -->
+    <div class="product-info" *ngIf="item.fpgTaxaAdicional">
+      <strong>Aplica Taxas:</strong> {{ item.fpgTaxaAdicional === 'sim' ? 'Sim' : 'Não' }}
     </div>
   </div>
 

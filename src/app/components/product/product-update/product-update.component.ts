@@ -31,7 +31,6 @@ export class ProductUpdateComponent implements OnInit {
     proPrecoCusto: 0,
     proPrecoVenda: 0,
     proQuantidadeEstoque: 0,
-    proAtivo: '',
     forId: 0, // add
     proDataCadastro: '',
     proMarcaPersonalizada: '',
@@ -95,7 +94,6 @@ export class ProductUpdateComponent implements OnInit {
       proPrecoCusto: 0,
       proPrecoVenda: 0,
       proQuantidadeEstoque: 0,
-      proAtivo: '',
       forId: 0,
       proDataCadastro: '',
       proMarcaPersonalizada: '',

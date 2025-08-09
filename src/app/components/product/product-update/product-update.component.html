@@ -303,17 +303,8 @@
           </mat-error>
         </mat-form-field>
  
-        <!-- Status -->
-        <mat-form-field appearance="outline" class="full-width" required>
-          <mat-label>Status</mat-label>
-          <mat-select [(ngModel)]="product.proAtivo" name="proAtivo" required #proAtivoInput="ngModel">
-            <mat-option [value]="true">Ativo</mat-option>
-            <mat-option [value]="false">Inativo</mat-option>
-          </mat-select>
-          <mat-error *ngIf="proAtivoInput.invalid && (proAtivoInput.dirty || proAtivoInput.touched)">
-            O status é obrigatório.
-          </mat-error>
-        </mat-form-field>
+      
+        
  
         <!-- Botões -->
         <div class="button-container">

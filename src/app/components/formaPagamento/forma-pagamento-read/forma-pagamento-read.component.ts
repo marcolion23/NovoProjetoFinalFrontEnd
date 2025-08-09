@@ -36,23 +36,21 @@ export class FormaPagamentoReadComponent implements OnInit {
   mockPagamentos(): void {
     this.fpagamentos = [
       {
-        clienteId: 101,
+        fpgId: 11,
         fpgDescricao: 'Cartão de Crédito',
-        tipo: 'Cartão',
-        status: 'Pago'
+        fpgTipo: 'Cartão',
       },
       {
 
-        clienteId: 102,
+        fpgId: 102,
         fpgDescricao: 'Boleto Bancário',
-        tipo: 'Boleto',
-        status: 'Pendente'
+        fpgTipo: 'Boleto',
       },
       {
-        clienteId: 103,
+        fpgId: 103,
         fpgDescricao: 'PIX',
-        tipo: 'PIX',
-        status: 'Pago'
+        fpgTipo: 'PIX',
+       
       }
     ];
   }
