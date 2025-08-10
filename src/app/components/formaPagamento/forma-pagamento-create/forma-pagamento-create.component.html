@@ -123,21 +123,7 @@
 
       </ng-container>
 
-      <!-- STATUS -->
-      <mat-form-field appearance="outline" class="half-width" required>
-        <mat-label>Status</mat-label>
-        <mat-select
-          [(ngModel)]="formaPagamento.fpgDescricao"
-          name="fpgDescricao"
-          #status="ngModel"
-          required>
-          <mat-option value="Pendente">Pendente</mat-option>
-          <mat-option value="Concluída">Concluída</mat-option>
-          <mat-option value="Cancelada">Cancelada</mat-option>
-        </mat-select>
-        <mat-error *ngIf="status.invalid && status.touched">Status é obrigatório.</mat-error>
-      </mat-form-field>
-
+ 
    
 
       <!-- BOTÕES -->

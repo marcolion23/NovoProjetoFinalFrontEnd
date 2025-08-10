@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 interface Cliente {
+  cliId?: number;
   cliNome: string;
   cliCpf: string;
-  cliDataNascimento: Date | null;
-  cliTelefone: string;
   cliEmail: string;
-  cliSexo: string;
-  estado?: string;      // para o endereço manual
-  cidade?: string;      // para o endereço manual
-  rua?: string;         // endereço manual
-  numero?: number;      // endereço manual
-  bairro?: string;      // endereço manual
+  cliTelefone: string;
+  cliDataNascimento?: string;
+  cliRua?: string;
+  cliNumero?: number | null;
+  cliBairro?: string;
+  cliCidade?: string;
+  cliEstado?: string;
+  cliCep?: string;    
+  cliDataCadastro?: string;
 }
 
 interface EstadoECidades {
@@ -28,17 +30,19 @@ interface EstadoECidades {
 export class ClienteUpdateComponent implements OnInit {
 
   cliente: Cliente = {
+    cliId: undefined,
     cliNome: '',
     cliCpf: '',
-    cliDataNascimento: null,
     cliTelefone: '',
     cliEmail: '',
-    cliSexo: '',
-    estado: '',
-    cidade: '',
-    rua: '',
-    numero: undefined,
-    bairro: ''
+    cliDataNascimento: '',
+    cliCep:'',
+    cliDataCadastro:'',
+    cliEstado: '',
+    cliCidade: '',
+    cliRua: '',
+    cliNumero: undefined,
+    cliBairro: ''
   };
 
   cep: string = '';
@@ -681,10 +685,10 @@ capitalizeFirst(fieldName: string | any, propertyName?: string) {
             this.endereco = data;
 
             // Atualiza campos do cliente para endereço automático
-            this.cliente.estado = data.uf;
-            this.cliente.cidade = data.localidade;
-            this.cliente.rua = data.logradouro;
-            this.cliente.bairro = data.bairro || '';
+            this.cliente.cliEstado = data.uf;
+            this.cliente.cliCidade = data.localidade;
+            this.cliente.cliRua = data.logradouro;
+            this.cliente.cliBairro = data.bairro || '';
           }
         },
         error: () => {
@@ -710,20 +714,20 @@ capitalizeFirst(fieldName: string | any, propertyName?: string) {
     this.cidadesFiltradas = [];
     this.mostrarCampoOutraCidade = false;
 
-    this.cliente.estado = '';
-    this.cliente.cidade = '';
-    this.cliente.rua = '';
-    this.cliente.numero = undefined;
-    this.cliente.bairro = '';
+    this.cliente.cliEstado = '';
+    this.cliente.cliCidade = '';
+    this.cliente.cliRua = '';
+    this.cliente.cliNumero = undefined;
+    this.cliente.cliBairro = '';
   }
 
   desativarEnderecoManual() {
     this.mostrarEnderecoManual = false;
-    this.cliente.estado = '';
-    this.cliente.cidade = '';
-    this.cliente.rua = '';
-    this.cliente.numero = undefined;
-    this.cliente.bairro = '';
+    this.cliente.cliEstado = '';
+    this.cliente.cliCidade = '';
+    this.cliente.cliRua = '';
+    this.cliente.cliNumero = undefined;
+    this.cliente.cliBairro = '';
     this.mostrarCampoOutraCidade = false;
   }
 
@@ -735,7 +739,7 @@ capitalizeFirst(fieldName: string | any, propertyName?: string) {
       this.cidadesFiltradas = [];
     }
 
-    this.cliente.cidade = '';
+    this.cliente.cliCidade = '';
     this.mostrarCampoOutraCidade = false;
     this.nomeOutraCidade = '';
   }
@@ -764,10 +768,10 @@ capitalizeFirst(fieldName: string | any, propertyName?: string) {
       );
     } else if (this.mostrarEnderecoManual) {
       enderecoValido = !!(
-        this.cliente.estado &&
-        (this.cliente.cidade && (this.cliente.cidade !== 'Outra Cidade' || this.nomeOutraCidade.trim() !== '')) &&
-        this.cliente.rua &&
-        this.cliente.numero !== undefined
+        this.cliente.cliEstado &&
+        (this.cliente.cliCidade && (this.cliente.cliCidade !== 'Outra Cidade' || this.nomeOutraCidade.trim() !== '')) &&
+        this.cliente.cliRua &&
+        this.cliente.cliNumero !== undefined
       );
     }
 
@@ -777,7 +781,6 @@ capitalizeFirst(fieldName: string | any, propertyName?: string) {
       this.cliente.cliDataNascimento &&
       this.cliente.cliTelefone &&
       this.cliente.cliEmail &&
-      this.cliente.cliSexo &&
       enderecoValido
     ) {
       // Prepara o objeto final a ser enviado
@@ -785,11 +788,11 @@ capitalizeFirst(fieldName: string | any, propertyName?: string) {
         ...this.cliente,
         endereco: this.mostrarEnderecoManual
           ? {
-              uf: this.cliente.estado,
-              localidade: this.cliente.cidade === 'Outra Cidade' ? this.nomeOutraCidade : this.cliente.cidade,
-              logradouro: this.cliente.rua,
-              numero: this.cliente.numero,
-              bairro: this.cliente.bairro,
+              uf: this.cliente.cliEstado,
+              localidade: this.cliente.cliCidade === 'Outra Cidade' ? this.nomeOutraCidade : this.cliente.cliCidade,
+              logradouro: this.cliente.cliRua,
+              numero: this.cliente.cliNumero,
+              bairro: this.cliente.cliBairro,
               pais: 'Brasil',
               cep: null
             }
@@ -821,15 +824,14 @@ capitalizeFirst(fieldName: string | any, propertyName?: string) {
     this.cliente = {
       cliNome: '',
       cliCpf: '',
-      cliDataNascimento: null,
+      cliDataNascimento: '',
       cliTelefone: '',
       cliEmail: '',
-      cliSexo: '',
-      estado: '',
-      cidade: '',
-      rua: '',
-      numero: undefined,
-      bairro: ''
+      cliEstado: '',
+      cliCidade: '',
+      cliRua: '',
+      cliNumero: undefined,
+      cliBairro: ''
     };
     this.cep = '';
     this.numeroResidencia = '';

@@ -30,9 +30,7 @@ this.clientes = [
     cliEmail: 'joao.silva@email.com',
     cliTelefone: '(11) 91234-5678',
     cliStatus: 'Ativo',
-    cliAtivo: true,
     cliDataCadastro: '2024-01-01',
-    cliSexo: 'Masculino'  // <-- adicione aqui também!
 
   },
   {
@@ -41,11 +39,7 @@ this.clientes = [
     cliCpf: '987.654.321-99',
     cliEmail: 'maria.oliveira@email.com',
     cliTelefone: '(21) 99876-5432',
-    cliStatus: 'Ativo',
-    cliAtivo: false,
     cliDataCadastro: '2024-05-15',
-    cliSexo: 'Feminino'  // <-- adicione aqui também!
-
   }
 ];
 

@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 interface Cliente {
+  cliId?: number;
   cliNome: string;
   cliCpf: string;
-  cliDataNascimento: Date | null;
-  cliTelefone: string;
   cliEmail: string;
-  cliSexo: string;
-  estado?: string;      // para o endereço manual
-  cidade?: string;      // para o endereço manual
-  rua?: string;         // endereço manual
-  numero?: number;      // endereço manual
-  bairro?: string;      // endereço manual
+  cliTelefone: string;
+  cliDataNascimento?: string;
+  cliRua?: string;
+  cliNumero?: number | null;
+  cliBairro?: string;
+  cliCidade?: string;
+  cliEstado?: string;
+  cliCep?: string;    
+  cliDataCadastro?: string;
 }
 
 interface EstadoECidades {
@@ -27,18 +29,20 @@ interface EstadoECidades {
 })
 export class ClienteCreateComponent implements OnInit {
 
-  cliente: Cliente = {
+   cliente: Cliente = {
+    cliId: undefined,
     cliNome: '',
     cliCpf: '',
-    cliDataNascimento: null,
     cliTelefone: '',
     cliEmail: '',
-    cliSexo: '',
-    estado: '',
-    cidade: '',
-    rua: '',
-    numero: undefined,
-    bairro: ''
+    cliDataNascimento: '',
+    cliCep:'',
+    cliDataCadastro:'',
+    cliEstado: '',
+    cliCidade: '',
+    cliRua: '',
+    cliNumero: undefined,
+    cliBairro: ''
   };
 
   cep: string = '';
@@ -681,10 +685,10 @@ capitalizeFirst(fieldName: string | any, propertyName?: string) {
             this.endereco = data;
 
             // Atualiza campos do cliente para endereço automático
-            this.cliente.estado = data.uf;
-            this.cliente.cidade = data.localidade;
-            this.cliente.rua = data.logradouro;
-            this.cliente.bairro = data.bairro || '';
+            this.cliente.cliEstado = data.uf;
+            this.cliente.cliCidade = data.localidade;
+            this.cliente.cliRua = data.logradouro;
+            this.cliente.cliBairro = data.bairro || '';
           }
         },
         error: () => {
@@ -710,20 +714,20 @@ capitalizeFirst(fieldName: string | any, propertyName?: string) {
     this.cidadesFiltradas = [];
     this.mostrarCampoOutraCidade = false;
 
-    this.cliente.estado = '';
-    this.cliente.cidade = '';
-    this.cliente.rua = '';
-    this.cliente.numero = undefined;
-    this.cliente.bairro = '';
+    this.cliente.cliEstado = '';
+    this.cliente.cliCidade = '';
+    this.cliente.cliRua = '';
+    this.cliente.cliNumero = undefined;
+    this.cliente.cliBairro = '';
   }
 
   desativarEnderecoManual() {
     this.mostrarEnderecoManual = false;
-    this.cliente.estado = '';
-    this.cliente.cidade = '';
-    this.cliente.rua = '';
-    this.cliente.numero = undefined;
-    this.cliente.bairro = '';
+    this.cliente.cliEstado = '';
+    this.cliente.cliCidade = '';
+    this.cliente.cliRua = '';
+    this.cliente.cliNumero = undefined;
+    this.cliente.cliBairro = '';
     this.mostrarCampoOutraCidade = false;
   }
 
@@ -735,7 +739,7 @@ capitalizeFirst(fieldName: string | any, propertyName?: string) {
       this.cidadesFiltradas = [];
     }
 
-    this.cliente.cidade = '';
+    this.cliente.cliCidade = '';
     this.mostrarCampoOutraCidade = false;
     this.nomeOutraCidade = '';
   }
@@ -749,67 +753,91 @@ capitalizeFirst(fieldName: string | any, propertyName?: string) {
     }
   }
 
-  salvar() {
-    // Validação dos campos obrigatórios
-    let enderecoValido = false;
+salvar() {
+  // Validação dos campos obrigatórios
+  let enderecoValido = false;
 
-    if (this.mostrarEndereco) {
-      enderecoValido = !!(
-        this.cep &&
-        this.endereco &&
-        this.endereco.uf &&
-        this.endereco.localidade &&
-        this.endereco.logradouro &&
-        this.numeroResidencia
-      );
-    } else if (this.mostrarEnderecoManual) {
-      enderecoValido = !!(
-        this.cliente.estado &&
-        (this.cliente.cidade && (this.cliente.cidade !== 'Outra Cidade' || this.nomeOutraCidade.trim() !== '')) &&
-        this.cliente.rua &&
-        this.cliente.numero !== undefined
-      );
-    }
-
-    if (
-      this.cliente.cliNome &&
-      this.cliente.cliCpf &&
-      this.cliente.cliDataNascimento &&
-      this.cliente.cliTelefone &&
-      this.cliente.cliEmail &&
-      this.cliente.cliSexo &&
-      enderecoValido
-    ) {
-      // Prepara o objeto final a ser enviado
-      const dadosCliente = {
-        ...this.cliente,
-        endereco: this.mostrarEnderecoManual
-          ? {
-              uf: this.cliente.estado,
-              localidade: this.cliente.cidade === 'Outra Cidade' ? this.nomeOutraCidade : this.cliente.cidade,
-              logradouro: this.cliente.rua,
-              numero: this.cliente.numero,
-              bairro: this.cliente.bairro,
-              pais: 'Brasil',
-              cep: null
-            }
-          : {
-              cep: this.cep,
-              uf: this.endereco.uf,
-              localidade: this.endereco.localidade,
-              logradouro: this.endereco.logradouro,
-              numero: this.numeroResidencia,
-              pais: 'Brasil'
-            }
-      };
-
-      console.log('Cliente salvo:', dadosCliente);
-      alert('Cliente salvo com sucesso!');
-      this.limpar();
-    } else {
-      alert('Por favor, preencha todos os campos obrigatórios.');
-    }
+  if (this.mostrarEndereco) {
+    enderecoValido = !!(
+      this.cep &&
+      this.endereco &&
+      this.endereco.uf &&
+      this.endereco.localidade &&
+      this.endereco.logradouro &&
+      this.numeroResidencia
+    );
+  } else if (this.mostrarEnderecoManual) {
+    enderecoValido = !!(
+      this.cliente.cliEstado &&
+      (this.cliente.cliCidade && (this.cliente.cliCidade !== 'Outra Cidade' || this.nomeOutraCidade.trim() !== '')) &&
+      this.cliente.cliRua &&
+      this.cliente.cliNumero !== undefined
+    );
   }
+
+  if (
+    this.cliente.cliNome &&
+    this.cliente.cliCpf &&
+    this.cliente.cliDataNascimento &&
+    this.cliente.cliTelefone &&
+    this.cliente.cliEmail &&
+    enderecoValido
+  ) {
+ let dataNascimentoFormatada = this.cliente.cliDataNascimento;
+
+if (this.cliente.cliDataNascimento) {
+  const data = new Date(this.cliente.cliDataNascimento);
+  if (!isNaN(data.getTime())) {
+    dataNascimentoFormatada = data.toISOString().substring(0, 10);
+  }
+}
+
+
+    // Monta o objeto plano conforme DTO do backend (sem "endereco" aninhado)
+    const dadosCliente = {
+      cliNome: this.cliente.cliNome,
+      cliCpf: this.cliente.cliCpf,
+      cliEmail: this.cliente.cliEmail,
+      cliTelefone: this.cliente.cliTelefone,
+      cliDataNascimento: dataNascimentoFormatada,
+      cliEstado: this.mostrarEnderecoManual
+        ? this.cliente.cliEstado
+        : this.endereco.uf,
+      cliCidade: this.mostrarEnderecoManual
+        ? (this.cliente.cliCidade === 'Outra Cidade' ? this.nomeOutraCidade : this.cliente.cliCidade)
+        : this.endereco.localidade,
+      cliRua: this.mostrarEnderecoManual
+        ? this.cliente.cliRua
+        : this.endereco.logradouro,
+      cliNumero: this.mostrarEnderecoManual
+        ? this.cliente.cliNumero
+        : this.numeroResidencia,
+      cliBairro: this.mostrarEnderecoManual
+        ? this.cliente.cliBairro
+        : this.endereco.bairro || '',
+      cliCep: this.mostrarEnderecoManual
+        ? this.cliente.cliCep || ''
+        : this.cep,
+      // Se quiser, pode setar a data cadastro aqui, ou deixar o backend gerar
+      // cliDataCadastro: new Date().toISOString().substring(0, 10)
+    };
+
+    this.http.post('http://localhost:8080/clientes', dadosCliente).subscribe({
+      next: () => {
+        alert('Cliente salvo com sucesso!');
+        this.limpar();
+      },
+      error: (err) => {
+        console.error('Erro ao salvar cliente', err);
+        alert('Erro ao salvar cliente. Veja o console para mais detalhes.');
+      }
+    });
+
+  } else {
+    alert('Por favor, preencha todos os campos obrigatórios.');
+  }
+}
+
 
   cancel() {
     if (confirm('Deseja cancelar o cadastro? Todas as informações serão perdidas.')) {
@@ -821,15 +849,14 @@ capitalizeFirst(fieldName: string | any, propertyName?: string) {
     this.cliente = {
       cliNome: '',
       cliCpf: '',
-      cliDataNascimento: null,
+      cliDataNascimento: '',
       cliTelefone: '',
       cliEmail: '',
-      cliSexo: '',
-      estado: '',
-      cidade: '',
-      rua: '',
-      numero: undefined,
-      bairro: ''
+      cliEstado: '',
+      cliCidade: '',
+      cliRua: '',
+      cliNumero: undefined,
+      cliBairro: ''
     };
     this.cep = '';
     this.numeroResidencia = '';

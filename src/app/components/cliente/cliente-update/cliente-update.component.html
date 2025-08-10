@@ -29,18 +29,7 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Campo Sexo -->
-<mat-form-field appearance="outline" class="half-width" required>
-  <mat-label>Sexo</mat-label>
-  <mat-select [(ngModel)]="cliente.cliSexo" name="cliSexo" required #cliSexo="ngModel">
-    <mat-option value="masculino">Masculino</mat-option>
-    <mat-option value="feminino">Feminino</mat-option>
-  </mat-select>
-  <mat-error *ngIf="cliSexo.invalid && cliSexo.touched">
-    O campo sexo é obrigatório.
-  </mat-error>
-</mat-form-field>
-
+ 
 
       <!-- EMAIL -->
       <mat-form-field appearance="outline" class="half-width spaced-field" required>
@@ -140,31 +129,31 @@
 
 
    <!-- Campos endereço automático -->
-<div *ngIf="!mostrarEnderecoManual && cliente.rua && cliente.bairro && cliente.cidade && cliente.estado" class="linha-campos">
+<div *ngIf="!mostrarEnderecoManual && cliente.cliRua && cliente.cliBairro && cliente.cliCidade && cliente.cliEstado" class="linha-campos">
 
   <mat-form-field appearance="outline" class="half-width spaced-field" disabled>
     <mat-label>Estado</mat-label>
-    <input matInput [value]="cliente.estado" disabled />
+    <input matInput [value]="cliente.cliEstado" disabled />
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="half-width spaced-field" disabled>
     <mat-label>Cidade</mat-label>
-    <input matInput [value]="cliente.cidade" disabled />
+    <input matInput [value]="cliente.cliCidade" disabled />
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="half-width spaced-field" disabled>
     <mat-label>Bairro</mat-label>
-    <input matInput [value]="cliente.bairro" disabled />
+    <input matInput [value]="cliente.cliBairro" disabled />
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="half-width spaced-field" disabled>
     <mat-label>Rua</mat-label>
-    <input matInput [value]="cliente.rua" disabled />
+    <input matInput [value]="cliente.cliRua" disabled />
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="half-width spaced-field" required>
     <mat-label>Número</mat-label>
-    <input matInput type="number" min="0" [(ngModel)]="cliente.numero" name="numero" #numero="ngModel" required />
+    <input matInput type="number" min="0" [(ngModel)]="cliente.cliNumero" name="numero" #numero="ngModel" required />
     <mat-error *ngIf="numero.invalid && numero.touched">Número obrigatório e não pode ser negativo</mat-error>
   </mat-form-field>
 
@@ -175,7 +164,7 @@
 
   <mat-form-field appearance="outline" class="half-width spaced-field" required>
     <mat-label>Estado</mat-label>
-    <mat-select [(ngModel)]="cliente.estado" name="estado" #estado="ngModel" required (selectionChange)="onEstadoChange($event.value)">
+    <mat-select [(ngModel)]="cliente.cliEstado" name="estado" #estado="ngModel" required (selectionChange)="onEstadoChange($event.value)">
       <mat-option *ngFor="let estado of estadosECidades" [value]="estado.nome">{{ estado.nome }}</mat-option>
     </mat-select>
     <mat-error *ngIf="estado.invalid && estado.touched">Estado é obrigatório</mat-error>
@@ -183,7 +172,7 @@
 
   <mat-form-field appearance="outline" class="half-width spaced-field" required>
     <mat-label>Cidade</mat-label>
-    <mat-select [(ngModel)]="cliente.cidade" name="cidade" #cidade="ngModel" required (selectionChange)="onCidadeSelecionada($event.value)">
+    <mat-select [(ngModel)]="cliente.cliCidade" name="cidade" #cidade="ngModel" required (selectionChange)="onCidadeSelecionada($event.value)">
       <mat-option *ngFor="let cidade of cidadesFiltradas" [value]="cidade">{{ cidade }}</mat-option>
     </mat-select>
     <mat-error *ngIf="cidade.invalid && cidade.touched">Cidade é obrigatória</mat-error>
@@ -209,7 +198,7 @@
   <mat-label>Bairro</mat-label>
   <input
     matInput
-    [(ngModel)]="cliente.bairro"
+    [(ngModel)]="cliente.cliBairro"
     name="bairro"
     #bairro="ngModel"
     pattern="^[A-Za-zÀ-ÿ\s]+$"
@@ -221,13 +210,13 @@
 
   <mat-form-field appearance="outline" class="half-width spaced-field" required>
     <mat-label>Rua</mat-label>
-    <input matInput [(ngModel)]="cliente.rua" name="rua" #rua="ngModel" required pattern="^[A-Za-zÀ-ÿ\s]+$" (keydown)="bloquearNumeros($event)" (ngModelChange)="capitalizeFirst($event, 'rua')" />
+    <input matInput [(ngModel)]="cliente.cliRua" name="rua" #rua="ngModel" required pattern="^[A-Za-zÀ-ÿ\s]+$" (keydown)="bloquearNumeros($event)" (ngModelChange)="capitalizeFirst($event, 'rua')" />
     <mat-error *ngIf="rua.invalid && rua.touched">Informe apenas letras e espaços</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="half-width spaced-field" required>
     <mat-label>Número</mat-label>
-    <input matInput type="number" min="0" [(ngModel)]="cliente.numero" name="numero" #numeroManual="ngModel" required />
+    <input matInput type="number" min="0" [(ngModel)]="cliente.cliNumero" name="numero" #numeroManual="ngModel" required />
     <mat-error *ngIf="numeroManual.invalid && numeroManual.touched">Número obrigatório e não pode ser negativo</mat-error>
   </mat-form-field>
 

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormaPagamento } from '../forma-pagamento.model';
 import { FormaPagamentoService } from '../forma-pagamento.service';
 import { Router } from '@angular/router';
-import { ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-forma-pagamento-create',
@@ -11,13 +10,17 @@ import { ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 })
 export class FormaPagamentoCreateComponent implements OnInit {
 
-  porcentagemText: string = ''; // usado no input visual (%)
+  // Texto exibido no input de porcentagem com %
+  porcentagemText: string = '';
+
+  // Flags para exibição de erros no formulário
   exibirErroPorcentagem: boolean = false;
   exibirErroObrigatorio: boolean = false;
   exibirErroZero: boolean = false;
   parcelasInvalida: boolean = false;
 
   formaPagamento: FormaPagamento = {
+    fpgId: undefined,
     fpgDescricao: '',
     fpgTipo: '',
     fpgPermiteParcelamento: undefined,
@@ -48,6 +51,9 @@ export class FormaPagamentoCreateComponent implements OnInit {
       this.formaPagamento.fpgPermiteParcelamento = undefined;
       this.formaPagamento.fpgNumMaxParcelas = '';
       this.formaPagamento.fpgTaxaAdicional = '';
+      this.porcentagemText = '';
+      this.exibirErroPorcentagem = false;
+      this.exibirErroZero = false;
     }
   }
 
@@ -57,15 +63,42 @@ export class FormaPagamentoCreateComponent implements OnInit {
     }
   }
 
+  // Método para salvar (chamado pelo botão)
+  salvar(): void {
+    this.createFormaPagamento();
+  }
+
   createFormaPagamento(): void {
     this.validarParcelas();
 
+    // Validação tipo pagamento obrigatório
+    if (!this.formaPagamento.fpgTipo) {
+      this.formaPagamentoService.showMessage('O tipo de pagamento é obrigatório!');
+      return;
+    }
+
+    // Validação parcelas se cartão e parcelado
     if (
-      !this.formaPagamento.fpgTipo ||
+      this.formaPagamento.fpgTipo === 'Cartão de Crédito' &&
+      this.formaPagamento.fpgNumMaxParcelas === 'sim' &&
       this.parcelasInvalida
     ) {
-      this.formaPagamentoService.showMessage('Preencha todos os campos obrigatórios corretamente!');
+      this.formaPagamentoService.showMessage('Número de parcelas inválido! Deve ser entre 1 e 24.');
       return;
+    }
+
+    // Validação taxa adicional e porcentagem
+    if (this.formaPagamento.fpgTaxaAdicional === 'sim') {
+      const valor = parseInt(this.porcentagemText.replace('%', '').trim(), 10);
+
+      if (!valor || valor <= 0 || valor > 100) {
+        this.formaPagamentoService.showMessage('Porcentagem da taxa inválida! Deve ser entre 1% e 100%.');
+        return;
+      }
+      // Coloca a porcentagem formatada na descrição para enviar
+      this.formaPagamento.fpgDescricao = `${valor}%`;
+    } else {
+      this.formaPagamento.fpgDescricao = '';
     }
 
     const payload: FormaPagamento = { ...this.formaPagamento };
@@ -91,16 +124,9 @@ export class FormaPagamentoCreateComponent implements OnInit {
     this.valorFormatado = '';
     this.parcelasInvalida = false;
     this.porcentagemText = '';
-  }
-
-  maxParcelasValidator(max: number): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const val = control.value;
-      if (val !== null && val > max) {
-        return { maxParcelas: { max: max, actual: val } };
-      }
-      return null;
-    };
+    this.exibirErroPorcentagem = false;
+    this.exibirErroObrigatorio = false;
+    this.exibirErroZero = false;
   }
 
   validarParcelas(): void {
@@ -119,22 +145,32 @@ export class FormaPagamentoCreateComponent implements OnInit {
 
   onPorcentagemInput(event: Event): void {
     const input = event.target as HTMLInputElement;
-    let valor = input.value.replace('%', '').replace(/[^\d.]/g, '');
+    let valor = input.value.replace('%', '').replace(/[^\d]/g, '');
 
     if (valor.length > 3) {
       valor = valor.slice(0, 3);
     }
 
-    const numero = parseFloat(valor);
+    const numero = parseInt(valor, 10);
 
     if (valor) {
-      this.porcentagemText = `${valor}%`;
+      if (numero > 100) {
+        this.exibirErroPorcentagem = true;
+        this.exibirErroZero = false;
+        this.porcentagemText = '100%';
+      } else if (numero === 0) {
+        this.exibirErroZero = true;
+        this.exibirErroPorcentagem = false;
+        this.porcentagemText = '0%';
+      } else {
+        this.exibirErroPorcentagem = false;
+        this.exibirErroZero = false;
+        this.porcentagemText = `${numero}%`;
+      }
     } else {
+      this.exibirErroPorcentagem = false;
+      this.exibirErroZero = false;
       this.porcentagemText = '';
     }
-
-    this.exibirErroPorcentagem = numero > 100;
-    this.exibirErroObrigatorio = valor.length === 0;
-    this.exibirErroZero = numero === 0 && valor.length > 0;
   }
 }
