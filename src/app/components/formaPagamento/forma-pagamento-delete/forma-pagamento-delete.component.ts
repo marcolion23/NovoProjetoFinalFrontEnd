@@ -9,6 +9,7 @@ import { FormaPagamento } from '../forma-pagamento.model';
   styleUrls: ['./forma-pagamento-delete.component.css']
 })
 export class FormaPagamentoDeleteComponent implements OnInit {
+  
   item: FormaPagamento = {} as FormaPagamento;
 
   constructor(
@@ -18,13 +19,17 @@ export class FormaPagamentoDeleteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('fpgId');
     if (id) {
       this.formaPagamentoService.readById(+id).subscribe({
-        next: (res: FormaPagamento) => this.item = res,
+        next: (res: FormaPagamento) => {
+          this.item = res;
+          console.log('Item para exclusão:', res);
+        },
         error: (err: any) => {
           console.error('Erro ao carregar forma de pagamento:', err);
-          this.router.navigate(['/forma-pagamento']);
+          this.formaPagamentoService.showMessage('Erro ao carregar forma de pagamento!');
+          this.router.navigate(['/fpagamentos']);
         }
       });
     }
@@ -33,13 +38,19 @@ export class FormaPagamentoDeleteComponent implements OnInit {
   excluir(): void {
     if (this.item.fpgId) {
       this.formaPagamentoService.delete(this.item.fpgId).subscribe({
-        next: () => this.router.navigate(['/forma-pagamento']),
-        error: (err: any) => console.error('Erro ao excluir forma de pagamento:', err)
+        next: () => {
+          this.formaPagamentoService.showMessage('Forma de pagamento excluída com sucesso!');
+          this.router.navigate(['/fpagamentos']);
+        },
+        error: (err: any) => {
+          console.error('Erro ao excluir forma de pagamento:', err);
+          this.formaPagamentoService.showMessage('Erro ao excluir forma de pagamento!');
+        }
       });
     }
   }
 
   cancelar(): void {
-    this.router.navigate(['/forma-pagamento']);
+    this.router.navigate(['/fpagamentos']);
   }
 }

@@ -1,36 +1,47 @@
 <div class="delete-container">
-  <h2 class="delete-title">🗑️ Confirmar Exclusão da Forma de Pagamento</h2>
+  <div class="delete-header">
+    <i class="material-icons delete-icon">warning</i>
+    <h2>Confirmar Exclusão</h2>
+    <p>Tem certeza que deseja excluir esta forma de pagamento?</p>
+  </div>
 
-  <div class="product-card">
-    <!-- Descrição -->
-    <div class="product-info">
-      <strong>Descrição:</strong> {{ item.fpgDescricao || 'Não informado' }}
+  <div class="item-details">
+    <div class="detail-row">
+      <strong>Tipo:</strong>
+      <span class="tipo-badge {{ item.fpgTipo?.toLowerCase() }}">
+        {{ item.fpgTipo }}
+      </span>
     </div>
 
-    <!-- Tipo de Pagamento -->
-    <div class="product-info">
-      <strong>Tipo de Pagamento:</strong> {{ item.fpgTipo || 'Não informado' }}
+    <div class="detail-row">
+      <strong>Descrição:</strong>
+      <span>{{ item.fpgDescricao || 'Não informado' }}</span>
     </div>
 
-    <!-- Parcelamento -->
-    <div class="product-info" *ngIf="item.fpgNumMaxParcelas">
-      <strong>Parcelado:</strong>
-      {{ item.fpgNumMaxParcelas === 'sim' ? 'Sim' : 'Não' }}
+    <div class="detail-row" *ngIf="item.fpgPermiteParcelamento">
+      <strong>Parcelamento:</strong>
+      <span class="status-badge {{ item.fpgPermiteParcelamento === 'S' ? 'sim' : 'nao' }}">
+        {{ item.fpgPermiteParcelamento === 'S' ? 'Sim' : 'Não' }}
+      </span>
     </div>
 
-    <!-- Número de Parcelas -->
-    <div class="product-info" *ngIf="item.fpgPermiteParcelamento && item.fpgNumMaxParcelas === 'sim'">
-      <strong>Número de Parcelas:</strong> {{ item.fpgPermiteParcelamento }}
+    <div class="detail-row" *ngIf="item.fpgPermiteParcelamento === 'S' && item.fpgNumMaxParcelas">
+      <strong>Max Parcelas:</strong>
+      <span>{{ item.fpgNumMaxParcelas }}</span>
     </div>
 
-    <!-- Taxa Adicional -->
-    <div class="product-info" *ngIf="item.fpgTaxaAdicional">
-      <strong>Aplica Taxas:</strong> {{ item.fpgTaxaAdicional === 'sim' ? 'Sim' : 'Não' }}
+    <div class="detail-row" *ngIf="item.fpgTaxaAdicional !== undefined">
+      <strong>Taxa Adicional:</strong>
+      <span>{{ item.fpgTaxaAdicional }}%</span>
     </div>
   </div>
 
   <div class="button-container">
-    <button mat-raised-button color="primary" (click)="excluir()">Excluir</button>
-    <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button color="warn" (click)="excluir()">
+      <i class="material-icons">delete_forever</i> Excluir
+    </button>
+    <button mat-raised-button color="primary" (click)="cancelar()">
+      <i class="material-icons">cancel</i> Cancelar
+    </button>
   </div>
 </div>

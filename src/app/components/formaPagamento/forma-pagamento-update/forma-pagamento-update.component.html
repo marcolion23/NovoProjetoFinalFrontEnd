@@ -1,110 +1,92 @@
 <div class="container-geral">
   <mat-card class="client-card">
-
-    <mat-card-title class="titulo-formulario">ATUALIZAR FORMA DE PAGAMENTO</mat-card-title>
+    <mat-card-title class="titulo-formulario">
+      <i class="material-icons">edit</i>
+      EDITAR FORMA DE PAGAMENTO
+    </mat-card-title>
 
     <form class="client-form" #formPagamento="ngForm">
+      
+      <!-- TIPO DE PAGAMENTO -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tipo de Pagamento *</mat-label>
+        <mat-select [(ngModel)]="formaPagamento.fpgTipo" name="fpgTipo" required (selectionChange)="onTipoChange()">
+          <mat-option value="Credito">
+            <i class="material-icons">credit_card</i> Crédito
+          </mat-option>
+          <mat-option value="Debito">
+            <i class="material-icons">payment</i> Débito
+          </mat-option>
+          <mat-option value="Dinheiro">
+            <i class="material-icons">attach_money</i> Dinheiro
+          </mat-option>
+          <mat-option value="Pix">
+            <i class="material-icons">qr_code</i> Pix
+          </mat-option>
+          <mat-option value="Boleto">
+            <i class="material-icons">receipt</i> Boleto
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!formaPagamento.fpgTipo">Tipo é obrigatório</mat-error>
+      </mat-form-field>
 
       <!-- DESCRIÇÃO -->
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Descrição</mat-label>
-        <input matInput [(ngModel)]="formaPagamento.fpgDescricao" name="fpgDescricao" required>
+        <mat-label>Descrição *</mat-label>
+        <input matInput [(ngModel)]="formaPagamento.fpgDescricao" name="fpgDescricao" 
+               placeholder="Ex: Pagamento via cartão de crédito" required>
+        <mat-error *ngIf="!formaPagamento.fpgDescricao">Descrição é obrigatória</mat-error>
       </mat-form-field>
 
-      <!-- TIPO -->
-      <mat-form-field appearance="outline" class="half-width">
-        <mat-label>Tipo</mat-label>
-        <mat-select [(ngModel)]="formaPagamento.fpgTipo" name="fpgTipo" required>
-          <mat-option value="Dinheiro">
-            <mat-icon inline>attach_money</mat-icon> Dinheiro
-          </mat-option>
-          <mat-option value="Cartão de Crédito">
-            <mat-icon inline>credit_card</mat-icon> Cartão de Crédito
-          </mat-option>
-          <mat-option value="Cartão de Débito">
-            <mat-icon inline>payment</mat-icon> Cartão de Débito
-          </mat-option>
-          <mat-option value="Pix">
-            <mat-icon inline>qr_code</mat-icon> Pix
-          </mat-option>
-          <mat-option value="Boleto">
-            <mat-icon inline>receipt</mat-icon> Boleto
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <!-- MOSTRAR SOMENTE SE FOR CARTÃO DE CRÉDITO -->
-      <ng-container *ngIf="formaPagamento.fpgTipo === 'Cartão de Crédito'">
-
-        <!-- PARCELADO? -->
-        <div class="full-width radio-section">
-          <label class="subtitle">Parcelado?</label>
-          <div class="radio-button-group">
-            <button type="button" class="sim-btn"
-              [class.selected]="formaPagamento.fpgNumMaxParcelas === 'sim'"
-              (click)="formaPagamento.fpgNumMaxParcelas = 'sim'">Sim</button>
-
-            <button type="button" class="nao-btn"
-              [class.selected]="formaPagamento.fpgNumMaxParcelas === 'nao'"
-              (click)="formaPagamento.fpgNumMaxParcelas = 'nao'">Não</button>
-          </div>
-          <p *ngIf="formaPagamento.fpgNumMaxParcelas === 'nao'" class="mensagem-alerta">
-            Não será aplicado parcelamento.
-          </p>
+      <!-- CAMPOS DE PARCELAMENTO E TAXA PARA TODOS OS TIPOS -->
+      
+      <!-- PERMITE PARCELAMENTO -->
+      <div class="radio-section">
+        <label class="subtitle">Permite Parcelamento?</label>
+        <div class="radio-buttons">
+          <button type="button" class="radio-btn sim" 
+                  [class.active]="formaPagamento.fpgPermiteParcelamento === 'S'"
+                  (click)="formaPagamento.fpgPermiteParcelamento = 'S'; onParcelamentoChange()">
+            <i class="material-icons">check_circle</i> Sim
+          </button>
+          <button type="button" class="radio-btn nao" 
+                  [class.active]="formaPagamento.fpgPermiteParcelamento === 'N'"
+                  (click)="onParcelamentoChange()">
+            <i class="material-icons">cancel</i> Não
+          </button>
         </div>
+      </div>
 
       <!-- NÚMERO DE PARCELAS -->
-<mat-form-field appearance="outline" class="half-width"
-  *ngIf="formaPagamento?.fpgNumMaxParcelas === 'sim'">
-  <mat-label>Parcelas</mat-label>
-  <input 
-    matInput 
-    type="number" 
-    [(ngModel)]="formaPagamento.fpgPermiteParcelamento"
-    name="fpgPermiteParcelamento" 
-    min="1" 
-    max="24" 
-    required
-  >
-<mat-error *ngIf="parcelasInvalidas">
-  O número de parcelas deve estar entre 1 e 24.
-</mat-error>
+      <mat-form-field appearance="outline" class="half-width" 
+                     *ngIf="formaPagamento.fpgPermiteParcelamento === 'S'">
+        <mat-label>Número Máximo de Parcelas</mat-label>
+        <input matInput type="number" [(ngModel)]="formaPagamento.fpgNumMaxParcelas" 
+               name="fpgNumMaxParcelas" min="1" max="24" placeholder="6">
+        <mat-hint>Mín: 1, Máx: 24</mat-hint>
+      </mat-form-field>
 
-
-</mat-form-field>
-
-        <!-- TAXA ADICIONAL -->
-        <div class="full-width radio-section">
-          <label class="subtitle">Aplicar taxas?</label>
-          <div class="radio-button-group">
-            <button type="button" class="sim-btn"
-              [class.selected]="formaPagamento.fpgTaxaAdicional === 'sim'"
-              (click)="formaPagamento.fpgTaxaAdicional = 'sim'">Sim</button>
-
-            <button type="button" class="nao-btn"
-              [class.selected]="formaPagamento.fpgTaxaAdicional === 'nao'"
-              (click)="formaPagamento.fpgTaxaAdicional = 'nao'">Não</button>
-          </div>
-          <p *ngIf="formaPagamento.fpgTaxaAdicional === 'nao'" class="mensagem-alerta">
-            Não será aplicada nenhuma taxa.
-          </p>
-        </div>
-
-        <!-- PERCENTUAL DA TAXA (somente se sim) -->
-        <mat-form-field appearance="outline" class="half-width" *ngIf="formaPagamento.fpgTaxaAdicional === 'sim'">
-          <mat-label>Porcentagem da Taxa</mat-label>
-          <input matInput type="text" maxlength="4" [(ngModel)]="porcentagemText" name="porcentagemTaxa" placeholder="Ex: 5%">
-        </mat-form-field>
-
-      </ng-container>
+      <!-- TAXA ADICIONAL -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Taxa Adicional (%)</mat-label>
+        <input matInput type="number" [(ngModel)]="formaPagamento.fpgTaxaAdicional" 
+               name="fpgTaxaAdicional" min="0" max="100" step="0.01" placeholder="2.50">
+        <mat-hint>Taxa em porcentagem (0 a 100)</mat-hint>
+      </mat-form-field>
 
       <!-- BOTÕES -->
       <div class="button-container">
-        <button mat-raised-button color="primary" (click)="atualizarPagamento()">Atualizar</button>
-        <button mat-raised-button color="warn" (click)="cancelarEdicao()">Cancelar</button>
-        <button mat-raised-button (click)="limparFormulario()">Limpar</button>
+        <button mat-raised-button color="primary" (click)="salvar()" 
+                [disabled]="!formaPagamento.fpgTipo || !formaPagamento.fpgDescricao">
+          <i class="material-icons">save</i> Salvar
+        </button>
+        <button mat-raised-button color="warn" (click)="cancel()">
+          <i class="material-icons">cancel</i> Cancelar
+        </button>
+        <button mat-raised-button color="accent" (click)="limpar()">
+          <i class="material-icons">refresh</i> Restaurar
+        </button>
       </div>
-
     </form>
   </mat-card>
 </div>

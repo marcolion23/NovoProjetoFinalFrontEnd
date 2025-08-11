@@ -1,86 +1,145 @@
 .delete-container {
-  background-color: #0D3B66;
-  color: #ffffff;
-  padding: 1rem 1.5rem;      /* menos padding */
-  border-radius: 16px;
-  border: 2px solid #0D3B66;
-  max-width: 700px;
-  margin: 95px auto 2rem auto;
-  box-shadow: 0 0 20px #0D3B66;
-  /* Removi max-height e overflow para evitar barra */
-  height: auto;             /* altura automática */
-  min-height: 200px;        /* altura mínima menor */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;  /* centraliza conteúdo verticalmente */
-}
-
-/* Ajuste título */
-.delete-title {
-  text-align: center;
-  margin-bottom: 1.2rem;    /* menos espaço */
-  font-size: 20px;          /* fonte menor */
-  color: #ff0000;
-}
-
-/* Ajuste do cartão info */
-.product-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;             /* menos espaçamento */
-  padding: 1rem;           /* menos padding */
-  background-color: #102e4a;
+  max-width: 600px;
+  margin: 120px auto 40px auto; /* Adiciona margin-top para evitar sobreposição com header */
+  padding: 30px;
+  background: white;
   border-radius: 12px;
-  border: 1px solid #0D3B66;
-  font-size: 14px;          /* fonte menor */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
-/* Botões */
+.delete-header {
+  margin-bottom: 30px;
+}
+
+.delete-icon {
+  font-size: 64px;
+  color: #ff9800;
+  margin-bottom: 16px;
+}
+
+.delete-header h2 {
+  color: #333;
+  margin: 16px 0 8px 0;
+  font-size: 24px;
+}
+
+.delete-header p {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+
+.item-details {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 30px 0;
+  text-align: left;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row strong {
+  color: #333;
+  font-weight: 600;
+  min-width: 120px;
+}
+
+.tipo-badge {
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.tipo-badge.credito {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.tipo-badge.debito {
+  background: #e8f5e8;
+  color: #4caf50;
+}
+
+.tipo-badge.dinheiro {
+  background: #fff3e0;
+  color: #ff9800;
+}
+
+.tipo-badge.pix {
+  background: #f3e5f5;
+  color: #9c27b0;
+}
+
+.tipo-badge.boleto {
+  background: #e0f2f1;
+  color: #009688;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge.sim {
+  background: #e8f5e8;
+  color: #4caf50;
+}
+
+.status-badge.nao {
+  background: #ffebee;
+  color: #f44336;
+}
+
 .button-container {
   display: flex;
+  gap: 16px;
   justify-content: center;
-  gap: 16px;               /* menos espaçamento */
-  margin-top: 16px;        /* menos margem */
+  margin-top: 30px;
 }
 
 .button-container button {
-  width: 130px;            /* largura menor */
-  height: 45px;            /* altura menor */
-  font-size: 1rem;         /* fonte menor */
-  padding: 8px 16px;
-  border-radius: 45px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  padding: 12px 24px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+  justify-content: center;
 }
 
-/* Ajuste cores dos botões se quiser, mantendo cores originais */
-button[color="primary"] {
-  background-color: #ff0000;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(56, 142, 60, 0.4);
-}
-
-button[color="warn"] {
-  background-color: #0044ff;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.4);
-}
-
-button:hover {
-  transform: translateY(-2px);
-  transition: all 0.3s ease-in-out;
-}
-
-/* Responsivo para telas pequenas */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .delete-container {
+    margin: 100px 20px 40px 20px; /* Ajusta margin para mobile */
+    padding: 20px;
+  }
+  
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .detail-row strong {
+    min-width: auto;
+  }
+  
   .button-container {
     flex-direction: column;
-    align-items: center;
-  }
-
-  .button-container button {
-    width: 100%;
-    max-width: 250px;
   }
 }

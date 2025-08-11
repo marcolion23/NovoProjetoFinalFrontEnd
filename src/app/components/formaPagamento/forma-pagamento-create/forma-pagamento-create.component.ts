@@ -10,25 +10,13 @@ import { Router } from '@angular/router';
 })
 export class FormaPagamentoCreateComponent implements OnInit {
 
-  // Texto exibido no input de porcentagem com %
-  porcentagemText: string = '';
-
-  // Flags para exibição de erros no formulário
-  exibirErroPorcentagem: boolean = false;
-  exibirErroObrigatorio: boolean = false;
-  exibirErroZero: boolean = false;
-  parcelasInvalida: boolean = false;
-
   formaPagamento: FormaPagamento = {
-    fpgId: undefined,
-    fpgDescricao: '',
-    fpgTipo: '',
-    fpgPermiteParcelamento: undefined,
-    fpgNumMaxParcelas: '',
-    fpgTaxaAdicional: ''
+    fpgTipo: 'Credito', // Valor padrão
+    fpgDescricao: 'Pagamento via cartão de crédito', // Valor padrão
+    fpgPermiteParcelamento: 'S', // Valor padrão
+    fpgNumMaxParcelas: 6, // Valor padrão
+    fpgTaxaAdicional: 2.50 // Valor padrão
   };
-
-  valorFormatado: string = '';
 
   constructor(
     private formaPagamentoService: FormaPagamentoService,
@@ -37,75 +25,34 @@ export class FormaPagamentoCreateComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onTipoPagamentoChange(tipo: string) {
-    this.formaPagamento.fpgTipo = tipo?.trim();
-
-    if (this.formaPagamento.fpgTipo === 'Cartão de Crédito') {
-      if (!this.formaPagamento.fpgNumMaxParcelas) {
-        this.formaPagamento.fpgNumMaxParcelas = '';
-      }
-      if (!this.formaPagamento.fpgTaxaAdicional) {
-        this.formaPagamento.fpgTaxaAdicional = '';
-      }
-    } else {
-      this.formaPagamento.fpgPermiteParcelamento = undefined;
-      this.formaPagamento.fpgNumMaxParcelas = '';
-      this.formaPagamento.fpgTaxaAdicional = '';
-      this.porcentagemText = '';
-      this.exibirErroPorcentagem = false;
-      this.exibirErroZero = false;
-    }
-  }
-
-  bloquearTeclasInvalidas(event: KeyboardEvent) {
-    if (['-', '+', 'e', ',', '.'].includes(event.key)) {
-      event.preventDefault();
-    }
-  }
-
-  // Método para salvar (chamado pelo botão)
   salvar(): void {
-    this.createFormaPagamento();
-  }
-
-  createFormaPagamento(): void {
-    this.validarParcelas();
-
-    // Validação tipo pagamento obrigatório
-    if (!this.formaPagamento.fpgTipo) {
-      this.formaPagamentoService.showMessage('O tipo de pagamento é obrigatório!');
+    // Validações básicas
+    if (!this.formaPagamento.fpgTipo || !this.formaPagamento.fpgDescricao) {
+      this.formaPagamentoService.showMessage('Preencha todos os campos obrigatórios!');
       return;
     }
 
-    // Validação parcelas se cartão e parcelado
-    if (
-      this.formaPagamento.fpgTipo === 'Cartão de Crédito' &&
-      this.formaPagamento.fpgNumMaxParcelas === 'sim' &&
-      this.parcelasInvalida
-    ) {
-      this.formaPagamentoService.showMessage('Número de parcelas inválido! Deve ser entre 1 e 24.');
-      return;
+    // Se não permite parcelamento, limpa os campos relacionados
+    if (this.formaPagamento.fpgPermiteParcelamento === 'N') {
+      this.formaPagamento.fpgNumMaxParcelas = undefined;
     }
 
-    // Validação taxa adicional e porcentagem
-    if (this.formaPagamento.fpgTaxaAdicional === 'sim') {
-      const valor = parseInt(this.porcentagemText.replace('%', '').trim(), 10);
+    // Se não tem taxa, define como undefined
+    if (!this.formaPagamento.fpgTaxaAdicional || this.formaPagamento.fpgTaxaAdicional === 0) {
+      this.formaPagamento.fpgTaxaAdicional = undefined;
+    }
 
-      if (!valor || valor <= 0 || valor > 100) {
-        this.formaPagamentoService.showMessage('Porcentagem da taxa inválida! Deve ser entre 1% e 100%.');
-        return;
+    console.log('Payload a ser enviado:', this.formaPagamento);
+
+    this.formaPagamentoService.create(this.formaPagamento).subscribe({
+      next: () => {
+        this.formaPagamentoService.showMessage('Forma de pagamento criada com sucesso!');
+        this.router.navigate(['/fpagamentos']);
+      },
+      error: (err) => {
+        console.error('Erro:', err);
+        this.formaPagamentoService.showMessage('Erro ao criar forma de pagamento!');
       }
-      // Coloca a porcentagem formatada na descrição para enviar
-      this.formaPagamento.fpgDescricao = `${valor}%`;
-    } else {
-      this.formaPagamento.fpgDescricao = '';
-    }
-
-    const payload: FormaPagamento = { ...this.formaPagamento };
-
-    this.formaPagamentoService.create(payload).subscribe(() => {
-      this.formaPagamentoService.showMessage('Pagamento criado!');
-      this.router.navigate(['/fpagamentos']);
     });
   }
 
@@ -115,62 +62,34 @@ export class FormaPagamentoCreateComponent implements OnInit {
 
   limpar(): void {
     this.formaPagamento = {
-      fpgDescricao: '',
-      fpgTipo: '',
-      fpgPermiteParcelamento: undefined,
-      fpgNumMaxParcelas: '',
-      fpgTaxaAdicional: ''
+      fpgTipo: 'Credito', // Volta ao valor padrão
+      fpgDescricao: 'Pagamento via cartão de crédito', // Volta ao valor padrão
+      fpgPermiteParcelamento: 'S', // Volta ao valor padrão
+      fpgNumMaxParcelas: 6, // Volta ao valor padrão
+      fpgTaxaAdicional: 2.50 // Volta ao valor padrão
     };
-    this.valorFormatado = '';
-    this.parcelasInvalida = false;
-    this.porcentagemText = '';
-    this.exibirErroPorcentagem = false;
-    this.exibirErroObrigatorio = false;
-    this.exibirErroZero = false;
   }
 
-  validarParcelas(): void {
-    if (
-      this.formaPagamento.fpgTipo === 'Cartão de Crédito' &&
-      this.formaPagamento.fpgNumMaxParcelas === 'sim' &&
-      (!this.formaPagamento.fpgPermiteParcelamento ||
-        this.formaPagamento.fpgPermiteParcelamento < 1 ||
-        this.formaPagamento.fpgPermiteParcelamento > 24)
-    ) {
-      this.parcelasInvalida = true;
+  onTipoChange(): void {
+    // Se não for crédito, não permite parcelamento mas mantém os valores
+    if (this.formaPagamento.fpgTipo !== 'Credito') {
+      this.formaPagamento.fpgPermiteParcelamento = 'N';
+      // Não limpa os outros campos para não interferir na validação
     } else {
-      this.parcelasInvalida = false;
+      // Se for crédito, volta aos valores padrão
+      this.formaPagamento.fpgPermiteParcelamento = 'S';
+      this.formaPagamento.fpgNumMaxParcelas = 6;
+      this.formaPagamento.fpgTaxaAdicional = 2.50;
     }
   }
 
-  onPorcentagemInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    let valor = input.value.replace('%', '').replace(/[^\d]/g, '');
-
-    if (valor.length > 3) {
-      valor = valor.slice(0, 3);
-    }
-
-    const numero = parseInt(valor, 10);
-
-    if (valor) {
-      if (numero > 100) {
-        this.exibirErroPorcentagem = true;
-        this.exibirErroZero = false;
-        this.porcentagemText = '100%';
-      } else if (numero === 0) {
-        this.exibirErroZero = true;
-        this.exibirErroPorcentagem = false;
-        this.porcentagemText = '0%';
-      } else {
-        this.exibirErroPorcentagem = false;
-        this.exibirErroZero = false;
-        this.porcentagemText = `${numero}%`;
-      }
+  onParcelamentoChange(): void {
+    // Se não permite parcelamento, limpa o número de parcelas
+    if (this.formaPagamento.fpgPermiteParcelamento === 'N') {
+      this.formaPagamento.fpgNumMaxParcelas = undefined;
     } else {
-      this.exibirErroPorcentagem = false;
-      this.exibirErroZero = false;
-      this.porcentagemText = '';
+      // Se permite parcelamento, volta ao valor padrão
+      this.formaPagamento.fpgNumMaxParcelas = 6;
     }
   }
 }

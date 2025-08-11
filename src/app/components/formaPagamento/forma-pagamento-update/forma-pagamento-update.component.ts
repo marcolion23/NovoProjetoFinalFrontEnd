@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormaPagamento } from '../forma-pagamento.model';
 import { FormaPagamentoService } from '../forma-pagamento.service';
-import { Router } from '@angular/router';
-import { ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-forma-pagamento-update',
@@ -11,162 +10,118 @@ import { ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 })
 export class FormaPagamentoUpdateComponent implements OnInit {
 
-  parcelasInvalida: boolean = false;
-  porcentagemText: string = '';
-  exibirErroPorcentagem: boolean = false;
-  exibirErroObrigatorio: boolean = false;
-  exibirErroZero: boolean = false;
-
   formaPagamento: FormaPagamento = {
-    fpgDescricao: '',
-    fpgTipo: '',
-    fpgPermiteParcelamento: undefined,
-    fpgNumMaxParcelas: '',
-    fpgTaxaAdicional: '',
+    fpgId: undefined,
+    fpgTipo: 'Credito', // Valor padrão
+    fpgDescricao: 'Pagamento via cartão de crédito', // Valor padrão
+    fpgPermiteParcelamento: 'S', // Valor padrão
+    fpgNumMaxParcelas: 6, // Valor padrão
+    fpgTaxaAdicional: 2.50 // Valor padrão
   };
-
-  valorFormatado: string = '';
-  maxDate: Date = new Date();
-
-  clientes = [
-    { id: 1, nome: 'Cliente A' },
-    { id: 2, nome: 'Cliente B' },
-    { id: 3, nome: 'Cliente C' }
-  ];
-
-  clientesFiltrados = [...this.clientes];
-  clienteFiltro: string = '';
 
   constructor(
     private formaPagamentoService: FormaPagamentoService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
-
-  filtrarClientes() {
-    const filtro = this.clienteFiltro.toLowerCase();
-    this.clientesFiltrados = this.clientes.filter(c =>
-      c.nome.toLowerCase().includes(filtro)
-    );
-  }
-
-  onClienteSelectOpened(opened: boolean) {
-    if (opened) {
-      this.clienteFiltro = '';
-      this.clientesFiltrados = [...this.clientes];
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('fpgId');
+    if (id) {
+      this.formaPagamentoService.readById(+id).subscribe({
+        next: (data) => {
+          this.formaPagamento = data;
+          console.log('Dados carregados para edição:', data);
+        },
+        error: (err) => {
+          console.error('Erro ao carregar:', err);
+          this.formaPagamentoService.showMessage('Erro ao carregar forma de pagamento!');
+          this.router.navigate(['/fpagamentos']);
+        }
+      });
     }
   }
 
-  compareClientes(c1: any, c2: any): boolean {
-    return c1 === c2;
-  }
-
-  onTipoPagamentoChange(tipo: string) {
-    this.formaPagamento.fpgTipo = tipo?.trim();
-
-    if (this.formaPagamento.fpgTipo === 'Cartão de Crédito') {
-      if (!this.formaPagamento.fpgPermiteParcelamento) {
-        this.formaPagamento.fpgPermiteParcelamento = 1;
-      }
-      if (!this.formaPagamento.fpgNumMaxParcelas) {
-        this.formaPagamento.fpgNumMaxParcelas = '';
-      }
-      if (!this.formaPagamento.fpgTaxaAdicional) {
-        this.formaPagamento.fpgTaxaAdicional = '';
-      }
-    } else {
-      this.formaPagamento.fpgPermiteParcelamento = undefined;
-      this.formaPagamento.fpgNumMaxParcelas = '';
-      this.formaPagamento.fpgTaxaAdicional = '';
-    }
-  }
-
-  bloquearTeclasInvalidas(event: KeyboardEvent) {
-    if (['-', '+', 'e', ',', '.'].includes(event.key)) {
-      event.preventDefault();
-    }
-  }
-
-  atualizarPagamento(): void {
-    this.validarParcelas();
-
-    if (!this.formaPagamento.fpgDescricao || !this.formaPagamento.fpgTipo || this.parcelasInvalida) {
-      this.formaPagamentoService.showMessage('Preencha todos os campos obrigatórios corretamente!');
+  salvar(): void {
+    // Validações básicas
+    if (!this.formaPagamento.fpgTipo || !this.formaPagamento.fpgDescricao) {
+      this.formaPagamentoService.showMessage('Preencha todos os campos obrigatórios!');
       return;
     }
 
-    const payload: FormaPagamento = {
-      ...this.formaPagamento,
-      fpgNumMaxParcelas: this.formaPagamento.fpgNumMaxParcelas === 'sim' ? 'sim' : 'nao',
-      fpgTaxaAdicional: this.formaPagamento.fpgTaxaAdicional === 'sim' ? 'sim' : 'nao'
-    };
+    // Se não permite parcelamento, limpa os campos relacionados
+    if (this.formaPagamento.fpgPermiteParcelamento === 'N') {
+      this.formaPagamento.fpgNumMaxParcelas = undefined;
+    }
 
-    this.formaPagamentoService.update(payload).subscribe(() => {
-      this.formaPagamentoService.showMessage('Pagamento atualizado com sucesso!');
-      this.router.navigate(['/fpagamentos']);
+    // Se não tem taxa, define como undefined
+    if (!this.formaPagamento.fpgTaxaAdicional || this.formaPagamento.fpgTaxaAdicional === 0) {
+      this.formaPagamento.fpgTaxaAdicional = undefined;
+    }
+
+    if (!this.formaPagamento.fpgId) {
+      this.formaPagamentoService.showMessage('ID da forma de pagamento não encontrado!');
+      return;
+    }
+
+    console.log('Payload a ser enviado:', this.formaPagamento);
+
+    this.formaPagamentoService.update(this.formaPagamento).subscribe({
+      next: () => {
+        this.formaPagamentoService.showMessage('Forma de pagamento atualizada com sucesso!');
+        this.router.navigate(['/fpagamentos']);
+      },
+      error: (err) => {
+        console.error('Erro ao atualizar:', err);
+        this.formaPagamentoService.showMessage('Erro ao atualizar forma de pagamento!');
+      }
     });
   }
 
-  cancelarEdicao(): void {
+  cancel(): void {
     this.router.navigate(['/fpagamentos']);
   }
 
-  limparFormulario(): void {
-    this.formaPagamento = {
-      fpgDescricao: '',
-      fpgTipo: '',
-      fpgNumMaxParcelas: '',
-      fpgTaxaAdicional: ''
-    };
+  limpar(): void {
+    // Recarrega os dados originais
+    const id = this.route.snapshot.paramMap.get('fpgId');
+    if (id) {
+      this.formaPagamentoService.readById(+id).subscribe({
+        next: (data) => {
+          this.formaPagamento = data;
+        }
+      });
+    }
   }
 
-  maxParcelasValidator(max: number): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const val = control.value;
-      if (val !== null && val > max) {
-        return { maxParcelas: { max: max, actual: val } };
+  onTipoChange(): void {
+    // Se não for crédito, não permite parcelamento mas mantém os valores
+    if (this.formaPagamento.fpgTipo !== 'Credito') {
+      this.formaPagamento.fpgPermiteParcelamento = 'N';
+      // Não limpa os outros campos para não interferir na validação
+    } else {
+      // Se for crédito, volta aos valores padrão se não estiverem definidos
+      if (!this.formaPagamento.fpgPermiteParcelamento || this.formaPagamento.fpgPermiteParcelamento === 'N') {
+        this.formaPagamento.fpgPermiteParcelamento = 'S';
       }
-      return null;
-    };
+      if (!this.formaPagamento.fpgNumMaxParcelas) {
+        this.formaPagamento.fpgNumMaxParcelas = 6;
+      }
+      if (!this.formaPagamento.fpgTaxaAdicional) {
+        this.formaPagamento.fpgTaxaAdicional = 2.50;
+      }
+    }
   }
 
-  validarParcelas(): void {
-    if (
-      this.formaPagamento.fpgTipo === 'Cartão de Crédito' &&
-      (!this.formaPagamento.fpgPermiteParcelamento || this.formaPagamento.fpgPermiteParcelamento < 1 || this.formaPagamento.fpgPermiteParcelamento > 24)
-    ) {
-      this.parcelasInvalida = true;
+  onParcelamentoChange(): void {
+    // Se não permite parcelamento, limpa o número de parcelas
+    if (this.formaPagamento.fpgPermiteParcelamento === 'N') {
+      this.formaPagamento.fpgNumMaxParcelas = undefined;
     } else {
-      this.parcelasInvalida = false;
+      // Se permite parcelamento, volta ao valor padrão se não estiver definido
+      if (!this.formaPagamento.fpgNumMaxParcelas) {
+        this.formaPagamento.fpgNumMaxParcelas = 6;
+      }
     }
   }
-
-  onPorcentagemInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    let valor = input.value.replace('%', '').replace(/[^\d.]/g, '');
-
-    if (valor.length > 3) {
-      valor = valor.slice(0, 3);
-    }
-
-    const numero = parseFloat(valor);
-
-    this.formaPagamento.fpgTaxaAdicional = numero > 0 ? 'sim' : 'nao';
-
-    if (valor) {
-      this.porcentagemText = `${valor}%`;
-    } else {
-      this.porcentagemText = '';
-    }
-
-    this.exibirErroPorcentagem = numero > 100;
-    this.exibirErroObrigatorio = valor.length === 0;
-    this.exibirErroZero = numero === 0 && valor.length > 0;
-  }
-  get parcelasInvalidas(): boolean {
-  const p = this.formaPagamento?.fpgPermiteParcelamento;
-  return p !== undefined && p !== null && (p < 1 || p > 24);
-}
-
 }

@@ -70,11 +70,12 @@ const routes: Routes = [
   { path: 'cliente/delete/:cliId', component: ClienteDeleteComponent },
 
   // Rotas Pagamentos
-  { path: 'fpagamentos', component: FormaPagamentoCrudComponent },
+  { path: 'fpagamentos', component: FormaPagamentoReadComponent },
   { path: 'fpagamentos/create', component: FormaPagamentoCreateComponent },
   { path: 'fpagamentos/update/:fpgId', component: FormaPagamentoUpdateComponent },
   { path: 'fpagamentos/delete/:fpgId', component: FormaPagamentoDeleteComponent },
   { path: 'fpagamentos/read/:fpgId', component: FormaPagamentoReadComponent },
+  { path: 'fpagamentos/crud', component: FormaPagamentoCrudComponent },
 
 // Rotas Vendas
 { path: 'venda', component: VendaCrudComponent },

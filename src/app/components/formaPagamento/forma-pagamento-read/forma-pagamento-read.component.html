@@ -1,43 +1,74 @@
-<div class="table-container mat-elevation-z8">
+<div class="table-container">
+  <!-- Cabeçalho com título e botão -->
+  <div class="header-section">
+    <h2 class="page-title">
+      <i class="material-icons">payment</i>
+      Formas de Pagamento
+    </h2>
+    <button mat-raised-button color="primary" (click)="criarNovaFormaPagamento()">
+      <i class="material-icons">add</i> Nova Forma
+    </button>
+  </div>
 
-  <table mat-table [dataSource]="fpagamentos" class="gamer-table">
-
-    <!-- Coluna: Cliente (mostrando nome via método getNomeCliente) -->
-    <ng-container matColumnDef="clienteId">
-      <th mat-header-cell *matHeaderCellDef>Pagador</th>
-      <td mat-cell *matCellDef="let row">{{ getNomeCliente(row.clienteId) }}</td>
+  <!-- Tabela -->
+  <table mat-table [dataSource]="fpagamentos" class="data-table">
+    
+    <!-- ID -->
+    <ng-container matColumnDef="fpgId">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let row">{{ row.fpgId }}</td>
     </ng-container>
 
-    <!-- Coluna: Forma de Pagamento -->
+    <!-- Tipo -->
+    <ng-container matColumnDef="fpgTipo">
+      <th mat-header-cell *matHeaderCellDef>Tipo</th>
+      <td mat-cell *matCellDef="let row">
+        <span class="tipo-badge {{ row.fpgTipo?.toLowerCase() }}">
+          {{ row.fpgTipo }}
+        </span>
+      </td>
+    </ng-container>
+
+    <!-- Descrição -->
     <ng-container matColumnDef="fpgDescricao">
-      <th mat-header-cell *matHeaderCellDef>Forma de Pagamento</th>
-      <td mat-cell *matCellDef="let row">{{ row.fpgDescricao }}</td>
+      <th mat-header-cell *matHeaderCellDef>Descrição</th>
+      <td mat-cell *matCellDef="let row">{{ row.fpgDescricao || '-' }}</td>
     </ng-container>
 
-    <!-- Coluna: Status -->
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let row">{{ row.status || '-' }}</td>
+    <!-- Parcelamento -->
+    <ng-container matColumnDef="fpgPermiteParcelamento">
+      <th mat-header-cell *matHeaderCellDef>Parcelamento</th>
+      <td mat-cell *matCellDef="let row">
+        <span class="status-badge {{ row.fpgPermiteParcelamento === 'S' ? 'sim' : 'nao' }}">
+          {{ row.fpgPermiteParcelamento === 'S' ? 'Sim' : 'Não' }}
+        </span>
+      </td>
     </ng-container>
 
-    <!-- Coluna: Ações -->
+    <!-- Max Parcelas -->
+    <ng-container matColumnDef="fpgNumMaxParcelas">
+      <th mat-header-cell *matHeaderCellDef>Max Parcelas</th>
+      <td mat-cell *matCellDef="let row">{{ row.fpgNumMaxParcelas || '-' }}</td>
+    </ng-container>
+
+    <!-- Taxa -->
+    <ng-container matColumnDef="fpgTaxaAdicional">
+      <th mat-header-cell *matHeaderCellDef>Taxa (%)</th>
+      <td mat-cell *matCellDef="let row">{{ row.fpgTaxaAdicional || '-' }}</td>
+    </ng-container>
+
+    <!-- Ações -->
     <ng-container matColumnDef="acoes">
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let row">
-        <div class="btn-actions-container">
-          <button
-            class="btn-acao editar"
-            (click)="editarPagamento(row.fpgId!)"
-            type="button"
-          >
-            <i class="material-icons">edit</i> Editar
+        <div class="action-buttons">
+          <button mat-icon-button color="primary" (click)="editarPagamento(row.fpgId!)" 
+                  matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
           </button>
-          <button
-            class="btn-acao remover"
-            (click)="removerPagamento(row.fpgId!)"
-            type="button"
-          >
-            <i class="material-icons">delete</i> Remover
+          <button mat-icon-button color="warn" (click)="removerPagamento(row.fpgId!)" 
+                  matTooltip="Excluir">
+            <mat-icon>delete</mat-icon>
           </button>
         </div>
       </td>
@@ -49,4 +80,13 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
   </table>
+
+  <!-- Mensagem quando não há dados -->
+  <div class="no-data" *ngIf="fpagamentos.length === 0">
+    <mat-icon>info</mat-icon>
+    <p>Nenhuma forma de pagamento cadastrada.</p>
+    <button mat-raised-button color="primary" (click)="criarNovaFormaPagamento()">
+      Criar Primeira Forma
+    </button>
+  </div>
 </div>

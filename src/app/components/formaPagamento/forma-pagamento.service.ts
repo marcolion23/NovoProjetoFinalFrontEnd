@@ -10,7 +10,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class FormaPagamentoService {
 
-  baseUrl = "http://localhost:8080/fpagamentos";
+  baseUrl = "http://localhost:8080/formaPagamentos";
 
   constructor(
     private snackBar: MatSnackBar,
@@ -80,5 +80,4 @@ export class FormaPagamentoService {
       })
     );
   }
-  
 }
